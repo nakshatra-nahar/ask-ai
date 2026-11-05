@@ -79,8 +79,9 @@ export default [
     modules: ['leads', 'tasks', 'campaigns'],
     turns: [{ user: complexPrompt }, { user: 'Only include leads from the Facebook campaign, and make those tasks due tomorrow.' }],
     expect: {
-      actions: ['tasks.create_task', 'tasks.set_task_due_date'],
-      allow: ['leads.assign_lead_owner', 'tasks.cancel_task', 'tasks.assign_task_owner', 'tasks.update_task', 'leads.update_lead'],
+      // Re-dating is only needed if turn 1 didn't already set tomorrow; the state check enforces the due date either way.
+      actions: ['tasks.create_task', 'tasks.cancel_task'],
+      allow: ['leads.assign_lead_owner', 'tasks.set_task_due_date', 'tasks.assign_task_owner', 'tasks.update_task', 'leads.update_lead'],
       state: (h) => {
         const targets = followUpTargets(h);
         const fb = targets.filter((l) => isFacebook(h, l));

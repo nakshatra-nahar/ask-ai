@@ -17,7 +17,12 @@ const MAX_PINNED = 3;
 const assertActive = (c) => {
   if (c.status !== 'active') fail('INVALID_STATE', `community ${c.id} (${c.name}) is ${c.status}`);
 };
-const getCommunity = (ctx, cid) => ctx.get('communities', cid, 'community');
+// Communities have no search action (fixed catalog), so lookups also accept the exact name, and a miss lists what exists.
+const getCommunity = (ctx, ref) => {
+  const all = ctx.all('communities');
+  return all.find((c) => c.id === ref) || all.find((c) => c.name.toLowerCase() === ref.trim().toLowerCase())
+    || fail('NOT_FOUND', `community '${ref}' not found; communities: ${all.map((c) => `${c.id} ${c.name}`).join(', ')}`);
+};
 const isMember = (c, contactId) => c.members.some((m) => m.contactId === contactId);
 const getPost = (ctx, pid) => ctx.get('community_posts', pid, 'community post');
 const requireMember = (ctx, c, contactId) => {
@@ -59,11 +64,11 @@ export default defineModule({
     {
       id: 'get_community', name: 'Get community details', description: 'Fetch a community with its channels (post counts), members (names, roles) and guidelines.',
       risk: 'read',
-      input: z.object({ id: id('community') }),
+      input: z.object({ id: z.string().min(1).describe('community ID (cmty_###) or exact community name') }),
       output: community,
-      handler: ({ id: cid }, ctx) => {
-        const c = getCommunity(ctx, cid);
-        const posts = ctx.all('community_posts').filter((p) => p.communityId === cid && p.status === 'published');
+      handler: ({ id: ref }, ctx) => {
+        const c = getCommunity(ctx, ref);
+        const posts = ctx.all('community_posts').filter((p) => p.communityId === c.id && p.status === 'published');
         return {
           ...c, memberCount: c.members.length,
           members: c.members.map((m) => ({ ...m, name: ctx.find('contacts', m.contactId)?.name })),
@@ -107,9 +112,9 @@ export default defineModule({
         if (isMember(c, contactId)) fail('DUPLICATE', `${ct.name} is already a member of ${c.name}`);
         let via = null;
         if (c.visibility === 'private') {
-          via = membershipAccess(ctx, contactId, 'community', cid);
+          via = membershipAccess(ctx, contactId, 'community', c.id);
           if (!via) {
-            const plans = ctx.all('membership_plans').filter((p) => p.entitlements?.some((e) => e.type === 'community' && e.refId === cid)).map((p) => `${p.id} ${p.name}`);
+            const plans = ctx.all('membership_plans').filter((p) => p.entitlements?.some((e) => e.type === 'community' && e.refId === c.id)).map((p) => `${p.id} ${p.name}`);
             fail('PERMISSION', `${c.name} is private: ${ct.name} needs an active, unexpired membership on a plan that includes it (${plans.join(', ') || 'no plan includes it yet'}). Grant one with memberships.grant_membership first`);
           }
         }
@@ -153,7 +158,7 @@ export default defineModule({
         if (!c.channels.some((ch) => ch.id === i.channelId))
           fail('NOT_FOUND', `channel ${i.channelId} not found in ${c.name}; channels: ${c.channels.map((ch) => `${ch.id} #${ch.name}`).join(', ')}`);
         requireMember(ctx, c, i.authorId);
-        return ctx.insert('community_posts', { ...i, title: i.title ?? null, status: 'published', pinned: false, reports: 0, reportReasons: [], replies: [] });
+        return ctx.insert('community_posts', { ...i, communityId: c.id, title: i.title ?? null, status: 'published', pinned: false, reports: 0, reportReasons: [], replies: [] });
       },
       example: (ctx) => {
         const c = ctx.all('communities')[0];

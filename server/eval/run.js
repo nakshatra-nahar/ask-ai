@@ -3,8 +3,9 @@
 // Each worker thread has its own in-memory store, so scenarios run in parallel without interfering.
 //
 // Usage: node --env-file=../.env eval/run.js --strategy optimized|baseline [--concurrency 4] [--filter id|category|module] [--limit N]
+//        --retry-errors re-runs only scenarios whose turns hit an API error (e.g. credits ran out) and merges them into latest-<strategy>.json
 import { Worker, isMainThread, parentPort, workerData } from 'node:worker_threads';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { summarize } from './summary.js';
@@ -25,6 +26,13 @@ if (isMainThread) {
   const { loadScenarios } = await import('./lib.js');
   let scenarios = await loadScenarios(arg('filter'));
   if (arg('limit')) scenarios = scenarios.slice(0, Number(arg('limit')));
+  const resultsFile = path.join(here, 'results', `latest-${strategy}.json`);
+  const prev = process.argv.includes('--retry-errors') ? JSON.parse(readFileSync(resultsFile, 'utf8')) : null;
+  if (prev) {
+    const bad = new Set(prev.results.filter((r) => !r.turns.length || r.turns.some((t) => t.error)).map((r) => r.id));
+    scenarios = scenarios.filter((s) => bad.has(s.id));
+    if (!scenarios.length) { console.log('No errored scenarios to retry.'); process.exit(0); }
+  }
   const ids = scenarios.map((s) => s.id);
   console.log(`Running ${ids.length} scenarios · strategy=${strategy} · concurrency=${conc}`);
   const started = Date.now();
@@ -49,12 +57,15 @@ if (isMainThread) {
   }
   results.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
   const { MODEL, EFFORT } = await import('../src/config.js');
-  const out = {
-    strategy, model: MODEL, effort: strategy === 'baseline' ? 'medium' : EFFORT, concurrency: conc, startedAt: new Date(started).toISOString(),
-    wallMs: Date.now() - started, node: process.version, summary: summarize(results), results,
-  };
+  const merged = prev ? prev.results.map((r) => results.find((x) => x.id === r.id) || r) : results;
+  const out = prev
+    ? { ...prev, summary: summarize(merged), results: merged, retriedErrors: { ids, at: new Date(started).toISOString(), wallMs: Date.now() - started, concurrency: conc } }
+    : {
+      strategy, model: MODEL, effort: strategy === 'baseline' ? 'medium' : EFFORT, concurrency: conc, startedAt: new Date(started).toISOString(),
+      wallMs: Date.now() - started, node: process.version, summary: summarize(results), results,
+    };
   mkdirSync(path.join(here, 'results'), { recursive: true });
-  writeFileSync(path.join(here, 'results', `latest-${strategy}.json`), JSON.stringify(out, null, 2));
+  writeFileSync(resultsFile, JSON.stringify(out, null, 2));
   const s = out.summary;
   console.log(`\n${strategy}: success ${s.quality.taskSuccess}% · selection ${s.quality.actionSelection}% · params ${s.quality.paramAccuracy}% · $${s.cost.total} total · $${s.cost.perSuccessfulTask}/success`);
   console.log(`TTFUR p50/p95 direct ${s.latency.direct.ttfur.p50}/${s.latency.direct.ttfur.p95}ms · complex ${s.latency.complex.ttfur.p50}/${s.latency.complex.ttfur.p95}ms`);

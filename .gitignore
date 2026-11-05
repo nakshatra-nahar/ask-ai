@@ -3,3 +3,4 @@ node_modules
 web/dist
 server/eval/traces/*.json
 server/traces/*.json
+.DS_Store

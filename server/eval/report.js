@@ -39,7 +39,7 @@ const rows = [
   ['Cost per request', 'cost.perRequest', usd],
   ['Cost per successful task', 'cost.perSuccessfulTask', usd],
   ['Model calls per request', 'cost.callsPerRequest', (v) => v],
-  ['Input tokens per request (incl. cached)', 'cost.inputTokensPerRequest', (v) => v?.toLocaleString()],
+  ['Input tokens per request (incl. cached)', 'cost.inputTokensPerRequest', (v) => v?.toLocaleString('en-US')],
   ['Cache hit rate (input)', 'cost.cacheHitRate', (v) => `${v}%`],
   ['Total cost (all scenarios)', 'cost.total', usd],
   ['Retries', 'cost.retries', (v) => v],
@@ -52,7 +52,7 @@ for (const [name, p, f] of rows) {
   const t = TARGETS[p];
   md += `| ${name} | ${runs.map((r) => f(get(r.summary, p))).join(' | ')} | ${t ? `${t.max != null ? '≤' : '≥'} ${f(t.max ?? t.min)} ${verdict(get(runs.at(-1).summary, p), t)}` : ''} |\n`;
 }
-md += `\n**Test conditions:** ${runs.map((r) => `${r.strategy}: model \`${r.model}\`, effort \`${r.effort}\`, ${r.summary.n} scenarios, concurrency ${r.concurrency}, wall ${(r.wallMs / 1000).toFixed(0)}s, started ${r.startedAt}, Node ${r.node}`).join('; ')}. `;
+md += `\n**Test conditions:** ${runs.map((r) => `${r.strategy}: model \`${r.model}\`, effort \`${r.effort}\`, ${r.summary.n} scenarios, concurrency ${r.concurrency}, wall ${(r.wallMs / 1000).toFixed(0)}s, started ${r.startedAt}, Node ${r.node}${r.retriedErrors ? ` (${r.retriedErrors.ids.length} scenarios that hit API errors were re-run at ${r.retriedErrors.at} and merged)` : ''}`).join('; ')}. `;
 md += `Latency is per user turn, measured server-side from request receipt (no network/UI). TTFUR = first streamed text (progress note or answer) or first completed action result, whichever comes first; first-streamed-text is reported separately. Confirmations are auto-approved in evals, so E2E excludes human wait. Cost = list price × tokens (cache write 1.25×, cache read 0.1× input), including retries.\n\n`;
 
 md += `## Task success by category\n\n| category | ${runs.map((r) => r.strategy).join(' | ')} |\n|---|${runs.map(() => '---|').join('')}\n`;

@@ -2,7 +2,7 @@
 //
 // optimized: 2 static meta-tools (search_actions, execute_action) + per-turn top-K candidate action cards
 //            -> tool list never changes, so system+tools stay prompt-cached; ~1-2k catalog tokens/turn instead of ~60k.
-// baseline:  all 500 actions as native tools (~68k schema tokens, prompt-cached), no retrieval, default effort, raw results.
+// baseline:  all 500 actions as native tools (~110k schema tokens, prompt-cached), no retrieval, default effort, raw results.
 import Anthropic from '@anthropic-ai/sdk';
 import { performance } from 'node:perf_hooks';
 import { randomUUID } from 'node:crypto';
@@ -13,7 +13,7 @@ import { SYSTEM, SYSTEM_BASELINE } from './prompt.js';
 
 export const STRATEGIES = {
   optimized: { name: 'optimized', tools: 'meta', retrieval: true, cache: true, effort: EFFORT, compact: true },
-  // Baseline still caches: without it every call re-bills ~68k tool-schema tokens, which no real deployment would do.
+  // Baseline still caches: without it every call re-bills ~110k tool-schema tokens, which no real deployment would do.
   baseline: { name: 'baseline', tools: 'all', retrieval: false, cache: true, effort: 'medium', compact: false },
 };
 const MAX_ITERS = 14;
