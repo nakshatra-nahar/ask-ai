@@ -1,0 +1,17 @@
+{
+  "name": "ask-ai",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w server & npm run dev -w web",
+    "start": "npm run build -w web && npm start -w server",
+    "test": "npm test -w server",
+    "smoke": "npm run smoke -w server",
+    "eval": "npm run eval -w server",
+    "benchmark": "npm run eval -w server -- --strategy optimized && npm run eval -w server -- --strategy baseline && npm run report -w server"
+  }
+}
