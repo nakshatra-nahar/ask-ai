@@ -1,0 +1,206 @@
+{
+  "scenario": {
+    "id": "sch-direct-declined-cancel",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Cancel Sarah Chen's discovery call tomorrow, she can't make it anymore.",
+        "confirm": false
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "confirmation requested",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "716d7421-a80d-4420-ade4-f7831c0f3e42",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Cancel Sarah Chen's discovery call tomorrow, she can't make it anymore.",
+      "ttfurMs": 1264,
+      "ttftTextMs": 1264,
+      "firstActionMs": 2155,
+      "e2eMs": 5691,
+      "llmCalls": [
+        {
+          "ms": 2148,
+          "ttftMs": 1258,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 113,
+            "cacheRead": 5235,
+            "cacheWrite": 2688
+          },
+          "costUSD": 0.01781
+        },
+        {
+          "ms": 1905,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 136,
+            "cacheRead": 7923,
+            "cacheWrite": 322
+          },
+          "costUSD": 0.0075072
+        },
+        {
+          "ms": 1631,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 104,
+            "cacheRead": 8245,
+            "cacheWrite": 300
+          },
+          "costUSD": 0.006886
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah Chen"
+          },
+          "ok": true,
+          "ms": 0.27,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.search_appointments",
+          "input": {
+            "contactId": "con_002",
+            "startAtAfter": "2026-11-05T00:00:00Z",
+            "startAtBefore": "2026-11-06T00:00:00Z"
+          },
+          "ok": true,
+          "ms": 0.32,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 353,
+        "cache_creation_input_tokens": 3310,
+        "cache_read_input_tokens": 21403
+      },
+      "costUSD": 0.032203,
+      "retries": 0,
+      "retrieved": [
+        "appointments.cancel_appointment",
+        "booking_pages.publish_booking_page",
+        "events.cancel_registration",
+        "tasks.cancel_task",
+        "appointments.mark_no_show",
+        "calendars.create_calendar",
+        "memberships.check_member_access",
+        "appointments.create_appointment",
+        "forms.publish_form",
+        "tasks.create_task",
+        "appointments.search_appointments",
+        "leads.record_qualification_answers",
+        "calendars.set_calendar_visibility",
+        "notes.create_note",
+        "enrollments.revoke_enrollment",
+        "email.record_email_unsubscribe",
+        "appointments.remove_appointment_attendee",
+        "sms.record_sms_opt_out",
+        "memberships.revoke_membership",
+        "triggers.create_event_trigger",
+        "courses.publish_course",
+        "reviews.cancel_review_request",
+        "email.cancel_scheduled_email",
+        "sms.cancel_scheduled_sms"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 6.17,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01D3XZnQbMpwQXxLL5JEB8ej",
+          "action": "appointments.cancel_appointment",
+          "name": "Cancel appointment",
+          "risk": "destructive",
+          "input": {
+            "id": "apt_001",
+            "reason": "Contact can no longer attend"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "716d7421-a80d-4420-ade4-f7831c0f3e42",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[declined]",
+      "ttfurMs": 2706,
+      "ttftTextMs": 2706,
+      "firstActionMs": null,
+      "e2eMs": 2713,
+      "llmCalls": [
+        {
+          "ms": 2713,
+          "ttftMs": 2706,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 156,
+            "cacheRead": 8545,
+            "cacheWrite": 147
+          },
+          "costUSD": 0.007281
+        }
+      ],
+      "actions": [],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 156,
+        "cache_creation_input_tokens": 147,
+        "cache_read_input_tokens": 8545
+      },
+      "costUSD": 0.007281,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I didn't cancel the call because you declined the confirmation, so it's still booked.\n\n- **Appointment:** Sales Discovery Call with Sarah Chen (apt_001)\n- **When:** Thu, 5 Nov 2026, 15:00–15:30 UTC\n- **Status:** booked\n- **Host:** usr_002\n\nIf you change your mind, just ask and I'll try the cancellation again. I can also move the call to another time instead.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

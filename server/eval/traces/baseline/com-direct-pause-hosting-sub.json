@@ -1,0 +1,182 @@
+{
+  "scenario": {
+    "id": "com-direct-pause-hosting-sub",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Pause Michael Müller's hosting plan until January 1st — his office is closed over the holidays."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action subscriptions.pause_subscription",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params subscriptions.pause_subscription",
+        "pass": true,
+        "detail": "{\"resumeAt\":\"2027-01-01\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "0ae49b57-9b34-48fe-9311-ef6300465824",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Pause Michael Müller's hosting plan until January 1st — his office is closed over the holidays.",
+      "ttfurMs": 830,
+      "ttftTextMs": 830,
+      "firstActionMs": 1918,
+      "e2eMs": 9355,
+      "llmCalls": [
+        {
+          "ms": 1917,
+          "ttftMs": 830,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 143,
+            "cacheRead": 112993,
+            "cacheWrite": 104
+          },
+          "costUSD": 0.0485932
+        },
+        {
+          "ms": 1100,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 61,
+            "cacheRead": 113097,
+            "cacheWrite": 1432
+          },
+          "costUSD": 0.0536268
+        },
+        {
+          "ms": 1351,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 52,
+            "cacheRead": 114529,
+            "cacheWrite": 283
+          },
+          "costUSD": 0.04827460000000001
+        },
+        {
+          "ms": 1884,
+          "ttftMs": 1497,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 122,
+            "cacheRead": 114812,
+            "cacheWrite": 228
+          },
+          "costUSD": 0.0495128
+        },
+        {
+          "ms": 3094,
+          "ttftMs": 3092,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 240,
+            "cacheRead": 115040,
+            "cacheWrite": 374
+          },
+          "costUSD": 0.052694
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Michael Müller"
+          },
+          "ok": true,
+          "ms": 0.4,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Muller"
+          },
+          "ok": true,
+          "ms": 0.33,
+          "confirmed": false
+        },
+        {
+          "action": "subscriptions.search_subscriptions",
+          "input": {
+            "contactId": "con_008"
+          },
+          "ok": true,
+          "ms": 0.38,
+          "confirmed": false
+        },
+        {
+          "action": "products.get_product",
+          "input": {
+            "id": "prd_004"
+          },
+          "ok": true,
+          "ms": 0.44,
+          "confirmed": false
+        },
+        {
+          "action": "subscriptions.pause_subscription",
+          "input": {
+            "id": "sub_004",
+            "resumeAt": "2027-01-01"
+          },
+          "ok": true,
+          "ms": 6.04,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 618,
+        "cache_creation_input_tokens": 2421,
+        "cache_read_input_tokens": 570471
+      },
+      "costUSD": 0.252701,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I've paused Michael Müller's hosting plan, with a planned restart on January 1, 2027.\n\n- **Subscription:** sub_004, Website Hosting & Care Plan (3 units), for Michael Müller (con_008)\n- **Status:** Changed from active to **paused** as of today, Nov 4, 2026. He won't be billed while it's paused, so his Nov 15 renewal won't be charged.\n- **Restart date:** 2027-01-01\n\n**Check before Jan 1:** The restart date is saved on the subscription, but nothing here confirms the plan will restart by itself on that date. If it's still paused on Jan 1, it will need to be resumed by hand. I can create a reminder task for that if you'd like.",
+      "progress": [],
+      "calls": 5
+    }
+  ]
+}

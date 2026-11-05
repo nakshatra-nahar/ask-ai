@@ -1,0 +1,114 @@
+{
+  "scenario": {
+    "id": "com-direct-create-holiday-coupon",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Set up a coupon code HOLIDAY15 — 15% off, valid from Nov 20 through Dec 31, capped at 100 uses."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action coupons.create_coupon",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params coupons.create_coupon",
+        "pass": true,
+        "detail": "{\"code\":\"HOLIDAY15\",\"discountType\":\"percent\",\"discountValue\":15,\"validFrom\":\"2026-11-20\",\"validUntil\":\"2026-12-31\",\"maxRedemptions\":100}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "2ac078a7-a1d0-49ac-9cc8-21476434df7d",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Set up a coupon code HOLIDAY15 — 15% off, valid from Nov 20 through Dec 31, capped at 100 uses.",
+      "ttfurMs": 794,
+      "ttftTextMs": 794,
+      "firstActionMs": 2262,
+      "e2eMs": 4050,
+      "llmCalls": [
+        {
+          "ms": 2260,
+          "ttftMs": 794,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 221,
+            "cacheRead": 112993,
+            "cacheWrite": 120
+          },
+          "costUSD": 0.050233200000000006
+        },
+        {
+          "ms": 1788,
+          "ttftMs": 1761,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 129,
+            "cacheRead": 113113,
+            "cacheWrite": 386
+          },
+          "costUSD": 0.04976320000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "coupons.create_coupon",
+          "input": {
+            "code": "HOLIDAY15",
+            "discountType": "percent",
+            "discountValue": 15,
+            "validFrom": "2026-11-20",
+            "validUntil": "2026-12-31T23:59:59Z",
+            "maxRedemptions": 100
+          },
+          "ok": true,
+          "ms": 2.09,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 350,
+        "cache_creation_input_tokens": 506,
+        "cache_read_input_tokens": 226106
+      },
+      "costUSD": 0.099996,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I created the coupon **HOLIDAY15** (`cpn_008`) and it's active.\n\n- **Discount:** 15% off\n- **Valid:** 2026-11-20 through the end of 2026-12-31 (23:59:59 UTC), so it works all day on Dec 31\n- **Limit:** 100 uses in total, with 0 used so far\n- **Products:** it works on any product",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

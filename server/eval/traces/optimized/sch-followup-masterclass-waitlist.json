@@ -1,0 +1,257 @@
+{
+  "scenario": {
+    "id": "sch-followup-masterclass-waitlist",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Can we bump the Q4 Growth Masterclass to 23 seats?"
+      },
+      {
+        "user": "Great — now get the folks on the waitlist into those seats."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action events.set_event_capacity",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action events.promote_waitlisted|events.register_attendee",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params events.set_event_capacity",
+        "pass": true,
+        "detail": "{\"id\":\"evt_001\",\"capacity\":23}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "6a2de0d7-0fd1-402f-943e-3b3bffa3053f",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Can we bump the Q4 Growth Masterclass to 23 seats?",
+      "ttfurMs": 744,
+      "ttftTextMs": 744,
+      "firstActionMs": 1820,
+      "e2eMs": 6741,
+      "llmCalls": [
+        {
+          "ms": 1817,
+          "ttftMs": 742,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 118,
+            "cacheRead": 5235,
+            "cacheWrite": 1103
+          },
+          "costUSD": 0.009985
+        },
+        {
+          "ms": 1441,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 94,
+            "cacheRead": 6338,
+            "cacheWrite": 1447
+          },
+          "costUSD": 0.0116582
+        },
+        {
+          "ms": 3474,
+          "ttftMs": 3470,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 244,
+            "cacheRead": 7785,
+            "cacheWrite": 1409
+          },
+          "costUSD": 0.015047
+        }
+      ],
+      "actions": [
+        {
+          "action": "events.search_events",
+          "input": {
+            "query": "Q4 Growth Masterclass"
+          },
+          "ok": true,
+          "ms": 0.11,
+          "confirmed": false
+        },
+        {
+          "action": "events.set_event_capacity",
+          "input": {
+            "id": "evt_001",
+            "capacity": 23
+          },
+          "ok": true,
+          "ms": 6.63,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 456,
+        "cache_creation_input_tokens": 3959,
+        "cache_read_input_tokens": 19358
+      },
+      "costUSD": 0.03669,
+      "retries": 0,
+      "retrieved": [
+        "subscriptions.update_subscription_quantity",
+        "reports.compare_report_periods",
+        "events.get_event",
+        "events.promote_waitlisted",
+        "surveys.set_question_branching",
+        "appointments.cancel_appointment",
+        "events.cancel_registration",
+        "events.register_attendee"
+      ],
+      "status": "completed",
+      "finalText": "I raised the **Q4 Growth Masterclass** (evt_001, 13 Nov 2026, Acme HQ) from 20 to **23 seats**.\n\n- **Registered:** 20, so 3 seats are now free.\n- **Waitlist:** 3 people (con_025, con_026, con_027). Nobody gets moved off the waitlist automatically when seats open.\n\nThe 3 open seats exactly match the 3 people waiting. Should I move all three into the event?",
+      "progress": [],
+      "retrievalMs": 2.25,
+      "calls": 3
+    },
+    {
+      "sessionId": "6a2de0d7-0fd1-402f-943e-3b3bffa3053f",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Great — now get the folks on the waitlist into those seats.",
+      "ttfurMs": 1336,
+      "ttftTextMs": 1336,
+      "firstActionMs": 3555,
+      "e2eMs": 5935,
+      "llmCalls": [
+        {
+          "ms": 3547,
+          "ttftMs": 1332,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 324,
+            "cacheRead": 9194,
+            "cacheWrite": 3363
+          },
+          "costUSD": 0.026988599999999998
+        },
+        {
+          "ms": 2373,
+          "ttftMs": 2369,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 219,
+            "cacheRead": 12557,
+            "cacheWrite": 4557
+          },
+          "costUSD": 0.0321958
+        }
+      ],
+      "actions": [
+        {
+          "action": "events.promote_waitlisted",
+          "input": {
+            "id": "evt_001",
+            "contactId": "con_026"
+          },
+          "ok": true,
+          "ms": 4.98,
+          "confirmed": false
+        },
+        {
+          "action": "events.promote_waitlisted",
+          "input": {
+            "id": "evt_001",
+            "contactId": "con_027"
+          },
+          "ok": true,
+          "ms": 3.68,
+          "confirmed": false
+        },
+        {
+          "action": "events.promote_waitlisted",
+          "input": {
+            "id": "evt_001",
+            "contactId": "con_025"
+          },
+          "ok": true,
+          "ms": 2.82,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 543,
+        "cache_creation_input_tokens": 7920,
+        "cache_read_input_tokens": 21751
+      },
+      "costUSD": 0.059184,
+      "retries": 0,
+      "retrieved": [
+        "events.get_event",
+        "events.promote_waitlisted",
+        "events.cancel_registration",
+        "events.register_attendee",
+        "events.add_to_waitlist",
+        "subscriptions.update_subscription_quantity",
+        "reviews.list_review_requests",
+        "notes.search_notes",
+        "refunds.search_refund_requests",
+        "quotes.search_quotes",
+        "contacts.search_contacts",
+        "orders.search_orders",
+        "events.set_event_capacity",
+        "tickets.search_tickets",
+        "appointments.cancel_appointment",
+        "leads.search_leads",
+        "opportunities.search_opportunities",
+        "smart_lists.preview_smart_list",
+        "blogs.publish_post",
+        "media.search_media",
+        "smart_lists.count_smart_list",
+        "blogs.schedule_post",
+        "reports.export_report",
+        "subscriptions.resume_subscription"
+      ],
+      "status": "completed",
+      "finalText": "I moved all 3 waitlisted people into the open seats for the **Q4 Growth Masterclass** (evt_001). The event is now full: 23 of 23 seats taken, and the waitlist is empty.\n\nI moved them in the order they joined the waitlist:\n\n| Contact | Joined waitlist | New registration |\n|---|---|---|\n| con_026 | 1 Nov | reg_072 |\n| con_027 | 2 Nov, 11:35 | reg_073 |\n| con_025 | 2 Nov, 15:41 | reg_074 |\n\nThey haven't been told they now have a seat. I can send them a confirmation email or SMS if you'd like.",
+      "progress": [],
+      "retrievalMs": 3.19,
+      "calls": 2
+    }
+  ]
+}

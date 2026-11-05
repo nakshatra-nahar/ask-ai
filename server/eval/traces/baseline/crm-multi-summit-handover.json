@@ -1,0 +1,214 @@
+{
+  "scenario": {
+    "id": "crm-multi-summit-handover",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Jordan is taking over Summit Fitness from Dana. Make him the account manager, move their open deals over to him, and drop a handover note on the company record."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action companies.assign_account_manager",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action opportunities.assign_opportunity_owner",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action notes.create_note",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params companies.assign_account_manager",
+        "pass": true,
+        "detail": "{\"id\":\"co_003\",\"userId\":\"usr_002\"}"
+      },
+      {
+        "name": "params opportunities.assign_opportunity_owner",
+        "pass": true,
+        "detail": "{\"id\":\"opp_002\",\"ownerId\":\"usr_002\"}"
+      },
+      {
+        "name": "params notes.create_note",
+        "pass": true,
+        "detail": "{\"recordType\":\"companies\",\"recordId\":\"co_003\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 3,
+      "hit": 3
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "33f76c3a-c32c-4a39-bc85-40511acf7e73",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Jordan is taking over Summit Fitness from Dana. Make him the account manager, move their open deals over to him, and drop a handover note on the company record.",
+      "ttfurMs": 1452,
+      "ttftTextMs": 1452,
+      "firstActionMs": 2710,
+      "e2eMs": 12540,
+      "llmCalls": [
+        {
+          "ms": 2710,
+          "ttftMs": 1452,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 179,
+            "cacheRead": 112993,
+            "cacheWrite": 121
+          },
+          "costUSD": 0.0493982
+        },
+        {
+          "ms": 2659,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 180,
+            "cacheRead": 113114,
+            "cacheWrite": 701
+          },
+          "costUSD": 0.052358600000000005
+        },
+        {
+          "ms": 3758,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 319,
+            "cacheRead": 113815,
+            "cacheWrite": 589
+          },
+          "costUSD": 0.054859
+        },
+        {
+          "ms": 3394,
+          "ttftMs": 3391,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 256,
+            "cacheRead": 114404,
+            "cacheWrite": 805
+          },
+          "costUSD": 0.05491460000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "companies.search_companies",
+          "input": {
+            "query": "Summit Fitness"
+          },
+          "ok": true,
+          "ms": 0.78,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Jordan"
+          },
+          "ok": true,
+          "ms": 0.12,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Dana"
+          },
+          "ok": true,
+          "ms": 0.04,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.search_opportunities",
+          "input": {
+            "companyId": "co_003",
+            "status": "open",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.35,
+          "confirmed": false
+        },
+        {
+          "action": "companies.assign_account_manager",
+          "input": {
+            "id": "co_003",
+            "userId": "usr_002"
+          },
+          "ok": true,
+          "ms": 4.57,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.assign_opportunity_owner",
+          "input": {
+            "id": "opp_002",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 6.55,
+          "confirmed": false
+        },
+        {
+          "action": "notes.create_note",
+          "input": {
+            "recordType": "companies",
+            "recordId": "co_003",
+            "body": "Account handover (2026-11-04): Summit Fitness has moved from Dana Cruz to Jordan Lee. Jordan is now the account manager and owns the open deal \"Michael Smith - Marketing Automation Setup\" (opp_002, $15,000, expected close 2026-11-09). Please send any questions about the account to Jordan.",
+            "pinned": true
+          },
+          "ok": true,
+          "ms": 5.39,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 934,
+        "cache_creation_input_tokens": 2216,
+        "cache_read_input_tokens": 454326
+      },
+      "costUSD": 0.21153,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Jordan Lee (usr_002) now has Summit Fitness (co_003) from Dana Cruz (usr_005).\n\n- **Account manager:** Jordan replaced Dana as account manager.\n- **Open deals:** Summit Fitness had one open deal, and it's now Jordan's: **Michael Smith - Marketing Automation Setup** (opp_002), $15,000, expected to close 2026-11-09.\n- **Handover note:** I added a note to the company record and pinned it there (nt_028). It says the account moved from Dana to Jordan, names the open deal, and asks people to send questions to Jordan.\n\nI didn't change the owners of Summit Fitness's contacts, like Michael Smith (con_003). I can move them to Jordan too if you'd like.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

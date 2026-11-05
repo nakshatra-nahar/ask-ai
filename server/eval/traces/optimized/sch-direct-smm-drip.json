@@ -1,0 +1,158 @@
+{
+  "scenario": {
+    "id": "sch-direct-smm-drip",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "In Social Media Marketing 101, 'Planning a Content Calendar' should unlock 3 days after someone enrolls instead of a week."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action lessons.set_lesson_release_schedule",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params lessons.set_lesson_release_schedule",
+        "pass": true,
+        "detail": "{\"id\":\"les_004\",\"mode\":\"drip\",\"daysAfterEnrollment\":3}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "cfbf7fa3-dad7-4849-959f-36e389ca96f4",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "In Social Media Marketing 101, 'Planning a Content Calendar' should unlock 3 days after someone enrolls instead of a week.",
+      "ttfurMs": 1088,
+      "ttftTextMs": 1088,
+      "firstActionMs": 2122,
+      "e2eMs": 6294,
+      "llmCalls": [
+        {
+          "ms": 2120,
+          "ttftMs": 1087,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 114,
+            "cacheRead": 5235,
+            "cacheWrite": 2726
+          },
+          "costUSD": 0.01802
+        },
+        {
+          "ms": 1883,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 114,
+            "cacheRead": 7961,
+            "cacheWrite": 312
+          },
+          "costUSD": 0.007032399999999999
+        },
+        {
+          "ms": 2282,
+          "ttftMs": 2281,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 144,
+            "cacheRead": 8273,
+            "cacheWrite": 298
+          },
+          "costUSD": 0.007687200000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "lessons.search_lessons",
+          "input": {
+            "query": "Planning a Content Calendar"
+          },
+          "ok": true,
+          "ms": 0.56,
+          "confirmed": false
+        },
+        {
+          "action": "lessons.set_lesson_release_schedule",
+          "input": {
+            "id": "les_004",
+            "mode": "drip",
+            "daysAfterEnrollment": 3
+          },
+          "ok": true,
+          "ms": 6.87,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 372,
+        "cache_creation_input_tokens": 3336,
+        "cache_read_input_tokens": 21469
+      },
+      "costUSD": 0.03274,
+      "retries": 0,
+      "retrieved": [
+        "lessons.set_lesson_release_schedule",
+        "media.search_media",
+        "lessons.attach_lesson_media",
+        "subscriptions.create_subscription",
+        "media.list_media_references",
+        "media.rename_media",
+        "campaigns.add_campaign_message_step",
+        "calendars.list_calendars",
+        "enrollments.enroll_learner",
+        "lessons.publish_lesson",
+        "campaigns.create_campaign",
+        "reports.schedule_report",
+        "memberships.create_membership_plan",
+        "subscriptions.search_subscriptions",
+        "campaigns.set_campaign_schedule",
+        "memberships.get_membership_plan",
+        "memberships.list_membership_plans",
+        "enrollments.search_enrollments",
+        "reports.set_report_grouping",
+        "calendars.set_booking_buffer",
+        "memberships.update_plan_description",
+        "subscriptions.change_subscription_plan",
+        "campaigns.list_campaigns",
+        "communities.pin_post"
+      ],
+      "status": "completed",
+      "finalText": "**Planning a Content Calendar** (les_004) now unlocks **3 days after enrollment** instead of 7. It's still published, and nothing else about the lesson changed.\n\nIt's in course crs_001. I didn't check that crs_001 is Social Media Marketing 101, but this was the only lesson with that title.",
+      "progress": [],
+      "retrievalMs": 1,
+      "calls": 3
+    }
+  ]
+}

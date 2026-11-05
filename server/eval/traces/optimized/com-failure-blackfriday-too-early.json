@@ -1,0 +1,223 @@
+{
+  "scenario": {
+    "id": "com-failure-blackfriday-too-early",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Apply BLACKFRIDAY25 to Sarah Chen's order so she gets the sale price now."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid coupons.set_coupon_validity_window",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(27|not (yet )?(valid|active|started|live)|isn't (yet )?(valid|active|live)|until|can't|cannot|couldn't|could not|unable)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "5ae3a128-0c67-418c-83b2-1a241309f32e",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Apply BLACKFRIDAY25 to Sarah Chen's order so she gets the sale price now.",
+      "ttfurMs": 794,
+      "ttftTextMs": 794,
+      "firstActionMs": 2803,
+      "e2eMs": 11924,
+      "llmCalls": [
+        {
+          "ms": 1563,
+          "ttftMs": 792,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 77,
+            "cacheRead": 5235,
+            "cacheWrite": 2364
+          },
+          "costUSD": 0.01547
+        },
+        {
+          "ms": 1236,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 88,
+            "cacheRead": 7599,
+            "cacheWrite": 122
+          },
+          "costUSD": 0.005417600000000001
+        },
+        {
+          "ms": 1382,
+          "ttftMs": 946,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 100,
+            "cacheRead": 7721,
+            "cacheWrite": 99
+          },
+          "costUSD": 0.0055914
+        },
+        {
+          "ms": 1329,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 86,
+            "cacheRead": 7820,
+            "cacheWrite": 307
+          },
+          "costUSD": 0.006391
+        },
+        {
+          "ms": 1382,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 107,
+            "cacheRead": 8127,
+            "cacheWrite": 446
+          },
+          "costUSD": 0.0076288
+        },
+        {
+          "ms": 5026,
+          "ttftMs": 5023,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 444,
+            "cacheRead": 8573,
+            "cacheWrite": 372
+          },
+          "costUSD": 0.014177200000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "query": "Sarah Chen"
+          },
+          "ok": true,
+          "ms": 1.64,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah Chen"
+          },
+          "ok": true,
+          "ms": 0.39,
+          "confirmed": false
+        },
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "contactId": "con_002"
+          },
+          "ok": true,
+          "ms": 0.22,
+          "confirmed": false
+        },
+        {
+          "action": "orders.apply_coupon_to_order",
+          "input": {
+            "id": "ord_006",
+            "code": "BLACKFRIDAY25"
+          },
+          "ok": false,
+          "error": {
+            "code": "VALIDATION",
+            "message": "coupon BLACKFRIDAY25 cannot be applied to ord_006: not valid until 2026-11-27",
+            "details": {
+              "valid": false,
+              "couponId": "cpn_002",
+              "code": "BLACKFRIDAY25",
+              "discountType": "percent",
+              "discountValue": 25,
+              "eligibleAmount": 65,
+              "discount": 0,
+              "reasons": [
+                "not valid until 2026-11-27"
+              ]
+            },
+            "signature": "orders.apply_coupon_to_order(id: string, code: string) [write] — Orders: Apply coupon to order. Apply a coupon code to a draft order using the same rules as coupons.validate_coupon (active, window, redemptions left, product restriction); stores the discount. Replaces any existing coupon."
+          },
+          "ms": 1.81,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 14,
+        "output_tokens": 902,
+        "cache_creation_input_tokens": 3710,
+        "cache_read_input_tokens": 45075
+      },
+      "costUSD": 0.054676,
+      "retries": 0,
+      "retrieved": [
+        "coupons.validate_coupon",
+        "orders.search_orders",
+        "tax_rules.calculate_tax",
+        "prices.set_default_price",
+        "prices.archive_price",
+        "orders.apply_coupon_to_order",
+        "quotes.apply_quote_discount",
+        "prices.get_price",
+        "prices.set_price_currency",
+        "orders.add_order_line_item",
+        "availability.get_weekly_hours",
+        "payments.allocate_payment",
+        "pipelines.get_pipeline",
+        "tax_rules.set_tax_region",
+        "tax_rules.deactivate_tax_rule",
+        "tax_rules.get_tax_rule",
+        "products.get_inventory_availability",
+        "memberships.check_member_access",
+        "orders.get_order",
+        "orders.submit_order",
+        "refunds.get_refund_execution_status",
+        "pipelines.create_pipeline",
+        "tax_rules.set_product_tax_category",
+        "products.get_product"
+      ],
+      "status": "completed",
+      "finalText": "I couldn't apply **BLACKFRIDAY25** to Sarah Chen's order. The code doesn't become valid until **2026-11-27**, and today is 2026-11-04.\n\n**What I found**\n- **Contact:** Sarah Chen (con_002)\n- **Order:** ORD-1006 (ord_006), still a draft. It has 2× Logo T-Shirt S (US$50) and 1× Ceramic Coffee Mug (US$15). The total is **US$65**, with no discount.\n- **Coupon:** BLACKFRIDAY25 (cpn_002) gives 25% off. Applied today, it would take **US$16.25** off and bring her total to **US$48.75**.\n\nNothing on the order was changed.\n\n**Ways to give her the sale price now. Tell me which one you want:**\n1. **Move the coupon's start date to today** so the code works now. This affects everyone, so anyone with the code could use it early.\n2. **Use a separate 25% coupon just for Sarah** and apply it to her order. The Black Friday code stays as it is.\n3. **Leave her order alone until 2026-11-27** and apply BLACKFRIDAY25 then. This only works if the order is still a draft at that point.",
+      "progress": [],
+      "retrievalMs": 1.91,
+      "calls": 6
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "scenario": {
+    "id": "sch-cond-demo-host-fallback",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "Liam Nguyen wants a product demo tomorrow at 3pm UTC. Book it with Priya Shah if she’s free then, otherwise put it with Alex Morgan."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action appointments.create_appointment",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params appointments.create_appointment",
+        "pass": true,
+        "detail": "{\"contactId\":\"con_045\",\"calendarId\":\"cal_002\",\"startAt\":\"2026-11-05\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "ae028149-dfe2-4718-aa75-2edaa3755691",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Liam Nguyen wants a product demo tomorrow at 3pm UTC. Book it with Priya Shah if she’s free then, otherwise put it with Alex Morgan.",
+      "ttfurMs": 1416,
+      "ttftTextMs": 1416,
+      "firstActionMs": 3136,
+      "e2eMs": 9434,
+      "llmCalls": [
+        {
+          "ms": 3128,
+          "ttftMs": 1409,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 264,
+            "cacheRead": 5235,
+            "cacheWrite": 3283
+          },
+          "costUSD": 0.023805
+        },
+        {
+          "ms": 1557,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 135,
+            "cacheRead": 8518,
+            "cacheWrite": 2323
+          },
+          "costUSD": 0.0177302
+        },
+        {
+          "ms": 1891,
+          "ttftMs": 1050,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 169,
+            "cacheRead": 10841,
+            "cacheWrite": 378
+          },
+          "costUSD": 0.009614400000000002
+        },
+        {
+          "ms": 2843,
+          "ttftMs": 2842,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 230,
+            "cacheRead": 11219,
+            "cacheWrite": 308
+          },
+          "costUSD": 0.0106356
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Liam Nguyen"
+          },
+          "ok": true,
+          "ms": 0.26,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 0.09,
+          "confirmed": false
+        },
+        {
+          "action": "calendars.list_calendars",
+          "input": {},
+          "ok": true,
+          "ms": 0.07,
+          "confirmed": false
+        },
+        {
+          "action": "availability.check_scheduling_conflicts",
+          "input": {
+            "userId": "usr_003",
+            "startAt": "2026-11-05T15:00:00Z",
+            "endAt": "2026-11-05T15:45:00Z"
+          },
+          "ok": true,
+          "ms": 0.41,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.create_appointment",
+          "input": {
+            "calendarId": "cal_002",
+            "contactId": "con_045",
+            "startAt": "2026-11-05T15:00:00Z",
+            "hostUserId": "usr_001",
+            "title": "Product Demo with Liam Nguyen"
+          },
+          "ok": true,
+          "ms": 5.4,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 798,
+        "cache_creation_input_tokens": 6292,
+        "cache_read_input_tokens": 35813
+      },
+      "costUSD": 0.061785,
+      "retries": 0,
+      "retrieved": [
+        "availability.find_available_slots",
+        "products.search_products",
+        "conversations.list_unanswered_conversations",
+        "events.add_to_waitlist",
+        "appointments.create_appointment",
+        "booking_pages.list_booking_pages",
+        "calendars.set_booking_buffer",
+        "subscriptions.set_subscription_trial_end",
+        "availability.check_scheduling_conflicts",
+        "availability.set_weekly_hours",
+        "funnels.publish_funnel",
+        "availability.get_weekly_hours",
+        "reports.compare_report_periods",
+        "appointments.assign_appointment_host",
+        "events.promote_waitlisted",
+        "teams.get_team_workload",
+        "prices.set_trial_period",
+        "memberships.check_member_access",
+        "appointments.reschedule_appointment",
+        "booking_pages.update_booking_page_content",
+        "calendars.archive_calendar",
+        "products.get_inventory_availability",
+        "workflows.add_workflow_step",
+        "calendars.set_calendar_timezone"
+      ],
+      "status": "completed",
+      "finalText": "I booked Liam's product demo with **Alex Morgan** because Priya isn't free at 3pm tomorrow.\n\n- **Appointment:** Product Demo with Liam Nguyen (apt_035)\n- **When:** Thu, 5 Nov 2026, 15:00–15:45 UTC (the Product Demo calendar's standard 45 minutes)\n- **Contact:** Liam Nguyen (con_045)\n- **Host:** Alex Morgan (usr_001)\n- **Status:** Booked\n\n**Why not Priya:** She already has a booked Sales Discovery Call with Sofia Nguyen (apt_006) from 15:00 to 15:30 UTC.",
+      "progress": [],
+      "retrievalMs": 6.81,
+      "calls": 4
+    }
+  ]
+}

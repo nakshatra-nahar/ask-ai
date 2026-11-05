@@ -1,0 +1,201 @@
+{
+  "scenario": {
+    "id": "sch-multi-funnel-pros-plan",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Set up a new 'Funnel Pros' membership at $79 a month that includes the Advanced Funnel Building course and the Growth Hackers Club community, then put Sarah Chen on it."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action memberships.create_membership_plan",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action memberships.grant_membership",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params memberships.create_membership_plan",
+        "pass": true,
+        "detail": "{\"name\":\"/funnel pros/i\",\"price\":79,\"interval\":\"month\"}"
+      },
+      {
+        "name": "params memberships.grant_membership",
+        "pass": true,
+        "detail": "{\"contactId\":\"con_002\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "5f7d1718-4c6b-4956-af7d-2aac04c58a7d",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Set up a new 'Funnel Pros' membership at $79 a month that includes the Advanced Funnel Building course and the Growth Hackers Club community, then put Sarah Chen on it.",
+      "ttfurMs": 4169,
+      "ttftTextMs": 4169,
+      "firstActionMs": 5648,
+      "e2eMs": 12976,
+      "llmCalls": [
+        {
+          "ms": 5647,
+          "ttftMs": 4169,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 245,
+            "cacheRead": 112993,
+            "cacheWrite": 135
+          },
+          "costUSD": 0.050788200000000006
+        },
+        {
+          "ms": 1824,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 164,
+            "cacheRead": 113128,
+            "cacheWrite": 1773
+          },
+          "costUSD": 0.0574042
+        },
+        {
+          "ms": 1399,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 83,
+            "cacheRead": 114901,
+            "cacheWrite": 356
+          },
+          "costUSD": 0.0494084
+        },
+        {
+          "ms": 4096,
+          "ttftMs": 4092,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 356,
+            "cacheRead": 115257,
+            "cacheWrite": 214
+          },
+          "costUSD": 0.0543008
+        }
+      ],
+      "actions": [
+        {
+          "action": "courses.search_courses",
+          "input": {
+            "query": "Advanced Funnel Building"
+          },
+          "ok": true,
+          "ms": 0.11,
+          "confirmed": false
+        },
+        {
+          "action": "communities.get_community",
+          "input": {
+            "id": "Growth Hackers Club"
+          },
+          "ok": true,
+          "ms": 0.47,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah Chen"
+          },
+          "ok": true,
+          "ms": 0.21,
+          "confirmed": false
+        },
+        {
+          "action": "memberships.list_membership_plans",
+          "input": {
+            "query": "Funnel Pros"
+          },
+          "ok": true,
+          "ms": 0.52,
+          "confirmed": false
+        },
+        {
+          "action": "memberships.create_membership_plan",
+          "input": {
+            "name": "Funnel Pros",
+            "interval": "month",
+            "price": 79,
+            "entitlements": [
+              {
+                "type": "course",
+                "refId": "crs_002"
+              },
+              {
+                "type": "community",
+                "refId": "cmty_001"
+              }
+            ]
+          },
+          "ok": true,
+          "ms": 6.62,
+          "confirmed": false
+        },
+        {
+          "action": "memberships.grant_membership",
+          "input": {
+            "contactId": "con_002",
+            "planId": "mpl_004"
+          },
+          "ok": true,
+          "ms": 1.86,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 848,
+        "cache_creation_input_tokens": 2478,
+        "cache_read_input_tokens": 456279
+      },
+      "costUSD": 0.211902,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I created the Funnel Pros plan and gave Sarah Chen a membership on it.\n\n- **Plan:** Funnel Pros (`mpl_004`), $79/month. It includes:\n  - The Advanced Funnel Building course (`crs_002`)\n  - The Growth Hackers Club community (`cmty_001`)\n- **Sarah Chen's membership:** `mem_011` (contact `con_002`). It's active from today and has no end date.\n\n**Notes**\n- The $79/month price is only a label on the plan. Sarah won't be charged until you set up billing separately, such as a subscription or invoice. I can do that if you want.\n- Advanced Funnel Building normally requires learners to finish course `crs_001` first. Sarah gets access through the membership, but I didn't check whether she has completed `crs_001`.\n- Growth Hackers Club is public, and Sarah was already a member. The membership doesn't change that.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

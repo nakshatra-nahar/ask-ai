@@ -1,0 +1,157 @@
+{
+  "scenario": {
+    "id": "sch-direct-demo-thankyou",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Change the thank-you message on the Product Demo booking page to: \"Thanks for booking! You'll get a short agenda from our team before the demo.\""
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action booking_pages.set_booking_confirmation_message",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params booking_pages.set_booking_confirmation_message",
+        "pass": true,
+        "detail": "{\"id\":\"bp_002\",\"message\":\"/short agenda/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "2d5b2632-ae8c-4a0f-8176-78234a45a040",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Change the thank-you message on the Product Demo booking page to: \"Thanks for booking! You'll get a short agenda from our team before the demo.\"",
+      "ttfurMs": 1100,
+      "ttftTextMs": 1100,
+      "firstActionMs": 2174,
+      "e2eMs": 7941,
+      "llmCalls": [
+        {
+          "ms": 2170,
+          "ttftMs": 1097,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 115,
+            "cacheRead": 5235,
+            "cacheWrite": 2603
+          },
+          "costUSD": 0.017425
+        },
+        {
+          "ms": 1993,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 124,
+            "cacheRead": 7838,
+            "cacheWrite": 368
+          },
+          "costUSD": 0.0074632000000000006
+        },
+        {
+          "ms": 3769,
+          "ttftMs": 3766,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 229,
+            "cacheRead": 8206,
+            "cacheWrite": 362
+          },
+          "costUSD": 0.0096804
+        }
+      ],
+      "actions": [
+        {
+          "action": "booking_pages.list_booking_pages",
+          "input": {
+            "query": "Product Demo"
+          },
+          "ok": true,
+          "ms": 0.71,
+          "confirmed": false
+        },
+        {
+          "action": "booking_pages.set_booking_confirmation_message",
+          "input": {
+            "id": "bp_002",
+            "message": "Thanks for booking! You'll get a short agenda from our team before the demo."
+          },
+          "ok": true,
+          "ms": 4.48,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 468,
+        "cache_creation_input_tokens": 3333,
+        "cache_read_input_tokens": 21279
+      },
+      "costUSD": 0.034569,
+      "retries": 0,
+      "retrieved": [
+        "booking_pages.set_booking_confirmation_message",
+        "templates.search_templates",
+        "teams.get_team",
+        "booking_pages.get_booking_page",
+        "products.search_products",
+        "appointments.create_appointment",
+        "teams.get_team_workload",
+        "appointments.search_appointments",
+        "booking_pages.list_booking_pages",
+        "teams.list_teams",
+        "booking_pages.unpublish_booking_page",
+        "teams.archive_team",
+        "calendars.assign_calendar_host",
+        "conversations.search_conversations",
+        "templates.get_template",
+        "conversations.get_conversation",
+        "calendars.set_calendar_visibility",
+        "appointments.get_appointment",
+        "sms.get_sms_details",
+        "sms.send_sms",
+        "templates.update_template_content",
+        "booking_pages.create_booking_page",
+        "templates.restore_template_version",
+        "booking_pages.link_calendar_to_booking_page"
+      ],
+      "status": "completed",
+      "finalText": "I changed the thank-you message on the **Product Demo** booking page (bp_002). The page is live at https://book.acme.test/product-demo, so visitors will see the new text after booking.\n\n- **Before:** \"Thanks! Your booking is confirmed. A calendar invite is on its way.\"\n- **Now:** \"Thanks for booking! You'll get a short agenda from our team before the demo.\"\n\nThis message only shows on the page itself. Nothing is set up to send an agenda automatically, so your team would need to send them. I could set up a workflow to email an agenda template when someone books.",
+      "progress": [],
+      "retrievalMs": 3.04,
+      "calls": 3
+    }
+  ]
+}

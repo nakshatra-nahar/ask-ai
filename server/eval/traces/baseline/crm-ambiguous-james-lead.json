@@ -1,0 +1,99 @@
+{
+  "scenario": {
+    "id": "crm-ambiguous-james-lead",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Mark James's lead as qualified."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "0463873d-c87d-4e61-8c3a-8ab212c1c8f0",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Mark James's lead as qualified.",
+      "ttfurMs": 2303,
+      "ttftTextMs": 2303,
+      "firstActionMs": 3100,
+      "e2eMs": 6779,
+      "llmCalls": [
+        {
+          "ms": 3100,
+          "ttftMs": 2303,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 64,
+            "cacheRead": 112993,
+            "cacheWrite": 84
+          },
+          "costUSD": 0.0469132
+        },
+        {
+          "ms": 3679,
+          "ttftMs": 3677,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 178,
+            "cacheRead": 113077,
+            "cacheWrite": 409
+          },
+          "costUSD": 0.0508438
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "query": "James"
+          },
+          "ok": true,
+          "ms": 0.3,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 242,
+        "cache_creation_input_tokens": 493,
+        "cache_read_input_tokens": 226070
+      },
+      "costUSD": 0.097757,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I found two open leads for \"James\", so I haven't changed either one yet. Which one do you want marked as qualified?\n\n| Lead | Name | Email | Status | Score | Created |\n|---|---|---|---|---|---|\n| `ld_017` | James Patel | james.patel31@example.com | new | 20 | 2026-11-04 |\n| `ld_003` | James Williams | james.williams1@example.com | new | 39 | 2026-10-31 |\n\nBoth came from Facebook (campaign `cam_001`) and neither has an owner.",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

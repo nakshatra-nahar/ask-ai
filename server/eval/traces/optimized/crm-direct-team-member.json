@@ -1,0 +1,171 @@
+{
+  "scenario": {
+    "id": "crm-direct-team-member",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Riley Kim is going to help the sales team for a bit — add her to Sales. She should stay on Support as well."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action teams.add_team_member",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid teams.remove_team_member",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params teams.add_team_member",
+        "pass": true,
+        "detail": "{\"id\":\"tm_001\",\"userId\":\"usr_007\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "b7f1112d-d0ed-48c9-9662-1e35434a60ae",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Riley Kim is going to help the sales team for a bit — add her to Sales. She should stay on Support as well.",
+      "ttfurMs": 779,
+      "ttftTextMs": 779,
+      "firstActionMs": 1945,
+      "e2eMs": 5355,
+      "llmCalls": [
+        {
+          "ms": 1940,
+          "ttftMs": 775,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 188,
+            "cacheRead": 5235,
+            "cacheWrite": 2417
+          },
+          "costUSD": 0.017955
+        },
+        {
+          "ms": 1292,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 96,
+            "cacheRead": 7652,
+            "cacheWrite": 491
+          },
+          "costUSD": 0.0074438
+        },
+        {
+          "ms": 2113,
+          "ttftMs": 2112,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 129,
+            "cacheRead": 8143,
+            "cacheWrite": 224
+          },
+          "costUSD": 0.0069652
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Riley Kim"
+          },
+          "ok": true,
+          "ms": 0.25,
+          "confirmed": false
+        },
+        {
+          "action": "teams.list_teams",
+          "input": {
+            "query": "Sales"
+          },
+          "ok": true,
+          "ms": 0.47,
+          "confirmed": false
+        },
+        {
+          "action": "teams.add_team_member",
+          "input": {
+            "id": "tm_001",
+            "userId": "usr_007"
+          },
+          "ok": true,
+          "ms": 5.29,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 413,
+        "cache_creation_input_tokens": 3132,
+        "cache_read_input_tokens": 21030
+      },
+      "costUSD": 0.032364,
+      "retries": 0,
+      "retrieved": [
+        "teams.add_team_member",
+        "teams.list_teams",
+        "tickets.reply_to_ticket",
+        "calendars.assign_calendar_host",
+        "tickets.search_tickets",
+        "teams.get_team_workload",
+        "memberships.check_member_access",
+        "tickets.add_ticket_note",
+        "tickets.create_ticket",
+        "users.deactivate_user",
+        "users.list_users",
+        "tickets.assign_ticket",
+        "users.invite_user",
+        "teams.archive_team",
+        "teams.rename_team",
+        "teams.get_team",
+        "pipelines.add_pipeline_stage",
+        "communities.join_community",
+        "tickets.get_ticket",
+        "workflows.add_workflow_step",
+        "funnels.create_funnel",
+        "funnels.add_funnel_step",
+        "tax_rules.create_tax_rule",
+        "opportunities.mark_opportunity_lost"
+      ],
+      "status": "completed",
+      "finalText": "I added Riley Kim (usr_007) to the **Sales** team (tm_001). Adding her doesn't take her off any team, so she stays on Support.\n\n- Her role is still **support** only. Being on the team doesn't make her a sales rep. If she needs sales-rep permissions too, I can add that role.\n- Sales hands out new work to members in turn, so she'll start getting a share of it.",
+      "progress": [],
+      "retrievalMs": 4.32,
+      "calls": 3
+    }
+  ]
+}

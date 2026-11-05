@@ -1,0 +1,138 @@
+{
+  "scenario": {
+    "id": "com-direct-revenue-vs-september",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "How much money did we actually collect last month, and how does that stack up against September?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action reports.compare_report_periods|reports.run_report|payments.search_payments",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(?=[\\s\\S]*(?<![\\d,.])\\$?(1,100|1100)(\\.00)?(?![\\d]))(?=[\\s\\S]*(?<![\\d,.])\\$?(2,890|2890)(\\.00)?(?![\\d]))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "1f3e1633-c124-44a6-ba90-511b47311251",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "How much money did we actually collect last month, and how does that stack up against September?",
+      "ttfurMs": 1389,
+      "ttftTextMs": 1389,
+      "firstActionMs": 2410,
+      "e2eMs": 5651,
+      "llmCalls": [
+        {
+          "ms": 2402,
+          "ttftMs": 1385,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 128,
+            "cacheRead": 5235,
+            "cacheWrite": 3193
+          },
+          "costUSD": 0.020635
+        },
+        {
+          "ms": 3242,
+          "ttftMs": 3238,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 223,
+            "cacheRead": 8428,
+            "cacheWrite": 259
+          },
+          "costUSD": 0.0091342
+        }
+      ],
+      "actions": [
+        {
+          "action": "reports.compare_report_periods",
+          "input": {
+            "metric": "revenue_collected",
+            "dateRange": {
+              "preset": "last_month"
+            }
+          },
+          "ok": true,
+          "ms": 2.51,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 351,
+        "cache_creation_input_tokens": 3452,
+        "cache_read_input_tokens": 13663
+      },
+      "costUSD": 0.029769,
+      "retries": 0,
+      "retrieved": [
+        "products.get_inventory_availability",
+        "refunds.check_refundable_balance",
+        "reports.compare_report_periods",
+        "products.set_inventory_quantity",
+        "reports.set_report_date_range",
+        "products.update_product_variant",
+        "prices.list_product_prices",
+        "products.add_product_variant",
+        "refunds.create_refund_request",
+        "reports.run_report",
+        "tax_rules.calculate_tax",
+        "coupons.set_discount_value",
+        "reports.set_report_grouping",
+        "payments.create_payment_request",
+        "orders.update_order_quantity",
+        "products.set_product_sku",
+        "forms.submit_form_response",
+        "refunds.execute_refund",
+        "conversations.search_conversations",
+        "availability.set_max_horizon",
+        "refunds.get_refund_execution_status",
+        "orders.submit_order",
+        "orders.add_order_line_item",
+        "conversations.summarize_conversation"
+      ],
+      "status": "completed",
+      "finalText": "We collected **1,100 in October 2026**, which is **1,790 (about 62%) less** than the **2,890** we collected in September.\n\n| Period | Revenue collected | Payments |\n|---|---|---|\n| Oct 1–31, 2026 | 1,100 | 1 |\n| Sep 1–30, 2026 | 2,890 | 3 |\n| **Change** | **−1,790 (−61.94%)** | −2 |\n\nThese figures are for money actually received, not amounts invoiced. The report didn't say which currency they're in. Most of the drop comes from receiving fewer payments: one in October against three in September.",
+      "progress": [],
+      "retrievalMs": 4.74,
+      "calls": 2
+    }
+  ]
+}

@@ -1,0 +1,305 @@
+{
+  "scenario": {
+    "id": "com-failure-refund-over-balance",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Refund the rest of Nina Chen's $250 check — she should get $210 back."
+      }
+    ]
+  },
+  "check": {
+    "pass": false,
+    "checks": [
+      {
+        "name": "reply /(?<![\\d,.])\\$?(160|160)(\\.00)?(?![\\d])/",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": false,
+        "detail": "refund request(s) created: 160"
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 3
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "b66676a2-4998-40c9-ac97-ecd120593f4b",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Refund the rest of Nina Chen's $250 check — she should get $210 back.",
+      "ttfurMs": 703,
+      "ttftTextMs": 703,
+      "firstActionMs": 1475,
+      "e2eMs": 8649,
+      "llmCalls": [
+        {
+          "ms": 1475,
+          "ttftMs": 703,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 78,
+            "cacheRead": 112993,
+            "cacheWrite": 99
+          },
+          "costUSD": 0.0472682
+        },
+        {
+          "ms": 1150,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 55,
+            "cacheRead": 113092,
+            "cacheWrite": 287
+          },
+          "costUSD": 0.047779800000000004
+        },
+        {
+          "ms": 1547,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 120,
+            "cacheRead": 113379,
+            "cacheWrite": 308
+          },
+          "costUSD": 0.049299600000000006
+        },
+        {
+          "ms": 4468,
+          "ttftMs": 3230,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 453,
+            "cacheRead": 113687,
+            "cacheWrite": 754
+          },
+          "costUSD": 0.058312800000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Nina Chen"
+          },
+          "ok": true,
+          "ms": 0.27,
+          "confirmed": false
+        },
+        {
+          "action": "payments.search_payments",
+          "input": {
+            "contactId": "con_025"
+          },
+          "ok": true,
+          "ms": 1.97,
+          "confirmed": false
+        },
+        {
+          "action": "refunds.check_refundable_balance",
+          "input": {
+            "paymentId": "pay_013"
+          },
+          "ok": true,
+          "ms": 0.68,
+          "confirmed": false
+        },
+        {
+          "action": "refunds.search_refund_requests",
+          "input": {
+            "paymentId": "pay_013"
+          },
+          "ok": true,
+          "ms": 0.1,
+          "confirmed": false
+        },
+        {
+          "action": "refunds.create_refund_request",
+          "input": {
+            "paymentId": "pay_013",
+            "amount": 160,
+            "reason": "requested_by_customer",
+            "note": "Refund remaining balance of $250 check #4471 (with rfd_002's $50, total $210)"
+          },
+          "ok": true,
+          "ms": 6.33,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 706,
+        "cache_creation_input_tokens": 1448,
+        "cache_read_input_tokens": 453151
+      },
+      "costUSD": 0.20266,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01VeUUn3N5GURDnfmZiLF5Nc",
+          "action": "refunds.execute_refund",
+          "name": "Execute simulated refund",
+          "risk": "external",
+          "input": {
+            "id": "rfd_002"
+          }
+        }
+      ],
+      "calls": 4
+    },
+    {
+      "sessionId": "b66676a2-4998-40c9-ac97-ecd120593f4b",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 5,
+      "ttftTextMs": null,
+      "firstActionMs": 5,
+      "e2eMs": 2208,
+      "llmCalls": [
+        {
+          "ms": 1103,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 59,
+            "cacheRead": 114441,
+            "cacheWrite": 1000
+          },
+          "costUSD": 0.0519644
+        },
+        {
+          "ms": 1094,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 57,
+            "cacheRead": 115441,
+            "cacheWrite": 309
+          },
+          "costUSD": 0.0488694
+        }
+      ],
+      "actions": [
+        {
+          "action": "refunds.execute_refund",
+          "input": {
+            "id": "rfd_002"
+          },
+          "ok": true,
+          "ms": 4.65,
+          "confirmed": true
+        },
+        {
+          "action": "refunds.approve_refund_request",
+          "input": {
+            "id": "rfd_005"
+          },
+          "ok": true,
+          "ms": 5.66,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 116,
+        "cache_creation_input_tokens": 1309,
+        "cache_read_input_tokens": 229882
+      },
+      "costUSD": 0.100834,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "resumed": true,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01RyDeg8ugfoKXByT4RjJhzr",
+          "action": "refunds.execute_refund",
+          "name": "Execute simulated refund",
+          "risk": "external",
+          "input": {
+            "id": "rfd_005"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "b66676a2-4998-40c9-ac97-ecd120593f4b",
+      "turn": 2,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 5,
+      "ttftTextMs": 3078,
+      "firstActionMs": 5,
+      "e2eMs": 3083,
+      "llmCalls": [
+        {
+          "ms": 3078,
+          "ttftMs": 3074,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 272,
+            "cacheRead": 115750,
+            "cacheWrite": 353
+          },
+          "costUSD": 0.053513
+        }
+      ],
+      "actions": [
+        {
+          "action": "refunds.execute_refund",
+          "input": {
+            "id": "rfd_005"
+          },
+          "ok": true,
+          "ms": 4.59,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 272,
+        "cache_creation_input_tokens": 353,
+        "cache_read_input_tokens": 115750
+      },
+      "costUSD": 0.053513,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I've sent Nina Chen (con_025) the remaining $210 from her $250 check #4471 (payment pay_013), so the full check amount has now been refunded.\n\n$40 had already been refunded on Oct 25, and another $50 refund was approved but hadn't been sent yet. I sent that one and added a new refund for the other $160, so the total is exactly $210 and nothing gets paid twice.\n\n| Refund | Amount | Status | Processor ref | Settles |\n|---|---|---|---|---|\n| rfd_002 (approved earlier, now sent) | $50 | Sent | re_sim_002 | 2026-11-09 |\n| rfd_005 (new, reason: requested by customer) | $160 | Sent | re_sim_005 | 2026-11-09 |\n| **Total** | **$210** | | | |",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

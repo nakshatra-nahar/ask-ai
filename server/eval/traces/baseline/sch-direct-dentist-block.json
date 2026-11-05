@@ -1,0 +1,133 @@
+{
+  "scenario": {
+    "id": "sch-direct-dentist-block",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Dana Cruz has a dentist appointment next Monday from 1 to 3pm, block that off on her calendar pls"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action availability.block_time",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params availability.block_time",
+        "pass": true,
+        "detail": "{\"userId\":\"usr_005\",\"startAt\":\"2026-11-09\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "a1cf4f50-76a8-43af-9042-1206dec103c9",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Dana Cruz has a dentist appointment next Monday from 1 to 3pm, block that off on her calendar pls",
+      "ttfurMs": 1858,
+      "ttftTextMs": 1858,
+      "firstActionMs": 2705,
+      "e2eMs": 24541,
+      "llmCalls": [
+        {
+          "ms": 2705,
+          "ttftMs": 1858,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 73,
+            "cacheRead": 112993,
+            "cacheWrite": 111
+          },
+          "costUSD": 0.047228200000000005
+        },
+        {
+          "ms": 4030,
+          "ttftMs": 3185,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 291,
+            "cacheRead": 113104,
+            "cacheWrite": 221
+          },
+          "costUSD": 0.05217460000000001
+        },
+        {
+          "ms": 17798,
+          "ttftMs": 17796,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 326,
+            "cacheRead": 113325,
+            "cacheWrite": 697
+          },
+          "costUSD": 0.055343
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Dana Cruz"
+          },
+          "ok": true,
+          "ms": 0.22,
+          "confirmed": false
+        },
+        {
+          "action": "availability.block_time",
+          "input": {
+            "userId": "usr_005",
+            "startAt": "2026-11-09T18:00:00Z",
+            "endAt": "2026-11-09T20:00:00Z",
+            "reason": "Dentist appointment"
+          },
+          "ok": true,
+          "ms": 7.14,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 690,
+        "cache_creation_input_tokens": 1029,
+        "cache_read_input_tokens": 339422
+      },
+      "costUSD": 0.154746,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Dana Cruz (usr_005) is now blocked off for her dentist appointment on **Mon, Nov 9, 1:00–3:00pm Eastern** (18:00–20:00 UTC). The block is `blk_003` and is labeled \"Dentist appointment.\"\n\n- She has no appointments booked in that window, so nothing needs to be moved.\n- **Please check the time zone:** I took \"1 to 3pm\" as her local Eastern time. This system reads working hours as UTC, and her hours are set to 09:00–17:00 UTC. That means the block falls after her bookable hours, so it may not change her availability. If you meant 1–3pm UTC (13:00–15:00), I can move it.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

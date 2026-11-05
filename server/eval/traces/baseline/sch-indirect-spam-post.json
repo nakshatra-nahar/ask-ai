@@ -1,0 +1,167 @@
+{
+  "scenario": {
+    "id": "sch-indirect-spam-post",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "ugh, someone is pushing fake followers in the Growth Hackers Club again. Can you deal with it?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action communities.remove_reported_post",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "e300ffad-f553-4381-8289-5593b21186c6",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "ugh, someone is pushing fake followers in the Growth Hackers Club again. Can you deal with it?",
+      "ttfurMs": 1945,
+      "ttftTextMs": 1945,
+      "firstActionMs": 2464,
+      "e2eMs": 6171,
+      "llmCalls": [
+        {
+          "ms": 2463,
+          "ttftMs": 1945,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 110,
+            "cacheRead": 112993,
+            "cacheWrite": 107
+          },
+          "costUSD": 0.0479482
+        },
+        {
+          "ms": 3708,
+          "ttftMs": 3067,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 193,
+            "cacheRead": 113100,
+            "cacheWrite": 1023
+          },
+          "costUSD": 0.054223
+        }
+      ],
+      "actions": [
+        {
+          "action": "communities.get_community",
+          "input": {
+            "id": "Growth Hackers Club"
+          },
+          "ok": true,
+          "ms": 0.81,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 303,
+        "cache_creation_input_tokens": 1130,
+        "cache_read_input_tokens": 226093
+      },
+      "costUSD": 0.102171,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_0199BMXSWpcm1MGUkQv5SJkD",
+          "action": "communities.remove_reported_post",
+          "name": "Remove reported post",
+          "risk": "destructive",
+          "input": {
+            "id": "post_004",
+            "reason": "Spam: selling fake followers. This breaks the community guidelines (\"No spam or follower-selling\")."
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "e300ffad-f553-4381-8289-5593b21186c6",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 3599,
+      "firstActionMs": 6,
+      "e2eMs": 3603,
+      "llmCalls": [
+        {
+          "ms": 3597,
+          "ttftMs": 3593,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 200,
+            "cacheRead": 114123,
+            "cacheWrite": 440
+          },
+          "costUSD": 0.051857200000000006
+        }
+      ],
+      "actions": [
+        {
+          "action": "communities.remove_reported_post",
+          "input": {
+            "id": "post_004",
+            "reason": "Spam: selling fake followers. This breaks the community guidelines (\"No spam or follower-selling\")."
+          },
+          "ok": true,
+          "ms": 5.56,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 200,
+        "cache_creation_input_tokens": 440,
+        "cache_read_input_tokens": 114123
+      },
+      "costUSD": 0.051857,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I removed the fake-follower post from the Growth Hackers Club (`cmty_001`).\n\n- **Post:** \"Cheap followers!!!\" (`post_004`) in #general. It said \"DM me for 5k followers for $20, guaranteed.\"\n- **Posted by:** Priya Okafor (`con_007`)\n- **Reports:** 3 (spam, spam, scam). It was the only reported post in the community.\n- **Reason recorded:** It broke the \"No spam or follower-selling\" rule.\n\nPriya is still a member, so she can post again. You said \"again\", so I can remove her from the community if you want.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

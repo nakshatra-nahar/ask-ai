@@ -1,0 +1,203 @@
+{
+  "scenario": {
+    "id": "com-multi-subscription-with-coupon",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Start Ethan Garcia on the monthly SEO retainer using code SEO15, and tell me what his next renewal invoice will come to."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action subscriptions.create_subscription",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action subscriptions.preview_next_invoice",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params subscriptions.create_subscription",
+        "pass": true,
+        "detail": "{\"priceId\":\"pri_002\",\"couponCode\":\"SEO15\"}"
+      },
+      {
+        "name": "reply /(?<![\\d,.])\\$?(679|679)\\.15(?![\\d])/",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "f90387f6-83c6-4b82-b6e3-d451b427560e",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Start Ethan Garcia on the monthly SEO retainer using code SEO15, and tell me what his next renewal invoice will come to.",
+      "ttfurMs": 748,
+      "ttftTextMs": 748,
+      "firstActionMs": 1977,
+      "e2eMs": 9045,
+      "llmCalls": [
+        {
+          "ms": 1977,
+          "ttftMs": 748,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 196,
+            "cacheRead": 112993,
+            "cacheWrite": 117
+          },
+          "costUSD": 0.049718200000000004
+        },
+        {
+          "ms": 1186,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 78,
+            "cacheRead": 113110,
+            "cacheWrite": 1018
+          },
+          "costUSD": 0.051902
+        },
+        {
+          "ms": 1811,
+          "ttftMs": 1286,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 135,
+            "cacheRead": 114128,
+            "cacheWrite": 492
+          },
+          "costUSD": 0.0508192
+        },
+        {
+          "ms": 1172,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 61,
+            "cacheRead": 114620,
+            "cacheWrite": 348
+          },
+          "costUSD": 0.048816
+        },
+        {
+          "ms": 2888,
+          "ttftMs": 2884,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 301,
+            "cacheRead": 114968,
+            "cacheWrite": 305
+          },
+          "costUSD": 0.0535402
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Ethan Garcia"
+          },
+          "ok": true,
+          "ms": 0.34,
+          "confirmed": false
+        },
+        {
+          "action": "products.search_products",
+          "input": {
+            "query": "SEO"
+          },
+          "ok": true,
+          "ms": 1.06,
+          "confirmed": false
+        },
+        {
+          "action": "coupons.search_coupons",
+          "input": {
+            "query": "SEO15"
+          },
+          "ok": true,
+          "ms": 0.53,
+          "confirmed": false
+        },
+        {
+          "action": "prices.list_product_prices",
+          "input": {
+            "productId": "prd_002",
+            "status": "active"
+          },
+          "ok": true,
+          "ms": 1.13,
+          "confirmed": false
+        },
+        {
+          "action": "subscriptions.create_subscription",
+          "input": {
+            "contactId": "con_024",
+            "priceId": "pri_002",
+            "couponCode": "SEO15"
+          },
+          "ok": true,
+          "ms": 7.16,
+          "confirmed": false
+        },
+        {
+          "action": "subscriptions.preview_next_invoice",
+          "input": {
+            "id": "sub_011"
+          },
+          "ok": true,
+          "ms": 0.72,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 771,
+        "cache_creation_input_tokens": 2280,
+        "cache_read_input_tokens": 569819
+      },
+      "costUSD": 0.254796,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Ethan Garcia is now on the Monthly SEO Retainer with code SEO15 applied. **His next renewal invoice comes to $679.15.**\n\n**Subscription:** sub_011\n- **Contact:** Ethan Garcia (con_024)\n- **Plan:** SEO Retainer — Monthly (pri_002), $799/month in USD. I chose this because it's the default price. There's also a yearly plan and a EUR monthly plan.\n- **Status:** active, no trial. The current period runs 4 Nov – 4 Dec 2026.\n\n**Next renewal invoice (4 Dec 2026, covering 4 Dec 2026 – 4 Jan 2027):**\n| | Amount |\n|---|---|\n| Monthly SEO Retainer × 1 | $799.00 |\n| SEO15 (15% off) | −$119.85 |\n| **Total** | **$679.15** |",
+      "progress": [],
+      "calls": 5
+    }
+  ]
+}

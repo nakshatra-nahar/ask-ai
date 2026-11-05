@@ -1,0 +1,200 @@
+{
+  "scenario": {
+    "id": "cmm-direct-publish-review-reply",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Post a public reply on Sofia M.'s 1-star Facebook review — apologize for the wait and ask her to give us a call so we can make it right."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action reviews.publish_review_response",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params reviews.publish_review_response",
+        "pass": true,
+        "detail": "{\"id\":\"rev_005\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "494a0206-176b-4667-87c9-1a60016c2841",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Post a public reply on Sofia M.'s 1-star Facebook review — apologize for the wait and ask her to give us a call so we can make it right.",
+      "ttfurMs": 2068,
+      "ttftTextMs": 2068,
+      "firstActionMs": 2854,
+      "e2eMs": 5826,
+      "llmCalls": [
+        {
+          "ms": 2847,
+          "ttftMs": 2063,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 128,
+            "cacheRead": 5235,
+            "cacheWrite": 2677
+          },
+          "costUSD": 0.018055
+        },
+        {
+          "ms": 2972,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 170,
+            "cacheRead": 7912,
+            "cacheWrite": 264
+          },
+          "costUSD": 0.0078928
+        }
+      ],
+      "actions": [
+        {
+          "action": "reviews.search_reviews",
+          "input": {
+            "platform": "facebook",
+            "ratingMax": 1,
+            "query": "Sofia"
+          },
+          "ok": true,
+          "ms": 1.18,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 298,
+        "cache_creation_input_tokens": 2941,
+        "cache_read_input_tokens": 13147
+      },
+      "costUSD": 0.025948,
+      "retries": 0,
+      "retrieved": [
+        "reviews.get_review_summary",
+        "reviews.list_review_requests",
+        "communities.reply_to_post",
+        "reviews.create_review_request",
+        "reviews.search_reviews",
+        "reviews.publish_review_response",
+        "tasks.create_task",
+        "reviews.draft_review_response",
+        "forms.publish_form",
+        "conversations.list_unanswered_conversations",
+        "courses.publish_course",
+        "booking_pages.publish_booking_page",
+        "appointments.create_appointment",
+        "blogs.set_post_categories",
+        "appointments.cancel_appointment",
+        "blogs.publish_post",
+        "blogs.schedule_post",
+        "memberships.grant_membership",
+        "appointments.search_appointments",
+        "conversations.summarize_conversation",
+        "events.cancel_registration",
+        "events.create_event",
+        "tickets.reply_to_ticket",
+        "conversations.mark_conversation_read"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 4.96,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01RgVq7zGYQvbcgowP3KWvSd",
+          "action": "reviews.publish_review_response",
+          "name": "Publish review response",
+          "risk": "external",
+          "input": {
+            "id": "rev_005",
+            "text": "Hi Sofia, we're truly sorry you waited 45 minutes past your appointment, and that nobody apologized at the time. That's not the experience we want for anyone. Please give us a call so we can make this right. Thank you for letting us know."
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "494a0206-176b-4667-87c9-1a60016c2841",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 3090,
+      "firstActionMs": 6,
+      "e2eMs": 3095,
+      "llmCalls": [
+        {
+          "ms": 3089,
+          "ttftMs": 3084,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 198,
+            "cacheRead": 8176,
+            "cacheWrite": 408
+          },
+          "costUSD": 0.0092784
+        }
+      ],
+      "actions": [
+        {
+          "action": "reviews.publish_review_response",
+          "input": {
+            "id": "rev_005",
+            "text": "Hi Sofia, we're truly sorry you waited 45 minutes past your appointment, and that nobody apologized at the time. That's not the experience we want for anyone. Please give us a call so we can make this right. Thank you for letting us know."
+          },
+          "ok": true,
+          "ms": 6.28,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 198,
+        "cache_creation_input_tokens": 408,
+        "cache_read_input_tokens": 8176
+      },
+      "costUSD": 0.009278,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I posted a public reply on Sofia M.'s 1-star Facebook review (rev_005).\n\n**Her review (30 Oct 2026):** \"Waited 45 minutes past my appointment and nobody apologized.\"\n\n**Your reply, now live on Facebook:**\n> Hi Sofia, we're truly sorry you waited 45 minutes past your appointment, and that nobody apologized at the time. That's not the experience we want for anyone. Please give us a call so we can make this right. Thank you for letting us know.\n\nThe reply doesn't include a phone number, so she'll need to find yours on your page or listing.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

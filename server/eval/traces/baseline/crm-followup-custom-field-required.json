@@ -1,0 +1,206 @@
+{
+  "scenario": {
+    "id": "crm-followup-custom-field-required",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Add a dropdown field on leads called Preferred Contact Time, with options Morning, Afternoon and Evening."
+      },
+      {
+        "user": "Oh, and make it required. Help text should say 'Best window to reach them by phone'."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action custom_fields.create_custom_field",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action custom_fields.set_field_validation",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action custom_fields.update_field_help_text",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params custom_fields.create_custom_field",
+        "pass": true,
+        "detail": "{\"module\":\"leads\",\"type\":\"dropdown\"}"
+      },
+      {
+        "name": "params custom_fields.set_field_validation",
+        "pass": true,
+        "detail": "{\"required\":true}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "8ea80b78-195a-44c7-9fbd-7cd8c94c3e75",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Add a dropdown field on leads called Preferred Contact Time, with options Morning, Afternoon and Evening.",
+      "ttfurMs": 1657,
+      "ttftTextMs": 1657,
+      "firstActionMs": 2814,
+      "e2eMs": 5551,
+      "llmCalls": [
+        {
+          "ms": 2806,
+          "ttftMs": 1656,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 163,
+            "cacheRead": 112993,
+            "cacheWrite": 110
+          },
+          "costUSD": 0.0490232
+        },
+        {
+          "ms": 2737,
+          "ttftMs": 2736,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 91,
+            "cacheRead": 113103,
+            "cacheWrite": 339
+          },
+          "costUSD": 0.04876420000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "custom_fields.create_custom_field",
+          "input": {
+            "module": "leads",
+            "label": "Preferred Contact Time",
+            "type": "dropdown",
+            "options": [
+              "Morning",
+              "Afternoon",
+              "Evening"
+            ]
+          },
+          "ok": true,
+          "ms": 7.68,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 254,
+        "cache_creation_input_tokens": 449,
+        "cache_read_input_tokens": 226096
+      },
+      "costUSD": 0.097787,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I added the **Preferred Contact Time** field to leads.\n\n- **ID:** `cf_013`\n- **Key:** `preferred_contact_time`\n- **Type:** Dropdown\n- **Options:** Morning, Afternoon, Evening\n- **Required:** No",
+      "progress": [],
+      "calls": 2
+    },
+    {
+      "sessionId": "8ea80b78-195a-44c7-9fbd-7cd8c94c3e75",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Oh, and make it required. Help text should say 'Best window to reach them by phone'.",
+      "ttfurMs": 1513,
+      "ttftTextMs": 1513,
+      "firstActionMs": 2784,
+      "e2eMs": 4866,
+      "llmCalls": [
+        {
+          "ms": 2782,
+          "ttftMs": 1513,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 182,
+            "cacheRead": 113442,
+            "cacheWrite": 121
+          },
+          "costUSD": 0.0496378
+        },
+        {
+          "ms": 2081,
+          "ttftMs": 2079,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 86,
+            "cacheRead": 113563,
+            "cacheWrite": 603
+          },
+          "costUSD": 0.0501682
+        }
+      ],
+      "actions": [
+        {
+          "action": "custom_fields.set_field_validation",
+          "input": {
+            "id": "cf_013",
+            "required": true
+          },
+          "ok": true,
+          "ms": 2.04,
+          "confirmed": false
+        },
+        {
+          "action": "custom_fields.update_field_help_text",
+          "input": {
+            "id": "cf_013",
+            "helpText": "Best window to reach them by phone"
+          },
+          "ok": true,
+          "ms": 1.76,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 268,
+        "cache_creation_input_tokens": 724,
+        "cache_read_input_tokens": 227005
+      },
+      "costUSD": 0.099806,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "**Preferred Contact Time** (`cf_013`) is now required, and its help text is set.\n\n- **Required:** Yes\n- **Help text:** \"Best window to reach them by phone\"\n- **Options:** Morning, Afternoon, Evening (no change)",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

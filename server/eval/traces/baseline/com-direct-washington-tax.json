@@ -1,0 +1,135 @@
+{
+  "scenario": {
+    "id": "com-direct-washington-tax",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "We've started shipping to Washington state. Add a 6.5% sales tax for WA."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tax_rules.create_tax_rule",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params tax_rules.create_tax_rule",
+        "pass": true,
+        "detail": "{\"country\":\"US\",\"state\":\"WA\",\"rate\":6.5}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "1ed36660-23c2-4adc-aa1c-b1ea3f3460d2",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "We've started shipping to Washington state. Add a 6.5% sales tax for WA.",
+      "ttfurMs": 1386,
+      "ttftTextMs": 1386,
+      "firstActionMs": 2012,
+      "e2eMs": 7472,
+      "llmCalls": [
+        {
+          "ms": 2010,
+          "ttftMs": 1386,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 135,
+            "cacheRead": 112993,
+            "cacheWrite": 100
+          },
+          "costUSD": 0.0484132
+        },
+        {
+          "ms": 1773,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 156,
+            "cacheRead": 113093,
+            "cacheWrite": 154
+          },
+          "costUSD": 0.049135200000000004
+        },
+        {
+          "ms": 3682,
+          "ttftMs": 3680,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 188,
+            "cacheRead": 113247,
+            "cacheWrite": 273
+          },
+          "costUSD": 0.050431800000000006
+        }
+      ],
+      "actions": [
+        {
+          "action": "tax_rules.list_tax_rules",
+          "input": {
+            "country": "US",
+            "state": "WA"
+          },
+          "ok": true,
+          "ms": 1.4,
+          "confirmed": false
+        },
+        {
+          "action": "tax_rules.create_tax_rule",
+          "input": {
+            "name": "Washington Sales Tax",
+            "country": "US",
+            "state": "WA",
+            "rate": 6.5,
+            "inclusive": false
+          },
+          "ok": true,
+          "ms": 5.86,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 479,
+        "cache_creation_input_tokens": 527,
+        "cache_read_input_tokens": 339333
+      },
+      "costUSD": 0.14798,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I added a 6.5% sales tax for Washington, and it's now active. No Washington rule existed before, so there's nothing duplicated.\n\n**Washington Sales Tax** (`tax_008`)\n- **Region:** Washington, US\n- **Rate:** 6.5%\n- **How it's charged:** added on top of your prices\n- **What it covers:** all product types. Anything marked tax-exempt still won't be taxed.\n\nWashington's 6.5% is only the state rate, and local sales tax is added based on where you ship. The rule I set up doesn't include those local rates.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "scenario": {
+    "id": "core-unsupported-business-cards",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Order 200 business cards from Vistaprint for Jordan Lee and charge the company card."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|unable|not able|don't have|do not have|not support|isn't supported|no (action|capability|way))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "c78fc44d-cfb6-4588-af3d-8e9177c25c80",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Order 200 business cards from Vistaprint for Jordan Lee and charge the company card.",
+      "ttfurMs": 3077,
+      "ttftTextMs": 3077,
+      "firstActionMs": null,
+      "e2eMs": 5343,
+      "llmCalls": [
+        {
+          "ms": 5343,
+          "ttftMs": 3077,
+          "stop": "end_turn",
+          "usage": {
+            "input": 4,
+            "output": 438,
+            "cacheRead": 112993,
+            "cacheWrite": 102
+          },
+          "costUSD": 0.0544832
+        }
+      ],
+      "actions": [],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 438,
+        "cache_creation_input_tokens": 102,
+        "cache_read_input_tokens": 112993
+      },
+      "costUSD": 0.054483,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I can't place this order. This platform has no connection to Vistaprint or any other outside vendor, and it can't charge a company card for purchases. Its orders and payments tools only handle sales to your own customers. Using them here would create a fake sales order, not a real Vistaprint purchase.\n\nNothing was ordered or charged.\n\n**What I can do instead:**\n- **Create a follow-up task**, such as \"Order 200 business cards for Jordan Lee from Vistaprint (charge company card)\". I can assign it to whoever handles purchasing and give it a due date and priority.\n- **Add an internal note** on Jordan Lee's record so there's a record of the request.\n\nShould I create the task? If so, tell me who it should go to and when it's due.",
+      "progress": [],
+      "calls": 1
+    }
+  ]
+}

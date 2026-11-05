@@ -1,0 +1,275 @@
+{
+  "scenario": {
+    "id": "core-conditional-invoice-reminders",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "For unpaid invoices overdue by more than 15 days, draft reminders, but skip customers who already received one this week."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action invoices.list_overdue_invoices",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action email.draft_email|sms.draft_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid invoices.send_invoice_reminder",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid email.send_email",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid sms.send_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "cb63d156-8a42-48ef-906b-bed1db8ff7ea",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "For unpaid invoices overdue by more than 15 days, draft reminders, but skip customers who already received one this week.",
+      "ttfurMs": 4699,
+      "ttftTextMs": 4699,
+      "firstActionMs": 5434,
+      "e2eMs": 28461,
+      "llmCalls": [
+        {
+          "ms": 5432,
+          "ttftMs": 4699,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 207,
+            "cacheRead": 112993,
+            "cacheWrite": 109
+          },
+          "costUSD": 0.049898200000000004
+        },
+        {
+          "ms": 5449,
+          "ttftMs": 2993,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 529,
+            "cacheRead": 113102,
+            "cacheWrite": 1041
+          },
+          "costUSD": 0.061033800000000006
+        },
+        {
+          "ms": 11130,
+          "ttftMs": 5211,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 1065,
+            "cacheRead": 114143,
+            "cacheWrite": 1393
+          },
+          "costUSD": 0.07393020000000002
+        },
+        {
+          "ms": 6420,
+          "ttftMs": 6414,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 593,
+            "cacheRead": 115536,
+            "cacheWrite": 3191
+          },
+          "costUSD": 0.07403739999999999
+        }
+      ],
+      "actions": [
+        {
+          "action": "invoices.list_overdue_invoices",
+          "input": {
+            "minDaysOverdue": 16,
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.5,
+          "confirmed": false
+        },
+        {
+          "action": "email.search_email_messages",
+          "input": {
+            "contactIds": [
+              "con_067",
+              "con_060",
+              "con_053",
+              "con_039",
+              "con_032",
+              "con_018"
+            ],
+            "direction": "outbound",
+            "sentAtAfter": "2026-11-02",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.79,
+          "confirmed": false
+        },
+        {
+          "action": "sms.search_sms_messages",
+          "input": {
+            "contactIds": [
+              "con_067",
+              "con_060",
+              "con_053",
+              "con_039",
+              "con_032",
+              "con_018"
+            ],
+            "direction": "outbound",
+            "sentAtAfter": "2026-11-02",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.45,
+          "confirmed": false
+        },
+        {
+          "action": "templates.search_templates",
+          "input": {
+            "query": "reminder",
+            "channel": "email"
+          },
+          "ok": true,
+          "ms": 0.69,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_067",
+            "templateId": "tpl_001",
+            "relatedType": "invoices",
+            "relatedId": "inv_010",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 8.1,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_060",
+            "templateId": "tpl_001",
+            "relatedType": "invoices",
+            "relatedId": "inv_009",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 4.73,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_053",
+            "templateId": "tpl_001",
+            "relatedType": "invoices",
+            "relatedId": "inv_008",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 4.18,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_039",
+            "templateId": "tpl_001",
+            "relatedType": "invoices",
+            "relatedId": "inv_006",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 1.98,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_032",
+            "templateId": "tpl_001",
+            "relatedType": "invoices",
+            "relatedId": "inv_005",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 1.67,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_018",
+            "templateId": "tpl_001",
+            "relatedType": "invoices",
+            "relatedId": "inv_003",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 1.51,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2394,
+        "cache_creation_input_tokens": 5734,
+        "cache_read_input_tokens": 455774
+      },
+      "costUSD": 0.2589,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I drafted 6 reminder emails. None have been sent. They use the \"Invoice Payment Reminder\" template (tpl_001).\n\n| Customer | Invoice | Days overdue | Balance | Draft |\n|---|---|---|---|---|\n| Michael Johnson (con_067) | INV-1010 (inv_010) | 60 | $1,310.00 | msg_130 |\n| Amara Müller (con_060) | INV-1009 (inv_009) | 45 | $600.00 | msg_131 |\n| Ethan Lee (con_053) | INV-1008 (inv_008) | 35 | $1,470.00 | msg_132 |\n| David Okafor (con_039) | INV-1006 (inv_006) | 25 | $900.00 | msg_133 |\n| Jack Rossi (con_032) | INV-1005 (inv_005) | 20 | $1,100.00 | msg_134 |\n| Noah Singh (con_018) | INV-1003 (inv_003) | 16 | $450.00 | msg_135 |\n\n**Skipped because they already got a reminder this week (Mon 2026-11-02):**\n- Fatima Martin (con_046): INV-1007, 31 days overdue\n- Nina Chen (con_025): INV-1004, 18 days overdue\n\n**Worth checking before sending:**\n- The template's subject says each invoice \"is due\" on a date that has already passed, e.g. \"Reminder: invoice INV-1010 is due 2026-09-05\". You may want to reword it to say \"overdue\" before sending.\n- Amara Müller and David Okafor last got a reminder on 2026-10-28, which was last week, so I included them.\n- David's text message on 2026-11-03 was a sales follow-up, not a payment reminder, so I didn't count it.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "scenario": {
+    "id": "crm-failure-lead-to-deactivated-user",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Hand Olivia Clark's lead over to Chris Park."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid users.reactivate_user",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(deactivat|inactive|not active|no longer (active|with)|can't|cannot|couldn't|could not|unable)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "e1b10037-8019-4d1d-84f0-6562e066dfcc",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Hand Olivia Clark's lead over to Chris Park.",
+      "ttfurMs": 791,
+      "ttftTextMs": 791,
+      "firstActionMs": 1733,
+      "e2eMs": 4928,
+      "llmCalls": [
+        {
+          "ms": 1733,
+          "ttftMs": 791,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 132,
+            "cacheRead": 112993,
+            "cacheWrite": 93
+          },
+          "costUSD": 0.048318200000000006
+        },
+        {
+          "ms": 3194,
+          "ttftMs": 3193,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 289,
+            "cacheRead": 113086,
+            "cacheWrite": 553
+          },
+          "costUSD": 0.0537874
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "query": "Olivia Clark"
+          },
+          "ok": true,
+          "ms": 0.1,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Chris Park"
+          },
+          "ok": true,
+          "ms": 0.02,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 421,
+        "cache_creation_input_tokens": 646,
+        "cache_read_input_tokens": 226079
+      },
+      "costUSD": 0.102106,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I couldn't hand Olivia Clark's lead to Chris Park because his user account is **deactivated**. The platform only lets active users own leads, so I didn't make any change.\n\n**Details**\n- **Lead:** Olivia Clark (`ld_025`). It's qualified, has a score of 62 and came from Google Ads (campaign `cam_002`). It's still owned by `usr_003`.\n- **Chris Park (`usr_009`):** His status is deactivated and his title is \"Former AE.\"\n\n**Ways to go ahead**\n1. **Reactivate Chris Park** and then assign the lead to him.\n2. **Assign the lead to another active sales rep.** I can list who's available and how busy they are so you can choose.\n\nWhich would you like?",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

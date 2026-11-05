@@ -1,0 +1,134 @@
+{
+  "scenario": {
+    "id": "cmm-direct-form-add-phone",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "add a required phone number field to the event rsvp form"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action forms.add_form_field",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params forms.add_form_field",
+        "pass": true,
+        "detail": "{\"id\":\"frm_006\",\"type\":\"phone\",\"required\":true}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "c91d9a43-463d-47e7-a92f-90b3bfe9f816",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "add a required phone number field to the event rsvp form",
+      "ttfurMs": 2067,
+      "ttftTextMs": 2067,
+      "firstActionMs": 2835,
+      "e2eMs": 8106,
+      "llmCalls": [
+        {
+          "ms": 2834,
+          "ttftMs": 2067,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 68,
+            "cacheRead": 112993,
+            "cacheWrite": 87
+          },
+          "costUSD": 0.04700820000000001
+        },
+        {
+          "ms": 2348,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 144,
+            "cacheRead": 113080,
+            "cacheWrite": 314
+          },
+          "costUSD": 0.04969
+        },
+        {
+          "ms": 2917,
+          "ttftMs": 2912,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 150,
+            "cacheRead": 113394,
+            "cacheWrite": 448
+          },
+          "costUSD": 0.05060560000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "forms.list_forms",
+          "input": {
+            "query": "rsvp"
+          },
+          "ok": true,
+          "ms": 0.65,
+          "confirmed": false
+        },
+        {
+          "action": "forms.add_form_field",
+          "input": {
+            "id": "frm_006",
+            "key": "phone",
+            "label": "Phone number",
+            "type": "phone",
+            "required": true
+          },
+          "ok": true,
+          "ms": 6.34,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 362,
+        "cache_creation_input_tokens": 849,
+        "cache_read_input_tokens": 339467
+      },
+      "costUSD": 0.147304,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I added a required **Phone number** field to the **Event RSVP** form (`frm_006`).\n\n- **New field:** \"Phone number\" (`ffl_021`), field type phone, key `phone`.\n- **Field order:** First name → Email → I will attend → Phone number. It went in last, after the attendance checkbox. I can move it up next to Email if you'd like.\n- **Status:** The form is still a draft that hasn't been published, so it isn't live yet.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

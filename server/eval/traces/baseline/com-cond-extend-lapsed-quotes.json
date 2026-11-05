@@ -1,0 +1,158 @@
+{
+  "scenario": {
+    "id": "com-cond-extend-lapsed-quotes",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "Any quotes that ran out before the customer got back to us — give them two more weeks from today. Leave everything else alone."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action quotes.search_quotes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action quotes.set_quote_expiry",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params quotes.set_quote_expiry",
+        "pass": true,
+        "detail": "{\"expiresAt\":\"2026-11-18\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "0d717d5a-cc1d-4a47-9e2b-e8c1a95a8c96",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Any quotes that ran out before the customer got back to us — give them two more weeks from today. Leave everything else alone.",
+      "ttfurMs": 3577,
+      "ttftTextMs": 3577,
+      "firstActionMs": 5033,
+      "e2eMs": 14143,
+      "llmCalls": [
+        {
+          "ms": 5032,
+          "ttftMs": 3577,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 289,
+            "cacheRead": 112993,
+            "cacheWrite": 109
+          },
+          "costUSD": 0.051538200000000006
+        },
+        {
+          "ms": 4969,
+          "ttftMs": 4031,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 228,
+            "cacheRead": 113102,
+            "cacheWrite": 911
+          },
+          "costUSD": 0.054363800000000004
+        },
+        {
+          "ms": 4131,
+          "ttftMs": 4127,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 255,
+            "cacheRead": 114013,
+            "cacheWrite": 830
+          },
+          "costUSD": 0.05486320000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "quotes.search_quotes",
+          "input": {
+            "status": "expired",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.39,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.search_quotes",
+          "input": {
+            "status": "sent",
+            "expiresAtBefore": "2026-11-04",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.09,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.set_quote_expiry",
+          "input": {
+            "id": "quo_005",
+            "expiresAt": "2026-11-18"
+          },
+          "ok": true,
+          "ms": 5.03,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.set_quote_expiry",
+          "input": {
+            "id": "quo_004",
+            "expiresAt": "2026-11-18"
+          },
+          "ok": true,
+          "ms": 4.61,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 772,
+        "cache_creation_input_tokens": 1850,
+        "cache_read_input_tokens": 340108
+      },
+      "costUSD": 0.160765,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I extended 2 quotes that expired before the customer replied. Both now expire on **2026-11-18**, two weeks from today, and both are open as \"sent\" again.\n\n| Quote | Title | Contact | Total | Old expiry | New expiry |\n|---|---|---|---|---|---|\n| Q-1005 (quo_005) | Print campaign refresh | con_018 | $1,200 | 2026-09-20 (marked expired) | 2026-11-18 |\n| Q-1004 (quo_004) | Social media starter | con_013 | $1,497 | 2026-10-25 (date passed, but never marked expired) | 2026-11-18 |\n\nI only changed the expiry dates. I didn't touch any other quotes, and I didn't email either customer about the new dates.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

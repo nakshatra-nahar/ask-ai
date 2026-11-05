@@ -1,0 +1,375 @@
+{
+  "scenario": {
+    "id": "sch-multi-slot-book-confirm",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Mei Rossi wants a product demo with Priya Shah on Monday the 9th. Grab Priya's earliest open slot that day, book it, add Mei's colleague Ben Ortiz (ben.ortiz@rossidesign.co) as a guest, and email Mei a confirmation with the time."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action availability.find_available_slots|availability.check_scheduling_conflicts",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action appointments.create_appointment",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action appointments.add_appointment_attendee",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action email.send_email",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params appointments.create_appointment",
+        "pass": true,
+        "detail": "{\"contactId\":\"con_044\",\"calendarId\":\"cal_002\",\"hostUserId\":\"usr_003\",\"startAt\":\"2026-11-09\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 4,
+      "hit": 4,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "66cc24c2-9ae8-4aef-aea4-d7b80bb21444",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Mei Rossi wants a product demo with Priya Shah on Monday the 9th. Grab Priya's earliest open slot that day, book it, add Mei's colleague Ben Ortiz (ben.ortiz@rossidesign.co) as a guest, and email Mei a confirmation with the time.",
+      "ttfurMs": 1580,
+      "ttftTextMs": 1580,
+      "firstActionMs": 3267,
+      "e2eMs": 13198,
+      "llmCalls": [
+        {
+          "ms": 3263,
+          "ttftMs": 1576,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 270,
+            "cacheRead": 5235,
+            "cacheWrite": 2801
+          },
+          "costUSD": 0.021515
+        },
+        {
+          "ms": 4188,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 129,
+            "cacheRead": 8036,
+            "cacheWrite": 1269
+          },
+          "costUSD": 0.0121474
+        },
+        {
+          "ms": 2168,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 177,
+            "cacheRead": 9305,
+            "cacheWrite": 404
+          },
+          "costUSD": 0.00929
+        },
+        {
+          "ms": 3558,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 386,
+            "cacheRead": 9709,
+            "cacheWrite": 319
+          },
+          "costUSD": 0.0132066
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Mei Rossi"
+          },
+          "ok": true,
+          "ms": 0.39,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Priya Shah"
+          },
+          "ok": true,
+          "ms": 0.11,
+          "confirmed": false
+        },
+        {
+          "action": "calendars.list_calendars",
+          "input": {},
+          "ok": true,
+          "ms": 0.61,
+          "confirmed": false
+        },
+        {
+          "action": "availability.find_available_slots",
+          "input": {
+            "userId": "usr_003",
+            "startDate": "2026-11-09",
+            "endDate": "2026-11-09",
+            "durationMin": 45,
+            "limit": 3
+          },
+          "ok": true,
+          "ms": 1.99,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.create_appointment",
+          "input": {
+            "calendarId": "cal_002",
+            "contactId": "con_044",
+            "startAt": "2026-11-09T09:00:00.000Z",
+            "endAt": "2026-11-09T09:45:00.000Z",
+            "hostUserId": "usr_003",
+            "title": "Product Demo – Mei Rossi"
+          },
+          "ok": true,
+          "ms": 7.67,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.add_appointment_attendee",
+          "input": {
+            "id": "apt_035",
+            "name": "Ben Ortiz",
+            "email": "ben.ortiz@rossidesign.co"
+          },
+          "ok": true,
+          "ms": 6.76,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 962,
+        "cache_creation_input_tokens": 4793,
+        "cache_read_input_tokens": 32285
+      },
+      "costUSD": 0.056159,
+      "retries": 0,
+      "retrieved": [
+        "availability.find_available_slots",
+        "products.search_products",
+        "conversations.list_unanswered_conversations",
+        "booking_pages.unpublish_booking_page",
+        "contacts.add_contact_relationship",
+        "appointments.add_appointment_attendee",
+        "booking_pages.set_booking_confirmation_message",
+        "appointments.create_appointment",
+        "booking_pages.list_booking_pages",
+        "availability.add_date_override",
+        "booking_pages.set_booking_intake_fields",
+        "events.add_to_waitlist",
+        "appointments.remove_appointment_attendee",
+        "email.schedule_email",
+        "email.search_email_messages",
+        "teams.archive_team",
+        "availability.get_weekly_hours",
+        "booking_pages.publish_booking_page",
+        "memberships.grant_membership",
+        "tasks.complete_task",
+        "tickets.reply_to_ticket",
+        "teams.rename_team",
+        "leads.record_qualification_answers",
+        "booking_pages.link_calendar_to_booking_page"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 3.91,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01QR7i9dK7GSWir1HTXabmto",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_044",
+            "subject": "Your product demo is confirmed – Mon, Nov 9",
+            "body": "Hi Mei,\n\nYour product demo with Priya Shah is confirmed for Monday, November 9, 2026, 09:00–09:45 UTC. Your colleague Ben Ortiz (ben.ortiz@rossidesign.co) has been added as a guest.\n\nLooking forward to it!\n\nBest regards",
+            "relatedType": "appointment",
+            "relatedId": "apt_035",
+            "purpose": "appointment_confirmation"
+          }
+        }
+      ],
+      "calls": 4
+    },
+    {
+      "sessionId": "66cc24c2-9ae8-4aef-aea4-d7b80bb21444",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": null,
+      "ttftTextMs": null,
+      "firstActionMs": null,
+      "e2eMs": 3038,
+      "llmCalls": [
+        {
+          "ms": 3032,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 271,
+            "cacheRead": 10028,
+            "cacheWrite": 911
+          },
+          "costUSD": 0.0139942
+        }
+      ],
+      "actions": [
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_044",
+            "subject": "Your product demo is confirmed – Mon, Nov 9",
+            "body": "Hi Mei,\n\nYour product demo with Priya Shah is confirmed for Monday, November 9, 2026, 09:00–09:45 UTC. Your colleague Ben Ortiz (ben.ortiz@rossidesign.co) has been added as a guest.\n\nLooking forward to it!\n\nBest regards",
+            "relatedType": "appointment",
+            "relatedId": "apt_035",
+            "purpose": "appointment_confirmation"
+          },
+          "ok": false,
+          "error": {
+            "code": "VALIDATION",
+            "message": "unknown recordType 'appointment'",
+            "signature": "email.send_email(messageId?: string, contactId?: string, to?: string, subject?: string, body?: string, templateId?: string, variables?: object, relatedType?: string, relatedId?: string, purpose?: string) [external] — Email: Send email. Immediately send one email to a single contact or address (compose new, render a template, or send an existing draft via messageId). Logs it on the contact's email conversation; invoice reminders (relatedType \"invoices\") are recorded on the invoice. Fails if the contact unsubscribed. For SMS use sms.send_sms; for bulk sends use campaigns."
+          },
+          "ms": 5.51,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 271,
+        "cache_creation_input_tokens": 911,
+        "cache_read_input_tokens": 10028
+      },
+      "costUSD": 0.013994,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "resumed": true,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01JrBkbYPUUazvoFckWJN4Kc",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_044",
+            "subject": "Your product demo is confirmed – Mon, Nov 9",
+            "body": "Hi Mei,\n\nYour product demo with Priya Shah is confirmed for Monday, November 9, 2026, 09:00–09:45 UTC. Your colleague Ben Ortiz (ben.ortiz@rossidesign.co) has been added as a guest.\n\nLooking forward to it!\n\nBest regards",
+            "relatedType": "appointments",
+            "relatedId": "apt_035",
+            "purpose": "appointment_confirmation"
+          }
+        }
+      ],
+      "calls": 1
+    },
+    {
+      "sessionId": "66cc24c2-9ae8-4aef-aea4-d7b80bb21444",
+      "turn": 2,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 7,
+      "ttftTextMs": 5220,
+      "firstActionMs": 7,
+      "e2eMs": 5222,
+      "llmCalls": [
+        {
+          "ms": 5215,
+          "ttftMs": 5213,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 379,
+            "cacheRead": 10939,
+            "cacheWrite": 602
+          },
+          "costUSD": 0.0149736
+        }
+      ],
+      "actions": [
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_044",
+            "subject": "Your product demo is confirmed – Mon, Nov 9",
+            "body": "Hi Mei,\n\nYour product demo with Priya Shah is confirmed for Monday, November 9, 2026, 09:00–09:45 UTC. Your colleague Ben Ortiz (ben.ortiz@rossidesign.co) has been added as a guest.\n\nLooking forward to it!\n\nBest regards",
+            "relatedType": "appointments",
+            "relatedId": "apt_035",
+            "purpose": "appointment_confirmation"
+          },
+          "ok": true,
+          "ms": 7,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 379,
+        "cache_creation_input_tokens": 602,
+        "cache_read_input_tokens": 10939
+      },
+      "costUSD": 0.014974,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I booked the demo for Monday, 9 Nov, 09:00–09:45 UTC. Ben Ortiz is added as a guest, and Mei's confirmation email was delivered.\n\n- **Appointment:** \"Product Demo – Mei Rossi\" (apt_035), on the Product Demo calendar (cal_002). Priya Shah (usr_003) is hosting and Mei Rossi (con_044) is the contact. It's 45 minutes, the calendar's standard length. This was Priya's earliest open slot that day.\n- **Guest:** Ben Ortiz, ben.ortiz@rossidesign.co (att_002).\n- **Email:** msg_130 went to mei.rossi40@example.com. It gives the time and says Ben has been added. My first try was rejected over a formatting error, and the retry went through.\n\n**Worth checking:** Our system treats working hours as UTC. Priya's profile and the calendar are both set to New York time, so 09:00 UTC is 4:00 AM there. If her hours are really meant to follow New York time, that's too early. In that case I can move the meeting to a later time and send Mei a corrected email.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

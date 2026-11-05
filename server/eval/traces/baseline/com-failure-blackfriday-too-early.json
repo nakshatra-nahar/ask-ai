@@ -1,0 +1,156 @@
+{
+  "scenario": {
+    "id": "com-failure-blackfriday-too-early",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Apply BLACKFRIDAY25 to Sarah Chen's order so she gets the sale price now."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid coupons.set_coupon_validity_window",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(27|not (yet )?(valid|active|started|live)|isn't (yet )?(valid|active|live)|until|can't|cannot|couldn't|could not|unable)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "65a48819-26e0-45d2-9e55-9bfa276962ee",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Apply BLACKFRIDAY25 to Sarah Chen's order so she gets the sale price now.",
+      "ttfurMs": 4052,
+      "ttftTextMs": 4052,
+      "firstActionMs": 4945,
+      "e2eMs": 16522,
+      "llmCalls": [
+        {
+          "ms": 4944,
+          "ttftMs": 4051,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 143,
+            "cacheRead": 112993,
+            "cacheWrite": 107
+          },
+          "costUSD": 0.048608200000000004
+        },
+        {
+          "ms": 2051,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 87,
+            "cacheRead": 113100,
+            "cacheWrite": 621
+          },
+          "costUSD": 0.050093
+        },
+        {
+          "ms": 3667,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 90,
+            "cacheRead": 113721,
+            "cacheWrite": 523
+          },
+          "costUSD": 0.0499114
+        },
+        {
+          "ms": 5857,
+          "ttftMs": 5854,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 470,
+            "cacheRead": 114244,
+            "cacheWrite": 181
+          },
+          "costUSD": 0.05601060000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah Chen"
+          },
+          "ok": true,
+          "ms": 0.33,
+          "confirmed": false
+        },
+        {
+          "action": "coupons.search_coupons",
+          "input": {
+            "query": "BLACKFRIDAY25"
+          },
+          "ok": true,
+          "ms": 0.65,
+          "confirmed": false
+        },
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "contactId": "con_002"
+          },
+          "ok": true,
+          "ms": 1.13,
+          "confirmed": false
+        },
+        {
+          "action": "coupons.validate_coupon",
+          "input": {
+            "code": "BLACKFRIDAY25",
+            "orderId": "ord_006"
+          },
+          "ok": true,
+          "ms": 0.98,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 790,
+        "cache_creation_input_tokens": 1432,
+        "cache_read_input_tokens": 454058
+      },
+      "costUSD": 0.204623,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I didn't apply BLACKFRIDAY25 to Sarah Chen's order **ORD-1006** (`ord_006`). The code doesn't work until **27 Nov 2026**, and today is 4 Nov. When I checked it against her order, it came back invalid with the reason \"not valid until 2026-11-27\".\n\n**Her order (draft, not yet submitted):**\n- Logo T-Shirt (S) × 2: $50\n- Ceramic Coffee Mug × 1: $15\n- Total: **$65.00**. With the code it would be **$48.75** (25% off, $16.25 saved).\n\n**The code (`cpn_002`):** 25% off, valid 27–30 Nov 2026, limited to 200 uses, none used yet.\n\n**Ways to get her the sale price now (tell me which):**\n1. **Make a one-off code for Sarah:** a new 25%-off coupon (e.g. `SARAH25`) that works now and can only be used once, applied to her order. The Black Friday code stays as it is. This is the cleanest choice.\n2. **Let BLACKFRIDAY25 start today:** this opens the Black Friday deal to all customers now, not just Sarah.\n3. **Keep her order as a draft and apply BLACKFRIDAY25 on 27 Nov,** when it starts working.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

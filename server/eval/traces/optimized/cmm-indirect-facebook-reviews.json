@@ -1,0 +1,171 @@
+{
+  "scenario": {
+    "id": "cmm-indirect-facebook-reviews",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "our facebook reviews are terrible rn, help"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action reviews.draft_review_response|reviews.publish_review_response",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "c1e39012-70d1-495c-b423-0e6db4db94aa",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "our facebook reviews are terrible rn, help",
+      "ttfurMs": 1252,
+      "ttftTextMs": 1252,
+      "firstActionMs": 2352,
+      "e2eMs": 16588,
+      "llmCalls": [
+        {
+          "ms": 2349,
+          "ttftMs": 1250,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 134,
+            "cacheRead": 5235,
+            "cacheWrite": 1750
+          },
+          "costUSD": 0.01354
+        },
+        {
+          "ms": 6261,
+          "ttftMs": 1498,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 648,
+            "cacheRead": 6985,
+            "cacheWrite": 892
+          },
+          "costUSD": 0.020222
+        },
+        {
+          "ms": 7958,
+          "ttftMs": 7955,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 719,
+            "cacheRead": 7877,
+            "cacheWrite": 1584
+          },
+          "costUSD": 0.0254588
+        }
+      ],
+      "actions": [
+        {
+          "action": "reviews.search_reviews",
+          "input": {
+            "platform": "facebook",
+            "ratingMax": 3,
+            "limit": 50
+          },
+          "ok": true,
+          "ms": 0.44,
+          "confirmed": false
+        },
+        {
+          "action": "reviews.draft_review_response",
+          "input": {
+            "id": "rev_005",
+            "text": "Sofia, we're truly sorry you waited 45 minutes past your appointment, and that no one apologized. That's not the experience we want for anyone. Please message us directly so we can make this right."
+          },
+          "ok": true,
+          "ms": 5.84,
+          "confirmed": false
+        },
+        {
+          "action": "reviews.draft_review_response",
+          "input": {
+            "id": "rev_023",
+            "text": "Elena, we're sorry about how you were treated at our front desk. Every guest deserves courtesy, and we're addressing this with our team. We'd appreciate the chance to talk with you directly — please reach out."
+          },
+          "ok": true,
+          "ms": 4.33,
+          "confirmed": false
+        },
+        {
+          "action": "reviews.draft_review_response",
+          "input": {
+            "id": "rev_011",
+            "text": "Mei, we apologize for the rude experience at our front desk. We've taken this feedback seriously and are working with our team on it. Please contact us directly — we'd love the opportunity to make it right."
+          },
+          "ok": true,
+          "ms": 3.59,
+          "confirmed": false
+        },
+        {
+          "action": "reviews.draft_review_response",
+          "input": {
+            "id": "rev_020",
+            "text": "Noah, we're sorry the service felt rushed and that the issue came back. That's not our standard. Please reach out directly and we'll get it properly resolved at no extra hassle to you."
+          },
+          "ok": true,
+          "ms": 2.66,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 1501,
+        "cache_creation_input_tokens": 4226,
+        "cache_read_input_tokens": 20097
+      },
+      "costUSD": 0.059221,
+      "retries": 0,
+      "retrieved": [
+        "reviews.create_review_request",
+        "reviews.list_review_requests",
+        "reviews.record_review",
+        "reviews.search_reviews",
+        "reviews.draft_review_response",
+        "reviews.get_review",
+        "leads.search_leads",
+        "campaigns.create_campaign",
+        "listings.publish_listing",
+        "campaigns.add_campaign_message_step",
+        "reports.create_report"
+      ],
+      "status": "completed",
+      "finalText": "I've drafted replies to your 4 unanswered negative Facebook reviews. They're saved as drafts only, so nothing is public until you publish them.\n\n**You have 6 Facebook reviews rated 3 stars or lower:**\n\n| Review | Rating | Complaint | Status |\n|---|---|---|---|\n| rev_005, Sofia M. (Oct 30) | 1★ | Waited 45 min past her appointment, no apology | **Draft reply saved** |\n| rev_023, Elena M. (Oct 17) | 2★ | Rude front desk | **Draft reply saved** |\n| rev_011, Mei R. (Aug 7) | 1★ | Rude front desk | **Draft reply saved** |\n| rev_020, Noah W. (Jun 21) | 1★ | Service felt rushed, the problem came back | **Draft reply saved** |\n| rev_014, James L. (Oct 4) | 2★ | Billing was wrong twice, no callback | Already answered |\n| rev_017, Chloe B. (Jun 25) | 3★ | Long wait | Already answered, but the reply is wrong |\n\nEach draft apologizes for the specific problem and asks the reviewer to contact you directly.\n\n**What stands out:**\n- **Two problems keep coming up:** long waits (3 reviews) and a rude front desk (2 reviews). Fixing these in the business itself will matter more than any reply.\n- **Chloe's review has a bad public reply.** She complained about the wait, but the reply says \"Thank you so much for the kind words!\" I can't edit or remove a reply that's already published.\n- **James was told a manager would call \"today.\"** That was on Oct 4. If no one called, he's worth contacting.\n\n**Next steps I can take:**\n1. Publish the 4 draft replies, after any edits you want.\n2. Send review requests to recent happy customers on Facebook, so new positive reviews outnumber the bad ones.\n3. Save a report that tracks your average review rating over time.\n\nWhich of these do you want?",
+      "progress": [],
+      "retrievalMs": 2.43,
+      "calls": 3
+    }
+  ]
+}

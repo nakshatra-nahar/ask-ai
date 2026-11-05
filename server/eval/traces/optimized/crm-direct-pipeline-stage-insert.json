@@ -1,0 +1,157 @@
+{
+  "scenario": {
+    "id": "crm-direct-pipeline-stage-insert",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Can you add a 'Legal Signoff' stage to the Partnerships pipeline? It goes right after Contract Review, 90% win probability."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action pipelines.add_pipeline_stage",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params pipelines.add_pipeline_stage",
+        "pass": true,
+        "detail": "{\"id\":\"pl_002\",\"name\":\"/legal sign-?off/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "5728a1f0-bcfe-4836-81ad-68cfa5a7c1d1",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Can you add a 'Legal Signoff' stage to the Partnerships pipeline? It goes right after Contract Review, 90% win probability.",
+      "ttfurMs": 770,
+      "ttftTextMs": 770,
+      "firstActionMs": 1511,
+      "e2eMs": 4825,
+      "llmCalls": [
+        {
+          "ms": 1503,
+          "ttftMs": 764,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 101,
+            "cacheRead": 5235,
+            "cacheWrite": 2845
+          },
+          "costUSD": 0.018355
+        },
+        {
+          "ms": 1422,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 112,
+            "cacheRead": 8080,
+            "cacheWrite": 745
+          },
+          "costUSD": 0.009205
+        },
+        {
+          "ms": 1886,
+          "ttftMs": 1883,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 141,
+            "cacheRead": 8825,
+            "cacheWrite": 362
+          },
+          "costUSD": 0.008168
+        }
+      ],
+      "actions": [
+        {
+          "action": "pipelines.list_pipelines",
+          "input": {},
+          "ok": true,
+          "ms": 0.66,
+          "confirmed": false
+        },
+        {
+          "action": "pipelines.add_pipeline_stage",
+          "input": {
+            "id": "pl_002",
+            "name": "Legal Signoff",
+            "probability": 90,
+            "position": 4
+          },
+          "ok": true,
+          "ms": 6.05,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 354,
+        "cache_creation_input_tokens": 3952,
+        "cache_read_input_tokens": 22140
+      },
+      "costUSD": 0.035728,
+      "retries": 0,
+      "retrieved": [
+        "pipelines.set_stage_probability",
+        "contacts.search_contacts",
+        "pipelines.add_pipeline_stage",
+        "reviews.list_review_requests",
+        "pipelines.rename_pipeline_stage",
+        "reviews.search_reviews",
+        "opportunities.get_opportunity",
+        "pipelines.get_pipeline",
+        "pipelines.remove_pipeline_stage",
+        "blogs.publish_post",
+        "opportunities.create_opportunity",
+        "reviews.get_review_summary",
+        "opportunities.search_opportunities",
+        "pipelines.reorder_pipeline_stages",
+        "opportunities.move_opportunity_to_stage",
+        "reviews.send_review_request",
+        "reviews.create_review_request",
+        "contacts.create_contact",
+        "opportunities.reopen_opportunity",
+        "reviews.record_review",
+        "contacts.update_contact",
+        "communities.create_channel",
+        "contacts.add_contact_relationship",
+        "appointments.add_appointment_attendee"
+      ],
+      "status": "completed",
+      "finalText": "I added the **Legal Signoff** stage (`stg_014`) to the **Partnerships** pipeline (`pl_002`). It sits right after Contract Review and has a 90% win probability.\n\nThe stages are now in this order:\n1. Intro Call: 20%\n2. Evaluation: 50%\n3. Contract Review: 80%\n4. **Legal Signoff: 90%** (new)\n5. On Hold: 5%",
+      "progress": [],
+      "retrievalMs": 6.48,
+      "calls": 3
+    }
+  ]
+}

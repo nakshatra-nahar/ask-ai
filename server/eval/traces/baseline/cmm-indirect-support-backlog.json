@@ -1,0 +1,249 @@
+{
+  "scenario": {
+    "id": "cmm-indirect-support-backlog",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "Support is a mess. Tickets are blowing through SLA and half of them don't even have anyone on them."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tickets.assign_ticket",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "ff92d8fb-de5a-4e94-be0d-ee89033777f0",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Support is a mess. Tickets are blowing through SLA and half of them don't even have anyone on them.",
+      "ttfurMs": 1439,
+      "ttftTextMs": 1439,
+      "firstActionMs": 2975,
+      "e2eMs": 21384,
+      "llmCalls": [
+        {
+          "ms": 2974,
+          "ttftMs": 1439,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 300,
+            "cacheRead": 112993,
+            "cacheWrite": 105
+          },
+          "costUSD": 0.051738200000000005
+        },
+        {
+          "ms": 4020,
+          "ttftMs": 2234,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 451,
+            "cacheRead": 113098,
+            "cacheWrite": 3188
+          },
+          "costUSD": 0.07020720000000001
+        },
+        {
+          "ms": 6766,
+          "ttftMs": 3816,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 783,
+            "cacheRead": 116286,
+            "cacheWrite": 3557
+          },
+          "costUSD": 0.0799674
+        },
+        {
+          "ms": 7602,
+          "ttftMs": 7599,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 817,
+            "cacheRead": 119843,
+            "cacheWrite": 2239
+          },
+          "costUSD": 0.07548020000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "breached": true,
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.4,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "unassigned": true,
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.11,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "roles": "support",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.16,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "ownerId": "usr_006",
+            "status": "open"
+          },
+          "ok": true,
+          "ms": 0.24,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "ownerId": "usr_007",
+            "status": "open"
+          },
+          "ok": true,
+          "ms": 0.09,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "ownerId": "usr_006",
+            "status": "pending"
+          },
+          "ok": true,
+          "ms": 0.05,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "ownerId": "usr_007",
+            "status": "pending"
+          },
+          "ok": true,
+          "ms": 0.08,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_001",
+            "ownerId": "usr_006"
+          },
+          "ok": true,
+          "ms": 5.41,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_015",
+            "ownerId": "usr_007"
+          },
+          "ok": true,
+          "ms": 4.24,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_003",
+            "ownerId": "usr_007"
+          },
+          "ok": true,
+          "ms": 3.57,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_019",
+            "ownerId": "usr_006"
+          },
+          "ok": true,
+          "ms": 3.15,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_004",
+            "ownerId": "usr_006"
+          },
+          "ok": true,
+          "ms": 1.74,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_008",
+            "ownerId": "usr_006"
+          },
+          "ok": true,
+          "ms": 1.52,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2351,
+        "cache_creation_input_tokens": 9089,
+        "cache_read_input_tokens": 462220
+      },
+      "costUSD": 0.277393,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Every unassigned ticket now has an owner. All 6 were split between your two support agents so each has 8 active tickets.\n\n**Assigned** (all were moved from new to open)\n\n| Ticket | Subject | Priority | SLA due (UTC) | Owner |\n|---|---|---|---|---|\n| tkt_001 | Payment page returns 500 error | urgent | **Missed** 08:00 today | Sam Taylor (usr_006) |\n| tkt_015 | Coupon code not applying | normal | **Missed** 08:00 today | Riley Kim (usr_007) |\n| tkt_003 | Double charged for October invoice | high | 15:00 today | Riley Kim |\n| tkt_019 | Website form not submitting | high | 17:00 today | Sam Taylor |\n| tkt_004 | Cannot reset password | normal | 08:00 tomorrow | Sam Taylor |\n| tkt_008 | Feature request: dark mode | low | 08:00 tomorrow | Sam Taylor |\n\n**Already past deadline**\n- 4 open tickets have missed their deadline: tkt_001 and tkt_015 above, plus Sam's tkt_002 (Booking widget down, urgent) and tkt_007 (Google calendar sync failing, high). Sam has already replied to tkt_002 and tkt_007 and escalated them to engineering.\n- tkt_001 and tkt_015 have had **no reply at all** yet, so they should get a reply first.\n- tkt_014 also missed its deadline but is already resolved.\n\n**Due in the next ~4 hours** (all already have owners)\n- tkt_013 Email campaign stuck in sending (urgent, Riley): 12:00\n- tkt_010 Refund not received yet (high, Riley, waiting on the customer): 12:00\n- tkt_017 Membership access revoked by mistake (high, Sam): 13:00\n- tkt_005 Appointment reminder SMS not received (Riley): 14:00\n\n**Root issue:** Only 2 active users have the support role, and 16 tickets are active. I can give the support role to more staff if you tell me who should help. I can also set up a workflow that assigns new tickets automatically, but nothing like that is in place right now.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "scenario": {
+    "id": "sch-indirect-onboarding-booking",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "New customers keep emailing me asking where they can book their onboarding kickoff. Can we make that self-serve?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action booking_pages.publish_booking_page",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "f8a81c56-69d6-4e1c-98a1-2e89bba67dfb",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "New customers keep emailing me asking where they can book their onboarding kickoff. Can we make that self-serve?",
+      "ttfurMs": 1351,
+      "ttftTextMs": 1351,
+      "firstActionMs": 2645,
+      "e2eMs": 6443,
+      "llmCalls": [
+        {
+          "ms": 2644,
+          "ttftMs": 1351,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 231,
+            "cacheRead": 112993,
+            "cacheWrite": 107
+          },
+          "costUSD": 0.0503682
+        },
+        {
+          "ms": 1857,
+          "ttftMs": 1616,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 139,
+            "cacheRead": 113100,
+            "cacheWrite": 930
+          },
+          "costUSD": 0.052678
+        },
+        {
+          "ms": 1933,
+          "ttftMs": 1145,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 172,
+            "cacheRead": 114030,
+            "cacheWrite": 379
+          },
+          "costUSD": 0.050955
+        }
+      ],
+      "actions": [
+        {
+          "action": "calendars.list_calendars",
+          "input": {
+            "query": "onboarding"
+          },
+          "ok": true,
+          "ms": 0.51,
+          "confirmed": false
+        },
+        {
+          "action": "booking_pages.list_booking_pages",
+          "input": {
+            "query": "onboarding"
+          },
+          "ok": true,
+          "ms": 0.26,
+          "confirmed": false
+        },
+        {
+          "action": "calendars.list_calendars",
+          "input": {
+            "query": "kickoff"
+          },
+          "ok": true,
+          "ms": 0.02,
+          "confirmed": false
+        },
+        {
+          "action": "calendars.get_calendar_settings",
+          "input": {
+            "id": "cal_004"
+          },
+          "ok": true,
+          "ms": 0.41,
+          "confirmed": false
+        },
+        {
+          "action": "calendars.set_calendar_visibility",
+          "input": {
+            "id": "cal_004",
+            "visibility": "public"
+          },
+          "ok": true,
+          "ms": 6.2,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 542,
+        "cache_creation_input_tokens": 1416,
+        "cache_read_input_tokens": 340123
+      },
+      "costUSD": 0.154001,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_015fdZwQAsRVeen1DYawSJ3W",
+          "action": "booking_pages.publish_booking_page",
+          "name": "Publish booking page",
+          "risk": "external",
+          "input": {
+            "id": "bp_004"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "f8a81c56-69d6-4e1c-98a1-2e89bba67dfb",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 5,
+      "ttftTextMs": 4665,
+      "firstActionMs": 5,
+      "e2eMs": 4667,
+      "llmCalls": [
+        {
+          "ms": 4662,
+          "ttftMs": 4660,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 394,
+            "cacheRead": 114409,
+            "cacheWrite": 689
+          },
+          "costUSD": 0.057096600000000004
+        }
+      ],
+      "actions": [
+        {
+          "action": "booking_pages.publish_booking_page",
+          "input": {
+            "id": "bp_004"
+          },
+          "ok": true,
+          "ms": 5.03,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 394,
+        "cache_creation_input_tokens": 689,
+        "cache_read_input_tokens": 114409
+      },
+      "costUSD": 0.057097,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Onboarding kickoffs are now self-serve. New customers can book here: **https://book.acme.test/onboarding-kickoff**\n\n**What changed**\n- **Booking page \"Customer Onboarding\" (bp_004)** was a draft and is now published. Its headline is \"Schedule your onboarding kickoff.\" It asks for name, email and phone (phone is optional), then shows a confirmation message.\n- **Calendar \"Customer Onboarding\" (cal_004)** was set to private, so customers couldn't book on it. It's now public. Its other settings didn't change:\n  - 60-minute sessions with a 15-minute buffer between them\n  - America/New_York timezone\n  - Hosts are Alex Morgan (usr_001) and Sam Taylor (usr_006). Both are active and not out of office.\n  - The 3 kickoffs already booked are untouched.\n\n**Next step (not done yet)**\nTo cut down on the emails at the source, I can add this link to your new-customer welcome email or onboarding workflow, so every customer gets it as soon as they sign. Just tell me which template or workflow to update.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

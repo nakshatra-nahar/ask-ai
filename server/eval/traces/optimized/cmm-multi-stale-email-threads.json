@@ -1,0 +1,505 @@
+{
+  "scenario": {
+    "id": "cmm-multi-stale-email-threads",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Pull up every email thread where the customer has been waiting on us for more than 3 days. Hand them all to Jordan and send each person a short apology for the slow reply, saying Jordan will follow up today."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action conversations.list_unanswered_conversations|conversations.search_conversations",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action conversations.assign_conversation_owner",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action email.send_email",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params conversations.assign_conversation_owner",
+        "pass": true,
+        "detail": "{\"ownerId\":\"usr_002\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "faa58a7a-7b23-4b26-bbc4-3d0d2bd6111a",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Pull up every email thread where the customer has been waiting on us for more than 3 days. Hand them all to Jordan and send each person a short apology for the slow reply, saying Jordan will follow up today.",
+      "ttfurMs": 1074,
+      "ttftTextMs": 1074,
+      "firstActionMs": 2443,
+      "e2eMs": 17637,
+      "llmCalls": [
+        {
+          "ms": 2437,
+          "ttftMs": 1069,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 205,
+            "cacheRead": 5235,
+            "cacheWrite": 3034
+          },
+          "costUSD": 0.02138
+        },
+        {
+          "ms": 1713,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 106,
+            "cacheRead": 8269,
+            "cacheWrite": 1491
+          },
+          "costUSD": 0.0128906
+        },
+        {
+          "ms": 13480,
+          "ttftMs": 1926,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 1873,
+            "cacheRead": 9760,
+            "cacheWrite": 1944
+          },
+          "costUSD": 0.051092
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 0.23,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.list_unanswered_conversations",
+          "input": {
+            "channel": "email",
+            "minHoursWaiting": 72,
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.52,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 2184,
+        "cache_creation_input_tokens": 6469,
+        "cache_read_input_tokens": 23264
+      },
+      "costUSD": 0.085363,
+      "retries": 0,
+      "retrieved": [
+        "conversations.list_unanswered_conversations",
+        "email.search_email_messages",
+        "conversations.assign_conversation_owner",
+        "email.send_email",
+        "tasks.create_task",
+        "quotes.send_quote",
+        "appointments.assign_appointment_host",
+        "email.receive_inbound_email",
+        "tasks.reopen_task",
+        "workflows.add_workflow_step",
+        "orders.submit_order",
+        "sms.receive_inbound_sms",
+        "tasks.cancel_task",
+        "products.set_inventory_quantity",
+        "conversations.mark_conversation_read",
+        "tasks.get_task",
+        "conversations.search_conversations",
+        "invoices.issue_invoice",
+        "contacts.create_contact",
+        "media.list_media_references",
+        "sms.search_sms_messages",
+        "tickets.reply_to_ticket",
+        "sms.send_sms",
+        "tasks.assign_task_owner"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 5.68,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01PqqWRXb8sbJKLN9BkfzqCJ",
+          "action": "conversations.assign_conversation_owner",
+          "name": "Assign conversation owner",
+          "risk": "bulk",
+          "input": {
+            "id": "cnv_024",
+            "ownerId": "usr_002"
+          }
+        },
+        {
+          "id": "toolu_01BBCEswynUfBT3aSHfmt3LW",
+          "action": "conversations.assign_conversation_owner",
+          "name": "Assign conversation owner",
+          "risk": "bulk",
+          "input": {
+            "id": "cnv_008",
+            "ownerId": "usr_002"
+          }
+        },
+        {
+          "id": "toolu_017Lb5AK7C1cEs9c8eH5diwZ",
+          "action": "conversations.assign_conversation_owner",
+          "name": "Assign conversation owner",
+          "risk": "bulk",
+          "input": {
+            "id": "cnv_014",
+            "ownerId": "usr_002"
+          }
+        },
+        {
+          "id": "toolu_01XBQjLdujY5vKTGszTaTkr5",
+          "action": "conversations.assign_conversation_owner",
+          "name": "Assign conversation owner",
+          "risk": "bulk",
+          "input": {
+            "id": "cnv_016",
+            "ownerId": "usr_002"
+          }
+        },
+        {
+          "id": "toolu_013qWUq3GiARf8Qg89rxdnRb",
+          "action": "conversations.assign_conversation_owner",
+          "name": "Assign conversation owner",
+          "risk": "bulk",
+          "input": {
+            "id": "cnv_010",
+            "ownerId": "usr_002"
+          }
+        },
+        {
+          "id": "toolu_013EUfTF8XD56VbhYEZmaGFX",
+          "action": "conversations.assign_conversation_owner",
+          "name": "Assign conversation owner",
+          "risk": "bulk",
+          "input": {
+            "id": "cnv_004",
+            "ownerId": "usr_002"
+          }
+        },
+        {
+          "id": "toolu_01R6D6eamw3uhG2Zk6cNmfQJ",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_053",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Ethan,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          }
+        },
+        {
+          "id": "toolu_014Sv4LFDACjCXsGBfEiXhyY",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_046",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Fatima,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          }
+        },
+        {
+          "id": "toolu_01H4s8K2jETaPiyUDXQUnAHG",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_019",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Olivia,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          }
+        },
+        {
+          "id": "toolu_016W2LR8LESWkRUs1nSWu5Mv",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_031",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Amara,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          }
+        },
+        {
+          "id": "toolu_01DBrHezEedG6m7jNAg9YVqb",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_033",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Sofia,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          }
+        },
+        {
+          "id": "toolu_01HZCBVFKiwDHBJKxAcbM3G6",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_022",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Lucas,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          }
+        },
+        {
+          "id": "toolu_01FWwbdPswpUnsjnSjmDvkJz",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_007",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Priya,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          }
+        },
+        {
+          "id": "toolu_01US7DCB31idN6qVwyiyBxho",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_025",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Nina,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "faa58a7a-7b23-4b26-bbc4-3d0d2bd6111a",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 7219,
+      "firstActionMs": 6,
+      "e2eMs": 7221,
+      "llmCalls": [
+        {
+          "ms": 7189,
+          "ttftMs": 7187,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 676,
+            "cacheRead": 11704,
+            "cacheWrite": 5095
+          },
+          "costUSD": 0.0436846
+        }
+      ],
+      "actions": [
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_024",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 6.08,
+          "confirmed": true
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_008",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 4.19,
+          "confirmed": true
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_014",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 3.65,
+          "confirmed": true
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_016",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 3.21,
+          "confirmed": true
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_010",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 1.81,
+          "confirmed": true
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_004",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 1.55,
+          "confirmed": true
+        },
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_053",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Ethan,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          },
+          "ok": true,
+          "ms": 1.47,
+          "confirmed": true
+        },
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_046",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Fatima,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          },
+          "ok": true,
+          "ms": 1.44,
+          "confirmed": true
+        },
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_019",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Olivia,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          },
+          "ok": true,
+          "ms": 1.34,
+          "confirmed": true
+        },
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_031",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Amara,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          },
+          "ok": true,
+          "ms": 1.38,
+          "confirmed": true
+        },
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_033",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Sofia,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          },
+          "ok": true,
+          "ms": 1.37,
+          "confirmed": true
+        },
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_022",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Lucas,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          },
+          "ok": true,
+          "ms": 1.47,
+          "confirmed": true
+        },
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_007",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Priya,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          },
+          "ok": true,
+          "ms": 1.51,
+          "confirmed": true
+        },
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_025",
+            "subject": "Sorry for the slow reply",
+            "body": "Hi Nina,\n\nApologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\n\nThanks for your patience."
+          },
+          "ok": true,
+          "ms": 1.47,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 676,
+        "cache_creation_input_tokens": 5095,
+        "cache_read_input_tokens": 11704
+      },
+      "costUSD": 0.043685,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I found 8 open email threads where the customer has waited more than 3 days for us. Jordan Lee (usr_002) now owns all of them, and every customer got an apology email saying Jordan will follow up today. All 8 emails were delivered.\n\n| Contact | Thread | Waiting | Previous owner | Apology email |\n|---|---|---|---|---|\n| Ethan Lee (con_053) | cnv_024 | 305 h | Marcus Reed → Jordan | msg_130 |\n| Fatima Martin (con_046) | cnv_022 | 242 h | Already Jordan | msg_131 |\n| Olivia Walker (con_019) | cnv_008 | 168 h | Dana Cruz → Jordan | msg_132 |\n| Amara Kim (con_031) | cnv_014 | 157 h | Dana Cruz → Jordan | msg_133 |\n| Sofia Nguyen (con_033) | cnv_016 | 110 h | Priya Shah → Jordan | msg_134 |\n| Lucas Johnson (con_022) | cnv_010 | 99 h | Priya Shah → Jordan | msg_135 |\n| Priya Okafor (con_007) | cnv_004 | 97 h | Marcus Reed → Jordan | msg_136 |\n| Nina Chen (con_025) | cnv_012 | 77 h | Already Jordan | msg_137 |\n\nEach email said: \"Apologies for the slow reply to your last message. Jordan Lee from our team will follow up with you today.\"\n\n**Heads-up:** The apology counts as a reply from us, so these threads will no longer show up in the \"unanswered\" list. Jordan should still answer their actual questions today. Most are asking about pricing or details, or confirming a call time. I can create a high-priority task due today for Jordan on each thread so none get missed.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

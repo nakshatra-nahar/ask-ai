@@ -1,0 +1,186 @@
+{
+  "scenario": {
+    "id": "com-direct-send-approved-refund",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Nina Chen's $50 refund was already approved — go ahead and send it to her."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action refunds.execute_refund",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "4894fb3f-2d1d-4e4c-a70f-946a8a73b541",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Nina Chen's $50 refund was already approved — go ahead and send it to her.",
+      "ttfurMs": 794,
+      "ttftTextMs": 794,
+      "firstActionMs": 1560,
+      "e2eMs": 3959,
+      "llmCalls": [
+        {
+          "ms": 1560,
+          "ttftMs": 794,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 80,
+            "cacheRead": 112993,
+            "cacheWrite": 99
+          },
+          "costUSD": 0.0473082
+        },
+        {
+          "ms": 1035,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 59,
+            "cacheRead": 113092,
+            "cacheWrite": 289
+          },
+          "costUSD": 0.047869800000000004
+        },
+        {
+          "ms": 1362,
+          "ttftMs": 1102,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 81,
+            "cacheRead": 113381,
+            "cacheWrite": 546
+          },
+          "costUSD": 0.0497104
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Nina Chen"
+          },
+          "ok": true,
+          "ms": 0.24,
+          "confirmed": false
+        },
+        {
+          "action": "refunds.search_refund_requests",
+          "input": {
+            "contactId": "con_025"
+          },
+          "ok": true,
+          "ms": 1.25,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 220,
+        "cache_creation_input_tokens": 934,
+        "cache_read_input_tokens": 339466
+      },
+      "costUSD": 0.144888,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01QkrXtNtXgmH8K9FQKjX5F9",
+          "action": "refunds.execute_refund",
+          "name": "Execute simulated refund",
+          "risk": "external",
+          "input": {
+            "id": "rfd_002"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "4894fb3f-2d1d-4e4c-a70f-946a8a73b541",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 2526,
+      "firstActionMs": 6,
+      "e2eMs": 2528,
+      "llmCalls": [
+        {
+          "ms": 2522,
+          "ttftMs": 2519,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 204,
+            "cacheRead": 113927,
+            "cacheWrite": 346
+          },
+          "costUSD": 0.051388800000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "refunds.execute_refund",
+          "input": {
+            "id": "rfd_002"
+          },
+          "ok": true,
+          "ms": 6.3,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 204,
+        "cache_creation_input_tokens": 346,
+        "cache_read_input_tokens": 113927
+      },
+      "costUSD": 0.051389,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I've sent Nina Chen's $50 refund to the payment processor.\n\n- **Refund:** rfd_002, $50.00 USD from payment pay_013, reason \"requested by customer\"\n- **Status:** Sent on 2026-11-04 (processor reference re_sim_002). It's expected to settle on **2026-11-09**.\n- **Invoices:** None were changed, because this payment wasn't applied to an invoice.\n\nNina already got a separate $40 refund from the same payment on 2026-10-25 (rfd_001, for a duplicate payment). So this is her second refund on pay_013, $90 in total.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

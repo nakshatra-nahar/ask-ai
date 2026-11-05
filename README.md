@@ -36,9 +36,9 @@ Production-style single process: `npm start` (builds the UI and serves it from t
 | `npm run retrieval -w server` | retrieval recall@K of expected actions over the scenario set | no |
 | `npm run filters -w server` | property test of every search/list filter (boolean partitions, enum values, field matches) | no |
 | `npm test` | smoke + filters + agent-loop test (scripted fake model: gating, stale confirmations, bulk-per-turn, progress streaming, atomic rollback, empty replies, step cap across confirmations, client abort) + oracle + retrieval | no |
-| `npm run eval -w server -- --strategy optimized` | LLM benchmark over all scenarios (also `--strategy baseline`, `--filter`, `--limit`, `--concurrency`) | yes |
+| `npm run eval -w server -- --strategy optimized` | LLM benchmark over all scenarios (also `--strategy baseline`, `--filter`, `--limit`, `--concurrency`, `--retry-errors` to re-run only scenarios that hit API errors and merge them) | yes |
 | `npm run report -w server` | builds `server/eval/BENCHMARK.md` from the latest results | no |
-| `npm run benchmark` | both strategies over all scenarios, then the report (estimated $35–40 for both at Opus 5.5 list price, mostly the baseline) | yes |
+| `npm run benchmark` | both strategies over all scenarios, then the report (measured: $6.22 optimized + $27.15 baseline at Opus 5.5 list price) | yes |
 | `npm run dataset -w server` | regenerates `docs/EVAL_DATASET.md` from the scenario files | no |
 | `npm run catalog -w server` | regenerates `docs/CATALOG.md` (all 500 action signatures) | no |
 | `npm run seed -w server` | prints seeded row counts (data is rebuilt deterministically on every server start / reset) | no |
@@ -144,7 +144,36 @@ Offline results (reproducible without an API key, `npm test`):
 | Filter property test (every search/list filter: boolean partitions, enum values, field matches) | **363/363** |
 | Retrieval recall@24 (expected actions present in the per-turn candidate cards) | **85.8%** of actions, 77.2% of scenarios fully covered — the rest is reachable through the cached catalog index / `search_actions`. The synonym list is generic CRM vocabulary; it was deliberately *not* tuned on eval misses |
 
-LLM benchmark (baseline vs optimized on the same 118 scenarios): see [`server/eval/BENCHMARK.md`](server/eval/BENCHMARK.md).
+### LLM benchmark results
+
+Both strategies ran on the same 118 scenarios with `claude-opus-5-5` and concurrency 4. The full report, with failures, is [`server/eval/BENCHMARK.md`](server/eval/BENCHMARK.md). The targets were committed before the first benchmark run.
+
+| | baseline (500 native tools, effort `medium`) | optimized (retrieval + 2 meta-tools, effort `low`) | target |
+|---|---|---|---|
+| Task success (state-checked) | 98.3% | 98.3% | ≥ 80% ✅ |
+| Action selection / parameter accuracy | 100% / 100% | 100% / 100% | ≥ 85% / ≥ 90% ✅ |
+| Time to first useful response p50 / p95, direct | 1.33s / 4.45s | **1.16s / 2.35s** | ≤ 2.5s / ≤ 5s ✅ |
+| Time to first useful response p50 / p95, complex | 1.57s / 4.79s | **1.13s / 2.77s** | ≤ 3s / ≤ 6s ✅ |
+| End-to-end p50 / p95, direct | 7.87s / 19.70s | **6.71s / 11.45s** | ≤ 6s ❌ / ≤ 12s ✅ |
+| End-to-end p50 / p95, complex | 13.11s / 32.64s | **12.56s / 24.86s** | ≤ 25s / ≤ 45s ✅ |
+| Cost per request / per successful task | $0.207 / $0.234 | **$0.047 / $0.054** | ≤ $0.05 / ≤ $0.08 ✅ |
+| Model calls per request | 3.5 | 3.5 | ≤ 3.5 ✅ |
+| Input tokens per request (incl. cached) | 396k | **32k** | |
+| Total cost, 118 scenarios | $27.15 | $6.22 | |
+
+What the numbers show:
+- **Quality is the same.** Retrieval doesn't cost accuracy: per-turn candidate recall is 85.8%, yet the optimized agent executed 100% of the expected actions. It recovered the misses through the cached catalog index or `search_actions`.
+- **Cost:** optimized is **4.4× cheaper per successful task** and sends 12× fewer input tokens per request.
+- **Latency:** optimized has a much shorter tail. At p95, direct requests get a first useful response in 2.35s against 4.45s and finish in 11.5s against 19.7s; complex requests finish in 24.9s against 32.6s. Medians are closer, because with a warm cache both are dominated by model generation time.
+- **Missed target: direct end-to-end p50, 6.71s against ≤ 6s.** A direct request usually takes a lookup call, an action call and a summary call (3.5 calls per request), and each takes about 1.6–2.5s on Opus 5.5 (interquartile range). Closing the gap needs fewer round trips, for example skipping the model-written summary for single-action requests and rendering the action result directly, or routing simple turns to a faster model. Neither is implemented.
+- **Failures: the same 2 in both strategies.**
+  - `com-ambiguous-noah-invoice`, "Send Noah his invoice.": only Noah Singh has invoices, so both strategies identified the right person from the data. But he has an overdue invoice and an unsent draft, and both picked one instead of asking which (optimized sent a reminder for the overdue one, baseline issued the draft), each behind a confirmation. Counted as a failure.
+  - `com-failure-refund-over-balance`, "Refund the rest of Nina Chen's $250 check — she should get $210 back.": only $160 is refundable as a new request, because a $50 refund is approved but not yet sent. The scenario expects the agent to explain this and stop. Both strategies instead sent the pending $50 and created a $160 refund, each behind a confirmation, which does get her $210. That's arguably correct, but the grader was kept as written, so it counts as a failure.
+- **Run notes:**
+  - The account ran out of credits during the baseline run. The 12 scenarios that hit the billing error were re-run with `--retry-errors` (concurrency 2) and merged; the results file and the report record this.
+  - Live runs before the reported benchmark found two problems, both fixed before it:
+    - One grader was too strict: the follow-up scenario required a due-date change even when the tasks were already due tomorrow. It was relaxed, and the state check still enforces the date.
+    - One catalog gap: Communities has no search action in the catalog, so the agent couldn't find "Growth Hackers Club" by name. Community lookups now accept the name, and a miss lists the communities that exist.
 
 ### Cost model, cache behaviour and test conditions
 
@@ -159,16 +188,16 @@ LLM benchmark (baseline vs optimized on the same 118 scenarios): see [`server/ev
 
 | decision | latency | cost | quality |
 |---|---|---|---|
-| Meta-tools + per-turn candidate cards instead of 500 native tools | far fewer input tokens to process per call (≈1.8k tokens of cards vs ≈68k of schemas) → lower time-to-first-token | fewer billed tokens; static tool list + system prompt cache across all requests | candidates can miss → mitigated by the cached catalog index and `search_actions` (one extra round trip when used) |
+| Meta-tools + per-turn candidate cards instead of 500 native tools | far fewer input tokens to process per call (≈1.8k tokens of cards vs ≈110k of schemas) → p95 time to first useful response 2.35s vs 4.45s | 32k vs 396k input tokens per request; $0.054 vs $0.234 per successful task | candidates can miss → mitigated by the cached catalog index and `search_actions` (one extra round trip when used) |
 | Cached catalog index of all 500 action ids in the system prompt (~2.8k tokens) | none after first write | ~$0.001/call at cache-read price | lets the model match paraphrases semantically across the whole catalog without an embedding service |
 | Lexical retrieval (BM25 + synonyms + typo correction + per-clause + module lookups) instead of embeddings / an LLM router | ~1–2 ms, no network | free | recall@24 85.8%; weaker on heavy paraphrase — the model-side index is the backstop |
-| Effort `low` on Opus 5.5 | fewer thinking tokens → faster first text and fewer, consolidated tool calls | fewer output tokens | measured against baseline `medium` in BENCHMARK.md |
+| Effort `low` on Opus 5.5 | fewer thinking tokens → faster first text and fewer, consolidated tool calls | fewer output tokens | same 98.3% task success as the baseline at `medium` |
 | Parallel tool calls + batched execution of a step | fewer model round trips for fan-out work (e.g. 5 tasks in one step) | fewer calls | — |
 | Compacted tool results (drop nulls/empties/`updatedAt`, clip strings, capped lists) | smaller follow-up prompts | fewer input tokens | `total`/`truncated` tell the model when to refine filters |
 | Confirmation gate on destructive/external/bulk writes | adds a human step only where it matters | — | prevents irreversible mistakes; safe calls in the same step still run |
 | One-sentence plan before acting | first useful text in a single streamed call | a few output tokens | user sees intent immediately and can interrupt |
 
-The baseline sends all 500 tools natively (still prompt-cached — no realistic deployment would re-bill 68k tokens per call), default effort `medium`, raw tool results, no retrieval.
+The baseline sends all 500 tools natively (still prompt-cached — no realistic deployment would re-bill ≈110k tokens per call), default effort `medium`, raw tool results, no retrieval.
 
 ## Known limitations
 

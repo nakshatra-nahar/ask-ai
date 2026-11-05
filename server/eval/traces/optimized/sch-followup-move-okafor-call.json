@@ -1,0 +1,249 @@
+{
+  "scenario": {
+    "id": "sch-followup-move-okafor-call",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "What's on Jordan Lee's calendar this Friday?"
+      },
+      {
+        "user": "Move the David Okafor one to Monday, same time."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action appointments.reschedule_appointment",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params appointments.reschedule_appointment",
+        "pass": true,
+        "detail": "{\"id\":\"apt_007\",\"startAt\":\"2026-11-09\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "fcf236df-ceb6-43bf-96ca-c33e9dddfa08",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "What's on Jordan Lee's calendar this Friday?",
+      "ttfurMs": 1057,
+      "ttftTextMs": 1057,
+      "firstActionMs": 2066,
+      "e2eMs": 8493,
+      "llmCalls": [
+        {
+          "ms": 2063,
+          "ttftMs": 1054,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 114,
+            "cacheRead": 5235,
+            "cacheWrite": 2647
+          },
+          "costUSD": 0.017625
+        },
+        {
+          "ms": 1860,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 139,
+            "cacheRead": 7882,
+            "cacheWrite": 240
+          },
+          "costUSD": 0.0071408
+        },
+        {
+          "ms": 4565,
+          "ttftMs": 4563,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 421,
+            "cacheRead": 8122,
+            "cacheWrite": 448
+          },
+          "costUSD": 0.0139168
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Jordan Lee"
+          },
+          "ok": true,
+          "ms": 0.18,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.search_appointments",
+          "input": {
+            "hostUserId": "usr_002",
+            "startAtAfter": "2026-11-06T00:00:00Z",
+            "startAtBefore": "2026-11-07T00:00:00Z"
+          },
+          "ok": true,
+          "ms": 1.69,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 674,
+        "cache_creation_input_tokens": 3335,
+        "cache_read_input_tokens": 21239
+      },
+      "costUSD": 0.038683,
+      "retries": 0,
+      "retrieved": [
+        "calendars.set_calendar_timezone",
+        "calendars.list_calendars",
+        "calendars.get_calendar_settings",
+        "appointments.search_appointments",
+        "appointments.assign_appointment_host",
+        "calendars.archive_calendar",
+        "calendars.update_calendar_details",
+        "calendars.set_calendar_visibility",
+        "booking_pages.link_calendar_to_booking_page",
+        "appointments.create_appointment",
+        "booking_pages.create_booking_page",
+        "booking_pages.list_booking_pages",
+        "appointments.get_appointment",
+        "availability.find_available_slots",
+        "booking_pages.get_booking_page",
+        "reports.update_report_filters",
+        "websites.update_site_navigation",
+        "availability.set_min_notice",
+        "booking_pages.publish_booking_page",
+        "appointments.reschedule_appointment",
+        "notes.update_note",
+        "communities.leave_community",
+        "forms.reorder_form_fields",
+        "landing_pages.reorder_page_sections"
+      ],
+      "status": "completed",
+      "finalText": "Jordan Lee (usr_002) has **2 meetings this Friday, 6 Nov 2026**. Both are booked but not yet confirmed, and both are on calendar cal_001:\n\n| Time (UTC) | Time (Jordan's time, ET) | Meeting | Appointment id |\n|---|---|---|---|\n| 15:00–15:30 | 10:00–10:30 AM | Sales Discovery Call with Priya Okafor (con_007, lead ld_004) | apt_002 |\n| 16:00–16:30 | 11:00–11:30 AM | Sales Discovery Call with David Okafor (con_039, lead ld_019) | apt_007 |\n\nThe rest of the day is open. I searched Friday in UTC (midnight to midnight). That means a meeting Jordan has after 7 PM ET on Friday wouldn't show up here.",
+      "progress": [],
+      "retrievalMs": 2.7,
+      "calls": 3
+    },
+    {
+      "sessionId": "fcf236df-ceb6-43bf-96ca-c33e9dddfa08",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Move the David Okafor one to Monday, same time.",
+      "ttfurMs": 1051,
+      "ttftTextMs": 1051,
+      "firstActionMs": 2091,
+      "e2eMs": 5444,
+      "llmCalls": [
+        {
+          "ms": 2081,
+          "ttftMs": 1047,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 140,
+            "cacheRead": 8570,
+            "cacheWrite": 3239
+          },
+          "costUSD": 0.022439
+        },
+        {
+          "ms": 3353,
+          "ttftMs": 3348,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 196,
+            "cacheRead": 11809,
+            "cacheWrite": 319
+          },
+          "costUSD": 0.0102466
+        }
+      ],
+      "actions": [
+        {
+          "action": "appointments.reschedule_appointment",
+          "input": {
+            "id": "apt_007",
+            "startAt": "2026-11-09T16:00:00Z"
+          },
+          "ok": true,
+          "ms": 5.66,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 336,
+        "cache_creation_input_tokens": 3558,
+        "cache_read_input_tokens": 20379
+      },
+      "costUSD": 0.032686,
+      "retries": 0,
+      "retrieved": [
+        "appointments.reschedule_appointment",
+        "calendars.list_calendars",
+        "lessons.move_lesson",
+        "availability.set_min_notice",
+        "calendars.set_calendar_timezone",
+        "media.move_media",
+        "orders.add_order_line_item",
+        "calendars.get_calendar_settings",
+        "opportunities.move_opportunity_to_stage",
+        "availability.remove_time_block",
+        "appointments.search_appointments",
+        "notes.attach_note",
+        "availability.block_time",
+        "appointments.assign_appointment_host",
+        "appointments.get_appointment",
+        "calendars.assign_calendar_host",
+        "appointments.create_appointment",
+        "availability.find_available_slots",
+        "prices.set_billing_interval",
+        "availability.remove_date_override",
+        "calendars.archive_calendar",
+        "calendars.update_calendar_details",
+        "booking_pages.link_calendar_to_booking_page",
+        "payments.allocate_payment"
+      ],
+      "status": "completed",
+      "finalText": "I moved Jordan's discovery call with David Okafor (apt_007) to **Monday, 9 Nov 2026, 16:00–16:30 UTC (11:00–11:30 AM ET)**. That's the same time as the original Friday slot. Jordan is still the host, it's still on calendar cal_001, and its status is still booked.\n\nThat leaves one meeting on Friday: the call with Priya Okafor at 10:00 AM ET (apt_002).\n\nI only changed the appointment in the system. Nothing was sent to David to tell him about the new time. I can email or text him if you'd like.",
+      "progress": [],
+      "retrievalMs": 4.02,
+      "calls": 2
+    }
+  ]
+}

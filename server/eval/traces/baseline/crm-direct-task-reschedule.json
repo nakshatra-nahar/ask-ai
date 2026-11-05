@@ -1,0 +1,200 @@
+{
+  "scenario": {
+    "id": "crm-direct-task-reschedule",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "the 'Prepare quote' task for Lucas Johnson - marcus is out so give it to Dana, and move it to monday"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tasks.assign_task_owner",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action tasks.set_task_due_date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params tasks.assign_task_owner",
+        "pass": true,
+        "detail": "{\"id\":\"tsk_008\",\"ownerId\":\"usr_005\"}"
+      },
+      {
+        "name": "params tasks.set_task_due_date",
+        "pass": true,
+        "detail": "{\"id\":\"tsk_008\",\"dueDate\":\"2026-11-09\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "bf749da7-9da5-45bb-9141-8b51611582c2",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "the 'Prepare quote' task for Lucas Johnson - marcus is out so give it to Dana, and move it to monday",
+      "ttfurMs": 1492,
+      "ttftTextMs": 1492,
+      "firstActionMs": 2514,
+      "e2eMs": 11647,
+      "llmCalls": [
+        {
+          "ms": 2513,
+          "ttftMs": 1492,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 140,
+            "cacheRead": 112993,
+            "cacheWrite": 112
+          },
+          "costUSD": 0.048573200000000004
+        },
+        {
+          "ms": 2736,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 105,
+            "cacheRead": 113105,
+            "cacheWrite": 639
+          },
+          "costUSD": 0.050545
+        },
+        {
+          "ms": 3564,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 281,
+            "cacheRead": 113744,
+            "cacheWrite": 562
+          },
+          "costUSD": 0.05393560000000001
+        },
+        {
+          "ms": 2822,
+          "ttftMs": 2817,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 161,
+            "cacheRead": 114306,
+            "cacheWrite": 791
+          },
+          "costUSD": 0.0529054
+        }
+      ],
+      "actions": [
+        {
+          "action": "tasks.search_tasks",
+          "input": {
+            "query": "Prepare quote",
+            "status": "open"
+          },
+          "ok": true,
+          "ms": 0.46,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Dana"
+          },
+          "ok": true,
+          "ms": 0.03,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.get_contact",
+          "input": {
+            "id": "con_022"
+          },
+          "ok": true,
+          "ms": 0.71,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.get_contact",
+          "input": {
+            "id": "con_046"
+          },
+          "ok": true,
+          "ms": 0.05,
+          "confirmed": false
+        },
+        {
+          "action": "users.get_user",
+          "input": {
+            "id": "usr_004"
+          },
+          "ok": true,
+          "ms": 0.5,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.assign_task_owner",
+          "input": {
+            "id": "tsk_008",
+            "ownerId": "usr_005"
+          },
+          "ok": true,
+          "ms": 4.95,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.set_task_due_date",
+          "input": {
+            "id": "tsk_008",
+            "dueDate": "2026-11-09"
+          },
+          "ok": true,
+          "ms": 5.09,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 687,
+        "cache_creation_input_tokens": 2104,
+        "cache_read_input_tokens": 454148
+      },
+      "costUSD": 0.205959,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I've moved Lucas Johnson's **Prepare quote** task (tsk_008) from Marcus Reed to Dana Cruz and changed the due date to next Monday.\n\n| | Before | After |\n|---|---|---|\n| Owner | Marcus Reed (usr_004, marked out of office) | **Dana Cruz** (usr_005) |\n| Due date | 2026-11-18 | **2026-11-09 (Mon)** |\n\nThe task is still open and its priority is still low.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "scenario": {
+    "id": "cmm-direct-disable-fb-trigger",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Turn off the trigger that drops new Facebook leads into the nurture sequence for now."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action triggers.disable_trigger",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid workflows.pause_workflow",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params triggers.disable_trigger",
+        "pass": true,
+        "detail": "{\"id\":\"trg_001\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "7890e003-b21d-48eb-9aa0-14e050ca76c1",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Turn off the trigger that drops new Facebook leads into the nurture sequence for now.",
+      "ttfurMs": 1481,
+      "ttftTextMs": 1481,
+      "firstActionMs": 2359,
+      "e2eMs": 8349,
+      "llmCalls": [
+        {
+          "ms": 2358,
+          "ttftMs": 1481,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 88,
+            "cacheRead": 112993,
+            "cacheWrite": 101
+          },
+          "costUSD": 0.047478200000000005
+        },
+        {
+          "ms": 1924,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 57,
+            "cacheRead": 113094,
+            "cacheWrite": 705
+          },
+          "costUSD": 0.049910600000000006
+        },
+        {
+          "ms": 4060,
+          "ttftMs": 4058,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 254,
+            "cacheRead": 113799,
+            "cacheWrite": 660
+          },
+          "costUSD": 0.05390760000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "triggers.list_event_triggers",
+          "input": {
+            "eventType": "lead_created"
+          },
+          "ok": true,
+          "ms": 0.92,
+          "confirmed": false
+        },
+        {
+          "action": "triggers.disable_trigger",
+          "input": {
+            "id": "trg_001"
+          },
+          "ok": true,
+          "ms": 5.72,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 399,
+        "cache_creation_input_tokens": 1466,
+        "cache_read_input_tokens": 339886
+      },
+      "costUSD": 0.151296,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I turned off the **New Facebook Lead** trigger (`trg_001`), so new Facebook leads will stop being added to workflow `wf_001`.\n\n- **What it did:** whenever a lead was created with source = `facebook`, it started workflow `wf_001`. It last did this on 2026-10-30.\n- **What hasn't changed:** the workflow itself is still live. Leads already in it, such as `ld_001`, `ld_002` and `ld_003` from the recent firings, will keep getting its steps. If you want to stop those too, I can pause the workflow.\n- **To turn it back on:** enabling `trg_001` again will start it immediately. The settings are unchanged.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

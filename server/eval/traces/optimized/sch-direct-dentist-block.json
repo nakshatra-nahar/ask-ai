@@ -1,0 +1,159 @@
+{
+  "scenario": {
+    "id": "sch-direct-dentist-block",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Dana Cruz has a dentist appointment next Monday from 1 to 3pm, block that off on her calendar pls"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action availability.block_time",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params availability.block_time",
+        "pass": true,
+        "detail": "{\"userId\":\"usr_005\",\"startAt\":\"2026-11-09\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "92b185d3-0f48-4916-90ce-f3ff43dab3ba",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Dana Cruz has a dentist appointment next Monday from 1 to 3pm, block that off on her calendar pls",
+      "ttfurMs": 806,
+      "ttftTextMs": 806,
+      "firstActionMs": 1654,
+      "e2eMs": 8012,
+      "llmCalls": [
+        {
+          "ms": 1650,
+          "ttftMs": 803,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 103,
+            "cacheRead": 5235,
+            "cacheWrite": 2892
+          },
+          "costUSD": 0.01863
+        },
+        {
+          "ms": 2657,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 231,
+            "cacheRead": 8127,
+            "cacheWrite": 227
+          },
+          "costUSD": 0.009013799999999999
+        },
+        {
+          "ms": 3694,
+          "ttftMs": 3690,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 310,
+            "cacheRead": 8354,
+            "cacheWrite": 579
+          },
+          "costUSD": 0.0124446
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Dana Cruz"
+          },
+          "ok": true,
+          "ms": 0.26,
+          "confirmed": false
+        },
+        {
+          "action": "availability.block_time",
+          "input": {
+            "userId": "usr_005",
+            "startAt": "2026-11-09T18:00:00Z",
+            "endAt": "2026-11-09T20:00:00Z",
+            "reason": "Dentist appointment"
+          },
+          "ok": true,
+          "ms": 6.1,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 644,
+        "cache_creation_input_tokens": 3698,
+        "cache_read_input_tokens": 21716
+      },
+      "costUSD": 0.040088,
+      "retries": 0,
+      "retrieved": [
+        "appointments.create_appointment",
+        "appointments.search_appointments",
+        "listings.set_listing_categories",
+        "availability.block_time",
+        "calendars.list_calendars",
+        "events.cancel_registration",
+        "availability.remove_time_block",
+        "events.register_attendee",
+        "calendars.set_appointment_duration",
+        "appointments.cancel_appointment",
+        "calendars.archive_calendar",
+        "calendars.get_calendar_settings",
+        "calendars.assign_calendar_host",
+        "appointments.assign_appointment_host",
+        "calendars.create_calendar",
+        "funnels.get_funnel_metrics",
+        "appointments.get_appointment",
+        "availability.find_available_slots",
+        "appointments.reschedule_appointment",
+        "events.create_event",
+        "subscriptions.preview_next_invoice",
+        "triggers.disable_trigger",
+        "booking_pages.link_calendar_to_booking_page",
+        "templates.render_template"
+      ],
+      "status": "completed",
+      "finalText": "I blocked off Dana's dentist appointment for next Monday (block `blk_003`, reason \"Dentist appointment\").\n\n- **Who:** Dana Cruz (`usr_005`)\n- **When:** Mon 9 Nov 2026, 1:00–3:00 pm New York time (Dana's time zone), which is 18:00–20:00 UTC\n- **Conflicts:** She has no meetings booked during that time.\n\n**Please check:** I took \"1 to 3pm\" as her local time. The system reads her working hours as 9:00–17:00 UTC, so 18:00–20:00 UTC is already outside them. If you meant 1–3pm UTC, the block needs to be moved to 13:00–15:00 UTC.",
+      "progress": [],
+      "retrievalMs": 3.59,
+      "calls": 3
+    }
+  ]
+}

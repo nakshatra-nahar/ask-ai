@@ -1,0 +1,100 @@
+{
+  "scenario": {
+    "id": "com-unsupported-shipping-labels",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Buy UPS shipping labels for ORD-1003 and book a courier pickup for tomorrow (2026-11-05) morning."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|unable|not able|don't have|do not have|not support|isn't supported|no (action|capability|way|integration))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "cf06fd50-5580-4eaf-b04c-c146f85b8798",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Buy UPS shipping labels for ORD-1003 and book a courier pickup for tomorrow (2026-11-05) morning.",
+      "ttfurMs": 1784,
+      "ttftTextMs": 1784,
+      "firstActionMs": 2600,
+      "e2eMs": 7600,
+      "llmCalls": [
+        {
+          "ms": 2598,
+          "ttftMs": 1784,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 143,
+            "cacheRead": 112993,
+            "cacheWrite": 116
+          },
+          "costUSD": 0.04865320000000001
+        },
+        {
+          "ms": 5000,
+          "ttftMs": 4996,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 398,
+            "cacheRead": 113109,
+            "cacheWrite": 500
+          },
+          "costUSD": 0.05571160000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "query": "ORD-1003",
+            "limit": 5
+          },
+          "ok": true,
+          "ms": 1.66,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 541,
+        "cache_creation_input_tokens": 616,
+        "cache_read_input_tokens": 226102
+      },
+      "costUSD": 0.104365,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I couldn't buy UPS labels or book a courier pickup. The platform doesn't connect to any carrier, so it can't buy labels, get shipping rates or schedule pickups. Nothing was changed.\n\n**What I found on ORD-1003 (`ord_003`)**\n- **Status:** submitted, not fulfilled yet. Stock is reserved.\n- **Items:** 3 × Teeth Whitening Kit (SKU WHT-KIT), $447.00 total\n- **Ship to:** Michael Smith, 266 Main St, Los Angeles, CA 90012, US\n- **Customer contact:** `con_003`\n\n**What I can do instead**\n- **Pickup reminder:** I can create a task for tomorrow (2026-11-05) morning to buy the UPS label and book the pickup in UPS directly, linked to this order.\n- **Mark as fulfilled:** once the label is bought in UPS, send me the tracking number. Marking the order fulfilled records the tracking number and takes the 3 kits out of stock.\n- **Tell the customer:** I can email or text Michael Smith that his order ships tomorrow, with tracking once you have it.\n\nDo you want me to set up any of these?",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "scenario": {
+    "id": "cmm-direct-schedule-email",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Schedule an email to Sarah Chen for tomorrow at 9am. Subject 'Your proposal from Acme' — just say the proposal we discussed is attached and she can reply with any questions."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action email.schedule_email",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid email.send_email",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params email.schedule_email",
+        "pass": true,
+        "detail": "{\"scheduledAt\":\"2026-11-05\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "1b7053db-6f7a-47b9-a81a-c057dff8e695",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Schedule an email to Sarah Chen for tomorrow at 9am. Subject 'Your proposal from Acme' — just say the proposal we discussed is attached and she can reply with any questions.",
+      "ttfurMs": 2347,
+      "ttftTextMs": 2347,
+      "firstActionMs": 3283,
+      "e2eMs": 6354,
+      "llmCalls": [
+        {
+          "ms": 3278,
+          "ttftMs": 2343,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 111,
+            "cacheRead": 5235,
+            "cacheWrite": 3256
+          },
+          "costUSD": 0.02061
+        },
+        {
+          "ms": 3070,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 185,
+            "cacheRead": 8491,
+            "cacheWrite": 320
+          },
+          "costUSD": 0.0087044
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah Chen"
+          },
+          "ok": true,
+          "ms": 0.25,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 296,
+        "cache_creation_input_tokens": 3576,
+        "cache_read_input_tokens": 13726
+      },
+      "costUSD": 0.029314,
+      "retries": 0,
+      "retrieved": [
+        "email.search_email_messages",
+        "campaigns.set_campaign_schedule",
+        "quotes.create_quote",
+        "conversations.search_conversations",
+        "email.receive_inbound_email",
+        "email.schedule_email",
+        "quotes.record_quote_acceptance",
+        "sms.search_sms_messages",
+        "quotes.send_quote",
+        "reports.schedule_report",
+        "conversations.list_unanswered_conversations",
+        "email.send_email",
+        "email.cancel_scheduled_email",
+        "notes.attach_note",
+        "conversations.mark_conversation_read",
+        "email.preview_email",
+        "booking_pages.set_booking_intake_fields",
+        "invoices.issue_invoice",
+        "tickets.reply_to_ticket",
+        "sms.receive_inbound_sms",
+        "memberships.check_member_access",
+        "conversations.assign_conversation_owner",
+        "conversations.summarize_conversation",
+        "surveys.set_question_branching"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 4.58,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_0128UmXaKL2FGUZCgQfLUwqH",
+          "action": "email.schedule_email",
+          "name": "Schedule email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_002",
+            "subject": "Your proposal from Acme",
+            "body": "Hi Sarah,\n\nPlease find attached the proposal we discussed. If you have any questions, just reply to this email.\n\nBest regards,\nAcme",
+            "scheduledAt": "2026-11-05T09:00:00Z"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "1b7053db-6f7a-47b9-a81a-c057dff8e695",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 7,
+      "ttftTextMs": 3405,
+      "firstActionMs": 7,
+      "e2eMs": 3408,
+      "llmCalls": [
+        {
+          "ms": 3401,
+          "ttftMs": 3398,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 289,
+            "cacheRead": 8811,
+            "cacheWrite": 378
+          },
+          "costUSD": 0.0112024
+        }
+      ],
+      "actions": [
+        {
+          "action": "email.schedule_email",
+          "input": {
+            "contactId": "con_002",
+            "subject": "Your proposal from Acme",
+            "body": "Hi Sarah,\n\nPlease find attached the proposal we discussed. If you have any questions, just reply to this email.\n\nBest regards,\nAcme",
+            "scheduledAt": "2026-11-05T09:00:00Z"
+          },
+          "ok": true,
+          "ms": 7.19,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 289,
+        "cache_creation_input_tokens": 378,
+        "cache_read_input_tokens": 8811
+      },
+      "costUSD": 0.011202,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I scheduled the email to Sarah Chen (con_002, sarah.chen@example.com) for tomorrow, Thu 5 Nov 2026, at 9:00 AM UTC. I used UTC because I don't know your time zone.\n\n- **Message ID:** msg_130 (status: scheduled)\n- **Subject:** Your proposal from Acme\n- **Body:** \"Hi Sarah, Please find attached the proposal we discussed. If you have any questions, just reply to this email. Best regards, Acme\"\n\n**Needs your attention:**\n- **No proposal is attached.** The email says it's attached, but I can't add attachments when scheduling an email. You could add a link to the proposal in the body, or I could cancel this email and send the proposal as a quote instead.\n- **Time zone:** If you meant 9am in a different time zone, tell me which one and I'll change the time.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

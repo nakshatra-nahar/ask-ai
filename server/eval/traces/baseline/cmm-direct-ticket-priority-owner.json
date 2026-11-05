@@ -1,0 +1,160 @@
+{
+  "scenario": {
+    "id": "cmm-direct-ticket-priority-owner",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "The 'cannot reset password' ticket — bump it to high priority and hand it to Riley."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tickets.set_ticket_priority",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action tickets.assign_ticket",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params tickets.set_ticket_priority",
+        "pass": true,
+        "detail": "{\"id\":\"tkt_004\",\"priority\":\"high\"}"
+      },
+      {
+        "name": "params tickets.assign_ticket",
+        "pass": true,
+        "detail": "{\"id\":\"tkt_004\",\"ownerId\":\"usr_007\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "1f1dfccd-718e-46e6-8f76-249742226ef2",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "The 'cannot reset password' ticket — bump it to high priority and hand it to Riley.",
+      "ttfurMs": 1292,
+      "ttftTextMs": 1292,
+      "firstActionMs": 2155,
+      "e2eMs": 6103,
+      "llmCalls": [
+        {
+          "ms": 2153,
+          "ttftMs": 1292,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 117,
+            "cacheRead": 112993,
+            "cacheWrite": 102
+          },
+          "costUSD": 0.04806320000000001
+        },
+        {
+          "ms": 1738,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 164,
+            "cacheRead": 113095,
+            "cacheWrite": 520
+          },
+          "costUSD": 0.051126
+        },
+        {
+          "ms": 2199,
+          "ttftMs": 2192,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 184,
+            "cacheRead": 113615,
+            "cacheWrite": 627
+          },
+          "costUSD": 0.052269
+        }
+      ],
+      "actions": [
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "query": "reset password"
+          },
+          "ok": true,
+          "ms": 1.67,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Riley"
+          },
+          "ok": true,
+          "ms": 0.32,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.set_ticket_priority",
+          "input": {
+            "id": "tkt_004",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 5.66,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_004",
+            "ownerId": "usr_007"
+          },
+          "ok": true,
+          "ms": 5.13,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 465,
+        "cache_creation_input_tokens": 1249,
+        "cache_read_input_tokens": 339703
+      },
+      "costUSD": 0.151458,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "The \"Cannot reset password\" ticket (tkt_004) is now high priority and assigned to Riley Kim (usr_007).\n\n- **Priority:** changed from normal to high. Because of this, the ticket is now due today at 16:00 UTC instead of tomorrow at 08:00 UTC.\n- **Owner:** Riley Kim, a support agent who isn't out of office. Assigning him changed the ticket's status from new to open.\n\nThe ticket isn't linked to a contact, so Riley can't reply to the requester through the ticket until a contact is added.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "scenario": {
+    "id": "cmm-followup-edit-reminder-template",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "What does our appointment reminder text say right now?"
+      },
+      {
+        "user": "Change it so people reply Y to confirm instead of C. Leave everything else as is."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action templates.update_template_content",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params templates.update_template_content",
+        "pass": true,
+        "detail": "{\"id\":\"tpl_004\",\"body\":\"/Reply Y to confirm/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "0e9b613c-ed03-4997-8e18-e00d490eda37",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "What does our appointment reminder text say right now?",
+      "ttfurMs": 1178,
+      "ttftTextMs": 1178,
+      "firstActionMs": 2056,
+      "e2eMs": 3890,
+      "llmCalls": [
+        {
+          "ms": 2054,
+          "ttftMs": 1178,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 104,
+            "cacheRead": 5235,
+            "cacheWrite": 3167
+          },
+          "costUSD": 0.020025
+        },
+        {
+          "ms": 1834,
+          "ttftMs": 1830,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 156,
+            "cacheRead": 8402,
+            "cacheWrite": 294
+          },
+          "costUSD": 0.0079588
+        }
+      ],
+      "actions": [
+        {
+          "action": "templates.search_templates",
+          "input": {
+            "query": "appointment reminder"
+          },
+          "ok": true,
+          "ms": 1.16,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 260,
+        "cache_creation_input_tokens": 3461,
+        "cache_read_input_tokens": 13637
+      },
+      "costUSD": 0.027984,
+      "retries": 0,
+      "retrieved": [
+        "invoices.send_invoice_reminder",
+        "appointments.search_appointments",
+        "blogs.publish_post",
+        "blogs.schedule_post",
+        "email.send_email",
+        "email.search_email_messages",
+        "coupons.validate_coupon",
+        "payments.create_payment_request",
+        "sms.draft_sms",
+        "sms.send_sms",
+        "sms.record_sms_opt_out",
+        "sms.cancel_scheduled_sms",
+        "sms.search_sms_messages",
+        "sms.receive_inbound_sms",
+        "invoices.issue_invoice",
+        "campaigns.launch_campaign",
+        "appointments.cancel_appointment",
+        "appointments.get_appointment",
+        "tasks.create_task",
+        "appointments.remove_appointment_attendee",
+        "calendars.set_appointment_duration",
+        "appointments.add_appointment_attendee",
+        "appointments.reschedule_appointment",
+        "calendars.list_calendars"
+      ],
+      "status": "completed",
+      "finalText": "Your appointment reminder text is the SMS template **Appointment Reminder** (`tpl_004`). It's active and on version 1. It currently says:\n\n> Reminder: {{contact.firstName}}, your appointment with {{business.name}} is on {{appointment.date}} at {{appointment.time}}. Reply C to confirm or R to reschedule.\n\nWhen it's sent, the placeholders are swapped for the contact's first name, your business name, and the appointment's date and time.",
+      "progress": [],
+      "retrievalMs": 0.55,
+      "calls": 2
+    },
+    {
+      "sessionId": "0e9b613c-ed03-4997-8e18-e00d490eda37",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Change it so people reply Y to confirm instead of C. Leave everything else as is.",
+      "ttfurMs": 764,
+      "ttftTextMs": 764,
+      "firstActionMs": 1976,
+      "e2eMs": 4060,
+      "llmCalls": [
+        {
+          "ms": 1965,
+          "ttftMs": 761,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 166,
+            "cacheRead": 8696,
+            "cacheWrite": 2932
+          },
+          "costUSD": 0.0214744
+        },
+        {
+          "ms": 2084,
+          "ttftMs": 2080,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 162,
+            "cacheRead": 11628,
+            "cacheWrite": 492
+          },
+          "costUSD": 0.0103592
+        }
+      ],
+      "actions": [
+        {
+          "action": "templates.update_template_content",
+          "input": {
+            "id": "tpl_004",
+            "body": "Reminder: {{contact.firstName}}, your appointment with {{business.name}} is on {{appointment.date}} at {{appointment.time}}. Reply Y to confirm or R to reschedule."
+          },
+          "ok": true,
+          "ms": 7.19,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 328,
+        "cache_creation_input_tokens": 3424,
+        "cache_read_input_tokens": 20324
+      },
+      "costUSD": 0.031834,
+      "retries": 0,
+      "retrieved": [
+        "conversations.mark_conversation_unread",
+        "conversations.assign_conversation_owner",
+        "communities.leave_community",
+        "conversations.mark_conversation_read",
+        "orders.add_order_line_item",
+        "conversations.list_unanswered_conversations",
+        "companies.merge_companies",
+        "tickets.reply_to_ticket",
+        "conversations.summarize_conversation",
+        "reviews.create_review_request",
+        "contacts.update_contact",
+        "email.receive_inbound_email",
+        "sms.receive_inbound_sms",
+        "conversations.add_internal_comment",
+        "appointments.reschedule_appointment",
+        "companies.list_company_contacts",
+        "forms.publish_form",
+        "communities.reply_to_post",
+        "sms.search_sms_messages",
+        "contacts.search_contacts",
+        "users.deactivate_user",
+        "contacts.merge_contacts",
+        "calendars.archive_calendar",
+        "email.send_email"
+      ],
+      "status": "completed",
+      "finalText": "The reminder text now asks people to reply **Y** to confirm instead of C. Nothing else changed. The template is **Appointment Reminder** (`tpl_004`), and it's now on version 2:\n\n> Reminder: {{contact.firstName}}, your appointment with {{business.name}} is on {{appointment.date}} at {{appointment.time}}. Reply Y to confirm or R to reschedule.\n\nVersion 1, which used \"C\", is saved in the template's history if you want to switch back.",
+      "progress": [],
+      "retrievalMs": 2.97,
+      "calls": 2
+    }
+  ]
+}

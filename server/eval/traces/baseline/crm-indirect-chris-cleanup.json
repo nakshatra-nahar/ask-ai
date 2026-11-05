@@ -1,0 +1,247 @@
+{
+  "scenario": {
+    "id": "crm-indirect-chris-cleanup",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "Chris Park left months ago but he's still showing up on the Sales team and as the owner on a few leads. Can you sort that out so nothing is stuck with him?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action leads.assign_lead_owner",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action teams.remove_team_member",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid users.reactivate_user",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "2fe80e95-a002-43d4-bc9d-62001447c74a",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Chris Park left months ago but he's still showing up on the Sales team and as the owner on a few leads. Can you sort that out so nothing is stuck with him?",
+      "ttfurMs": 1565,
+      "ttftTextMs": 1565,
+      "firstActionMs": 2727,
+      "e2eMs": 17622,
+      "llmCalls": [
+        {
+          "ms": 2727,
+          "ttftMs": 1565,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 127,
+            "cacheRead": 112993,
+            "cacheWrite": 123
+          },
+          "costUSD": 0.04836820000000001
+        },
+        {
+          "ms": 4120,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 410,
+            "cacheRead": 113116,
+            "cacheWrite": 486
+          },
+          "costUSD": 0.0558844
+        },
+        {
+          "ms": 5741,
+          "ttftMs": 4229,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 552,
+            "cacheRead": 113602,
+            "cacheWrite": 1370
+          },
+          "costUSD": 0.0633388
+        },
+        {
+          "ms": 5023,
+          "ttftMs": 4930,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 392,
+            "cacheRead": 114972,
+            "cacheWrite": 1348
+          },
+          "costUSD": 0.0605768
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Chris Park"
+          },
+          "ok": true,
+          "ms": 0.12,
+          "confirmed": false
+        },
+        {
+          "action": "teams.list_teams",
+          "input": {
+            "query": "Sales"
+          },
+          "ok": true,
+          "ms": 0.04,
+          "confirmed": false
+        },
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "ownerId": "usr_009",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.21,
+          "confirmed": false
+        },
+        {
+          "action": "teams.get_team_workload",
+          "input": {
+            "id": "tm_001"
+          },
+          "ok": true,
+          "ms": 0.45,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.search_opportunities",
+          "input": {
+            "ownerId": "usr_009",
+            "status": "open",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.search_tasks",
+          "input": {
+            "ownerId": "usr_009",
+            "status": "open",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.33,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "ownerId": "usr_009",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.71,
+          "confirmed": false
+        },
+        {
+          "action": "leads.assign_lead_owner",
+          "input": {
+            "id": "ld_038",
+            "ownerId": "usr_005"
+          },
+          "ok": true,
+          "ms": 2.13,
+          "confirmed": false
+        },
+        {
+          "action": "leads.assign_lead_owner",
+          "input": {
+            "id": "ld_031",
+            "ownerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 1.7,
+          "confirmed": false
+        },
+        {
+          "action": "teams.remove_team_member",
+          "input": {
+            "id": "tm_001",
+            "userId": "usr_009"
+          },
+          "ok": true,
+          "ms": 1.48,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.search_conversations",
+          "input": {
+            "ownerId": "usr_009",
+            "status": "open"
+          },
+          "ok": true,
+          "ms": 0.31,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "ownerId": "usr_009"
+          },
+          "ok": true,
+          "ms": 0.27,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 1481,
+        "cache_creation_input_tokens": 3327,
+        "cache_read_input_tokens": 454683
+      },
+      "costUSD": 0.228168,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Nothing is left with Chris Park (usr_009). I moved his 2 leads to other reps and took him off the Sales team. His account was already deactivated.\n\n**Leads reassigned**\n| Lead | Status | New owner |\n|---|---|---|\n| Olivia Nguyen (ld_038), score 63, budget $10k+, wants to buy this month | qualified | Dana Cruz (usr_005) |\n| Sofia Brown (ld_031), score 46 | contacted | Priya Shah (usr_003) |\n\nI chose Dana and Priya because they had the lightest workload among the reps who are available. Dana got Olivia because she has no upcoming appointments and Olivia is the more urgent lead. Jordan Lee has the most work, and Marcus Reed is out of office.\n\n**Sales team (tm_001)**\n- Chris is no longer a member, so the team's round-robin assignment can't hand him anything new.\n- The team is now Jordan Lee, Priya Shah, Marcus Reed and Dana Cruz.\n\n**Nothing else needed moving.** Chris has no:\n- open deals\n- open tasks\n- contacts he owns\n- open conversations\n- support tickets",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

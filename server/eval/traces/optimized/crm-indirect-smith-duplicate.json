@@ -1,0 +1,193 @@
+{
+  "scenario": {
+    "id": "crm-indirect-smith-duplicate",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "Pretty sure Michael Smith is in here twice — once as 'Mike'. Can you clean that up?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action contacts.merge_contacts",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "eed224b5-a13e-43ac-95f7-a8f7fd4af26f",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Pretty sure Michael Smith is in here twice — once as 'Mike'. Can you clean that up?",
+      "ttfurMs": 1745,
+      "ttftTextMs": 1745,
+      "firstActionMs": 2732,
+      "e2eMs": 5893,
+      "llmCalls": [
+        {
+          "ms": 2726,
+          "ttftMs": 1738,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 108,
+            "cacheRead": 5235,
+            "cacheWrite": 2413
+          },
+          "costUSD": 0.016335
+        },
+        {
+          "ms": 3160,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 134,
+            "cacheRead": 7648,
+            "cacheWrite": 1248
+          },
+          "costUSD": 0.0119872
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Smith"
+          },
+          "ok": true,
+          "ms": 0.34,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 242,
+        "cache_creation_input_tokens": 3661,
+        "cache_read_input_tokens": 12883
+      },
+      "costUSD": 0.028322,
+      "retries": 0,
+      "retrieved": [
+        "workflows.publish_workflow",
+        "quotes.create_quote",
+        "forms.publish_form",
+        "availability.block_time",
+        "courses.publish_course",
+        "booking_pages.publish_booking_page",
+        "products.add_product_variant",
+        "courses.create_course",
+        "lessons.publish_lesson",
+        "funnels.create_funnel",
+        "calendars.create_calendar",
+        "custom_fields.create_custom_field",
+        "tax_rules.create_tax_rule",
+        "websites.publish_website",
+        "funnels.publish_funnel",
+        "companies.link_contact_to_company",
+        "appointments.create_appointment",
+        "landing_pages.publish_landing_page",
+        "tasks.complete_task",
+        "conversations.mark_conversation_unread",
+        "notes.detach_note",
+        "opportunities.mark_opportunity_lost",
+        "events.check_in_attendee",
+        "leads.disqualify_lead"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 5.98,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_012dPkDWWZGDhASmVm3iZQtX",
+          "action": "contacts.merge_contacts",
+          "name": "Merge duplicate contacts",
+          "risk": "destructive",
+          "input": {
+            "primaryId": "con_003",
+            "duplicateId": "con_004"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "eed224b5-a13e-43ac-95f7-a8f7fd4af26f",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 4327,
+      "firstActionMs": 6,
+      "e2eMs": 4329,
+      "llmCalls": [
+        {
+          "ms": 4323,
+          "ttftMs": 4321,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 345,
+            "cacheRead": 8896,
+            "cacheWrite": 413
+          },
+          "costUSD": 0.0125314
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.merge_contacts",
+          "input": {
+            "primaryId": "con_003",
+            "duplicateId": "con_004"
+          },
+          "ok": true,
+          "ms": 5.97,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 345,
+        "cache_creation_input_tokens": 413,
+        "cache_read_input_tokens": 8896
+      },
+      "costUSD": 0.012531,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I merged **Mike Smith (con_004)** into **Michael Smith (con_003)**. Both records had the same phone number (+1-555-0142), so they were very likely the same person.\n\n**Michael Smith (con_003)** is now the only record left. I kept it because it had more information: the \"customer\" stage, the `customer` tag, birthday and annual budget.\n\n**Moved over from Mike's record:** 1 lead, 1 conversation, 2 messages, 1 invoice, 1 payment, 1 payment request, 1 task, 1 note, 1 review request, 1 review and 1 ticket.\n\n**Kept Michael's version where the two records differed.** If any of Mike's versions were correct, I can update the record:\n- **Email:** kept michael.smith@example.com, dropped mike.smith@example.com.\n- **Company:** kept co_003, dropped co_004.\n- **Owner:** kept usr_004, dropped usr_005.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "scenario": {
+    "id": "cmm-failure-enable-vip-trigger",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Switch on the VIP Tag Added trigger."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid triggers.enable_trigger",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(draft|not published|unpublished|publish|deactivated|invalid|error)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "adbf077c-9cea-4452-80c9-a4ec8585b631",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Switch on the VIP Tag Added trigger.",
+      "ttfurMs": 10945,
+      "ttftTextMs": 10945,
+      "firstActionMs": 11772,
+      "e2eMs": 23525,
+      "llmCalls": [
+        {
+          "ms": 11772,
+          "ttftMs": 10945,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 86,
+            "cacheRead": 112993,
+            "cacheWrite": 89
+          },
+          "costUSD": 0.0473782
+        },
+        {
+          "ms": 1700,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 57,
+            "cacheRead": 113082,
+            "cacheWrite": 259
+          },
+          "costUSD": 0.047675800000000004
+        },
+        {
+          "ms": 3968,
+          "ttftMs": 3427,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 308,
+            "cacheRead": 113341,
+            "cacheWrite": 128
+          },
+          "costUSD": 0.0521444
+        },
+        {
+          "ms": 6077,
+          "ttftMs": 6072,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 480,
+            "cacheRead": 113469,
+            "cacheWrite": 615
+          },
+          "costUSD": 0.05807060000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "triggers.list_event_triggers",
+          "input": {
+            "query": "VIP Tag Added"
+          },
+          "ok": true,
+          "ms": 0.16,
+          "confirmed": false
+        },
+        {
+          "action": "triggers.enable_trigger",
+          "input": {
+            "id": "trg_005"
+          },
+          "ok": false,
+          "error": {
+            "code": "INVALID_STATE",
+            "message": "bound workflow wf_004 'Webinar Follow-up' is draft; publish it before enabling the trigger"
+          },
+          "ms": 5.78,
+          "confirmed": false
+        },
+        {
+          "action": "workflows.get_workflow",
+          "input": {
+            "id": "wf_004"
+          },
+          "ok": true,
+          "ms": 0.52,
+          "confirmed": false
+        },
+        {
+          "action": "workflows.list_workflows",
+          "input": {
+            "query": "VIP"
+          },
+          "ok": true,
+          "ms": 0.73,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 931,
+        "cache_creation_input_tokens": 1091,
+        "cache_read_input_tokens": 452885
+      },
+      "costUSD": 0.205269,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I didn't switch on the **VIP Tag Added** trigger (`trg_005`). It's still off, because the platform only enables a trigger whose workflow is published.\n\n**What's in the way**\n- The trigger fires when the `vip` tag is added, and it's linked to **Webinar Follow-up** (`wf_004`). That workflow is still a draft.\n- I didn't publish that workflow to get around the block, because it doesn't look like the right one for VIPs:\n  - It's for webinar attendees. Its steps assign the contact to owner `usr_009`, send a \"Thanks for attending!\" email and add the `webinar-attendee` tag. Turning the trigger on would send that webinar email to every new VIP.\n  - Its email step has a subject but no body, so it probably wouldn't pass the check needed to publish anyway.\n- No workflow with \"VIP\" in its name exists.\n\n**Options**\n1. **Build a VIP workflow:** tell me what should happen when someone gets the `vip` tag. I'll create and publish the workflow, link the trigger to it and switch the trigger on.\n2. **Use a different existing workflow:** give me its name and I'll link the trigger to it and switch it on.\n3. **Use Webinar Follow-up anyway:** give me the email body. I'll complete the workflow, publish it and switch the trigger on.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

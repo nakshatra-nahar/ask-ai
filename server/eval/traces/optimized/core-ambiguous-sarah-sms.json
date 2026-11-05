@@ -1,0 +1,151 @@
+{
+  "scenario": {
+    "id": "core-ambiguous-sarah-sms",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Send Sarah a text saying her appointment is confirmed."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "3209df2a-96f9-4853-ad7e-c14c01995f20",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Send Sarah a text saying her appointment is confirmed.",
+      "ttfurMs": 756,
+      "ttftTextMs": 756,
+      "firstActionMs": 1634,
+      "e2eMs": 7819,
+      "llmCalls": [
+        {
+          "ms": 1630,
+          "ttftMs": 753,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 107,
+            "cacheRead": 5235,
+            "cacheWrite": 2978
+          },
+          "costUSD": 0.01914
+        },
+        {
+          "ms": 1896,
+          "ttftMs": 1357,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 127,
+            "cacheRead": 8213,
+            "cacheWrite": 699
+          },
+          "costUSD": 0.0093282
+        },
+        {
+          "ms": 4286,
+          "ttftMs": 4285,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 421,
+            "cacheRead": 8912,
+            "cacheWrite": 471
+          },
+          "costUSD": 0.014347799999999999
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah"
+          },
+          "ok": true,
+          "ms": 1.21,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.search_appointments",
+          "input": {
+            "contactIds": [
+              "con_001",
+              "con_002",
+              "con_064"
+            ],
+            "upcoming": true
+          },
+          "ok": true,
+          "ms": 1.82,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 655,
+        "cache_creation_input_tokens": 4148,
+        "cache_read_input_tokens": 22360
+      },
+      "costUSD": 0.042816,
+      "retries": 0,
+      "retrieved": [
+        "sms.send_sms",
+        "appointments.search_appointments",
+        "appointments.reschedule_appointment",
+        "sms.schedule_sms",
+        "appointments.cancel_appointment",
+        "invoices.issue_invoice",
+        "sms.cancel_scheduled_sms",
+        "sms.record_sms_opt_out",
+        "appointments.mark_completed",
+        "sms.draft_sms",
+        "sms.get_sms_delivery_status",
+        "appointments.assign_appointment_host",
+        "appointments.mark_no_show",
+        "calendars.archive_calendar",
+        "email.send_email",
+        "reviews.send_review_request",
+        "campaigns.launch_campaign",
+        "invoices.send_invoice_reminder",
+        "availability.check_scheduling_conflicts",
+        "calendars.set_appointment_duration",
+        "orders.submit_order",
+        "availability.find_available_slots",
+        "calendars.list_calendars",
+        "reviews.create_review_request"
+      ],
+      "status": "completed",
+      "finalText": "I haven't sent a text yet because there are 3 contacts named Sarah, and 2 of them have appointments coming up:\n\n| Contact | Appointment | When (UTC) | Status |\n|---|---|---|---|\n| **Sarah Johnson** (con_001) | Product Demo (apt_010) | Thu 5 Nov, 14:00–14:45 | Confirmed |\n| **Sarah Chen** (con_002) | Sales Discovery Call (apt_001) | Thu 5 Nov, 15:00–15:30 | Booked, not yet confirmed |\n\nSarah Walker (con_064) has no upcoming appointments.\n\nWhich Sarah should get the text? If it's Sarah Chen, keep in mind her appointment shows as booked, not confirmed, in the system. Once you choose, I'll send something like: *\"Hi Sarah, your [appointment] on Thu, Nov 5 at [time] is confirmed. See you then!\"*",
+      "progress": [],
+      "retrievalMs": 2.21,
+      "calls": 3
+    }
+  ]
+}

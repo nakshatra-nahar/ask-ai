@@ -1,0 +1,215 @@
+{
+  "scenario": {
+    "id": "com-multi-blog-hero-publish",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Upload whitening-hero.jpg (JPEG, about 850 KB) to the /blog folder with alt text 'Smiling patient after professional whitening', make it the featured image on the Teeth Whitening Myths post, and then publish that post."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action media.upload_media",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action blogs.update_blog_post",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action blogs.publish_post",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params media.upload_media",
+        "pass": true,
+        "detail": "{\"name\":\"whitening-hero.jpg\",\"mimeType\":\"image/jpeg\",\"folder\":\"/blog\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "89df71dd-6d9f-42a4-8180-eb1bec191874",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Upload whitening-hero.jpg (JPEG, about 850 KB) to the /blog folder with alt text 'Smiling patient after professional whitening', make it the featured image on the Teeth Whitening Myths post, and then publish that post.",
+      "ttfurMs": 1144,
+      "ttftTextMs": 1144,
+      "firstActionMs": 2861,
+      "e2eMs": 5513,
+      "llmCalls": [
+        {
+          "ms": 2853,
+          "ttftMs": 1144,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 253,
+            "cacheRead": 112993,
+            "cacheWrite": 152
+          },
+          "costUSD": 0.05103320000000001
+        },
+        {
+          "ms": 1404,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 84,
+            "cacheRead": 113145,
+            "cacheWrite": 838
+          },
+          "costUSD": 0.051136
+        },
+        {
+          "ms": 1239,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 55,
+            "cacheRead": 113983,
+            "cacheWrite": 365
+          },
+          "costUSD": 0.048526200000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "media.upload_media",
+          "input": {
+            "name": "whitening-hero.jpg",
+            "mimeType": "image/jpeg",
+            "sizeBytes": 870400,
+            "folder": "/blog",
+            "altText": "Smiling patient after professional whitening"
+          },
+          "ok": true,
+          "ms": 7.64,
+          "confirmed": false
+        },
+        {
+          "action": "blogs.search_blog_posts",
+          "input": {
+            "query": "Teeth Whitening Myths"
+          },
+          "ok": true,
+          "ms": 0.85,
+          "confirmed": false
+        },
+        {
+          "action": "blogs.update_blog_post",
+          "input": {
+            "id": "blog_005",
+            "featuredImage": "med_010"
+          },
+          "ok": true,
+          "ms": 6.79,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 392,
+        "cache_creation_input_tokens": 1355,
+        "cache_read_input_tokens": 340121
+      },
+      "costUSD": 0.150695,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01FD3y8getmdwnwimBp1kUna",
+          "action": "blogs.publish_post",
+          "name": "Publish post",
+          "risk": "external",
+          "input": {
+            "id": "blog_005"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "89df71dd-6d9f-42a4-8180-eb1bec191874",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 5,
+      "ttftTextMs": 3649,
+      "firstActionMs": 5,
+      "e2eMs": 3652,
+      "llmCalls": [
+        {
+          "ms": 3647,
+          "ttftMs": 3644,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 291,
+            "cacheRead": 114348,
+            "cacheWrite": 350
+          },
+          "costUSD": 0.0533172
+        }
+      ],
+      "actions": [
+        {
+          "action": "blogs.publish_post",
+          "input": {
+            "id": "blog_005"
+          },
+          "ok": true,
+          "ms": 4.95,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 291,
+        "cache_creation_input_tokens": 350,
+        "cache_read_input_tokens": 114348
+      },
+      "costUSD": 0.053317,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I uploaded the image, set it as the post's featured image, and published **Teeth Whitening Myths Debunked**.\n\n- **Image:** `whitening-hero.jpg` (med_010) is in `/blog` with the alt text \"Smiling patient after professional whitening\". I recorded the size as 870,400 bytes (850 KB). Link: https://cdn.askai-media.test/assets/med_010\n- **Post:** \"Teeth Whitening Myths Debunked\" (blog_005) now uses med_010 as its featured image. It went live at 2026-11-04 10:00 UTC at the address `teeth-whitening-myths-debunked`.\n\n**Please check:** the post's text is still placeholder copy (\"Placeholder article body written by the Bright Smile Dental team…\"), and that is now live. It also has no SEO title or description. If you send me the real article text, I can update the post.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

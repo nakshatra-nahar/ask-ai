@@ -1,0 +1,196 @@
+{
+  "scenario": {
+    "id": "cmm-multi-contact-form-to-nurture",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Whenever someone fills out the Contact Us form I want them dropped straight into the New Lead Nurture workflow. Wire that up and switch it on."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action triggers.bind_trigger_to_workflow|triggers.create_event_trigger",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action triggers.enable_trigger",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "cdc3d2b1-6769-4150-8401-af91234430d3",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Whenever someone fills out the Contact Us form I want them dropped straight into the New Lead Nurture workflow. Wire that up and switch it on.",
+      "ttfurMs": 1515,
+      "ttftTextMs": 1515,
+      "firstActionMs": 3316,
+      "e2eMs": 12109,
+      "llmCalls": [
+        {
+          "ms": 3310,
+          "ttftMs": 1510,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 285,
+            "cacheRead": 5235,
+            "cacheWrite": 3187
+          },
+          "costUSD": 0.023745
+        },
+        {
+          "ms": 2308,
+          "ttftMs": 1763,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 136,
+            "cacheRead": 8422,
+            "cacheWrite": 1620
+          },
+          "costUSD": 0.014196799999999999
+        },
+        {
+          "ms": 2164,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 88,
+            "cacheRead": 10042,
+            "cacheWrite": 261
+          },
+          "costUSD": 0.0070898
+        },
+        {
+          "ms": 4307,
+          "ttftMs": 4302,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 297,
+            "cacheRead": 10303,
+            "cacheWrite": 213
+          },
+          "costUSD": 0.0111342
+        }
+      ],
+      "actions": [
+        {
+          "action": "forms.list_forms",
+          "input": {
+            "query": "Contact Us"
+          },
+          "ok": true,
+          "ms": 0.43,
+          "confirmed": false
+        },
+        {
+          "action": "workflows.list_workflows",
+          "input": {
+            "query": "New Lead Nurture"
+          },
+          "ok": true,
+          "ms": 0.27,
+          "confirmed": false
+        },
+        {
+          "action": "triggers.list_event_triggers",
+          "input": {
+            "eventType": "form_submitted"
+          },
+          "ok": true,
+          "ms": 0.95,
+          "confirmed": false
+        },
+        {
+          "action": "triggers.bind_trigger_to_workflow",
+          "input": {
+            "id": "trg_004",
+            "workflowId": "wf_001"
+          },
+          "ok": true,
+          "ms": 6.5,
+          "confirmed": false
+        },
+        {
+          "action": "triggers.enable_trigger",
+          "input": {
+            "id": "trg_004"
+          },
+          "ok": true,
+          "ms": 5.92,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 806,
+        "cache_creation_input_tokens": 5281,
+        "cache_read_input_tokens": 34002
+      },
+      "costUSD": 0.056166,
+      "retries": 0,
+      "retrieved": [
+        "forms.submit_form_response",
+        "contacts.search_contacts",
+        "landing_pages.set_page_seo",
+        "subscriptions.change_subscription_plan",
+        "forms.create_form",
+        "forms.list_forms",
+        "blogs.set_post_seo",
+        "prices.set_billing_interval",
+        "forms.list_form_submissions",
+        "websites.set_site_seo_defaults",
+        "coupons.set_discount_value",
+        "triggers.create_event_trigger",
+        "leads.search_leads",
+        "tax_rules.set_tax_inclusive",
+        "triggers.bind_trigger_to_workflow",
+        "workflows.list_workflows",
+        "triggers.set_trigger_event_type",
+        "triggers.disable_trigger",
+        "triggers.list_event_triggers",
+        "workflows.create_workflow",
+        "triggers.enable_trigger",
+        "leads.create_lead",
+        "workflows.add_workflow_step",
+        "forms.publish_form"
+      ],
+      "status": "completed",
+      "finalText": "It's set up and switched on. From now on, everyone who submits the **Contact Us** form (`frm_001`) goes straight into the **New Lead Nurture** workflow (`wf_001`).\n\n- **What I used:** There was already a trigger for this, **Contact Us Form Submitted** (`trg_004`). It was switched off and not linked to any workflow. Rather than make a duplicate, I linked it to New Lead Nurture and turned it on.\n- **When it runs:** Any time a form is submitted and the form name is \"Contact Us\".\n- **What happens next:** The workflow sends a text, waits a day, then sends an email. If they still haven't replied, it creates a \"Call new lead\" task for the next day.\n\n**Watch out for:** The workflow starts with a text message. A recent run for `con_008` failed at that first step because the contact had opted out of texts. The same could happen to form submitters who opt out.",
+      "progress": [],
+      "retrievalMs": 5.46,
+      "calls": 4
+    }
+  ]
+}

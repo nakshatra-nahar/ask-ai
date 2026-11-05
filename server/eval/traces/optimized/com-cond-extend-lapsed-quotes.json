@@ -1,0 +1,184 @@
+{
+  "scenario": {
+    "id": "com-cond-extend-lapsed-quotes",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "Any quotes that ran out before the customer got back to us — give them two more weeks from today. Leave everything else alone."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action quotes.search_quotes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action quotes.set_quote_expiry",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params quotes.set_quote_expiry",
+        "pass": true,
+        "detail": "{\"expiresAt\":\"2026-11-18\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "41f26f2b-2593-471a-89d4-f664d4fe85d1",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Any quotes that ran out before the customer got back to us — give them two more weeks from today. Leave everything else alone.",
+      "ttfurMs": 1201,
+      "ttftTextMs": 1201,
+      "firstActionMs": 2703,
+      "e2eMs": 9023,
+      "llmCalls": [
+        {
+          "ms": 2699,
+          "ttftMs": 1198,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 215,
+            "cacheRead": 5235,
+            "cacheWrite": 2831
+          },
+          "costUSD": 0.020565
+        },
+        {
+          "ms": 3273,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 270,
+            "cacheRead": 8066,
+            "cacheWrite": 703
+          },
+          "costUSD": 0.0121494
+        },
+        {
+          "ms": 3044,
+          "ttftMs": 3034,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 249,
+            "cacheRead": 8769,
+            "cacheWrite": 727
+          },
+          "costUSD": 0.0121306
+        }
+      ],
+      "actions": [
+        {
+          "action": "quotes.search_quotes",
+          "input": {
+            "status": "expired",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.09,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.search_quotes",
+          "input": {
+            "status": "sent",
+            "expiresAtBefore": "2026-11-04",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.08,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.set_quote_expiry",
+          "input": {
+            "id": "quo_005",
+            "expiresAt": "2026-11-18"
+          },
+          "ok": true,
+          "ms": 1.75,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.set_quote_expiry",
+          "input": {
+            "id": "quo_004",
+            "expiresAt": "2026-11-18"
+          },
+          "ok": true,
+          "ms": 1.8,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 734,
+        "cache_creation_input_tokens": 4261,
+        "cache_read_input_tokens": 22070
+      },
+      "costUSD": 0.044845,
+      "retries": 0,
+      "retrieved": [
+        "quotes.search_quotes",
+        "communities.leave_community",
+        "refunds.create_refund_request",
+        "templates.duplicate_template",
+        "memberships.grant_membership",
+        "orders.add_order_line_item",
+        "enrollments.enroll_learner",
+        "companies.merge_companies",
+        "contacts.add_contact_relationship",
+        "leads.assign_lead_owner",
+        "quotes.record_quote_acceptance",
+        "reviews.create_review_request",
+        "quotes.create_quote",
+        "quotes.send_quote",
+        "quotes.get_quote",
+        "quotes.update_quote_line_item",
+        "refunds.execute_refund",
+        "reports.schedule_report",
+        "contacts.search_contacts",
+        "opportunities.set_expected_close_date",
+        "tasks.create_task",
+        "reviews.list_review_requests",
+        "reviews.search_reviews",
+        "reports.set_report_grouping"
+      ],
+      "status": "completed",
+      "finalText": "I found two quotes that ran out before the customer replied. Both now expire on **2026-11-18**, two weeks from today.\n\n| Quote | Title | Contact | Old expiry | New expiry | Status now |\n|---|---|---|---|---|---|\n| Q-1005 (quo_005) | Print campaign refresh ($1,200) | con_018 | 2026-09-20 | 2026-11-18 | went from expired back to sent |\n| Q-1004 (quo_004) | Social media starter ($1,497) | con_013 | 2026-10-25 | 2026-11-18 | sent (its date had passed, but it was never marked expired) |\n\nI didn't change any other quotes. I didn't email the customers either, so they haven't been told about the new dates.",
+      "progress": [],
+      "retrievalMs": 2.98,
+      "calls": 3
+    }
+  ]
+}

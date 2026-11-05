@@ -1,0 +1,103 @@
+{
+  "scenario": {
+    "id": "sch-unsupported-google-calendar-sync",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Hook the Sales Discovery Call calendar up to my Google Calendar so new bookings show up on my phone."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|unable|not able|couldn't|could not|don't have|do not have|not support|isn't supported|no (action|capability|way|integration))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "53097e8a-d7d6-436b-a709-e1793a2c2c95",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Hook the Sales Discovery Call calendar up to my Google Calendar so new bookings show up on my phone.",
+      "ttfurMs": 2244,
+      "ttftTextMs": 2244,
+      "firstActionMs": null,
+      "e2eMs": 5421,
+      "llmCalls": [
+        {
+          "ms": 5420,
+          "ttftMs": 2243,
+          "stop": "end_turn",
+          "usage": {
+            "input": 4,
+            "output": 379,
+            "cacheRead": 5235,
+            "cacheWrite": 3216
+          },
+          "costUSD": 0.02577
+        }
+      ],
+      "actions": [],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 379,
+        "cache_creation_input_tokens": 3216,
+        "cache_read_input_tokens": 5235
+      },
+      "costUSD": 0.02577,
+      "retries": 0,
+      "retrieved": [
+        "calendars.create_calendar",
+        "booking_pages.list_booking_pages",
+        "calendars.set_appointment_duration",
+        "calendars.list_calendars",
+        "appointments.create_appointment",
+        "appointments.search_appointments",
+        "calendars.archive_calendar",
+        "appointments.mark_no_show",
+        "listings.create_listing",
+        "appointments.assign_appointment_host",
+        "appointments.reschedule_appointment",
+        "appointments.cancel_appointment",
+        "availability.set_min_notice",
+        "calendars.set_booking_buffer",
+        "calendars.get_calendar_settings",
+        "booking_pages.create_booking_page",
+        "booking_pages.unpublish_booking_page",
+        "reports.create_report",
+        "booking_pages.link_calendar_to_booking_page",
+        "booking_pages.publish_booking_page",
+        "tasks.create_task",
+        "leads.create_lead",
+        "booking_pages.set_booking_redirect_url",
+        "listings.publish_listing"
+      ],
+      "status": "completed",
+      "finalText": "I can't set this up for you. None of the platform actions I have can connect a calendar to Google Calendar or any other outside calendar, so I haven't changed anything on the Sales Discovery Call calendar.\n\n**Other ways to get new bookings on your phone:**\n- **Email or text alerts:** I can build an automation that starts whenever someone books on Sales Discovery Call. It would email or text you the booking details, which you'd see on your phone. This needs your email or mobile number, and I'd only build it if you ask.\n- **Checking bookings when you need them:** I can pull up upcoming appointments on that calendar whenever you ask, for example \"what's booked for this week?\"\n\nTo connect to Google Calendar itself, you'd need to use an integrations or settings screen outside the actions I can run, if your account has one.\n\nDo you want me to set up the email or text alerts?",
+      "progress": [],
+      "retrievalMs": 1.15,
+      "calls": 1
+    }
+  ]
+}

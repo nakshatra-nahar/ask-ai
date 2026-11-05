@@ -1,0 +1,178 @@
+{
+  "scenario": {
+    "id": "crm-direct-deal-stage",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Grace Nguyen got her proposal today — move her deal to Proposal Sent please"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action opportunities.move_opportunity_to_stage",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params opportunities.move_opportunity_to_stage",
+        "pass": true,
+        "detail": "{\"id\":\"opp_005\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "9e986147-215c-4604-9e00-94f07eda915b",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Grace Nguyen got her proposal today — move her deal to Proposal Sent please",
+      "ttfurMs": 1201,
+      "ttftTextMs": 1201,
+      "firstActionMs": 2206,
+      "e2eMs": 7938,
+      "llmCalls": [
+        {
+          "ms": 2201,
+          "ttftMs": 1196,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 119,
+            "cacheRead": 5235,
+            "cacheWrite": 2871
+          },
+          "costUSD": 0.018845
+        },
+        {
+          "ms": 1559,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 90,
+            "cacheRead": 8106,
+            "cacheWrite": 318
+          },
+          "costUSD": 0.006640399999999999
+        },
+        {
+          "ms": 1728,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 108,
+            "cacheRead": 8424,
+            "cacheWrite": 257
+          },
+          "costUSD": 0.006822600000000001
+        },
+        {
+          "ms": 2437,
+          "ttftMs": 2434,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 117,
+            "cacheRead": 8681,
+            "cacheWrite": 318
+          },
+          "costUSD": 0.007410399999999999
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Grace Nguyen"
+          },
+          "ok": true,
+          "ms": 0.37,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.search_opportunities",
+          "input": {
+            "contactId": "con_013"
+          },
+          "ok": true,
+          "ms": 1.42,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.move_opportunity_to_stage",
+          "input": {
+            "id": "opp_005",
+            "stageId": "Proposal Sent"
+          },
+          "ok": true,
+          "ms": 5.94,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 434,
+        "cache_creation_input_tokens": 3764,
+        "cache_read_input_tokens": 30446
+      },
+      "costUSD": 0.039718,
+      "retries": 0,
+      "retrieved": [
+        "opportunities.move_opportunity_to_stage",
+        "quotes.record_quote_acceptance",
+        "opportunities.set_expected_close_date",
+        "quotes.send_quote",
+        "quotes.create_quote",
+        "opportunities.update_opportunity_value",
+        "opportunities.mark_opportunity_won",
+        "opportunities.mark_opportunity_lost",
+        "opportunities.create_opportunity",
+        "quotes.set_quote_expiry",
+        "leads.convert_lead",
+        "pipelines.remove_pipeline_stage",
+        "pipelines.create_pipeline",
+        "lessons.move_lesson",
+        "media.move_media",
+        "notes.attach_note",
+        "quotes.search_quotes",
+        "appointments.reschedule_appointment",
+        "reports.create_report",
+        "sms.search_sms_messages",
+        "email.search_email_messages",
+        "quotes.convert_quote_to_invoice",
+        "notes.create_note",
+        "email.cancel_scheduled_email"
+      ],
+      "status": "completed",
+      "finalText": "I moved Grace Nguyen's deal, **Grace Nguyen - SEO Retainer** (opp_005), to **Proposal Sent**. It came from stage stg_003.\n\n- Value: $6,200 USD, with a 60% chance of closing at this stage\n- Expected close date: 2026-11-25 (no change)\n- The deal is still open",
+      "progress": [],
+      "retrievalMs": 4.11,
+      "calls": 4
+    }
+  ]
+}

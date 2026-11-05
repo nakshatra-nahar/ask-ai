@@ -1,0 +1,121 @@
+{
+  "scenario": {
+    "id": "crm-unsupported-linkedin-import",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Pull everyone who works at Harbor Auto Repair off LinkedIn and add them as contacts under that company."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|couldn't|could not|unable|not able|don't have|do not have|not support|isn't supported|no (action|capability|integration|way))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "be90cac3-2630-40f9-8cf7-5913603bc79a",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Pull everyone who works at Harbor Auto Repair off LinkedIn and add them as contacts under that company.",
+      "ttfurMs": 2699,
+      "ttftTextMs": 2699,
+      "firstActionMs": 2700,
+      "e2eMs": 10617,
+      "llmCalls": [
+        {
+          "ms": 2700,
+          "ttftMs": 2699,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 140,
+            "cacheRead": 112993,
+            "cacheWrite": 109
+          },
+          "costUSD": 0.0485582
+        },
+        {
+          "ms": 2262,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 78,
+            "cacheRead": 113102,
+            "cacheWrite": 298
+          },
+          "costUSD": 0.0482988
+        },
+        {
+          "ms": 5654,
+          "ttftMs": 5647,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 300,
+            "cacheRead": 113400,
+            "cacheWrite": 521
+          },
+          "costUSD": 0.053973
+        }
+      ],
+      "actions": [
+        {
+          "action": "companies.search_companies",
+          "input": {
+            "query": "Harbor Auto Repair"
+          },
+          "ok": true,
+          "ms": 0.19,
+          "confirmed": false
+        },
+        {
+          "action": "companies.list_company_contacts",
+          "input": {
+            "id": "co_008",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.78,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 518,
+        "cache_creation_input_tokens": 928,
+        "cache_read_input_tokens": 339495
+      },
+      "costUSD": 0.15083,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I can't do the LinkedIn part. This platform has no LinkedIn connection or any way to look people up on the web, so I can't get Harbor Auto Repair's staff list from there. I haven't created any contacts.\n\n**What's in the CRM now:** Harbor Auto Repair (co_008, harborautorepair.com, Portland, OR) has 2 contacts linked to it:\n- Michael Müller (con_008), michael.muller3@example.com\n- Isabel Smith (con_029), isabel.smith24@example.com\n\n**How we can still add the rest:** paste the names you have from LinkedIn, plus email, phone and job title if you have them. I'll create each person as a contact under co_008. Before creating anyone, I'll check for duplicates by email, so Michael and Isabel won't be added twice. Tell me if you also want an owner, a source (for example \"linkedin\") or a tag set on the new contacts.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

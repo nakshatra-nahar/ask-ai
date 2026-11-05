@@ -1,0 +1,199 @@
+{
+  "scenario": {
+    "id": "com-ambiguous-noah-invoice",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Send Noah his invoice."
+      }
+    ]
+  },
+  "check": {
+    "pass": false,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": false,
+        "detail": "invoices.issue_invoice"
+      },
+      {
+        "name": "asks clarification",
+        "pass": false,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 1
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "69cb441e-d3b4-402a-993d-0dadbf0867fb",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Send Noah his invoice.",
+      "ttfurMs": 1615,
+      "ttftTextMs": 1615,
+      "firstActionMs": 2348,
+      "e2eMs": 9154,
+      "llmCalls": [
+        {
+          "ms": 2348,
+          "ttftMs": 1615,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 70,
+            "cacheRead": 112993,
+            "cacheWrite": 82
+          },
+          "costUSD": 0.0470232
+        },
+        {
+          "ms": 3767,
+          "ttftMs": 2872,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 182,
+            "cacheRead": 113075,
+            "cacheWrite": 660
+          },
+          "costUSD": 0.052178
+        },
+        {
+          "ms": 3036,
+          "ttftMs": 2838,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 201,
+            "cacheRead": 113735,
+            "cacheWrite": 1049
+          },
+          "costUSD": 0.054767
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Noah"
+          },
+          "ok": true,
+          "ms": 0.23,
+          "confirmed": false
+        },
+        {
+          "action": "invoices.search_invoices",
+          "input": {
+            "contactId": "con_018"
+          },
+          "ok": true,
+          "ms": 1.64,
+          "confirmed": false
+        },
+        {
+          "action": "invoices.search_invoices",
+          "input": {
+            "contactId": "con_047"
+          },
+          "ok": true,
+          "ms": 0.07,
+          "confirmed": false
+        },
+        {
+          "action": "invoices.search_invoices",
+          "input": {
+            "contactId": "con_077"
+          },
+          "ok": true,
+          "ms": 0.05,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 453,
+        "cache_creation_input_tokens": 1791,
+        "cache_read_input_tokens": 339803
+      },
+      "costUSD": 0.153968,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01ATE879WCGPxmKiFUrmTabt",
+          "action": "invoices.issue_invoice",
+          "name": "Issue invoice",
+          "risk": "external",
+          "input": {
+            "id": "inv_026"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "69cb441e-d3b4-402a-993d-0dadbf0867fb",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 3909,
+      "firstActionMs": 6,
+      "e2eMs": 3915,
+      "llmCalls": [
+        {
+          "ms": 3909,
+          "ttftMs": 3902,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 270,
+            "cacheRead": 114784,
+            "cacheWrite": 480
+          },
+          "costUSD": 0.05372160000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "invoices.issue_invoice",
+          "input": {
+            "id": "inv_026"
+          },
+          "ok": true,
+          "ms": 6.33,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 270,
+        "cache_creation_input_tokens": 480,
+        "cache_read_input_tokens": 114784
+      },
+      "costUSD": 0.053722,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I sent invoice **INV-1026** (inv_026) to **Noah Singh** (con_018) at noah.singh13@example.com.\n\n- Dental cleaning × 1: **$600.00 USD**\n- Issued 2026-11-04, due **2026-12-04**\n- Status: sent (email message msg_130)\n\nI picked Noah Singh because none of the other Noahs in your contacts (Noah Silva, con_047, and Noah Rossi, con_077) have invoices. INV-1026 was his only invoice still in draft.\n\n**Also worth knowing:** Noah Singh has another invoice, **INV-1003** (inv_003). It's for $450 in membership fees, was sent earlier and is **16 days overdue**, and no reminders have gone out for it. I can send him a payment reminder if you'd like.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

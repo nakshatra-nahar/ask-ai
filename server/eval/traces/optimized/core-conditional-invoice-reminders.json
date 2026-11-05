@@ -1,0 +1,247 @@
+{
+  "scenario": {
+    "id": "core-conditional-invoice-reminders",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "For unpaid invoices overdue by more than 15 days, draft reminders, but skip customers who already received one this week."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action invoices.list_overdue_invoices",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action email.draft_email|sms.draft_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid invoices.send_invoice_reminder",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid email.send_email",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid sms.send_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "e5da2395-6900-4ee2-88b7-246662463fcc",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "For unpaid invoices overdue by more than 15 days, draft reminders, but skip customers who already received one this week.",
+      "ttfurMs": 1131,
+      "ttftTextMs": 1131,
+      "firstActionMs": 2219,
+      "e2eMs": 19023,
+      "llmCalls": [
+        {
+          "ms": 2215,
+          "ttftMs": 1128,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 129,
+            "cacheRead": 5235,
+            "cacheWrite": 3057
+          },
+          "costUSD": 0.019975
+        },
+        {
+          "ms": 10721,
+          "ttftMs": 1762,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 1454,
+            "cacheRead": 8292,
+            "cacheWrite": 927
+          },
+          "costUSD": 0.037039800000000005
+        },
+        {
+          "ms": 6062,
+          "ttftMs": 6060,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 501,
+            "cacheRead": 9219,
+            "cacheWrite": 3097
+          },
+          "costUSD": 0.0292006
+        }
+      ],
+      "actions": [
+        {
+          "action": "invoices.list_overdue_invoices",
+          "input": {
+            "minDaysOverdue": 16,
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.23,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_067",
+            "subject": "Payment reminder: Invoice INV-1010",
+            "body": "Hi Michael,\n\nThis is a friendly reminder that invoice INV-1010 (due 2026-09-05) has an outstanding balance of $1,310.00 USD and is now 60 days overdue. Please arrange payment at your earliest convenience.\n\nThank you!",
+            "relatedType": "invoices",
+            "relatedId": "inv_010",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 8.78,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_060",
+            "subject": "Payment reminder: Invoice INV-1009",
+            "body": "Hi Amara,\n\nThis is a friendly reminder that invoice INV-1009 (due 2026-09-20) has an outstanding balance of $600.00 USD and is now 45 days overdue. Please arrange payment at your earliest convenience.\n\nThank you!",
+            "relatedType": "invoices",
+            "relatedId": "inv_009",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 4.31,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_053",
+            "subject": "Payment reminder: Invoice INV-1008",
+            "body": "Hi Ethan,\n\nThis is a friendly reminder that invoice INV-1008 (due 2026-09-30) has an outstanding balance of $1,470.00 USD and is now 35 days overdue. Please arrange payment at your earliest convenience.\n\nThank you!",
+            "relatedType": "invoices",
+            "relatedId": "inv_008",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 3.18,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_039",
+            "subject": "Payment reminder: Invoice INV-1006",
+            "body": "Hi David,\n\nThis is a friendly reminder that invoice INV-1006 (due 2026-10-10) has an outstanding balance of $900.00 USD and is now 25 days overdue. Please arrange payment at your earliest convenience.\n\nThank you!",
+            "relatedType": "invoices",
+            "relatedId": "inv_006",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 1.73,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_032",
+            "subject": "Payment reminder: Invoice INV-1005",
+            "body": "Hi Jack,\n\nThank you for your partial payment. This is a friendly reminder that invoice INV-1005 (due 2026-10-15) still has a remaining balance of $1,100.00 USD and is now 20 days overdue. Please arrange payment at your earliest convenience.\n\nThank you!",
+            "relatedType": "invoices",
+            "relatedId": "inv_005",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 1.78,
+          "confirmed": false
+        },
+        {
+          "action": "email.draft_email",
+          "input": {
+            "contactId": "con_018",
+            "subject": "Payment reminder: Invoice INV-1003",
+            "body": "Hi Noah,\n\nThis is a friendly reminder that invoice INV-1003 (due 2026-10-19) has an outstanding balance of $450.00 USD and is now 16 days overdue. Please arrange payment at your earliest convenience.\n\nThank you!",
+            "relatedType": "invoices",
+            "relatedId": "inv_003",
+            "purpose": "invoice_reminder"
+          },
+          "ok": true,
+          "ms": 1.57,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 2084,
+        "cache_creation_input_tokens": 7081,
+        "cache_read_input_tokens": 22746
+      },
+      "costUSD": 0.086215,
+      "retries": 0,
+      "retrieved": [
+        "invoices.list_overdue_invoices",
+        "invoices.search_invoices",
+        "invoices.send_invoice_reminder",
+        "reviews.get_review",
+        "invoices.get_invoice",
+        "email.send_email",
+        "reviews.search_reviews",
+        "payments.create_payment_request",
+        "invoices.void_invoice",
+        "email.search_email_messages",
+        "reports.schedule_report",
+        "email.draft_email",
+        "reviews.cancel_review_request",
+        "invoices.issue_invoice",
+        "refunds.check_refundable_balance",
+        "quotes.convert_quote_to_invoice",
+        "tasks.create_task",
+        "payments.cancel_payment_request",
+        "reports.set_report_grouping",
+        "quotes.send_quote",
+        "surveys.set_question_branching",
+        "sms.send_sms",
+        "email.receive_inbound_email",
+        "sms.receive_inbound_sms"
+      ],
+      "status": "completed",
+      "finalText": "I saved 6 reminder emails as drafts. None have been sent. They cover every unpaid invoice more than 15 days overdue, except for customers who already got a reminder this week.\n\n| Draft | Invoice | Customer | Balance | Days overdue |\n|---|---|---|---|---|\n| msg_130 | INV-1010 (inv_010) | Michael Johnson | $1,310 | 60 |\n| msg_131 | INV-1009 (inv_009) | Amara Müller | $600 | 45 |\n| msg_132 | INV-1008 (inv_008) | Ethan Lee | $1,470 | 35 |\n| msg_133 | INV-1006 (inv_006) | David Okafor | $900 | 25 |\n| msg_134 | INV-1005 (inv_005) | Jack Rossi | $1,100 left after a partial payment | 20 |\n| msg_135 | INV-1003 (inv_003) | Noah Singh | $450 | 16 |\n\nAmara Müller and David Okafor last got a reminder on 28 Oct. That was last week, so I included them.\n\n## Skipped (already reminded this week, on 2 Nov)\n- **Fatima Martin**: INV-1007 (inv_007), $1,420, 31 days overdue\n- **Nina Chen**: INV-1004 (inv_004), $1,200, 18 days overdue\n\nI can send these drafts whenever you're ready.",
+      "progress": [],
+      "retrievalMs": 2.83,
+      "calls": 3
+    }
+  ]
+}

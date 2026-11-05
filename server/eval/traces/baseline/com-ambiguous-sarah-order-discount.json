@@ -1,0 +1,180 @@
+{
+  "scenario": {
+    "id": "com-ambiguous-sarah-order-discount",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Put the discount on Sarah's order."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "cd0e43a1-1b8a-4add-9ee0-96dd86690f72",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Put the discount on Sarah's order.",
+      "ttfurMs": 2505,
+      "ttftTextMs": 2505,
+      "firstActionMs": 3148,
+      "e2eMs": 13036,
+      "llmCalls": [
+        {
+          "ms": 3148,
+          "ttftMs": 2505,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 110,
+            "cacheRead": 112993,
+            "cacheWrite": 85
+          },
+          "costUSD": 0.047838200000000004
+        },
+        {
+          "ms": 2050,
+          "ttftMs": 1229,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 189,
+            "cacheRead": 113078,
+            "cacheWrite": 808
+          },
+          "costUSD": 0.05305920000000001
+        },
+        {
+          "ms": 1800,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 125,
+            "cacheRead": 113886,
+            "cacheWrite": 1365
+          },
+          "costUSD": 0.0548874
+        },
+        {
+          "ms": 1662,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 120,
+            "cacheRead": 115251,
+            "cacheWrite": 1075
+          },
+          "costUSD": 0.053883400000000005
+        },
+        {
+          "ms": 4373,
+          "ttftMs": 4369,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 413,
+            "cacheRead": 116326,
+            "cacheWrite": 371
+          },
+          "costUSD": 0.0566534
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah"
+          },
+          "ok": true,
+          "ms": 0.35,
+          "confirmed": false
+        },
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "contactId": "con_001"
+          },
+          "ok": true,
+          "ms": 1.1,
+          "confirmed": false
+        },
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "contactId": "con_002"
+          },
+          "ok": true,
+          "ms": 0.07,
+          "confirmed": false
+        },
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "contactId": "con_064"
+          },
+          "ok": true,
+          "ms": 0.03,
+          "confirmed": false
+        },
+        {
+          "action": "coupons.search_coupons",
+          "input": {
+            "status": "active"
+          },
+          "ok": true,
+          "ms": 0.71,
+          "confirmed": false
+        },
+        {
+          "action": "notes.search_notes",
+          "input": {
+            "query": "discount"
+          },
+          "ok": true,
+          "ms": 1.08,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 957,
+        "cache_creation_input_tokens": 3704,
+        "cache_read_input_tokens": 571534
+      },
+      "costUSD": 0.266322,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I didn't apply anything yet. Two different Sarahs have draft orders, and I don't know which discount you mean.\n\n**Which order?**\n- **Sarah Chen**: ORD-1006 (`ord_006`). It's a draft with 2 Logo T-Shirts (S) and 1 Ceramic Coffee Mug, for a subtotal of $65.\n- **Sarah Johnson**: ORD-1012 (`ord_012`). It's a draft created today, but it's empty, so a discount wouldn't do anything until items are added.\n- Sarah Walker has no orders.\n\n**Which discount?** These coupons can be used today:\n- **WELCOME10**: 10% off everything.\n- **MERCH5**: $5 off branded merch. This one fits Sarah Chen's T-shirts and mug.\n- **SEO15**: 15% off, but only on the SEO retainer.\n\nThese won't work right now: BLACKFRIDAY25 (only valid Nov 27–30), SUMMER20 (expired Aug 31) and LAUNCH50 (all 25 uses are gone).\n\nWhich order and which code should I use? For example: \"MERCH5 on Sarah Chen's ORD-1006.\"",
+      "progress": [],
+      "calls": 5
+    }
+  ]
+}

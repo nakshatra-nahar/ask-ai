@@ -1,0 +1,130 @@
+{
+  "scenario": {
+    "id": "sch-failure-summer-shred-relaunch",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "We're running the Summer Shred Challenge again — put that funnel back live."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "reply /(no landing page|not linked|isn't linked|aren't linked|missing|not ready|need(s)? (a )?(landing )?page|couldn't|could not|can't|cannot|unable|failed)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "8d4ab12e-de20-4f3b-b1a8-e60ce7ddc73c",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "We're running the Summer Shred Challenge again — put that funnel back live.",
+      "ttfurMs": 724,
+      "ttftTextMs": 724,
+      "firstActionMs": 1463,
+      "e2eMs": 12419,
+      "llmCalls": [
+        {
+          "ms": 1462,
+          "ttftMs": 724,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 82,
+            "cacheRead": 112993,
+            "cacheWrite": 96
+          },
+          "costUSD": 0.047333200000000006
+        },
+        {
+          "ms": 2099,
+          "ttftMs": 1348,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 200,
+            "cacheRead": 113089,
+            "cacheWrite": 546
+          },
+          "costUSD": 0.05197360000000001
+        },
+        {
+          "ms": 8857,
+          "ttftMs": 8853,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 785,
+            "cacheRead": 113635,
+            "cacheWrite": 1849
+          },
+          "costUSD": 0.070407
+        }
+      ],
+      "actions": [
+        {
+          "action": "funnels.list_funnels",
+          "input": {
+            "query": "Summer Shred"
+          },
+          "ok": true,
+          "ms": 0.21,
+          "confirmed": false
+        },
+        {
+          "action": "landing_pages.get_landing_page",
+          "input": {
+            "id": "lp_010"
+          },
+          "ok": true,
+          "ms": 0.11,
+          "confirmed": false
+        },
+        {
+          "action": "landing_pages.search_landing_pages",
+          "input": {
+            "websiteId": "web_002",
+            "limit": 50
+          },
+          "ok": true,
+          "ms": 0.73,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 1067,
+        "cache_creation_input_tokens": 2491,
+        "cache_read_input_tokens": 339717
+      },
+      "costUSD": 0.169714,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I didn't republish the Summer Shred Challenge funnel (`fnl_004`) because it can't go live yet. A funnel only publishes when every step is linked to a published landing page, and this one isn't ready:\n\n| Step | Type | Landing page | Status |\n|---|---|---|---|\n| Challenge Signup (`fstp_010`) | sales | Summer Shred Signup (`lp_010`) | Unpublished; would need republishing |\n| Nutrition Add-on (`fstp_011`) | upsell | None linked | Blocking |\n| Welcome (`fstp_012`) | thank-you | None linked | Blocking |\n\nNone of the other landing pages on the site fit the upsell or welcome steps. The only others are the meal plan opt-in and download pages and a free trial class signup.\n\n**Choose one to continue:**\n1. **Keep all three steps.** I create a \"Nutrition Add-on\" page and a \"Welcome\" page, publish them, link them to their steps, republish `lp_010`, then publish the funnel. Send me the headline and copy you want for each page, or I can write simple versions from the challenge details ($149 for 6 weeks, 3 coaches).\n2. **Drop the steps that have no page.** I can remove the Nutrition Add-on step and possibly the Welcome step, then republish `lp_010` and the funnel. That means losing the upsell, which brought in 41 conversions last run.\n\nThe old copy also says \"Your strongest summer\" and the description says the challenge ended in September. Do you want to update that text before it goes live?",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

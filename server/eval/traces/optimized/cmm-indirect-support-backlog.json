@@ -1,0 +1,220 @@
+{
+  "scenario": {
+    "id": "cmm-indirect-support-backlog",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "Support is a mess. Tickets are blowing through SLA and half of them don't even have anyone on them."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tickets.assign_ticket",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "502019c8-a1bd-4919-bba3-5ac04e402e6f",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Support is a mess. Tickets are blowing through SLA and half of them don't even have anyone on them.",
+      "ttfurMs": 714,
+      "ttftTextMs": 714,
+      "firstActionMs": 2580,
+      "e2eMs": 16972,
+      "llmCalls": [
+        {
+          "ms": 2576,
+          "ttftMs": 710,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 279,
+            "cacheRead": 5235,
+            "cacheWrite": 2894
+          },
+          "costUSD": 0.02216
+        },
+        {
+          "ms": 6897,
+          "ttftMs": 3234,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 858,
+            "cacheRead": 8129,
+            "cacheWrite": 3331
+          },
+          "costUSD": 0.0370746
+        },
+        {
+          "ms": 7473,
+          "ttftMs": 7470,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 773,
+            "cacheRead": 11460,
+            "cacheWrite": 1832
+          },
+          "costUSD": 0.029212
+        }
+      ],
+      "actions": [
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "breached": true,
+            "limit": 50
+          },
+          "ok": true,
+          "ms": 0.37,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.search_tickets",
+          "input": {
+            "unassigned": true,
+            "limit": 50
+          },
+          "ok": true,
+          "ms": 0.1,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 0.08,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_001",
+            "ownerId": "usr_007"
+          },
+          "ok": true,
+          "ms": 6.29,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_015",
+            "ownerId": "usr_006"
+          },
+          "ok": true,
+          "ms": 4.29,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_003",
+            "ownerId": "usr_007"
+          },
+          "ok": true,
+          "ms": 3.82,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_019",
+            "ownerId": "usr_006"
+          },
+          "ok": true,
+          "ms": 3.2,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_004",
+            "ownerId": "usr_007"
+          },
+          "ok": true,
+          "ms": 1.99,
+          "confirmed": false
+        },
+        {
+          "action": "tickets.assign_ticket",
+          "input": {
+            "id": "tkt_008",
+            "ownerId": "usr_007"
+          },
+          "ok": true,
+          "ms": 1.47,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 1910,
+        "cache_creation_input_tokens": 8057,
+        "cache_read_input_tokens": 24824
+      },
+      "costUSD": 0.088447,
+      "retries": 0,
+      "retrieved": [
+        "tickets.get_ticket_sla",
+        "tickets.search_tickets",
+        "tickets.create_ticket",
+        "events.cancel_registration",
+        "tickets.assign_ticket",
+        "appointments.mark_no_show",
+        "blogs.search_blog_posts",
+        "tickets.set_ticket_priority",
+        "events.get_event",
+        "triggers.list_event_triggers",
+        "tickets.get_ticket",
+        "triggers.set_trigger_event_type",
+        "events.search_events",
+        "blogs.get_blog_post",
+        "blogs.create_blog_post",
+        "blogs.publish_post",
+        "blogs.update_blog_post",
+        "blogs.unpublish_post",
+        "conversations.list_unanswered_conversations",
+        "events.update_event",
+        "triggers.create_event_trigger",
+        "events.set_event_capacity",
+        "triggers.test_trigger",
+        "events.register_attendee"
+      ],
+      "status": "completed",
+      "finalText": "I assigned all 6 tickets that had no owner, so every ticket in the queue now has someone on it. Sam Taylor (usr_006) and Riley Kim (usr_007) are your only two active support agents. Sam already had 2 open past-deadline tickets, so I gave Riley more of the new work. Riley now has 4 tickets and Sam has 4.\n\n**New assignments** (all moved from new to open)\n| Ticket | Subject | Priority | Deadline (UTC) | Owner |\n|---|---|---|---|---|\n| tkt_001 | Payment page returns 500 error | Urgent | Nov 4 08:00 — **past** | Riley Kim |\n| tkt_015 | Coupon code not applying | Normal | Nov 4 08:00 — **past** | Sam Taylor |\n| tkt_003 | Double charged for October invoice | High | Nov 4 15:00 | Riley Kim |\n| tkt_019 | Website form not submitting | High | Nov 4 17:00 | Sam Taylor |\n| tkt_004 | Cannot reset password | Normal | Nov 5 08:00 | Riley Kim |\n| tkt_008 | Feature request: dark mode | Low | Nov 5 08:00 | Riley Kim |\n\n**Open tickets already past their deadline** (Sam already had these)\n- tkt_002, \"Booking widget down on website\": urgent, deadline was Nov 4 05:00. Notes say it was escalated to engineering.\n- tkt_007, \"Calendar sync with Google failing\": high, deadline was Nov 4 06:00. Also escalated to engineering.\n\nOne more ticket, tkt_014, missed its deadline but is already resolved, so I left it alone.\n\n**Where things stand**\n- Four open tickets are past their deadline: tkt_001, tkt_015, tkt_002 and tkt_007. tkt_001 (the urgent payment page error) still has no reply, so it should be handled first.\n- tkt_003 (the double charge) is due at 15:00 today. If you'd rather Jamie Fox from billing handle it, I can reassign it.\n\nI could also set up a trigger and workflow to assign new tickets automatically, but the trigger events available don't include \"ticket created.\" So for now, assigning new tickets is still a manual job.",
+      "progress": [],
+      "retrievalMs": 3.73,
+      "calls": 3
+    }
+  ]
+}

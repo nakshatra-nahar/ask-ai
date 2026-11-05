@@ -1,0 +1,658 @@
+{
+  "scenario": {
+    "id": "core-indirect-follow-up-leads",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "I keep forgetting to follow up with new leads. Help me stay on top of them."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tasks.create_task|workflows.create_workflow",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "8739e6a0-a4c5-4d76-a90f-cc5f17c9646f",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "I keep forgetting to follow up with new leads. Help me stay on top of them.",
+      "ttfurMs": 1450,
+      "ttftTextMs": 1450,
+      "firstActionMs": 2389,
+      "e2eMs": 20931,
+      "llmCalls": [
+        {
+          "ms": 2374,
+          "ttftMs": 1438,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 107,
+            "cacheRead": 5235,
+            "cacheWrite": 2706
+          },
+          "costUSD": 0.01778
+        },
+        {
+          "ms": 18541,
+          "ttftMs": 3444,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 2546,
+            "cacheRead": 7941,
+            "cacheWrite": 1910
+          },
+          "costUSD": 0.0636544
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "status": "new",
+            "limit": 50
+          },
+          "ok": true,
+          "ms": 2.79,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 2653,
+        "cache_creation_input_tokens": 4616,
+        "cache_read_input_tokens": 13176
+      },
+      "costUSD": 0.081434,
+      "retries": 0,
+      "retrieved": [
+        "tasks.create_task",
+        "leads.search_leads",
+        "notes.pin_note",
+        "leads.create_lead",
+        "communities.pin_post",
+        "tasks.reopen_task",
+        "communities.leave_community",
+        "tasks.cancel_task",
+        "custom_fields.rename_field_label",
+        "tasks.get_task",
+        "tasks.complete_task",
+        "tasks.update_task",
+        "forms.create_form",
+        "media.rename_media",
+        "funnels.create_funnel",
+        "opportunities.create_opportunity",
+        "contacts.merge_contacts",
+        "forms.set_form_validation_rules",
+        "custom_fields.create_custom_field",
+        "triggers.create_event_trigger",
+        "surveys.create_survey",
+        "funnels.reorder_funnel_steps",
+        "leads.update_lead",
+        "leads.convert_lead"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 11.19,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_016BHWiciMKR9GsWUTFSTnf6",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: James Patel",
+            "contactId": "con_035",
+            "recordType": "leads",
+            "recordId": "ld_017",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01XbJnm7cWmvxwTzBVseQW4P",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Michael Chen",
+            "contactId": "con_037",
+            "recordType": "leads",
+            "recordId": "ld_018",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_019NKz7m7qKVU6SoTmz7CDGr",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Mei Rossi",
+            "contactId": "con_044",
+            "recordType": "leads",
+            "recordId": "ld_021",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_018zXfBPBLYHc9UqGwVppCp1",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: David Okafor",
+            "contactId": "con_039",
+            "recordType": "leads",
+            "recordId": "ld_019",
+            "ownerId": "usr_002",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01CFKmfn5ULQY9tKt6fq5MUA",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Mike Smith",
+            "contactId": "con_004",
+            "recordType": "leads",
+            "recordId": "ld_002",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01V9SrG9uogVGNJdSjBRC4MD",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Ravi Haddad",
+            "contactId": "con_020",
+            "recordType": "leads",
+            "recordId": "ld_009",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01Cj4L2fMZgt9Sam4rkB26ci",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: James Williams",
+            "contactId": "con_006",
+            "recordType": "leads",
+            "recordId": "ld_003",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01QHyhmJcQ8pgU4rGY1nWkUJ",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Jack Rossi",
+            "contactId": "con_032",
+            "recordType": "leads",
+            "recordId": "ld_015",
+            "ownerId": "usr_002",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01VkVAkPNFF6g1xEEAemRXML",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Sarah Chen",
+            "contactId": "con_002",
+            "recordType": "leads",
+            "recordId": "ld_001",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_016H8ryF1yWnCdnbQFRoeFy1",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Priya Okafor",
+            "contactId": "con_007",
+            "recordType": "leads",
+            "recordId": "ld_004",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01N58xmEN4uQPw1XF8pMUx8h",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Lucas Johnson",
+            "contactId": "con_022",
+            "recordType": "leads",
+            "recordId": "ld_010",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01Cri5CmDTzy1V9Wp4TF4n2v",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Aisha Kim",
+            "contactId": "con_011",
+            "recordType": "leads",
+            "recordId": "ld_005",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_01Gdo88DFNyJYojo2JPuqakj",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Zoe Patel",
+            "contactId": "con_023",
+            "recordType": "leads",
+            "recordId": "ld_011",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_01XsB5v2n3vzVkmKv4M3nh5T",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Olivia Walker",
+            "contactId": "con_019",
+            "recordType": "leads",
+            "recordId": "ld_008",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_01XZrepZK8a3X5KNmjbSh6Du",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Mei Silva",
+            "contactId": "con_015",
+            "recordType": "leads",
+            "recordId": "ld_045",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_012pGfmG9pWhLuNAPig8WdR8",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Tom Williams",
+            "contactId": "con_071",
+            "recordType": "leads",
+            "recordId": "ld_033",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_01PJP7BrYNNDwuNPtU6WZMYo",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Elena Smith",
+            "contactId": "con_009",
+            "recordType": "leads",
+            "recordId": "ld_043",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "8739e6a0-a4c5-4d76-a90f-cc5f17c9646f",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 3,
+      "ttftTextMs": 6905,
+      "firstActionMs": 3,
+      "e2eMs": 6907,
+      "llmCalls": [
+        {
+          "ms": 6872,
+          "ttftMs": 6870,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 730,
+            "cacheRead": 9851,
+            "cacheWrite": 4929
+          },
+          "costUSD": 0.0431934
+        }
+      ],
+      "actions": [
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: James Patel",
+            "contactId": "con_035",
+            "recordType": "leads",
+            "recordId": "ld_017",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 3,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Michael Chen",
+            "contactId": "con_037",
+            "recordType": "leads",
+            "recordId": "ld_018",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 2.03,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Mei Rossi",
+            "contactId": "con_044",
+            "recordType": "leads",
+            "recordId": "ld_021",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.94,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: David Okafor",
+            "contactId": "con_039",
+            "recordType": "leads",
+            "recordId": "ld_019",
+            "ownerId": "usr_002",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 2.19,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Mike Smith",
+            "contactId": "con_004",
+            "recordType": "leads",
+            "recordId": "ld_002",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.98,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Ravi Haddad",
+            "contactId": "con_020",
+            "recordType": "leads",
+            "recordId": "ld_009",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 2.14,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: James Williams",
+            "contactId": "con_006",
+            "recordType": "leads",
+            "recordId": "ld_003",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.94,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Jack Rossi",
+            "contactId": "con_032",
+            "recordType": "leads",
+            "recordId": "ld_015",
+            "ownerId": "usr_002",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 2,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Sarah Chen",
+            "contactId": "con_002",
+            "recordType": "leads",
+            "recordId": "ld_001",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.94,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Priya Okafor",
+            "contactId": "con_007",
+            "recordType": "leads",
+            "recordId": "ld_004",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 2,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Lucas Johnson",
+            "contactId": "con_022",
+            "recordType": "leads",
+            "recordId": "ld_010",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 2.14,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Aisha Kim",
+            "contactId": "con_011",
+            "recordType": "leads",
+            "recordId": "ld_005",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 2.19,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Zoe Patel",
+            "contactId": "con_023",
+            "recordType": "leads",
+            "recordId": "ld_011",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.91,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Olivia Walker",
+            "contactId": "con_019",
+            "recordType": "leads",
+            "recordId": "ld_008",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.95,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Mei Silva",
+            "contactId": "con_015",
+            "recordType": "leads",
+            "recordId": "ld_045",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.9,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Tom Williams",
+            "contactId": "con_071",
+            "recordType": "leads",
+            "recordId": "ld_033",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.84,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Elena Smith",
+            "contactId": "con_009",
+            "recordType": "leads",
+            "recordId": "ld_043",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-05",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.72,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 730,
+        "cache_creation_input_tokens": 4929,
+        "cache_read_input_tokens": 9851
+      },
+      "costUSD": 0.043193,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I created a follow-up task for each of your 17 leads that haven't been contacted yet. They're all due tomorrow (5 Nov). The 6 leads that have been waiting more than a week are marked high priority. If a lead already had an owner, the task went to that same person. The rest have no owner.\n\n**High priority (waiting more than a week)**\n| Lead | Task | Owner |\n|---|---|---|\n| Aisha Kim (ld_005) | tsk_042 | — |\n| Zoe Patel (ld_011) | tsk_043 | — |\n| Olivia Walker (ld_008) | tsk_044 | usr_005 |\n| Mei Silva (ld_045) | tsk_045 | — |\n| Tom Williams (ld_033), since 30 Sep | tsk_046 | — |\n| Elena Smith (ld_043), since 7 Sep | tsk_047 | usr_005 |\n\n**Medium priority**\n| Lead | Task | Owner |\n|---|---|---|\n| James Patel (ld_017) | tsk_031 | — |\n| Michael Chen (ld_018) | tsk_032 | — |\n| Mei Rossi (ld_021) | tsk_033 | — |\n| David Okafor (ld_019) | tsk_034 | usr_002 |\n| Mike Smith (ld_002) | tsk_035 | — |\n| Ravi Haddad (ld_009) | tsk_036 | — |\n| James Williams (ld_003) | tsk_037 | — |\n| Jack Rossi (ld_015) | tsk_038 | usr_002 |\n| Sarah Chen (ld_001) | tsk_039 | — |\n| Priya Okafor (ld_004) | tsk_040 | — |\n| Lucas Johnson (ld_010) | tsk_041 | — |\n\n**Next steps I can take:**\n- **Automatic follow-ups:** I can set up an automation so every new lead gets a follow-up task as soon as it comes in. That way you won't need to remember. I haven't set it up yet.\n- **Owners:** 12 of these leads don't have an owner yet. I can assign them and their tasks to you or a teammate.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

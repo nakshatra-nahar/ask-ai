@@ -1,0 +1,239 @@
+{
+  "scenario": {
+    "id": "com-indirect-check-for-overdue-invoice",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "Sarah Johnson just dropped off a check for her overdue invoice, check #2231."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action payments.record_payment",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params payments.record_payment",
+        "pass": true,
+        "detail": "{\"method\":\"check\",\"reference\":\"/2231/\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "0e5401bc-8d32-44d7-8001-4110fed7b1ab",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Sarah Johnson just dropped off a check for her overdue invoice, check #2231.",
+      "ttfurMs": 1146,
+      "ttftTextMs": 1146,
+      "firstActionMs": 2133,
+      "e2eMs": 8805,
+      "llmCalls": [
+        {
+          "ms": 2131,
+          "ttftMs": 1143,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 120,
+            "cacheRead": 5235,
+            "cacheWrite": 2412
+          },
+          "costUSD": 0.01657
+        },
+        {
+          "ms": 1667,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 92,
+            "cacheRead": 7647,
+            "cacheWrite": 373
+          },
+          "costUSD": 0.0067718000000000006
+        },
+        {
+          "ms": 2394,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 135,
+            "cacheRead": 8020,
+            "cacheWrite": 195
+          },
+          "costUSD": 0.006891
+        },
+        {
+          "ms": 2610,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 132,
+            "cacheRead": 8215,
+            "cacheWrite": 1076
+          },
+          "costUSD": 0.011314
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah Johnson"
+          },
+          "ok": true,
+          "ms": 0.16,
+          "confirmed": false
+        },
+        {
+          "action": "invoices.list_overdue_invoices",
+          "input": {
+            "contactId": "con_001"
+          },
+          "ok": true,
+          "ms": 1.02,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 479,
+        "cache_creation_input_tokens": 4056,
+        "cache_read_input_tokens": 29117
+      },
+      "costUSD": 0.041547,
+      "retries": 0,
+      "retrieved": [
+        "funnels.get_funnel_metrics",
+        "events.check_in_attendee",
+        "triggers.disable_trigger",
+        "memberships.check_member_access",
+        "invoices.get_invoice",
+        "refunds.check_refundable_balance",
+        "triggers.set_trigger_event_type",
+        "availability.check_scheduling_conflicts",
+        "tickets.get_ticket_sla",
+        "triggers.enable_trigger",
+        "triggers.get_trigger",
+        "invoices.list_overdue_invoices",
+        "triggers.bind_trigger_to_workflow",
+        "availability.add_date_override",
+        "workflows.validate_workflow",
+        "workflows.pause_workflow",
+        "triggers.list_event_triggers",
+        "appointments.cancel_appointment",
+        "conversations.assign_conversation_owner",
+        "invoices.issue_invoice",
+        "availability.block_time",
+        "payments.allocate_payment",
+        "invoices.void_invoice",
+        "coupons.validate_coupon"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 2.17,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01NbRCTns3vxGcM5gwLHRkBd",
+          "action": "payments.record_payment",
+          "name": "Record simulated payment",
+          "risk": "external",
+          "input": {
+            "invoiceId": "inv_030",
+            "contactId": "con_001",
+            "amount": 2190,
+            "currency": "USD",
+            "method": "check",
+            "reference": "Check #2231"
+          }
+        }
+      ],
+      "calls": 4
+    },
+    {
+      "sessionId": "0e5401bc-8d32-44d7-8001-4110fed7b1ab",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 4,
+      "ttftTextMs": 2902,
+      "firstActionMs": 4,
+      "e2eMs": 2905,
+      "llmCalls": [
+        {
+          "ms": 2901,
+          "ttftMs": 2898,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 206,
+            "cacheRead": 9291,
+            "cacheWrite": 370
+          },
+          "costUSD": 0.009694399999999999
+        }
+      ],
+      "actions": [
+        {
+          "action": "payments.record_payment",
+          "input": {
+            "invoiceId": "inv_030",
+            "contactId": "con_001",
+            "amount": 2190,
+            "currency": "USD",
+            "method": "check",
+            "reference": "Check #2231"
+          },
+          "ok": true,
+          "ms": 3.49,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 206,
+        "cache_creation_input_tokens": 370,
+        "cache_read_input_tokens": 9291
+      },
+      "costUSD": 0.009694,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I recorded Sarah Johnson's check #2231, and her overdue invoice is now marked paid.\n\n- **Payment:** pay_014, $2,190.00 USD by check, reference \"Check #2231\". It went through successfully today.\n- **Invoice:** INV-1030 (inv_030) was due 2026-11-02 and was 2 days overdue. It's now **paid**, and nothing is left owing.\n\nYou didn't give the check amount, so I recorded it as the full amount owed ($2,190). If the check was for a different amount, tell me and I'll correct the payment.\n\nI can also make a receipt for her if you'd like one.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

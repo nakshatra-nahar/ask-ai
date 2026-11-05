@@ -1,0 +1,135 @@
+{
+  "scenario": {
+    "id": "cmm-direct-unanswered-count",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "how many convos are still waiting on a reply from us? and who's been waiting longest"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action conversations.list_unanswered_conversations|conversations.search_conversations",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /^(?=[\\s\\S]*\\b18\\b)(?=[\\s\\S]*Ethan Lee)/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "9ef103f0-0f9e-4fc8-af93-1842ac53fb58",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "how many convos are still waiting on a reply from us? and who's been waiting longest",
+      "ttfurMs": 3387,
+      "ttftTextMs": 3387,
+      "firstActionMs": 4197,
+      "e2eMs": 12095,
+      "llmCalls": [
+        {
+          "ms": 4194,
+          "ttftMs": 3386,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 105,
+            "cacheRead": 5235,
+            "cacheWrite": 3072
+          },
+          "costUSD": 0.01957
+        },
+        {
+          "ms": 7898,
+          "ttftMs": 7862,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 712,
+            "cacheRead": 8307,
+            "cacheWrite": 4133
+          },
+          "costUSD": 0.0382358
+        }
+      ],
+      "actions": [
+        {
+          "action": "conversations.list_unanswered_conversations",
+          "input": {
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.95,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 817,
+        "cache_creation_input_tokens": 7205,
+        "cache_read_input_tokens": 13542
+      },
+      "costUSD": 0.057806,
+      "retries": 0,
+      "retrieved": [
+        "conversations.list_unanswered_conversations",
+        "products.get_inventory_availability",
+        "funnels.get_funnel_metrics",
+        "availability.set_max_horizon",
+        "workflows.add_workflow_step",
+        "refunds.check_refundable_balance",
+        "reports.update_report_filters",
+        "conversations.summarize_conversation",
+        "reports.run_report",
+        "smart_lists.count_smart_list",
+        "tickets.reply_to_ticket",
+        "coupons.set_redemption_limit",
+        "conversations.mark_conversation_read",
+        "conversations.search_conversations",
+        "tags.get_tag_usage",
+        "sms.search_sms_messages",
+        "conversations.assign_conversation_owner",
+        "email.send_email",
+        "email.receive_inbound_email",
+        "sms.receive_inbound_sms",
+        "email.search_email_messages",
+        "communities.reply_to_post",
+        "reviews.draft_review_response",
+        "pipelines.archive_pipeline"
+      ],
+      "status": "completed",
+      "finalText": "**18 conversations are waiting on a reply from us.** The longest wait is **Ethan Lee** (email, `cnv_024`, owner `usr_004`). He's been waiting about 305 hours (around 12.7 days), since Oct 22. His last message: *\"Thanks! Tomorrow afternoon works for a call.\"* That call date has probably passed by now.\n\n**The 5 longest waits:**\n\n| # | Contact | Channel | Waiting | Owner | Last message |\n|---|---|---|---|---|---|\n| 1 | Ethan Lee (`cnv_024`) | email | 305.5h (~12.7d) | usr_004 | \"Thanks! Tomorrow afternoon works for a call.\" |\n| 2 | Fatima Martin (`cnv_022`) | email | 242.1h (~10d) | usr_002 | \"Yes, I'm interested. Can you send more details?\" |\n| 3 | Olivia Walker (`cnv_008`) | email | 168.1h (~7d) | usr_005 | \"Sounds good, what does pricing look like?\" |\n| 4 | Amara Kim (`cnv_014`) | email | 156.6h (~6.5d) | usr_005 | \"Thanks! Tomorrow afternoon works for a call.\" |\n| 5 | Sofia Nguyen (`cnv_016`) | email | 110.4h (~4.6d) | usr_003 | \"Thanks! Tomorrow afternoon works for a call.\" |\n\n**Other messages that look urgent:**\n- **David Brown** (webchat, `cnv_031`, 100h): \"Hello? Still waiting to hear back about my quote.\" He has already followed up once.\n- **Olivia Martin** (email, `cnv_028`, 20h): \"I was charged twice this month.\" This is a billing problem.\n\nAll 18 are unread. 15 are email, 2 are SMS and 1 is webchat. By owner, usr_002 has 7, usr_005 has 5, usr_004 has 3 and usr_003 has 3.\n\nI can reassign any of these to someone else or draft replies to the oldest ones.",
+      "progress": [],
+      "retrievalMs": 1.23,
+      "calls": 2
+    }
+  ]
+}

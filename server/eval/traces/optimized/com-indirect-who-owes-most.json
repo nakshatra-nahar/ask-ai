@@ -1,0 +1,128 @@
+{
+  "scenario": {
+    "id": "com-indirect-who-owes-most",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "Who owes us the most money right now?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action invoices.search_invoices|invoices.list_overdue_invoices",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /Fatima Martin/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "a8534203-93fe-48dc-a1b5-dc00c3418ec9",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Who owes us the most money right now?",
+      "ttfurMs": 1520,
+      "ttftTextMs": 1520,
+      "firstActionMs": 2189,
+      "e2eMs": 11081,
+      "llmCalls": [
+        {
+          "ms": 2188,
+          "ttftMs": 1519,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 103,
+            "cacheRead": 5235,
+            "cacheWrite": 2122
+          },
+          "costUSD": 0.01478
+        },
+        {
+          "ms": 8892,
+          "ttftMs": 8887,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 756,
+            "cacheRead": 7357,
+            "cacheWrite": 1154
+          },
+          "costUSD": 0.0238408
+        }
+      ],
+      "actions": [
+        {
+          "action": "invoices.list_overdue_invoices",
+          "input": {},
+          "ok": true,
+          "ms": 0.3,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 859,
+        "cache_creation_input_tokens": 3276,
+        "cache_read_input_tokens": 12592
+      },
+      "costUSD": 0.038621,
+      "retries": 0,
+      "retrieved": [
+        "blogs.publish_post",
+        "blogs.schedule_post",
+        "payments.create_payment_request",
+        "coupons.validate_coupon",
+        "refunds.execute_refund",
+        "refunds.create_refund_request",
+        "refunds.get_refund_execution_status",
+        "refunds.approve_refund_request",
+        "tags.get_tag_usage",
+        "funnels.add_funnel_step",
+        "smart_lists.preview_smart_list",
+        "tickets.search_tickets",
+        "payments.remove_payment_allocation",
+        "smart_lists.count_smart_list",
+        "reports.export_report",
+        "subscriptions.resume_subscription",
+        "memberships.revoke_membership",
+        "tax_rules.calculate_tax",
+        "campaigns.launch_campaign"
+      ],
+      "status": "completed",
+      "finalText": "**Sarah Johnson** (con_001) owes the most overdue money: **$2,190**, all on INV-1030 (inv_030). It was due on 2026-11-02, so it's 2 days late, and the record shows no reminder sent yet.\n\nThis only covers overdue invoices. Unpaid invoices that aren't due yet aren't included. There are 11 overdue invoices, one per customer, adding up to **$11,225 USD**:\n\n| # | Contact | Invoice | Balance | Days overdue | Last reminder |\n|---|---|---|---|---|---|\n| 1 | Sarah Johnson (con_001) | INV-1030 | $2,190 | 2 | — |\n| 2 | Ethan Lee (con_053) | INV-1008 | $1,470 | 35 | — |\n| 3 | Fatima Martin (con_046) | INV-1007 | $1,420 | 31 | 2026-11-02 |\n| 4 | Michael Johnson (con_067) | INV-1010 | $1,310 | **60** | — |\n| 5 | Nina Chen (con_025) | INV-1004 | $1,200 | 18 | 2026-11-02 |\n| 6 | Jack Rossi (con_032) | INV-1005 (partly paid) | $1,100 | 20 | — |\n| 7 | David Okafor (con_039) | INV-1006 | $900 | 25 | 2026-10-28 |\n| 8 | Amara Müller (con_060) | INV-1009 | $600 | 45 | 2026-10-28 |\n| 9 | Noah Singh (con_018) | INV-1003 | $450 | 16 | — |\n| 10 | Aisha Kim (con_011) | INV-1002 | $360 | 10 | — |\n| 11 | Mike Smith (con_004) | INV-1001 | $225 | 5 | — |\n\nMichael Johnson's invoice is the oldest at 60 days late, and Ethan Lee is 35 days late. Neither has had a reminder. I can send reminders or pay-now links to them and the other customers who haven't had a reminder.",
+      "progress": [],
+      "retrievalMs": 0.52,
+      "calls": 2
+    }
+  ]
+}

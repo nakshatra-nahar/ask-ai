@@ -1,0 +1,292 @@
+{
+  "scenario": {
+    "id": "crm-multi-new-client-tidewater",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "We just signed Tidewater Brewing Co. Please set up the company and add their GM, Harper Vance (harper.vance@tidewaterbrewing.com), as a contact linked to it. Tag her as a customer, and Dana should be both the account manager and Harper’s owner."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action companies.create_company",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action contacts.create_contact",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params companies.create_company",
+        "pass": true,
+        "detail": "{\"name\":\"/tidewater brewing/i\"}"
+      },
+      {
+        "name": "params contacts.create_contact",
+        "pass": true,
+        "detail": "{\"email\":\"harper.vance@tidewaterbrewing.com\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "2a4eca89-fc1d-4790-9e5e-1612e796c909",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "We just signed Tidewater Brewing Co. Please set up the company and add their GM, Harper Vance (harper.vance@tidewaterbrewing.com), as a contact linked to it. Tag her as a customer, and Dana should be both the account manager and Harper’s owner.",
+      "ttfurMs": 1106,
+      "ttftTextMs": 1106,
+      "firstActionMs": 3239,
+      "e2eMs": 16406,
+      "llmCalls": [
+        {
+          "ms": 3233,
+          "ttftMs": 1100,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 324,
+            "cacheRead": 5235,
+            "cacheWrite": 2263
+          },
+          "costUSD": 0.019905
+        },
+        {
+          "ms": 1544,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 86,
+            "cacheRead": 7498,
+            "cacheWrite": 1721
+          },
+          "costUSD": 0.0133322
+        },
+        {
+          "ms": 2772,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 271,
+            "cacheRead": 9219,
+            "cacheWrite": 97
+          },
+          "costUSD": 0.0096006
+        },
+        {
+          "ms": 2386,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 198,
+            "cacheRead": 9316,
+            "cacheWrite": 544
+          },
+          "costUSD": 0.010414399999999999
+        },
+        {
+          "ms": 1677,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 104,
+            "cacheRead": 9860,
+            "cacheWrite": 529
+          },
+          "costUSD": 0.008677
+        },
+        {
+          "ms": 1668,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 105,
+            "cacheRead": 10389,
+            "cacheWrite": 232
+          },
+          "costUSD": 0.007423600000000001
+        },
+        {
+          "ms": 3092,
+          "ttftMs": 3088,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 255,
+            "cacheRead": 10621,
+            "cacheWrite": 198
+          },
+          "costUSD": 0.010346400000000002
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 0.21,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "harper.vance@tidewaterbrewing.com"
+          },
+          "ok": true,
+          "ms": 0.97,
+          "confirmed": false
+        },
+        {
+          "action": "tags.list_tags",
+          "input": {
+            "query": "customer"
+          },
+          "ok": true,
+          "ms": 0.28,
+          "confirmed": false
+        },
+        {
+          "action": "companies.search_companies",
+          "input": {
+            "query": "Tidewater"
+          },
+          "ok": true,
+          "ms": 0.81,
+          "confirmed": false
+        },
+        {
+          "action": "companies.create_company",
+          "input": {
+            "name": "Tidewater Brewing Co.",
+            "domain": "tidewaterbrewing.com",
+            "accountManagerId": "usr_005"
+          },
+          "ok": true,
+          "ms": 5.34,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.create_contact",
+          "input": {
+            "firstName": "Harper",
+            "lastName": "Vance",
+            "email": "harper.vance@tidewaterbrewing.com",
+            "title": "GM",
+            "ownerId": "usr_005",
+            "lifecycleStage": "customer"
+          },
+          "ok": true,
+          "ms": 4.59,
+          "confirmed": false
+        },
+        {
+          "action": "companies.link_contact_to_company",
+          "input": {
+            "id": "co_022",
+            "contactId": "con_081"
+          },
+          "ok": true,
+          "ms": 5.5,
+          "confirmed": false
+        },
+        {
+          "action": "tags.apply_tag",
+          "input": {
+            "tag": "customer",
+            "recordType": "contact",
+            "recordId": "con_081"
+          },
+          "ok": false,
+          "error": {
+            "code": "VALIDATION",
+            "message": "unknown recordType 'contact'",
+            "signature": "tags.apply_tag(tag: string, recordType: string, recordId: string) [write] — Tags: Apply tag to record. Add an existing tag to a record (contact, opportunity, …). The tag must already exist (tags.create_tag)."
+          },
+          "ms": 6.21,
+          "confirmed": false
+        },
+        {
+          "action": "tags.apply_tag",
+          "input": {
+            "tag": "customer",
+            "recordType": "contacts",
+            "recordId": "con_081"
+          },
+          "ok": true,
+          "ms": 1.96,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 16,
+        "output_tokens": 1343,
+        "cache_creation_input_tokens": 5584,
+        "cache_read_input_tokens": 62138
+      },
+      "costUSD": 0.079699,
+      "retries": 0,
+      "retrieved": [
+        "companies.assign_account_manager",
+        "companies.search_companies",
+        "media.create_media_access_link",
+        "companies.create_company",
+        "courses.add_course_section",
+        "tickets.reply_to_ticket",
+        "tags.apply_tag",
+        "reports.update_report_filters",
+        "companies.list_company_contacts",
+        "quotes.record_quote_acceptance",
+        "appointments.create_appointment",
+        "teams.add_team_member",
+        "tickets.link_ticket_contact",
+        "contacts.search_contacts",
+        "contacts.assign_contact_owner",
+        "companies.get_company",
+        "events.register_attendee",
+        "companies.archive_company",
+        "websites.add_website_page",
+        "tags.list_records_with_tag",
+        "opportunities.assign_opportunity_owner",
+        "tags.list_tags",
+        "enrollments.enroll_learner",
+        "pipelines.add_pipeline_stage"
+      ],
+      "status": "completed",
+      "finalText": "I've set up Tidewater Brewing Co. and added Harper Vance as a contact linked to it.\n\n- **Company:** Tidewater Brewing Co. (`co_022`), domain tidewaterbrewing.com. Dana Cruz (`usr_005`) is the account manager.\n- **Contact:** Harper Vance (`con_081`), harper.vance@tidewaterbrewing.com.\n  - She's linked to Tidewater Brewing Co.\n  - Dana Cruz is her owner.\n  - She has the existing `customer` tag, and her lifecycle stage is set to customer.\n\nI checked first: no company or contact with these details was already in the system. I asked to save her GM title, but the saved contact doesn't show a title, so you may need to add it by hand.",
+      "progress": [],
+      "retrievalMs": 5.91,
+      "calls": 7
+    }
+  ]
+}

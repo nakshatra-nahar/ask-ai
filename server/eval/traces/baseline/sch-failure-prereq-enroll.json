@@ -1,0 +1,194 @@
+{
+  "scenario": {
+    "id": "sch-failure-prereq-enroll",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Enroll Michael Smith in Advanced Funnel Building."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid enrollments.record_lesson_completion",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid courses.set_course_prerequisites",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(prerequisite|hasn't (completed|finished)|has not (completed|finished)|needs to (complete|finish)|must (complete|finish)|first complete|couldn't|could not|can't|cannot|unable)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "1b28d859-6f1f-4968-90c0-a72f67291b24",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Enroll Michael Smith in Advanced Funnel Building.",
+      "ttfurMs": 1060,
+      "ttftTextMs": 1060,
+      "firstActionMs": 1918,
+      "e2eMs": 10306,
+      "llmCalls": [
+        {
+          "ms": 1918,
+          "ttftMs": 1060,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 128,
+            "cacheRead": 112993,
+            "cacheWrite": 94
+          },
+          "costUSD": 0.04824320000000001
+        },
+        {
+          "ms": 1520,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 85,
+            "cacheRead": 113087,
+            "cacheWrite": 673
+          },
+          "costUSD": 0.0503078
+        },
+        {
+          "ms": 1501,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 82,
+            "cacheRead": 113760,
+            "cacheWrite": 214
+          },
+          "costUSD": 0.048222
+        },
+        {
+          "ms": 1371,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 59,
+            "cacheRead": 113974,
+            "cacheWrite": 384
+          },
+          "costUSD": 0.04869760000000001
+        },
+        {
+          "ms": 3987,
+          "ttftMs": 3983,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 370,
+            "cacheRead": 114358,
+            "cacheWrite": 706
+          },
+          "costUSD": 0.0566812
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Michael Smith"
+          },
+          "ok": true,
+          "ms": 0.43,
+          "confirmed": false
+        },
+        {
+          "action": "courses.search_courses",
+          "input": {
+            "query": "Advanced Funnel Building"
+          },
+          "ok": true,
+          "ms": 0.11,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.enroll_learner",
+          "input": {
+            "contactId": "con_003",
+            "courseId": "crs_002"
+          },
+          "ok": false,
+          "error": {
+            "code": "INVALID_STATE",
+            "message": "Michael Smith has not completed the prerequisite course(s) for Advanced Funnel Building: crs_001 Social Media Marketing 101. Enroll them in and complete those first",
+            "details": {
+              "missing": [
+                {
+                  "id": "crs_001",
+                  "title": "Social Media Marketing 101"
+                }
+              ]
+            }
+          },
+          "ms": 6.39,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.search_enrollments",
+          "input": {
+            "contactId": "con_003"
+          },
+          "ok": true,
+          "ms": 0.34,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.get_learner_progress",
+          "input": {
+            "id": "enr_003"
+          },
+          "ok": true,
+          "ms": 1.47,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 724,
+        "cache_creation_input_tokens": 2071,
+        "cache_read_input_tokens": 568172
+      },
+      "costUSD": 0.252152,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I couldn't enroll Michael Smith (con_003) in **Advanced Funnel Building** (crs_002). The course requires him to finish **Social Media Marketing 101** (crs_001) first, and he hasn't yet.\n\n**Where he is in Social Media Marketing 101** (enrollment enr_003, active):\n- He has finished 3 of 6 lessons (50%).\n- Still to do: \"Planning a Content Calendar\" (les_004), \"Creating Engaging Posts\" (les_005) and \"Content Strategy Quiz\" (les_006). All three are already open to him.\n\n**What you can do:**\n1. **Wait for him to finish.** Once he completes the last 3 lessons, I can enroll him in Advanced Funnel Building.\n2. **Mark the lessons done.** If he has already done this work outside the platform, I can record the 3 lessons as complete and then enroll him. The quiz may need a passing score.\n3. **Remove the requirement.** I can take the prerequisite off Advanced Funnel Building. That would let anyone enroll without finishing Social Media Marketing 101, not just Michael.",
+      "progress": [],
+      "calls": 5
+    }
+  ]
+}

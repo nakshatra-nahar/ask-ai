@@ -1,0 +1,140 @@
+{
+  "scenario": {
+    "id": "sch-direct-basic-membership",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Give Grace Nguyen a Basic Membership."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action memberships.grant_membership",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params memberships.grant_membership",
+        "pass": true,
+        "detail": "{\"contactId\":\"con_013\",\"planId\":\"mpl_001\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "5de0da25-edfc-4640-a391-4127907f5202",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Give Grace Nguyen a Basic Membership.",
+      "ttfurMs": 1097,
+      "ttftTextMs": 1097,
+      "firstActionMs": 2155,
+      "e2eMs": 5737,
+      "llmCalls": [
+        {
+          "ms": 2154,
+          "ttftMs": 1097,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 139,
+            "cacheRead": 112993,
+            "cacheWrite": 90
+          },
+          "costUSD": 0.048443200000000006
+        },
+        {
+          "ms": 1339,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 83,
+            "cacheRead": 113083,
+            "cacheWrite": 658
+          },
+          "costUSD": 0.050191200000000005
+        },
+        {
+          "ms": 2237,
+          "ttftMs": 2236,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 149,
+            "cacheRead": 113741,
+            "cacheWrite": 214
+          },
+          "costUSD": 0.0495544
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Grace Nguyen"
+          },
+          "ok": true,
+          "ms": 0.36,
+          "confirmed": false
+        },
+        {
+          "action": "memberships.list_membership_plans",
+          "input": {
+            "query": "Basic"
+          },
+          "ok": true,
+          "ms": 0.75,
+          "confirmed": false
+        },
+        {
+          "action": "memberships.grant_membership",
+          "input": {
+            "contactId": "con_013",
+            "planId": "mpl_001"
+          },
+          "ok": true,
+          "ms": 5.33,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 371,
+        "cache_creation_input_tokens": 962,
+        "cache_read_input_tokens": 339817
+      },
+      "costUSD": 0.148189,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Grace Nguyen (con_013) now has an active Basic Membership (mem_011). It started today, 2026-11-04, and has no end date.\n\nThe plan (mpl_001, $29/month) gives her access to:\n- **Course:** Social Media Marketing 101 (crs_001)\n- **Community:** Growth Hackers Club (cmty_001)\n\nThe plan's price is for reference only. Giving her the membership didn't set up a payment subscription.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

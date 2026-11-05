@@ -1,0 +1,358 @@
+{
+  "scenario": {
+    "id": "cmm-multi-payment-failed-automation",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Set up an automation for failed payments: email the customer our Payment Failed Notice template, wait 2 days, then create a task to 'Call about failed payment'. Hook it up to the existing Payment Failed trigger and turn everything on."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action workflows.create_workflow",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action workflows.add_workflow_step",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action workflows.publish_workflow",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action triggers.bind_trigger_to_workflow",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action triggers.enable_trigger",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params workflows.add_workflow_step",
+        "pass": true,
+        "detail": "{\"type\":\"send_email\",\"config\":{\"templateId\":\"tpl_007\"}}"
+      },
+      {
+        "name": "params workflows.add_workflow_step",
+        "pass": true,
+        "detail": "{\"type\":\"create_task\"}"
+      },
+      {
+        "name": "params triggers.enable_trigger",
+        "pass": true,
+        "detail": "{\"id\":\"trg_006\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 5,
+      "hit": 5,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 3,
+      "hit": 3
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "780d7fe4-6995-4681-aacd-813e693eda1b",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Set up an automation for failed payments: email the customer our Payment Failed Notice template, wait 2 days, then create a task to 'Call about failed payment'. Hook it up to the existing Payment Failed trigger and turn everything on.",
+      "ttfurMs": 4791,
+      "ttftTextMs": 4791,
+      "firstActionMs": 5629,
+      "e2eMs": 26398,
+      "llmCalls": [
+        {
+          "ms": 5623,
+          "ttftMs": 4787,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 132,
+            "cacheRead": 0,
+            "cacheWrite": 113141
+          },
+          "costUSD": 0.568361
+        },
+        {
+          "ms": 5526,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 110,
+            "cacheRead": 113141,
+            "cacheWrite": 542
+          },
+          "costUSD": 0.0501744
+        },
+        {
+          "ms": 2674,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 115,
+            "cacheRead": 113683,
+            "cacheWrite": 251
+          },
+          "costUSD": 0.0490362
+        },
+        {
+          "ms": 2482,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 107,
+            "cacheRead": 113934,
+            "cacheWrite": 326
+          },
+          "costUSD": 0.0493516
+        },
+        {
+          "ms": 2537,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 115,
+            "cacheRead": 114260,
+            "cacheWrite": 334
+          },
+          "costUSD": 0.049682
+        },
+        {
+          "ms": 2765,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 144,
+            "cacheRead": 114594,
+            "cacheWrite": 385
+          },
+          "costUSD": 0.050650600000000004
+        },
+        {
+          "ms": 4749,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 57,
+            "cacheRead": 114979,
+            "cacheWrite": 390
+          },
+          "costUSD": 0.049089600000000004
+        }
+      ],
+      "actions": [
+        {
+          "action": "templates.search_templates",
+          "input": {
+            "query": "Payment Failed Notice"
+          },
+          "ok": true,
+          "ms": 0.98,
+          "confirmed": false
+        },
+        {
+          "action": "triggers.list_event_triggers",
+          "input": {
+            "query": "Payment Failed"
+          },
+          "ok": true,
+          "ms": 0.21,
+          "confirmed": false
+        },
+        {
+          "action": "workflows.create_workflow",
+          "input": {
+            "name": "Failed Payment Follow-up",
+            "description": "Emails Payment Failed Notice, waits 2 days, then creates a call task."
+          },
+          "ok": true,
+          "ms": 6.86,
+          "confirmed": false
+        },
+        {
+          "action": "workflows.add_workflow_step",
+          "input": {
+            "id": "wf_007",
+            "type": "send_email",
+            "config": {
+              "templateId": "tpl_007"
+            }
+          },
+          "ok": true,
+          "ms": 6.19,
+          "confirmed": false
+        },
+        {
+          "action": "workflows.add_workflow_step",
+          "input": {
+            "id": "wf_007",
+            "type": "wait",
+            "config": {
+              "days": 2
+            }
+          },
+          "ok": true,
+          "ms": 6.98,
+          "confirmed": false
+        },
+        {
+          "action": "workflows.add_workflow_step",
+          "input": {
+            "id": "wf_007",
+            "type": "create_task",
+            "config": {
+              "title": "Call about failed payment"
+            }
+          },
+          "ok": true,
+          "ms": 6.06,
+          "confirmed": false
+        },
+        {
+          "action": "workflows.validate_workflow",
+          "input": {
+            "id": "wf_007"
+          },
+          "ok": true,
+          "ms": 1.15,
+          "confirmed": false
+        },
+        {
+          "action": "triggers.bind_trigger_to_workflow",
+          "input": {
+            "id": "trg_006",
+            "workflowId": "wf_007"
+          },
+          "ok": true,
+          "ms": 5.86,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 16,
+        "output_tokens": 780,
+        "cache_creation_input_tokens": 115369,
+        "cache_read_input_tokens": 684591
+      },
+      "costUSD": 0.866345,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01KAAc11Tm799mAczVPe3r8w",
+          "action": "workflows.publish_workflow",
+          "name": "Publish workflow",
+          "risk": "external",
+          "input": {
+            "id": "wf_007"
+          }
+        }
+      ],
+      "calls": 7
+    },
+    {
+      "sessionId": "780d7fe4-6995-4681-aacd-813e693eda1b",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 7,
+      "ttftTextMs": 6211,
+      "firstActionMs": 7,
+      "e2eMs": 6240,
+      "llmCalls": [
+        {
+          "ms": 2232,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 57,
+            "cacheRead": 115369,
+            "cacheWrite": 305
+          },
+          "costUSD": 0.048820600000000006
+        },
+        {
+          "ms": 3993,
+          "ttftMs": 3965,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 234,
+            "cacheRead": 115674,
+            "cacheWrite": 193
+          },
+          "costUSD": 0.051922600000000006
+        }
+      ],
+      "actions": [
+        {
+          "action": "workflows.publish_workflow",
+          "input": {
+            "id": "wf_007"
+          },
+          "ok": true,
+          "ms": 6.86,
+          "confirmed": true
+        },
+        {
+          "action": "triggers.enable_trigger",
+          "input": {
+            "id": "trg_006"
+          },
+          "ok": true,
+          "ms": 6.51,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 291,
+        "cache_creation_input_tokens": 498,
+        "cache_read_input_tokens": 231043
+      },
+      "costUSD": 0.100743,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "The failed-payment automation is set up and turned on.\n\n**Workflow: Failed Payment Follow-up (`wf_007`)**: published (version 1)\n1. Email the customer the **Payment Failed Notice** template (`tpl_007`)\n2. Wait 2 days\n3. Create a task: \"Call about failed payment\"\n\n**Trigger: Payment Failed (`trg_006`)**: now runs this workflow and is switched on. It has no conditions, so every failed payment will start it.\n\nNotes:\n- The call task doesn't have an owner or due date. If you want one, I can set a specific person or a due date (for example, the same day the task is created).\n- The email step won't reach customers who have unsubscribed from email.",
+      "progress": [],
+      "resumed": true,
+      "calls": 2
+    }
+  ]
+}

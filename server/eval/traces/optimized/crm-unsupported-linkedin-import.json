@@ -1,0 +1,146 @@
+{
+  "scenario": {
+    "id": "crm-unsupported-linkedin-import",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Pull everyone who works at Harbor Auto Repair off LinkedIn and add them as contacts under that company."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|couldn't|could not|unable|not able|don't have|do not have|not support|isn't supported|no (action|capability|integration|way))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "4ad18a9d-9324-4e5f-8b39-a71ee2251ff2",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Pull everyone who works at Harbor Auto Repair off LinkedIn and add them as contacts under that company.",
+      "ttfurMs": 2283,
+      "ttftTextMs": 2283,
+      "firstActionMs": 3156,
+      "e2eMs": 8783,
+      "llmCalls": [
+        {
+          "ms": 3151,
+          "ttftMs": 2277,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 191,
+            "cacheRead": 5235,
+            "cacheWrite": 2527
+          },
+          "costUSD": 0.018565
+        },
+        {
+          "ms": 1952,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 87,
+            "cacheRead": 7762,
+            "cacheWrite": 325
+          },
+          "costUSD": 0.006477800000000001
+        },
+        {
+          "ms": 3673,
+          "ttftMs": 3669,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 220,
+            "cacheRead": 8087,
+            "cacheWrite": 456
+          },
+          "costUSD": 0.009922799999999999
+        }
+      ],
+      "actions": [
+        {
+          "action": "companies.search_companies",
+          "input": {
+            "query": "Harbor Auto Repair"
+          },
+          "ok": true,
+          "ms": 0.11,
+          "confirmed": false
+        },
+        {
+          "action": "companies.list_company_contacts",
+          "input": {
+            "id": "co_008"
+          },
+          "ok": true,
+          "ms": 0.86,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 498,
+        "cache_creation_input_tokens": 3308,
+        "cache_read_input_tokens": 21084
+      },
+      "costUSD": 0.034966,
+      "retries": 0,
+      "retrieved": [
+        "companies.link_contact_to_company",
+        "contacts.search_contacts",
+        "blogs.unpublish_post",
+        "companies.create_company",
+        "companies.search_companies",
+        "availability.set_weekly_hours",
+        "companies.list_company_contacts",
+        "custom_fields.create_custom_field",
+        "companies.archive_company",
+        "tickets.link_ticket_contact",
+        "companies.unlink_contact_from_company",
+        "tickets.reply_to_ticket",
+        "contacts.add_contact_relationship",
+        "availability.add_date_override",
+        "contacts.create_contact",
+        "opportunities.create_opportunity",
+        "communities.join_community",
+        "notes.create_note",
+        "contacts.update_contact",
+        "availability.block_time",
+        "teams.add_team_member",
+        "media.create_media_access_link",
+        "payments.cancel_payment_request",
+        "tickets.add_ticket_note"
+      ],
+      "status": "completed",
+      "finalText": "I couldn't pull anyone from LinkedIn because the platform has no LinkedIn integration or way to import from it. No contacts were created.\n\n**Harbor Auto Repair (co_008)** is in the CRM. It already has 2 contacts:\n- Michael Müller (con_008), michael.muller3@example.com\n- Isabel Smith (con_029), isabel.smith24@example.com\n\n**Another way to do it:** Send me the employees' names, plus emails or phone numbers if you have them. You could paste a list copied from LinkedIn. I'll add each one as a contact linked to Harbor Auto Repair and skip Michael and Isabel since they're already there.",
+      "progress": [],
+      "retrievalMs": 5.31,
+      "calls": 3
+    }
+  ]
+}

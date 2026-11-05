@@ -1,0 +1,264 @@
+{
+  "scenario": {
+    "id": "com-multi-approve-execute-refund",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Jack Rossi's $75 refund for the missed sessions — approve it and send the money back, then tell me what he still owes on INV-1005."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action refunds.approve_refund_request",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action refunds.execute_refund",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(?<![\\d,.])\\$?(1,175|1175)(\\.00)?(?![\\d])/",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "6db8d548-349b-415d-a0f9-faac3bd9b492",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Jack Rossi's $75 refund for the missed sessions — approve it and send the money back, then tell me what he still owes on INV-1005.",
+      "ttfurMs": 1611,
+      "ttftTextMs": 1611,
+      "firstActionMs": 2363,
+      "e2eMs": 8692,
+      "llmCalls": [
+        {
+          "ms": 2360,
+          "ttftMs": 1609,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 115,
+            "cacheRead": 5235,
+            "cacheWrite": 2750
+          },
+          "costUSD": 0.01816
+        },
+        {
+          "ms": 2051,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 90,
+            "cacheRead": 7985,
+            "cacheWrite": 299
+          },
+          "costUSD": 0.006497
+        },
+        {
+          "ms": 2008,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 90,
+            "cacheRead": 8284,
+            "cacheWrite": 236
+          },
+          "costUSD": 0.0063016
+        },
+        {
+          "ms": 2262,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 88,
+            "cacheRead": 8520,
+            "cacheWrite": 260
+          },
+          "costUSD": 0.006476
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Jack Rossi"
+          },
+          "ok": true,
+          "ms": 0.19,
+          "confirmed": false
+        },
+        {
+          "action": "refunds.search_refund_requests",
+          "input": {
+            "contactId": "con_032"
+          },
+          "ok": true,
+          "ms": 1.51,
+          "confirmed": false
+        },
+        {
+          "action": "refunds.approve_refund_request",
+          "input": {
+            "id": "rfd_003"
+          },
+          "ok": true,
+          "ms": 6.29,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 383,
+        "cache_creation_input_tokens": 3545,
+        "cache_read_input_tokens": 30024
+      },
+      "costUSD": 0.037435,
+      "retries": 0,
+      "retrieved": [
+        "refunds.execute_refund",
+        "refunds.search_refund_requests",
+        "quotes.convert_quote_to_invoice",
+        "refunds.create_refund_request",
+        "pipelines.archive_pipeline",
+        "refunds.approve_refund_request",
+        "campaigns.resume_campaign",
+        "leads.update_lead_score",
+        "refunds.get_refund_execution_status",
+        "refunds.get_refund_request",
+        "payments.create_payment_request",
+        "tax_rules.set_tax_rate",
+        "payments.remove_payment_allocation",
+        "email.preview_email",
+        "appointments.mark_no_show",
+        "events.add_to_waitlist",
+        "sms.send_sms",
+        "events.update_event",
+        "email.send_email",
+        "events.create_event",
+        "events.cancel_registration",
+        "enrollments.revoke_enrollment",
+        "templates.render_template",
+        "tasks.create_task"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 2.35,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_0115YmTuWimAsvbtCDJmn3Ck",
+          "action": "refunds.execute_refund",
+          "name": "Execute simulated refund",
+          "risk": "external",
+          "input": {
+            "id": "rfd_003"
+          }
+        }
+      ],
+      "calls": 4
+    },
+    {
+      "sessionId": "6db8d548-349b-415d-a0f9-faac3bd9b492",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 5,
+      "ttftTextMs": 6475,
+      "firstActionMs": 5,
+      "e2eMs": 6478,
+      "llmCalls": [
+        {
+          "ms": 2181,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 120,
+            "cacheRead": 8780,
+            "cacheWrite": 368
+          },
+          "costUSD": 0.00776
+        },
+        {
+          "ms": 4290,
+          "ttftMs": 4287,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 279,
+            "cacheRead": 9148,
+            "cacheWrite": 410
+          },
+          "costUSD": 0.0112972
+        }
+      ],
+      "actions": [
+        {
+          "action": "refunds.execute_refund",
+          "input": {
+            "id": "rfd_003"
+          },
+          "ok": true,
+          "ms": 5.22,
+          "confirmed": true
+        },
+        {
+          "action": "invoices.get_invoice",
+          "input": {
+            "id": "inv_005"
+          },
+          "ok": true,
+          "ms": 0.46,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 399,
+        "cache_creation_input_tokens": 778,
+        "cache_read_input_tokens": 17928
+      },
+      "costUSD": 0.019057,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I approved Jack Rossi's $75 refund for the missed sessions and sent it. **He now owes $1,175.00 on INV-1005.**\n\n**Refund rfd_003**\n- Status: Sent. The processor reference is re_sim_003, and the money should reach him by 2026-11-09.\n- It came out of payment pay_001, which had been applied to INV-1005. So the refund took $75 off what he'd paid on that invoice.\n\n**INV-1005 (inv_005)**\n- Total: $2,200.00\n- Paid: $1,025.00 (after the refund)\n- **Still owed: $1,175.00**\n- Status: Partly paid. It was due 2026-10-15 and is now **20 days overdue**.\n\nNote that the refund made his balance go up by $75, not down, because the money returned to him had been counted as payment on this invoice.",
+      "progress": [],
+      "resumed": true,
+      "calls": 2
+    }
+  ]
+}

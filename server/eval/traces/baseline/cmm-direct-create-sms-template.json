@@ -1,0 +1,111 @@
+{
+  "scenario": {
+    "id": "cmm-direct-create-sms-template",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Make a new SMS template called Holiday Hours: \"Hi {{contact.firstName}}, heads up — we're closed Nov 26-27 for Thanksgiving. See you after the holiday! - {{business.name}}\""
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action templates.create_template",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params templates.create_template",
+        "pass": true,
+        "detail": "{\"name\":\"Holiday Hours\",\"channel\":\"sms\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "6e9e1c58-c47a-47ab-94fe-a70e3f1a25ac",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Make a new SMS template called Holiday Hours: \"Hi {{contact.firstName}}, heads up — we're closed Nov 26-27 for Thanksgiving. See you after the holiday! - {{business.name}}\"",
+      "ttfurMs": 1513,
+      "ttftTextMs": 1513,
+      "firstActionMs": 2600,
+      "e2eMs": 6462,
+      "llmCalls": [
+        {
+          "ms": 2598,
+          "ttftMs": 1513,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 165,
+            "cacheRead": 112993,
+            "cacheWrite": 146
+          },
+          "costUSD": 0.04924320000000001
+        },
+        {
+          "ms": 3862,
+          "ttftMs": 3859,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 202,
+            "cacheRead": 113139,
+            "cacheWrite": 352
+          },
+          "costUSD": 0.05106360000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "templates.create_template",
+          "input": {
+            "name": "Holiday Hours",
+            "channel": "sms",
+            "body": "Hi {{contact.firstName}}, heads up — we're closed Nov 26-27 for Thanksgiving. See you after the holiday! - {{business.name}}"
+          },
+          "ok": true,
+          "ms": 1.95,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 367,
+        "cache_creation_input_tokens": 498,
+        "cache_read_input_tokens": 226132
+      },
+      "costUSD": 0.100307,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I created the SMS template **Holiday Hours** (`tpl_011`). It's active and ready to use.\n\n- **Body:** \"Hi {{contact.firstName}}, heads up — we're closed Nov 26-27 for Thanksgiving. See you after the holiday! - {{business.name}}\"\n- **Placeholders it fills in:** `contact.firstName` (the contact's first name) and `business.name` (your business name)\n- **Category:** none set\n\nThe em dash (—) may make carriers bill each text as more than one message. If you want, I can check how many segments it uses or swap the dash for a plain hyphen.",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

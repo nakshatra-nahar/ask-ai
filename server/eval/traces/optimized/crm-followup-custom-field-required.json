@@ -1,0 +1,258 @@
+{
+  "scenario": {
+    "id": "crm-followup-custom-field-required",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Add a dropdown field on leads called Preferred Contact Time, with options Morning, Afternoon and Evening."
+      },
+      {
+        "user": "Oh, and make it required. Help text should say 'Best window to reach them by phone'."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action custom_fields.create_custom_field",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action custom_fields.set_field_validation",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action custom_fields.update_field_help_text",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params custom_fields.create_custom_field",
+        "pass": true,
+        "detail": "{\"module\":\"leads\",\"type\":\"dropdown\"}"
+      },
+      {
+        "name": "params custom_fields.set_field_validation",
+        "pass": true,
+        "detail": "{\"required\":true}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "152b8e8c-5125-4e34-b518-02be49bff6d0",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Add a dropdown field on leads called Preferred Contact Time, with options Morning, Afternoon and Evening.",
+      "ttfurMs": 660,
+      "ttftTextMs": 660,
+      "firstActionMs": 1617,
+      "e2eMs": 2941,
+      "llmCalls": [
+        {
+          "ms": 1610,
+          "ttftMs": 656,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 142,
+            "cacheRead": 5235,
+            "cacheWrite": 3295
+          },
+          "costUSD": 0.021425
+        },
+        {
+          "ms": 1324,
+          "ttftMs": 1321,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 82,
+            "cacheRead": 8530,
+            "cacheWrite": 298
+          },
+          "costUSD": 0.00655
+        }
+      ],
+      "actions": [
+        {
+          "action": "custom_fields.create_custom_field",
+          "input": {
+            "module": "leads",
+            "label": "Preferred Contact Time",
+            "type": "dropdown",
+            "options": [
+              "Morning",
+              "Afternoon",
+              "Evening"
+            ]
+          },
+          "ok": true,
+          "ms": 2.08,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 224,
+        "cache_creation_input_tokens": 3593,
+        "cache_read_input_tokens": 13765
+      },
+      "costUSD": 0.027975,
+      "retries": 0,
+      "retrieved": [
+        "custom_fields.add_dropdown_option",
+        "custom_fields.list_custom_fields",
+        "custom_fields.retire_dropdown_option",
+        "leads.search_leads",
+        "custom_fields.create_custom_field",
+        "contacts.search_contacts",
+        "appointments.search_appointments",
+        "products.add_product_variant",
+        "forms.add_form_field",
+        "triggers.list_event_triggers",
+        "listings.set_listing_hours",
+        "events.search_events",
+        "appointments.cancel_appointment",
+        "custom_fields.set_record_field_value",
+        "appointments.create_appointment",
+        "forms.update_form_field",
+        "tasks.create_task",
+        "notes.create_note",
+        "events.add_to_waitlist",
+        "events.register_attendee",
+        "forms.create_form",
+        "contacts.merge_contacts",
+        "triggers.update_trigger_conditions",
+        "appointments.add_appointment_attendee"
+      ],
+      "status": "completed",
+      "finalText": "I added the **Preferred Contact Time** dropdown field to leads (id `cf_013`, key `preferred_contact_time`).\n\n- **Options:** Morning, Afternoon, Evening\n- **Required:** No\n- **Status:** Active",
+      "progress": [],
+      "retrievalMs": 3.98,
+      "calls": 2
+    },
+    {
+      "sessionId": "152b8e8c-5125-4e34-b518-02be49bff6d0",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Oh, and make it required. Help text should say 'Best window to reach them by phone'.",
+      "ttfurMs": 1352,
+      "ttftTextMs": 1352,
+      "firstActionMs": 2523,
+      "e2eMs": 3961,
+      "llmCalls": [
+        {
+          "ms": 2515,
+          "ttftMs": 1349,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 259,
+            "cacheRead": 8828,
+            "cacheWrite": 2760
+          },
+          "costUSD": 0.0225272
+        },
+        {
+          "ms": 1433,
+          "ttftMs": 1428,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 64,
+            "cacheRead": 11588,
+            "cacheWrite": 615
+          },
+          "costUSD": 0.008998200000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "custom_fields.set_field_validation",
+          "input": {
+            "id": "cf_013",
+            "required": true
+          },
+          "ok": true,
+          "ms": 5.81,
+          "confirmed": false
+        },
+        {
+          "action": "custom_fields.update_field_help_text",
+          "input": {
+            "id": "cf_013",
+            "helpText": "Best window to reach them by phone"
+          },
+          "ok": true,
+          "ms": 4.75,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 323,
+        "cache_creation_input_tokens": 3375,
+        "cache_read_input_tokens": 20416
+      },
+      "costUSD": 0.031525,
+      "retries": 0,
+      "retrieved": [
+        "triggers.test_trigger",
+        "courses.publish_course",
+        "sms.draft_sms",
+        "booking_pages.publish_booking_page",
+        "websites.publish_website",
+        "sms.send_sms",
+        "forms.publish_form",
+        "sms.receive_inbound_sms",
+        "invoices.issue_invoice",
+        "forms.add_form_field",
+        "forms.submit_form_response",
+        "coupons.set_coupon_validity_window",
+        "custom_fields.create_custom_field",
+        "coupons.search_coupons",
+        "surveys.update_survey_question",
+        "coupons.create_coupon",
+        "coupons.get_coupon",
+        "custom_fields.set_field_validation",
+        "listings.update_listing_phone",
+        "listings.create_listing",
+        "templates.render_template",
+        "sms.record_sms_opt_out",
+        "sms.cancel_scheduled_sms",
+        "sms.search_sms_messages"
+      ],
+      "status": "completed",
+      "finalText": "**Preferred Contact Time** (`cf_013`) on leads is now required, and its help text reads \"Best window to reach them by phone\". The options are still Morning, Afternoon and Evening.",
+      "progress": [],
+      "retrievalMs": 2.71,
+      "calls": 2
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+{
+  "scenario": {
+    "id": "crm-multi-webinar-tag-list",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Create a tag called webinar-follow-up and put it on the contact record of everyone whose lead came in from a webinar and is still open (not converted or disqualified). Then make a contacts smart list named 'Webinar Follow-up' that pulls in everyone with that tag."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tags.create_tag",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action leads.search_leads",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action tags.apply_tag",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action smart_lists.create_smart_list",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params tags.create_tag",
+        "pass": true,
+        "detail": "{\"name\":\"webinar-follow-up\"}"
+      },
+      {
+        "name": "params leads.search_leads",
+        "pass": true,
+        "detail": "{\"source\":\"webinar\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 4,
+      "hit": 4,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "686e3faf-7b94-485e-b5a6-0447306c6edc",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Create a tag called webinar-follow-up and put it on the contact record of everyone whose lead came in from a webinar and is still open (not converted or disqualified). Then make a contacts smart list named 'Webinar Follow-up' that pulls in everyone with that tag.",
+      "ttfurMs": 1570,
+      "ttftTextMs": 1570,
+      "firstActionMs": 2788,
+      "e2eMs": 13102,
+      "llmCalls": [
+        {
+          "ms": 2787,
+          "ttftMs": 1570,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 187,
+            "cacheRead": 112993,
+            "cacheWrite": 159
+          },
+          "costUSD": 0.049748200000000006
+        },
+        {
+          "ms": 1198,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 58,
+            "cacheRead": 113152,
+            "cacheWrite": 1063
+          },
+          "costUSD": 0.0517438
+        },
+        {
+          "ms": 4220,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 552,
+            "cacheRead": 114215,
+            "cacheWrite": 147
+          },
+          "costUSD": 0.057469
+        },
+        {
+          "ms": 1698,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 59,
+            "cacheRead": 114362,
+            "cacheWrite": 1336
+          },
+          "costUSD": 0.0536128
+        },
+        {
+          "ms": 3182,
+          "ttftMs": 3181,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 289,
+            "cacheRead": 115698,
+            "cacheWrite": 104
+          },
+          "costUSD": 0.05258720000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "source": "webinar",
+            "status": [
+              "new",
+              "contacted",
+              "qualified"
+            ],
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.46,
+          "confirmed": false
+        },
+        {
+          "action": "tags.list_tags",
+          "input": {
+            "query": "webinar"
+          },
+          "ok": true,
+          "ms": 0.52,
+          "confirmed": false
+        },
+        {
+          "action": "tags.create_tag",
+          "input": {
+            "name": "webinar-follow-up"
+          },
+          "ok": true,
+          "ms": 2.02,
+          "confirmed": false
+        },
+        {
+          "action": "tags.apply_tag",
+          "input": {
+            "tag": "tag_008",
+            "recordType": "contacts",
+            "recordId": "con_032"
+          },
+          "ok": true,
+          "ms": 4.92,
+          "confirmed": false
+        },
+        {
+          "action": "tags.apply_tag",
+          "input": {
+            "tag": "tag_008",
+            "recordType": "contacts",
+            "recordId": "con_056"
+          },
+          "ok": true,
+          "ms": 2.05,
+          "confirmed": false
+        },
+        {
+          "action": "tags.apply_tag",
+          "input": {
+            "tag": "tag_008",
+            "recordType": "contacts",
+            "recordId": "con_077"
+          },
+          "ok": true,
+          "ms": 1.62,
+          "confirmed": false
+        },
+        {
+          "action": "tags.apply_tag",
+          "input": {
+            "tag": "tag_008",
+            "recordType": "contacts",
+            "recordId": "con_009"
+          },
+          "ok": true,
+          "ms": 1.73,
+          "confirmed": false
+        },
+        {
+          "action": "smart_lists.create_smart_list",
+          "input": {
+            "name": "Webinar Follow-up",
+            "targetTable": "contacts",
+            "rules": [
+              {
+                "field": "tags",
+                "op": "contains",
+                "value": "webinar-follow-up"
+              }
+            ]
+          },
+          "ok": true,
+          "ms": 2.04,
+          "confirmed": false
+        },
+        {
+          "action": "smart_lists.count_smart_list",
+          "input": {
+            "id": "sl_008"
+          },
+          "ok": true,
+          "ms": 0.96,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 1145,
+        "cache_creation_input_tokens": 2809,
+        "cache_read_input_tokens": 570420
+      },
+      "costUSD": 0.265161,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I created the **webinar-follow-up** tag (tag_008) and put it on the contact records of all 4 people with open webinar leads. I also made the **Webinar Follow-up** contacts smart list (sl_008), which picks up anyone with that tag. It currently has 4 contacts.\n\n**Tagged contacts:**\n| Contact | Contact ID | Lead | Lead status |\n|---|---|---|---|\n| Jack Rossi | con_032 | ld_015 | new |\n| Chloe Garcia | con_056 | ld_028 | qualified |\n| Noah Rossi | con_077 | ld_036 | contacted |\n| Elena Smith | con_009 | ld_043 | new |\n\nContacts whose webinar leads were converted or disqualified didn't get the tag. Because the smart list updates automatically, anyone you tag later will show up in it on its own.",
+      "progress": [],
+      "calls": 5
+    }
+  ]
+}

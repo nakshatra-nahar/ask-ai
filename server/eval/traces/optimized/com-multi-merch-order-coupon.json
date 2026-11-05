@@ -1,0 +1,275 @@
+{
+  "scenario": {
+    "id": "com-multi-merch-order-coupon",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Priya Okafor wants two black hoodies and three coffee mugs shipped to 286 Main St, Brooklyn NY 11201. Use the MERCH5 code and submit the order."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action orders.create_order",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action orders.add_order_line_item",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action orders.apply_coupon_to_order",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action orders.submit_order",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params orders.apply_coupon_to_order",
+        "pass": true,
+        "detail": "{\"code\":\"MERCH5\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 4,
+      "hit": 4,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "dc203450-1458-44e5-ba3d-1e55bc05ab51",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Priya Okafor wants two black hoodies and three coffee mugs shipped to 286 Main St, Brooklyn NY 11201. Use the MERCH5 code and submit the order.",
+      "ttfurMs": 1966,
+      "ttftTextMs": 1966,
+      "firstActionMs": 3869,
+      "e2eMs": 17173,
+      "llmCalls": [
+        {
+          "ms": 3864,
+          "ttftMs": 1962,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 275,
+            "cacheRead": 5235,
+            "cacheWrite": 2560
+          },
+          "costUSD": 0.02041
+        },
+        {
+          "ms": 4046,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 152,
+            "cacheRead": 7795,
+            "cacheWrite": 981
+          },
+          "costUSD": 0.011071
+        },
+        {
+          "ms": 2454,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 219,
+            "cacheRead": 8776,
+            "cacheWrite": 309
+          },
+          "costUSD": 0.0094434
+        },
+        {
+          "ms": 1688,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 101,
+            "cacheRead": 9085,
+            "cacheWrite": 884
+          },
+          "costUSD": 0.010082
+        },
+        {
+          "ms": 1591,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 85,
+            "cacheRead": 9969,
+            "cacheWrite": 477
+          },
+          "costUSD": 0.0080806
+        },
+        {
+          "ms": 3492,
+          "ttftMs": 3487,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 319,
+            "cacheRead": 10446,
+            "cacheWrite": 486
+          },
+          "costUSD": 0.012996400000000002
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Priya Okafor"
+          },
+          "ok": true,
+          "ms": 0.38,
+          "confirmed": false
+        },
+        {
+          "action": "products.search_products",
+          "input": {
+            "query": "hoodie"
+          },
+          "ok": true,
+          "ms": 1.09,
+          "confirmed": false
+        },
+        {
+          "action": "products.search_products",
+          "input": {
+            "query": "mug"
+          },
+          "ok": true,
+          "ms": 0.07,
+          "confirmed": false
+        },
+        {
+          "action": "orders.create_order",
+          "input": {
+            "contactId": "con_007",
+            "shippingAddress": {
+              "name": "Priya Okafor",
+              "line1": "286 Main St",
+              "city": "Brooklyn",
+              "state": "NY",
+              "postalCode": "11201",
+              "country": "US"
+            }
+          },
+          "ok": true,
+          "ms": 7.88,
+          "confirmed": false
+        },
+        {
+          "action": "orders.add_order_line_item",
+          "input": {
+            "id": "ord_013",
+            "productId": "prd_008",
+            "variantId": "pvr_005",
+            "quantity": 2
+          },
+          "ok": true,
+          "ms": 6.3,
+          "confirmed": false
+        },
+        {
+          "action": "orders.add_order_line_item",
+          "input": {
+            "id": "ord_013",
+            "productId": "prd_009",
+            "quantity": 3
+          },
+          "ok": true,
+          "ms": 4.71,
+          "confirmed": false
+        },
+        {
+          "action": "orders.apply_coupon_to_order",
+          "input": {
+            "id": "ord_013",
+            "code": "MERCH5"
+          },
+          "ok": true,
+          "ms": 6.66,
+          "confirmed": false
+        },
+        {
+          "action": "orders.submit_order",
+          "input": {
+            "id": "ord_013"
+          },
+          "ok": true,
+          "ms": 5.13,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 14,
+        "output_tokens": 1151,
+        "cache_creation_input_tokens": 5697,
+        "cache_read_input_tokens": 51306
+      },
+      "costUSD": 0.072083,
+      "retries": 0,
+      "retrieved": [
+        "orders.apply_coupon_to_order",
+        "orders.search_orders",
+        "conversations.list_unanswered_conversations",
+        "orders.set_order_shipping_address",
+        "coupons.validate_coupon",
+        "orders.submit_order",
+        "contacts.add_contact_relationship",
+        "prices.set_default_price",
+        "orders.create_order",
+        "orders.get_order",
+        "availability.remove_time_block",
+        "coupons.create_coupon",
+        "availability.block_time",
+        "coupons.search_coupons",
+        "coupons.deactivate_coupon",
+        "quotes.apply_quote_discount",
+        "coupons.get_coupon",
+        "subscriptions.create_subscription",
+        "products.archive_product",
+        "tax_rules.calculate_tax",
+        "tax_rules.set_product_tax_category",
+        "prices.set_price_currency",
+        "communities.update_community_guidelines",
+        "surveys.submit_survey_response"
+      ],
+      "status": "completed",
+      "finalText": "I placed Priya Okafor's order (con_007). It's **ORD-1013** (ord_013), and the MERCH5 code brought the total to **$150.00 USD**.\n\n| Item | Qty | Unit | Amount |\n|---|---|---|---|\n| Branded Hoodie — Black (HOOD-BLK) | 2 | $55 | $110 |\n| Ceramic Coffee Mug (MUG-11OZ) | 3 | $15 | $45 |\n| **Subtotal** | | | $155 |\n| MERCH5 discount (coupon cpn_006) | | | −$5 |\n| **Total** | | | **$150** |\n\n- **Shipping to:** Priya Okafor, 286 Main St, Brooklyn, NY 11201, US. I filled in the country as US.\n- **Stock and coupon:** Submitting the order set aside the 2 hoodies and 3 mugs in stock and used up one MERCH5 redemption.",
+      "progress": [],
+      "retrievalMs": 4.44,
+      "calls": 6
+    }
+  ]
+}

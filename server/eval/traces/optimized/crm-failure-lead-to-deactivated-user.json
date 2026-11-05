@@ -1,0 +1,142 @@
+{
+  "scenario": {
+    "id": "crm-failure-lead-to-deactivated-user",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Hand Olivia Clark's lead over to Chris Park."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid users.reactivate_user",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(deactivat|inactive|not active|no longer (active|with)|can't|cannot|couldn't|could not|unable)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "356d66d3-c661-4f69-ba9e-582be0e31951",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Hand Olivia Clark's lead over to Chris Park.",
+      "ttfurMs": 717,
+      "ttftTextMs": 717,
+      "firstActionMs": 1954,
+      "e2eMs": 4949,
+      "llmCalls": [
+        {
+          "ms": 1951,
+          "ttftMs": 714,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 185,
+            "cacheRead": 5235,
+            "cacheWrite": 2709
+          },
+          "costUSD": 0.019355
+        },
+        {
+          "ms": 2995,
+          "ttftMs": 2994,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 260,
+            "cacheRead": 7944,
+            "cacheWrite": 1591
+          },
+          "costUSD": 0.0163406
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "query": "Olivia Clark"
+          },
+          "ok": true,
+          "ms": 0.36,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 0.16,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 445,
+        "cache_creation_input_tokens": 4300,
+        "cache_read_input_tokens": 13179
+      },
+      "costUSD": 0.035696,
+      "retries": 0,
+      "retrieved": [
+        "conversations.assign_conversation_owner",
+        "leads.search_leads",
+        "leads.convert_lead",
+        "appointments.assign_appointment_host",
+        "leads.record_qualification_answers",
+        "leads.assign_lead_owner",
+        "companies.assign_account_manager",
+        "leads.update_lead",
+        "smart_lists.create_smart_list",
+        "tasks.complete_task",
+        "conversations.mark_conversation_read",
+        "conversations.mark_conversation_unread",
+        "reports.compare_report_periods",
+        "reports.update_report_filters",
+        "opportunities.mark_opportunity_lost",
+        "opportunities.mark_opportunity_won",
+        "opportunities.create_opportunity",
+        "appointments.mark_no_show",
+        "appointments.mark_completed",
+        "orders.fulfill_order",
+        "events.check_in_attendee",
+        "forms.reorder_form_fields",
+        "contacts.merge_contacts",
+        "forms.update_form_field"
+      ],
+      "status": "completed",
+      "finalText": "I didn't reassign the lead, because Chris Park's account is deactivated (he's listed as \"Former AE\") and leads can only go to active users.\n\n**Lead:** Olivia Clark (ld_025) is still owned by **Priya Shah** (usr_003). It's qualified, with a score of 62, from Google Ads.\n\n**Options:**\n- **Hand it to another active sales rep:** Jordan Lee (usr_002), Dana Cruz (usr_005), or Marcus Reed (usr_004, currently out of office).\n- **Reactivate Chris Park first, then reassign:** this would give him access to the platform again, so only do it if he's actually returning.\n\nTell me which option you want and I'll make the change.",
+      "progress": [],
+      "retrievalMs": 2.96,
+      "calls": 2
+    }
+  ]
+}

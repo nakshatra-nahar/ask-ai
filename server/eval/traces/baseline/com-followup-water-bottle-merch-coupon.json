@@ -1,0 +1,268 @@
+{
+  "scenario": {
+    "id": "com-followup-water-bottle-merch-coupon",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "New product: Insulated Water Bottle, SKU BTL-750. It's a physical item, we have 50 in stock, and it sells for $22."
+      },
+      {
+        "user": "Oh, and make sure the MERCH5 code works on it too."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action products.create_product",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action prices.create_price",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action coupons.restrict_coupon_to_products",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params products.create_product",
+        "pass": true,
+        "detail": "{\"sku\":\"BTL-750\"}"
+      },
+      {
+        "name": "params prices.create_price",
+        "pass": true,
+        "detail": "{\"amount\":22}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "5050a591-b0c9-4a79-b520-54ade97d46a3",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "New product: Insulated Water Bottle, SKU BTL-750. It's a physical item, we have 50 in stock, and it sells for $22.",
+      "ttfurMs": 1049,
+      "ttftTextMs": 1049,
+      "firstActionMs": 2156,
+      "e2eMs": 6017,
+      "llmCalls": [
+        {
+          "ms": 2149,
+          "ttftMs": 1049,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 170,
+            "cacheRead": 112993,
+            "cacheWrite": 119
+          },
+          "costUSD": 0.04920820000000001
+        },
+        {
+          "ms": 1507,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 123,
+            "cacheRead": 113112,
+            "cacheWrite": 320
+          },
+          "costUSD": 0.049312800000000004
+        },
+        {
+          "ms": 2348,
+          "ttftMs": 2347,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 154,
+            "cacheRead": 113432,
+            "cacheWrite": 247
+          },
+          "costUSD": 0.049695800000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "products.create_product",
+          "input": {
+            "name": "Insulated Water Bottle",
+            "sku": "BTL-750",
+            "type": "physical",
+            "quantity": 50,
+            "trackInventory": true
+          },
+          "ok": true,
+          "ms": 6.73,
+          "confirmed": false
+        },
+        {
+          "action": "prices.create_price",
+          "input": {
+            "productId": "prd_013",
+            "amount": 22,
+            "currency": "USD",
+            "interval": "one_time"
+          },
+          "ok": true,
+          "ms": 5.81,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 447,
+        "cache_creation_input_tokens": 686,
+        "cache_read_input_tokens": 339537
+      },
+      "costUSD": 0.148217,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I added **Insulated Water Bottle** (prd_013) to the catalog with a $22 price.\n\n- **SKU:** BTL-750\n- **Type:** physical\n- **Stock:** 50 on hand. Stock tracking is on, so orders will reserve and reduce this count.\n- **Tax category:** general (the standard setting)\n- **Price:** $22.00 USD, one-time (pri_019). It's the product's only price, so it should be the default used on orders.",
+      "progress": [],
+      "calls": 3
+    },
+    {
+      "sessionId": "5050a591-b0c9-4a79-b520-54ade97d46a3",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Oh, and make sure the MERCH5 code works on it too.",
+      "ttfurMs": 804,
+      "ttftTextMs": 804,
+      "firstActionMs": 1528,
+      "e2eMs": 6657,
+      "llmCalls": [
+        {
+          "ms": 1528,
+          "ttftMs": 804,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 74,
+            "cacheRead": 113679,
+            "cacheWrite": 177
+          },
+          "costUSD": 0.04785260000000001
+        },
+        {
+          "ms": 1392,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 107,
+            "cacheRead": 113856,
+            "cacheWrite": 254
+          },
+          "costUSD": 0.0489604
+        },
+        {
+          "ms": 1414,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 109,
+            "cacheRead": 114110,
+            "cacheWrite": 281
+          },
+          "costUSD": 0.049237
+        },
+        {
+          "ms": 2315,
+          "ttftMs": 2314,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 133,
+            "cacheRead": 114391,
+            "cacheWrite": 183
+          },
+          "costUSD": 0.0493394
+        }
+      ],
+      "actions": [
+        {
+          "action": "coupons.search_coupons",
+          "input": {
+            "query": "MERCH5"
+          },
+          "ok": true,
+          "ms": 0.15,
+          "confirmed": false
+        },
+        {
+          "action": "coupons.restrict_coupon_to_products",
+          "input": {
+            "id": "cpn_006",
+            "productIds": [
+              "prd_007",
+              "prd_008",
+              "prd_009",
+              "prd_013"
+            ]
+          },
+          "ok": true,
+          "ms": 6.26,
+          "confirmed": false
+        },
+        {
+          "action": "coupons.validate_coupon",
+          "input": {
+            "code": "MERCH5",
+            "productIds": [
+              "prd_013"
+            ],
+            "amount": 22
+          },
+          "ok": true,
+          "ms": 0.8,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 423,
+        "cache_creation_input_tokens": 895,
+        "cache_read_input_tokens": 456036
+      },
+      "costUSD": 0.195389,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "MERCH5 (cpn_006) now works on the Insulated Water Bottle (prd_013). I tested it on a $22 basket with just the bottle, and it took off $5.\n\n- **Products it applies to:** prd_007, prd_008 and prd_009 as before, plus the bottle (prd_013).\n- **Coupon status:** active, with no date limits. It has been used 12 of 100 times.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

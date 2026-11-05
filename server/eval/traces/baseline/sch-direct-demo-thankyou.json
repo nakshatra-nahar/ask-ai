@@ -1,0 +1,131 @@
+{
+  "scenario": {
+    "id": "sch-direct-demo-thankyou",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Change the thank-you message on the Product Demo booking page to: \"Thanks for booking! You'll get a short agenda from our team before the demo.\""
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action booking_pages.set_booking_confirmation_message",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params booking_pages.set_booking_confirmation_message",
+        "pass": true,
+        "detail": "{\"id\":\"bp_002\",\"message\":\"/short agenda/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "8dd9b88c-508b-4060-b224-c0b37c0c8b4a",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Change the thank-you message on the Product Demo booking page to: \"Thanks for booking! You'll get a short agenda from our team before the demo.\"",
+      "ttfurMs": 1503,
+      "ttftTextMs": 1503,
+      "firstActionMs": 2348,
+      "e2eMs": 7577,
+      "llmCalls": [
+        {
+          "ms": 2347,
+          "ttftMs": 1503,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 85,
+            "cacheRead": 112993,
+            "cacheWrite": 118
+          },
+          "costUSD": 0.0475032
+        },
+        {
+          "ms": 2295,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 109,
+            "cacheRead": 113111,
+            "cacheWrite": 377
+          },
+          "costUSD": 0.049317400000000004
+        },
+        {
+          "ms": 2928,
+          "ttftMs": 2924,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 156,
+            "cacheRead": 113488,
+            "cacheWrite": 386
+          },
+          "costUSD": 0.050453200000000004
+        }
+      ],
+      "actions": [
+        {
+          "action": "booking_pages.list_booking_pages",
+          "input": {
+            "query": "Product Demo"
+          },
+          "ok": true,
+          "ms": 0.62,
+          "confirmed": false
+        },
+        {
+          "action": "booking_pages.set_booking_confirmation_message",
+          "input": {
+            "id": "bp_002",
+            "message": "Thanks for booking! You'll get a short agenda from our team before the demo."
+          },
+          "ok": true,
+          "ms": 6.42,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 350,
+        "cache_creation_input_tokens": 881,
+        "cache_read_input_tokens": 339592
+      },
+      "costUSD": 0.147274,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I've changed the thank-you message on the **Product Demo** booking page (bp_002).\n\n- **New message:** \"Thanks for booking! You'll get a short agenda from our team before the demo.\"\n- **Old message:** \"Thanks! Your booking is confirmed. A calendar invite is on its way.\"\n\nThe page is published, so visitors to https://book.acme.test/product-demo see the new message now. It always shows after someone books, because the page doesn't send people to a different web address afterwards.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "scenario": {
+    "id": "crm-cond-stale-deals",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "Go through the open deals in the Sales Pipeline whose expected close date has already passed. If one is still in New Lead or Contacted, mark it lost with the reason 'stale'. If it's further along than that, just push its close date to the end of this month."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action opportunities.search_opportunities",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action opportunities.mark_opportunity_lost",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action opportunities.set_expected_close_date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid opportunities.mark_opportunity_won",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params opportunities.mark_opportunity_lost",
+        "pass": true,
+        "detail": "{\"id\":\"opp_011\",\"reason\":\"/stale/i\"}"
+      },
+      {
+        "name": "params opportunities.set_expected_close_date",
+        "pass": true,
+        "detail": "{\"id\":\"opp_013\",\"expectedCloseDate\":\"2026-11-30\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "0afb475d-3a56-498a-9d98-44a33b735232",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Go through the open deals in the Sales Pipeline whose expected close date has already passed. If one is still in New Lead or Contacted, mark it lost with the reason 'stale'. If it's further along than that, just push its close date to the end of this month.",
+      "ttfurMs": 1085,
+      "ttftTextMs": 1085,
+      "firstActionMs": 1975,
+      "e2eMs": 8433,
+      "llmCalls": [
+        {
+          "ms": 1970,
+          "ttftMs": 1081,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 103,
+            "cacheRead": 5235,
+            "cacheWrite": 3531
+          },
+          "costUSD": 0.021825
+        },
+        {
+          "ms": 1702,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 122,
+            "cacheRead": 8766,
+            "cacheWrite": 747
+          },
+          "costUSD": 0.009689399999999999
+        },
+        {
+          "ms": 2168,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 207,
+            "cacheRead": 9513,
+            "cacheWrite": 422
+          },
+          "costUSD": 0.010063200000000001
+        },
+        {
+          "ms": 2576,
+          "ttftMs": 2573,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 211,
+            "cacheRead": 9935,
+            "cacheWrite": 577
+          },
+          "costUSD": 0.011087
+        }
+      ],
+      "actions": [
+        {
+          "action": "pipelines.list_pipelines",
+          "input": {},
+          "ok": true,
+          "ms": 1.02,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.search_opportunities",
+          "input": {
+            "status": "open",
+            "pipelineId": "pl_001",
+            "expectedCloseDateBefore": "2026-11-03",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.3,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.mark_opportunity_lost",
+          "input": {
+            "id": "opp_011",
+            "reason": "stale"
+          },
+          "ok": true,
+          "ms": 6.42,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.set_expected_close_date",
+          "input": {
+            "id": "opp_013",
+            "expectedCloseDate": "2026-11-30"
+          },
+          "ok": true,
+          "ms": 4.49,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 643,
+        "cache_creation_input_tokens": 5277,
+        "cache_read_input_tokens": 33449
+      },
+      "costUSD": 0.052665,
+      "retries": 0,
+      "retrieved": [
+        "opportunities.create_opportunity",
+        "leads.search_leads",
+        "opportunities.set_expected_close_date",
+        "leads.create_lead",
+        "opportunities.mark_opportunity_lost",
+        "campaigns.pause_campaign",
+        "reports.compare_report_periods",
+        "opportunities.search_opportunities",
+        "contacts.search_contacts",
+        "forms.create_form",
+        "opportunities.move_opportunity_to_stage",
+        "leads.convert_lead",
+        "opportunities.reopen_opportunity",
+        "sms.send_sms",
+        "surveys.close_survey",
+        "workflows.validate_workflow",
+        "email.send_email",
+        "reports.set_report_date_range",
+        "pipelines.create_pipeline",
+        "leads.update_lead",
+        "pipelines.archive_pipeline",
+        "reports.create_report",
+        "leads.disqualify_lead",
+        "pipelines.remove_pipeline_stage"
+      ],
+      "status": "completed",
+      "finalText": "I found 2 open deals in the Sales Pipeline with close dates before today (2026-11-04), and I've updated both:\n\n| Deal | Stage | Old close date | What I did |\n|---|---|---|---|\n| Daniel Martin - Marketing Automation Setup (opp_011, $7,400) | Contacted | 2026-11-01 | **Marked lost**, reason \"stale\" |\n| Elena Williams - Annual Membership (opp_013, $3,900) | Qualified | 2026-10-28 | **Moved the close date to 2026-11-30** (still open) |\n\nNo other open deals in this pipeline were past their close date.",
+      "progress": [],
+      "retrievalMs": 3.86,
+      "calls": 4
+    }
+  ]
+}

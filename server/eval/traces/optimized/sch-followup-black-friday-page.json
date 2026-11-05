@@ -1,0 +1,333 @@
+{
+  "scenario": {
+    "id": "sch-followup-black-friday-page",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Make a landing page for our Black Friday whitening deal on the Bright Smile Dental site. Slug black-friday-whitening, headline 'Black Friday: 50% off professional whitening'."
+      },
+      {
+        "user": "Give it a hero section and an FAQ section, then put it live."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action landing_pages.create_landing_page",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action landing_pages.add_page_section",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action landing_pages.publish_landing_page",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params landing_pages.create_landing_page",
+        "pass": true,
+        "detail": "{\"slug\":\"black-friday-whitening\",\"websiteId\":\"web_001\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "2200db71-ee40-480f-9b9e-f14299e4b055",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Make a landing page for our Black Friday whitening deal on the Bright Smile Dental site. Slug black-friday-whitening, headline 'Black Friday: 50% off professional whitening'.",
+      "ttfurMs": 1641,
+      "ttftTextMs": 1641,
+      "firstActionMs": 2294,
+      "e2eMs": 6337,
+      "llmCalls": [
+        {
+          "ms": 2291,
+          "ttftMs": 1639,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 178,
+            "cacheRead": 5235,
+            "cacheWrite": 2368
+          },
+          "costUSD": 0.01751
+        },
+        {
+          "ms": 1796,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 141,
+            "cacheRead": 7603,
+            "cacheWrite": 1752
+          },
+          "costUSD": 0.0146292
+        },
+        {
+          "ms": 2240,
+          "ttftMs": 2236,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 171,
+            "cacheRead": 9355,
+            "cacheWrite": 248
+          },
+          "costUSD": 0.00841
+        }
+      ],
+      "actions": [
+        {
+          "action": "websites.list_websites",
+          "input": {},
+          "ok": true,
+          "ms": 0.71,
+          "confirmed": false
+        },
+        {
+          "action": "landing_pages.create_landing_page",
+          "input": {
+            "name": "Black Friday Whitening Deal",
+            "slug": "black-friday-whitening",
+            "headline": "Black Friday: 50% off professional whitening",
+            "websiteId": "web_001"
+          },
+          "ok": true,
+          "ms": 6.58,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 490,
+        "cache_creation_input_tokens": 4368,
+        "cache_read_input_tokens": 22193
+      },
+      "costUSD": 0.040549,
+      "retries": 0,
+      "retrieved": [
+        "landing_pages.create_landing_page",
+        "landing_pages.search_landing_pages",
+        "websites.publish_website",
+        "availability.remove_time_block",
+        "availability.block_time",
+        "websites.add_website_page",
+        "landing_pages.update_page_content",
+        "landing_pages.publish_landing_page",
+        "websites.create_website",
+        "enrollments.suspend_enrollment",
+        "triggers.disable_trigger",
+        "websites.set_website_home_page",
+        "booking_pages.create_booking_page",
+        "websites.unpublish_website",
+        "landing_pages.get_landing_page",
+        "landing_pages.unpublish_landing_page",
+        "websites.set_site_seo_defaults",
+        "funnels.publish_funnel",
+        "opportunities.create_opportunity",
+        "funnels.link_landing_page_to_step",
+        "booking_pages.publish_booking_page",
+        "pipelines.create_pipeline",
+        "booking_pages.update_booking_page_content",
+        "opportunities.update_opportunity_value"
+      ],
+      "status": "completed",
+      "finalText": "I created the landing page as a draft on the Bright Smile Dental site (web_001). It isn't live yet.\n\n- **Black Friday Whitening Deal** (lp_018)\n  - Slug: `black-friday-whitening`\n  - Headline: \"Black Friday: 50% off professional whitening\"\n\n**Before it can go live:** the page needs at least one section added before it can be published. It also has no body text or call-to-action button yet. Send me the copy and a button label and link, like a booking page, and I'll add them and publish it.",
+      "progress": [],
+      "retrievalMs": 2.4,
+      "calls": 3
+    },
+    {
+      "sessionId": "2200db71-ee40-480f-9b9e-f14299e4b055",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Give it a hero section and an FAQ section, then put it live.",
+      "ttfurMs": 1051,
+      "ttftTextMs": 1051,
+      "firstActionMs": 4652,
+      "e2eMs": 6093,
+      "llmCalls": [
+        {
+          "ms": 4648,
+          "ttftMs": 1048,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 438,
+            "cacheRead": 9603,
+            "cacheWrite": 2468
+          },
+          "costUSD": 0.024957200000000002
+        },
+        {
+          "ms": 1439,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 91,
+            "cacheRead": 12071,
+            "cacheWrite": 1307
+          },
+          "costUSD": 0.0131914
+        }
+      ],
+      "actions": [
+        {
+          "action": "landing_pages.add_page_section",
+          "input": {
+            "id": "lp_018",
+            "type": "hero",
+            "heading": "Black Friday: 50% off professional whitening",
+            "content": "Get a brighter smile for less. For Black Friday only, professional in-office whitening at Bright Smile Dental is half price. Book your appointment today."
+          },
+          "ok": true,
+          "ms": 2.08,
+          "confirmed": false
+        },
+        {
+          "action": "landing_pages.add_page_section",
+          "input": {
+            "id": "lp_018",
+            "type": "faq",
+            "heading": "Frequently asked questions",
+            "content": "Q: Who can get the deal? A: New and existing patients.\nQ: How long does whitening take? A: A single in-office visit, usually about an hour.\nQ: Is professional whitening safe? A: Yes. A licensed dental professional does it and protects your gums and enamel.\nQ: How do I claim the offer? A: Book an appointment during the Black Friday promotion and mention the deal."
+          },
+          "ok": true,
+          "ms": 1.5,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 529,
+        "cache_creation_input_tokens": 3775,
+        "cache_read_input_tokens": 21674
+      },
+      "costUSD": 0.038149,
+      "retries": 0,
+      "retrieved": [
+        "landing_pages.add_page_section",
+        "events.add_to_waitlist",
+        "landing_pages.publish_landing_page",
+        "memberships.grant_membership",
+        "courses.reorder_course_sections",
+        "courses.publish_course",
+        "enrollments.enroll_learner",
+        "landing_pages.reorder_page_sections",
+        "workflows.publish_workflow",
+        "courses.add_course_section",
+        "websites.publish_website",
+        "leads.assign_lead_owner",
+        "lessons.move_lesson",
+        "lessons.create_lesson",
+        "lessons.search_lessons",
+        "funnels.publish_funnel",
+        "subscriptions.set_subscription_trial_end",
+        "booking_pages.publish_booking_page",
+        "blogs.publish_post",
+        "forms.publish_form",
+        "lessons.get_lesson",
+        "campaigns.launch_campaign",
+        "landing_pages.get_landing_page",
+        "courses.get_course"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 2.18,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01Wj1TJ225Le5e2ZRARSjBs5",
+          "action": "landing_pages.publish_landing_page",
+          "name": "Publish landing page",
+          "risk": "external",
+          "input": {
+            "id": "lp_018"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "2200db71-ee40-480f-9b9e-f14299e4b055",
+      "turn": 2,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 4195,
+      "firstActionMs": 6,
+      "e2eMs": 4196,
+      "llmCalls": [
+        {
+          "ms": 4190,
+          "ttftMs": 4189,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 299,
+            "cacheRead": 13378,
+            "cacheWrite": 503
+          },
+          "costUSD": 0.0138542
+        }
+      ],
+      "actions": [
+        {
+          "action": "landing_pages.publish_landing_page",
+          "input": {
+            "id": "lp_018"
+          },
+          "ok": true,
+          "ms": 6.38,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 299,
+        "cache_creation_input_tokens": 503,
+        "cache_read_input_tokens": 13378
+      },
+      "costUSD": 0.013854,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "The **Black Friday Whitening Deal** page (lp_018) is now live at https://brightsmiledental.com/black-friday-whitening\n\n**Sections added:**\n- **Hero** (lsec_028): \"Black Friday: 50% off professional whitening.\" It says the offer is for Black Friday only and asks visitors to book.\n- **FAQ** (lsec_029): four questions on who can get the deal, how long whitening takes, whether it's safe and how to claim the offer.\n\n**Please check:** I wrote the section text myself, and it's now public. The FAQ says the deal is for new and existing patients, takes one visit of about an hour, and is claimed by booking and mentioning the deal. Tell me what to change and I'll update it.\n\nThe page still has no button. Send me a booking link and I'll add one.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

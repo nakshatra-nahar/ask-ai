@@ -1,0 +1,271 @@
+{
+  "scenario": {
+    "id": "com-followup-invoice-add-mugs-send",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Make an invoice for Ethan Garcia: one 60-minute strategy consultation at $150, due November 30. Don't send it yet."
+      },
+      {
+        "user": "Actually add two coffee mugs at $15 each as well, then send it to him."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action invoices.create_invoice",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action invoices.add_invoice_line_item",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action invoices.issue_invoice",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "475795d1-bb1b-444d-9d1b-baf1418f57c0",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Make an invoice for Ethan Garcia: one 60-minute strategy consultation at $150, due November 30. Don't send it yet.",
+      "ttfurMs": 2137,
+      "ttftTextMs": 2137,
+      "firstActionMs": 2888,
+      "e2eMs": 9680,
+      "llmCalls": [
+        {
+          "ms": 2887,
+          "ttftMs": 2137,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 84,
+            "cacheRead": 112993,
+            "cacheWrite": 117
+          },
+          "costUSD": 0.047478200000000005
+        },
+        {
+          "ms": 1856,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 146,
+            "cacheRead": 113110,
+            "cacheWrite": 305
+          },
+          "costUSD": 0.049697
+        },
+        {
+          "ms": 4928,
+          "ttftMs": 4920,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 157,
+            "cacheRead": 113415,
+            "cacheWrite": 390
+          },
+          "costUSD": 0.050464
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Ethan Garcia"
+          },
+          "ok": true,
+          "ms": 0.37,
+          "confirmed": false
+        },
+        {
+          "action": "invoices.create_invoice",
+          "input": {
+            "contactId": "con_024",
+            "dueDate": "2026-11-30",
+            "lineItems": [
+              {
+                "description": "Strategy consultation (60 minutes)",
+                "quantity": 1,
+                "unitPrice": 150
+              }
+            ]
+          },
+          "ok": true,
+          "ms": 7.29,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 387,
+        "cache_creation_input_tokens": 812,
+        "cache_read_input_tokens": 339518
+      },
+      "costUSD": 0.147639,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I created a draft invoice **INV-1031** (inv_031) for Ethan Garcia (con_024). It hasn't been sent.\n\n- **Line item:** Strategy consultation (60 minutes), 1 × $150.00\n- **Total:** $150.00 USD, with no discount or tax\n- **Due:** 2026-11-30\n- **Status:** Draft\n\nTo send it, I can issue it whenever you're ready. It would go to ethan.garcia19@example.com.",
+      "progress": [],
+      "calls": 3
+    },
+    {
+      "sessionId": "475795d1-bb1b-444d-9d1b-baf1418f57c0",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Actually add two coffee mugs at $15 each as well, then send it to him.",
+      "ttfurMs": 1467,
+      "ttftTextMs": 1467,
+      "firstActionMs": 2476,
+      "e2eMs": 4262,
+      "llmCalls": [
+        {
+          "ms": 2469,
+          "ttftMs": 1467,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 155,
+            "cacheRead": 113805,
+            "cacheWrite": 184
+          },
+          "costUSD": 0.049558
+        },
+        {
+          "ms": 1786,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 57,
+            "cacheRead": 113989,
+            "cacheWrite": 444
+          },
+          "costUSD": 0.0489636
+        }
+      ],
+      "actions": [
+        {
+          "action": "invoices.add_invoice_line_item",
+          "input": {
+            "id": "inv_031",
+            "description": "Coffee mug",
+            "quantity": 2,
+            "unitPrice": 15
+          },
+          "ok": true,
+          "ms": 6.37,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 212,
+        "cache_creation_input_tokens": 628,
+        "cache_read_input_tokens": 227794
+      },
+      "costUSD": 0.098522,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01PrfEyimzGJG4XdpCcpgCDb",
+          "action": "invoices.issue_invoice",
+          "name": "Issue invoice",
+          "risk": "external",
+          "input": {
+            "id": "inv_031"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "475795d1-bb1b-444d-9d1b-baf1418f57c0",
+      "turn": 2,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 7,
+      "ttftTextMs": 3446,
+      "firstActionMs": 7,
+      "e2eMs": 3450,
+      "llmCalls": [
+        {
+          "ms": 3443,
+          "ttftMs": 3440,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 203,
+            "cacheRead": 114433,
+            "cacheWrite": 391
+          },
+          "costUSD": 0.05179620000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "invoices.issue_invoice",
+          "input": {
+            "id": "inv_031"
+          },
+          "ok": true,
+          "ms": 6.54,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 203,
+        "cache_creation_input_tokens": 391,
+        "cache_read_input_tokens": 114433
+      },
+      "costUSD": 0.051796,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I added the two coffee mugs to **INV-1031** (inv_031) and sent it to Ethan Garcia at ethan.garcia19@example.com.\n\n| Item | Qty | Unit | Amount |\n|---|---|---|---|\n| Strategy consultation (60 minutes) | 1 | $150.00 | $150.00 |\n| Coffee mug | 2 | $15.00 | $30.00 |\n| **Total** | | | **$180.00 USD** |\n\n- **Status:** Sent, dated 2026-11-04\n- **Due:** 2026-11-30\n- **Balance:** $180.00",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

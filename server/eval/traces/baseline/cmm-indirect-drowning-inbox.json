@@ -1,0 +1,245 @@
+{
+  "scenario": {
+    "id": "cmm-indirect-drowning-inbox",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "I'm drowning in unanswered messages. Marcus is out this week and his threads are just sitting there — can you sort that out?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action conversations.assign_conversation_owner",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "9d72d5b0-9f60-4db3-af50-382338963799",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "I'm drowning in unanswered messages. Marcus is out this week and his threads are just sitting there — can you sort that out?",
+      "ttfurMs": 2938,
+      "ttftTextMs": 2938,
+      "firstActionMs": 3924,
+      "e2eMs": 25017,
+      "llmCalls": [
+        {
+          "ms": 3924,
+          "ttftMs": 2938,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 169,
+            "cacheRead": 112993,
+            "cacheWrite": 112
+          },
+          "costUSD": 0.0491532
+        },
+        {
+          "ms": 2989,
+          "ttftMs": 2292,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 220,
+            "cacheRead": 113105,
+            "cacheWrite": 4944
+          },
+          "costUSD": 0.07437
+        },
+        {
+          "ms": 1847,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 56,
+            "cacheRead": 118049,
+            "cacheWrite": 1075
+          },
+          "costUSD": 0.05372260000000001
+        },
+        {
+          "ms": 9231,
+          "ttftMs": 4383,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 1044,
+            "cacheRead": 119124,
+            "cacheWrite": 445
+          },
+          "costUSD": 0.07076260000000001
+        },
+        {
+          "ms": 7002,
+          "ttftMs": 6998,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 584,
+            "cacheRead": 119569,
+            "cacheWrite": 3128
+          },
+          "costUSD": 0.0751556
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Marcus"
+          },
+          "ok": true,
+          "ms": 0.18,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.list_unanswered_conversations",
+          "input": {
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.4,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "roles": "sales_rep",
+            "status": "active",
+            "outOfOffice": false
+          },
+          "ok": true,
+          "ms": 0.28,
+          "confirmed": false
+        },
+        {
+          "action": "teams.list_teams",
+          "input": {},
+          "ok": true,
+          "ms": 0.34,
+          "confirmed": false
+        },
+        {
+          "action": "teams.get_team_workload",
+          "input": {
+            "id": "tm_001"
+          },
+          "ok": true,
+          "ms": 0.79,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_024",
+            "ownerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 5.92,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_004",
+            "ownerId": "usr_005"
+          },
+          "ok": true,
+          "ms": 5.13,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_027",
+            "ownerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 4.12,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.add_internal_comment",
+          "input": {
+            "id": "cnv_024",
+            "body": "Reassigned from Marcus (out of office this week). Ethan has been waiting ~12 days and said \"tomorrow afternoon works for a call\" — please reply and get a call booked ASAP.",
+            "mentionUserIds": [
+              "usr_003"
+            ]
+          },
+          "ok": true,
+          "ms": 2.65,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.add_internal_comment",
+          "input": {
+            "id": "cnv_004",
+            "body": "Reassigned from Marcus (out of office this week). Priya Okafor asked about pricing ~4 days ago — please follow up.",
+            "mentionUserIds": [
+              "usr_005"
+            ]
+          },
+          "ok": true,
+          "ms": 1.42,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.add_internal_comment",
+          "input": {
+            "id": "cnv_027",
+            "body": "Reassigned from Marcus (out of office this week). Michael is asking about availability this Friday afternoon (Nov 6) — please reply today.",
+            "mentionUserIds": [
+              "usr_003"
+            ]
+          },
+          "ok": true,
+          "ms": 1.5,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 2073,
+        "cache_creation_input_tokens": 9704,
+        "cache_read_input_tokens": 582840
+      },
+      "costUSD": 0.323164,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I moved all 3 of Marcus Reed's unanswered threads to Priya Shah and Dana Cruz. On each one I left an internal note that @mentions the new owner and says what the customer is waiting for. No replies have been sent to customers yet.\n\n| Conversation | Contact | Waiting | What they asked | New owner |\n|---|---|---|---|---|\n| cnv_024 (email) | Ethan Lee | ~12.7 days | \"Tomorrow afternoon works for a call.\" | Priya Shah (usr_003) |\n| cnv_004 (email) | Priya Okafor | ~4 days | \"What does pricing look like?\" | Dana Cruz (usr_005) |\n| cnv_027 (email) | Michael Smith | ~9 hrs | Any availability this Friday afternoon (Nov 6)? | Priya Shah (usr_003) |\n\n**Why them:** Priya, Dana and Jordan Lee are the only sales reps who are active and in the office. Priya had the shortest queue of unanswered threads (3), then Dana (5), then Jordan (7), so Jordan got none.\n\n**The rest of the backlog:** 18 conversations are still waiting on a reply across the team. Jordan has 7, and his oldest is Fatima Martin at about 10 days. Two of the threads aren't sales questions and might be better handled by Support:\n- **cnv_028, Olivia Martin:** says she was charged twice this month.\n- **cnv_031, David Brown:** a webchat asking about his quote, waiting about 4 days.\n\nI can move those two to Support or spread Jordan's oldest threads around. I can also draft replies for any of these threads.",
+      "progress": [],
+      "calls": 5
+    }
+  ]
+}

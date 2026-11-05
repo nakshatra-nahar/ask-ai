@@ -1,0 +1,142 @@
+{
+  "scenario": {
+    "id": "sch-direct-smm-drip",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "In Social Media Marketing 101, 'Planning a Content Calendar' should unlock 3 days after someone enrolls instead of a week."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action lessons.set_lesson_release_schedule",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params lessons.set_lesson_release_schedule",
+        "pass": true,
+        "detail": "{\"id\":\"les_004\",\"mode\":\"drip\",\"daysAfterEnrollment\":3}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "f89cc5a8-f7b0-478b-891b-556f72d2ea90",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "In Social Media Marketing 101, 'Planning a Content Calendar' should unlock 3 days after someone enrolls instead of a week.",
+      "ttfurMs": 755,
+      "ttftTextMs": 755,
+      "firstActionMs": 1980,
+      "e2eMs": 4690,
+      "llmCalls": [
+        {
+          "ms": 1980,
+          "ttftMs": 755,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 161,
+            "cacheRead": 112993,
+            "cacheWrite": 118
+          },
+          "costUSD": 0.0490232
+        },
+        {
+          "ms": 1445,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 114,
+            "cacheRead": 113111,
+            "cacheWrite": 730
+          },
+          "costUSD": 0.0511824
+        },
+        {
+          "ms": 1257,
+          "ttftMs": 1253,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 89,
+            "cacheRead": 113841,
+            "cacheWrite": 351
+          },
+          "costUSD": 0.0490794
+        }
+      ],
+      "actions": [
+        {
+          "action": "lessons.search_lessons",
+          "input": {
+            "query": "Planning a Content Calendar"
+          },
+          "ok": true,
+          "ms": 0.32,
+          "confirmed": false
+        },
+        {
+          "action": "courses.search_courses",
+          "input": {
+            "query": "Social Media Marketing 101",
+            "status": "published"
+          },
+          "ok": true,
+          "ms": 0.14,
+          "confirmed": false
+        },
+        {
+          "action": "lessons.set_lesson_release_schedule",
+          "input": {
+            "id": "les_004",
+            "mode": "drip",
+            "daysAfterEnrollment": 3
+          },
+          "ok": true,
+          "ms": 7.25,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 364,
+        "cache_creation_input_tokens": 1199,
+        "cache_read_input_tokens": 339945
+      },
+      "costUSD": 0.149285,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "\"Planning a Content Calendar\" (les_004) now unlocks **3 days after enrollment** instead of 7. It's in the Content Strategy section of **Social Media Marketing 101** (crs_001).\n\nThe lesson is still published, and nothing else about it changed.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

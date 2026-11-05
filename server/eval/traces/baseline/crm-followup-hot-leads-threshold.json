@@ -1,0 +1,258 @@
+{
+  "scenario": {
+    "id": "crm-followup-hot-leads-threshold",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "How many leads are in the Hot Leads list right now?"
+      },
+      {
+        "user": "Ok. Raise the score cutoff to 80, but first save a copy of the current version as 'Hot Leads (70+)'."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action smart_lists.count_smart_list|smart_lists.preview_smart_list",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action smart_lists.duplicate_smart_list|smart_lists.create_smart_list",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action smart_lists.update_smart_list_rules|smart_lists.create_smart_list",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "8aa7b0dc-870a-4621-9e9c-7d99f4b9614d",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "How many leads are in the Hot Leads list right now?",
+      "ttfurMs": 1248,
+      "ttftTextMs": 1248,
+      "firstActionMs": 2097,
+      "e2eMs": 9534,
+      "llmCalls": [
+        {
+          "ms": 2096,
+          "ttftMs": 1248,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 83,
+            "cacheRead": 112993,
+            "cacheWrite": 89
+          },
+          "costUSD": 0.047318200000000005
+        },
+        {
+          "ms": 4883,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 59,
+            "cacheRead": 113082,
+            "cacheWrite": 240
+          },
+          "costUSD": 0.047620800000000005
+        },
+        {
+          "ms": 2553,
+          "ttftMs": 2550,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 64,
+            "cacheRead": 113322,
+            "cacheWrite": 100
+          },
+          "costUSD": 0.0471168
+        }
+      ],
+      "actions": [
+        {
+          "action": "smart_lists.list_smart_lists",
+          "input": {
+            "query": "Hot Leads"
+          },
+          "ok": true,
+          "ms": 0.89,
+          "confirmed": false
+        },
+        {
+          "action": "smart_lists.count_smart_list",
+          "input": {
+            "id": "sl_006"
+          },
+          "ok": true,
+          "ms": 1.12,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 206,
+        "cache_creation_input_tokens": 429,
+        "cache_read_input_tokens": 339397
+      },
+      "costUSD": 0.142056,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "There are **2 leads** in the **Hot Leads** list (sl_006) right now.\n\nThe list updates automatically. It includes open leads (status new, contacted or qualified) with a score above 70.",
+      "progress": [],
+      "calls": 3
+    },
+    {
+      "sessionId": "8aa7b0dc-870a-4621-9e9c-7d99f4b9614d",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Ok. Raise the score cutoff to 80, but first save a copy of the current version as 'Hot Leads (70+)'.",
+      "ttfurMs": 2474,
+      "ttftTextMs": 2474,
+      "firstActionMs": 3481,
+      "e2eMs": 14596,
+      "llmCalls": [
+        {
+          "ms": 3474,
+          "ttftMs": 2474,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 114,
+            "cacheRead": 113422,
+            "cacheWrite": 108
+          },
+          "costUSD": 0.048204800000000006
+        },
+        {
+          "ms": 2424,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 129,
+            "cacheRead": 113530,
+            "cacheWrite": 278
+          },
+          "costUSD": 0.04939
+        },
+        {
+          "ms": 4133,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 59,
+            "cacheRead": 113808,
+            "cacheWrite": 281
+          },
+          "costUSD": 0.048116200000000005
+        },
+        {
+          "ms": 4550,
+          "ttftMs": 4548,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 245,
+            "cacheRead": 114089,
+            "cacheWrite": 100
+          },
+          "costUSD": 0.05104360000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "smart_lists.duplicate_smart_list",
+          "input": {
+            "id": "sl_006",
+            "name": "Hot Leads (70+)"
+          },
+          "ok": true,
+          "ms": 7.1,
+          "confirmed": false
+        },
+        {
+          "action": "smart_lists.update_smart_list_rules",
+          "input": {
+            "id": "sl_006",
+            "rules": [
+              {
+                "field": "score",
+                "op": "gt",
+                "value": 80
+              },
+              {
+                "field": "status",
+                "op": "in",
+                "value": [
+                  "new",
+                  "contacted",
+                  "qualified"
+                ]
+              }
+            ]
+          },
+          "ok": true,
+          "ms": 7.03,
+          "confirmed": false
+        },
+        {
+          "action": "smart_lists.count_smart_list",
+          "input": {
+            "id": "sl_006"
+          },
+          "ok": true,
+          "ms": 0.21,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 547,
+        "cache_creation_input_tokens": 767,
+        "cache_read_input_tokens": 454849
+      },
+      "costUSD": 0.196755,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I saved a copy of the list and raised the Hot Leads cutoff to 80. **No leads currently match** the new rule.\n\n- **Hot Leads (70+)** (sl_008): a copy of the old version. It still includes open leads (new, contacted or qualified) with a score above 70, and currently has 2 leads.\n- **Hot Leads** (sl_006): now includes open leads with a score **above 80**. That means 81 and up, the same way the old rule meant 71 and up. It currently has 0 leads, so both of the old leads score between 71 and 80.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

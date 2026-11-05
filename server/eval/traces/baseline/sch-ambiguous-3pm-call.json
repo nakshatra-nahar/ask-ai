@@ -1,0 +1,101 @@
+{
+  "scenario": {
+    "id": "sch-ambiguous-3pm-call",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Push tomorrow's 3pm discovery call to next week."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "64d15c89-d0f7-4d2e-bd00-34b39a5bbbd6",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Push tomorrow's 3pm discovery call to next week.",
+      "ttfurMs": 1920,
+      "ttftTextMs": 1920,
+      "firstActionMs": 2896,
+      "e2eMs": 5707,
+      "llmCalls": [
+        {
+          "ms": 2895,
+          "ttftMs": 1920,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 257,
+            "cacheRead": 112993,
+            "cacheWrite": 92
+          },
+          "costUSD": 0.0508132
+        },
+        {
+          "ms": 2811,
+          "ttftMs": 2808,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 223,
+            "cacheRead": 113085,
+            "cacheWrite": 1032
+          },
+          "costUSD": 0.054862
+        }
+      ],
+      "actions": [
+        {
+          "action": "appointments.search_appointments",
+          "input": {
+            "startAtAfter": "2026-11-05T00:00:00Z",
+            "startAtBefore": "2026-11-06T00:00:00Z",
+            "upcoming": true
+          },
+          "ok": true,
+          "ms": 0.97,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 480,
+        "cache_creation_input_tokens": 1124,
+        "cache_read_input_tokens": 226078
+      },
+      "costUSD": 0.105675,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "There are two discovery calls tomorrow (Thu, Nov 5) at 3:00 PM UTC:\n\n1. **Sales Discovery Call with Sarah Chen** (apt_001), hosted by usr_002\n2. **Sales Discovery Call with Sofia Nguyen** (apt_006), hosted by usr_003\n\nWhich one should I move? Or should I move both? Unless you'd like a different time, I'll move it to the same time next week: **Thu, Nov 12, 3:00–3:30 PM UTC**.",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

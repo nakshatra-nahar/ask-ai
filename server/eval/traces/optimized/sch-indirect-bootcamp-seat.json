@@ -1,0 +1,164 @@
+{
+  "scenario": {
+    "id": "sch-indirect-bootcamp-seat",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "Looks like someone dropped out of the Local SEO Bootcamp. Let's not leave that seat empty — be fair about who gets it."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action events.promote_waitlisted|events.register_attendee",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "a40e1b55-ba9d-4a97-b5a7-eda78eb09560",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Looks like someone dropped out of the Local SEO Bootcamp. Let's not leave that seat empty — be fair about who gets it.",
+      "ttfurMs": 1432,
+      "ttftTextMs": 1432,
+      "firstActionMs": 3999,
+      "e2eMs": 10834,
+      "llmCalls": [
+        {
+          "ms": 2024,
+          "ttftMs": 1426,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 90,
+            "cacheRead": 5235,
+            "cacheWrite": 2408
+          },
+          "costUSD": 0.01595
+        },
+        {
+          "ms": 1968,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 90,
+            "cacheRead": 7643,
+            "cacheWrite": 877
+          },
+          "costUSD": 0.0092502
+        },
+        {
+          "ms": 2615,
+          "ttftMs": 2065,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 143,
+            "cacheRead": 8520,
+            "cacheWrite": 866
+          },
+          "costUSD": 0.010606
+        },
+        {
+          "ms": 4213,
+          "ttftMs": 4211,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 230,
+            "cacheRead": 9386,
+            "cacheWrite": 964
+          },
+          "costUSD": 0.0131824
+        }
+      ],
+      "actions": [
+        {
+          "action": "events.search_events",
+          "input": {
+            "query": "Local SEO Bootcamp"
+          },
+          "ok": true,
+          "ms": 1.46,
+          "confirmed": false
+        },
+        {
+          "action": "events.promote_waitlisted",
+          "input": {
+            "id": "evt_005",
+            "contactId": "con_073"
+          },
+          "ok": true,
+          "ms": 6.07,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 553,
+        "cache_creation_input_tokens": 5115,
+        "cache_read_input_tokens": 30784
+      },
+      "costUSD": 0.048989,
+      "retries": 0,
+      "retrieved": [
+        "communities.leave_community",
+        "booking_pages.list_booking_pages",
+        "listings.create_listing",
+        "funnels.get_funnel_metrics",
+        "events.get_event",
+        "listings.get_listing_sync_status",
+        "appointments.reschedule_appointment",
+        "events.promote_waitlisted",
+        "landing_pages.set_page_seo",
+        "pipelines.remove_pipeline_stage",
+        "appointments.cancel_appointment",
+        "calendars.get_calendar_settings",
+        "websites.set_site_seo_defaults",
+        "booking_pages.get_booking_page",
+        "payments.get_payment_failure",
+        "blogs.get_blog_post",
+        "landing_pages.get_landing_page",
+        "sms.get_sms_delivery_status",
+        "websites.get_website",
+        "reviews.create_review_request",
+        "workflows.get_workflow_execution_history",
+        "appointments.get_appointment",
+        "booking_pages.update_booking_page_content",
+        "availability.get_weekly_hours"
+      ],
+      "status": "completed",
+      "finalText": "I gave the open Local SEO Bootcamp seat (evt_005) to **con_073**, who had been on the waitlist longest (added 1 Nov). That's first come, first served.\n\n- **Why there was a seat:** con_072 cancelled, which left 9 of 10 seats taken.\n- **Now:** all 10 seats are taken. Only **con_074** (added 3 Nov) is still on the waitlist, and they're next if someone else drops out.\n- **Event:** 18 Nov 2026, 16:00–18:00 UTC, at Acme HQ, 200 Market St.\n\nI didn't send con_073 a confirmation. I can email or text them to let them know they're in.",
+      "progress": [],
+      "retrievalMs": 5.18,
+      "calls": 4
+    }
+  ]
+}

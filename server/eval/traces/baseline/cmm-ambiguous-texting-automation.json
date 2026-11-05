@@ -1,0 +1,133 @@
+{
+  "scenario": {
+    "id": "cmm-ambiguous-texting-automation",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Can you turn off the automation that texts people? Customers are complaining."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "84492b00-6b59-471e-9e03-23fc7cd69b26",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Can you turn off the automation that texts people? Customers are complaining.",
+      "ttfurMs": 2001,
+      "ttftTextMs": 2001,
+      "firstActionMs": 3134,
+      "e2eMs": 13465,
+      "llmCalls": [
+        {
+          "ms": 3134,
+          "ttftMs": 2001,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 211,
+            "cacheRead": 112993,
+            "cacheWrite": 94
+          },
+          "costUSD": 0.0499032
+        },
+        {
+          "ms": 3844,
+          "ttftMs": 3252,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 247,
+            "cacheRead": 113087,
+            "cacheWrite": 3192
+          },
+          "costUSD": 0.0661428
+        },
+        {
+          "ms": 6484,
+          "ttftMs": 6482,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 380,
+            "cacheRead": 116279,
+            "cacheWrite": 2449
+          },
+          "costUSD": 0.06636460000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "workflows.list_workflows",
+          "input": {
+            "status": "published",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.36,
+          "confirmed": false
+        },
+        {
+          "action": "campaigns.list_campaigns",
+          "input": {
+            "status": "active",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.73,
+          "confirmed": false
+        },
+        {
+          "action": "sms.search_sms_messages",
+          "input": {
+            "direction": "inbound",
+            "sentAtAfter": "2026-10-20",
+            "limit": 50
+          },
+          "ok": true,
+          "ms": 1.09,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 838,
+        "cache_creation_input_tokens": 5735,
+        "cache_read_input_tokens": 342359
+      },
+      "costUSD": 0.182411,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I haven't turned anything off yet. Two live automations send texts, and nothing I found shows which one customers are complaining about.\n\n| Workflow | What it texts | Recent activity |\n|---|---|---|\n| **New Lead Nurture** (`wf_001`) | Texts new leads first, then emails them if they don't reply and creates a call task | 1 contact is partway through |\n| **Appointment Reminders** (`wf_002`) | Texts a reminder 24 hours before each booked appointment | 1 contact is waiting for a reminder; last one went out today |\n\nI read the texts customers sent in since Oct 20, and none of them complain about our messages. They're about pricing, rescheduling, quotes and double charges. No other live campaigns send texts (the only active ones are Facebook and Google ads).\n\n**Which one should I pause: New Lead Nurture, Appointment Reminders, or both?** Pausing stops new contacts from being added and holds any messages not yet sent. You can turn it back on later. Keep in mind that pausing Appointment Reminders means people with booked appointments won't get their reminder.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

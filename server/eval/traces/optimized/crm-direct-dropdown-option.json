@@ -1,0 +1,158 @@
+{
+  "scenario": {
+    "id": "crm-direct-dropdown-option",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "We just opened an Eastside office. Add Eastside as a choice on the Preferred Location field for contacts."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action custom_fields.add_dropdown_option",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params custom_fields.add_dropdown_option",
+        "pass": true,
+        "detail": "{\"id\":\"cf_002\",\"value\":\"Eastside\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "c16add5a-263a-4e2d-b881-b4afc1ab6d64",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "We just opened an Eastside office. Add Eastside as a choice on the Preferred Location field for contacts.",
+      "ttfurMs": 706,
+      "ttftTextMs": 706,
+      "firstActionMs": 1595,
+      "e2eMs": 4344,
+      "llmCalls": [
+        {
+          "ms": 1590,
+          "ttftMs": 702,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 125,
+            "cacheRead": 5235,
+            "cacheWrite": 2864
+          },
+          "costUSD": 0.01893
+        },
+        {
+          "ms": 1284,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 101,
+            "cacheRead": 8099,
+            "cacheWrite": 296
+          },
+          "costUSD": 0.0067476
+        },
+        {
+          "ms": 1458,
+          "ttftMs": 1456,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 80,
+            "cacheRead": 8395,
+            "cacheWrite": 272
+          },
+          "costUSD": 0.006326
+        }
+      ],
+      "actions": [
+        {
+          "action": "custom_fields.list_custom_fields",
+          "input": {
+            "module": "contacts",
+            "query": "Preferred Location"
+          },
+          "ok": true,
+          "ms": 0.86,
+          "confirmed": false
+        },
+        {
+          "action": "custom_fields.add_dropdown_option",
+          "input": {
+            "id": "cf_002",
+            "value": "Eastside"
+          },
+          "ok": true,
+          "ms": 6.76,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 306,
+        "cache_creation_input_tokens": 3432,
+        "cache_read_input_tokens": 21729
+      },
+      "costUSD": 0.032004,
+      "retries": 0,
+      "retrieved": [
+        "custom_fields.add_dropdown_option",
+        "custom_fields.list_custom_fields",
+        "availability.get_weekly_hours",
+        "custom_fields.create_custom_field",
+        "contacts.search_contacts",
+        "teams.get_team_workload",
+        "custom_fields.retire_dropdown_option",
+        "tickets.assign_ticket",
+        "availability.block_time",
+        "listings.create_listing",
+        "forms.add_form_field",
+        "surveys.add_survey_question",
+        "communities.join_community",
+        "opportunities.create_opportunity",
+        "availability.set_weekly_hours",
+        "events.update_event",
+        "forms.create_form",
+        "contacts.add_contact_relationship",
+        "custom_fields.set_record_field_value",
+        "media.upload_media",
+        "smart_lists.export_smart_list",
+        "leads.create_lead",
+        "calendars.assign_calendar_host",
+        "appointments.add_appointment_attendee"
+      ],
+      "status": "completed",
+      "finalText": "\"Eastside\" is now a choice on the contacts **Preferred Location** field (`cf_002`), and people can pick it.\n\nChoices people can pick now: Downtown, Uptown, Westside, Eastside. \"Online\" is still retired.",
+      "progress": [],
+      "retrievalMs": 4.08,
+      "calls": 3
+    }
+  ]
+}

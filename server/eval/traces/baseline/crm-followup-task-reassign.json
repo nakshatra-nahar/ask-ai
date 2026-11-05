@@ -1,0 +1,229 @@
+{
+  "scenario": {
+    "id": "crm-followup-task-reassign",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Create a task to call Liam Clark about his quarterly review next Tuesday."
+      },
+      {
+        "user": "Actually give that one to Priya, and make it high priority."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tasks.create_task",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params tasks.create_task",
+        "pass": true,
+        "detail": "{\"dueDate\":\"2026-11-10\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "eab17604-67ab-4976-b904-f768fd7e2876",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Create a task to call Liam Clark about his quarterly review next Tuesday.",
+      "ttfurMs": 1297,
+      "ttftTextMs": 1297,
+      "firstActionMs": 1953,
+      "e2eMs": 6306,
+      "llmCalls": [
+        {
+          "ms": 1953,
+          "ttftMs": 1297,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 72,
+            "cacheRead": 112993,
+            "cacheWrite": 98
+          },
+          "costUSD": 0.0471432
+        },
+        {
+          "ms": 1851,
+          "ttftMs": 1015,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 163,
+            "cacheRead": 113091,
+            "cacheWrite": 288
+          },
+          "costUSD": 0.0499444
+        },
+        {
+          "ms": 2496,
+          "ttftMs": 2494,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 143,
+            "cacheRead": 113379,
+            "cacheWrite": 318
+          },
+          "costUSD": 0.0498096
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Liam Clark"
+          },
+          "ok": true,
+          "ms": 0.42,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Call Liam Clark about his quarterly review",
+            "contactId": "con_016",
+            "dueDate": "2026-11-10",
+            "ownerId": "usr_005"
+          },
+          "ok": true,
+          "ms": 5.75,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 378,
+        "cache_creation_input_tokens": 704,
+        "cache_read_input_tokens": 339463
+      },
+      "costUSD": 0.146897,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I created the task to call Liam Clark about his quarterly review next Tuesday.\n\n- **Task:** Call Liam Clark about his quarterly review (tsk_031)\n- **Contact:** Liam Clark (con_016)\n- **Due:** Tue, 10 Nov 2026\n- **Owner:** usr_005, who also owns Liam's contact record\n- **Priority:** Medium, the default\n- **Status:** Open",
+      "progress": [],
+      "calls": 3
+    },
+    {
+      "sessionId": "eab17604-67ab-4976-b904-f768fd7e2876",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Actually give that one to Priya, and make it high priority.",
+      "ttfurMs": 941,
+      "ttftTextMs": 941,
+      "firstActionMs": 1536,
+      "e2eMs": 6011,
+      "llmCalls": [
+        {
+          "ms": 1536,
+          "ttftMs": 941,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 63,
+            "cacheRead": 113697,
+            "cacheWrite": 163
+          },
+          "costUSD": 0.0475698
+        },
+        {
+          "ms": 2047,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 163,
+            "cacheRead": 113860,
+            "cacheWrite": 211
+          },
+          "costUSD": 0.049867
+        },
+        {
+          "ms": 2417,
+          "ttftMs": 2413,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 139,
+            "cacheRead": 114071,
+            "cacheWrite": 533
+          },
+          "costUSD": 0.0510814
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Priya"
+          },
+          "ok": true,
+          "ms": 0.09,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.assign_task_owner",
+          "input": {
+            "id": "tsk_031",
+            "ownerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 4.71,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.set_task_priority",
+          "input": {
+            "id": "tsk_031",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 5.45,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 365,
+        "cache_creation_input_tokens": 907,
+        "cache_read_input_tokens": 341628
+      },
+      "costUSD": 0.148518,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "The task to call Liam Clark about his quarterly review (tsk_031) now belongs to Priya Shah (usr_003, Account Executive) and is high priority.\n\n- **Due:** Tue, 10 Nov 2026 (unchanged)\n- **Contact:** Liam Clark (con_016)\n- **Status:** Open\n\nLiam's contact record is still owned by usr_005. Only the task moved to Priya.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

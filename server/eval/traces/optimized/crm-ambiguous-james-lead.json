@@ -1,0 +1,125 @@
+{
+  "scenario": {
+    "id": "crm-ambiguous-james-lead",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Mark James's lead as qualified."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "67df330d-51cf-41fa-b14d-f08d0e8f8ea7",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Mark James's lead as qualified.",
+      "ttfurMs": 1932,
+      "ttftTextMs": 1932,
+      "firstActionMs": 2809,
+      "e2eMs": 5160,
+      "llmCalls": [
+        {
+          "ms": 2808,
+          "ttftMs": 1931,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 93,
+            "cacheRead": 5235,
+            "cacheWrite": 2455
+          },
+          "costUSD": 0.016245
+        },
+        {
+          "ms": 2351,
+          "ttftMs": 2349,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 128,
+            "cacheRead": 7690,
+            "cacheWrite": 320
+          },
+          "costUSD": 0.007244
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "query": "James"
+          },
+          "ok": true,
+          "ms": 0.33,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 221,
+        "cache_creation_input_tokens": 2775,
+        "cache_read_input_tokens": 12925
+      },
+      "costUSD": 0.023489,
+      "retries": 0,
+      "retrieved": [
+        "leads.record_qualification_answers",
+        "leads.search_leads",
+        "leads.update_lead",
+        "leads.convert_lead",
+        "tasks.complete_task",
+        "conversations.mark_conversation_unread",
+        "opportunities.mark_opportunity_lost",
+        "opportunities.mark_opportunity_won",
+        "events.check_in_attendee",
+        "orders.fulfill_order",
+        "leads.disqualify_lead",
+        "lessons.set_lesson_completion_criteria",
+        "funnels.create_funnel",
+        "conversations.mark_conversation_read",
+        "reports.update_report_filters",
+        "opportunities.create_opportunity",
+        "appointments.mark_no_show",
+        "appointments.mark_completed",
+        "forms.reorder_form_fields",
+        "contacts.merge_contacts",
+        "forms.update_form_field",
+        "tickets.reply_to_ticket",
+        "opportunities.move_opportunity_to_stage",
+        "enrollments.record_lesson_completion"
+      ],
+      "status": "completed",
+      "finalText": "I found two leads named James, so I haven't changed either one yet. Which one should I mark as qualified?\n\n- **James Patel** (ld_017): status is New, score 20, created 2026-11-04\n- **James Williams** (ld_003): status is New, score 39, created 2026-10-31\n\nBoth came in from Facebook through the same campaign (cam_001).",
+      "progress": [],
+      "retrievalMs": 0.45,
+      "calls": 2
+    }
+  ]
+}

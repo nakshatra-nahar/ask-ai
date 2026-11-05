@@ -1,0 +1,280 @@
+{
+  "scenario": {
+    "id": "crm-followup-task-reassign",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Create a task to call Liam Clark about his quarterly review next Tuesday."
+      },
+      {
+        "user": "Actually give that one to Priya, and make it high priority."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tasks.create_task",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params tasks.create_task",
+        "pass": true,
+        "detail": "{\"dueDate\":\"2026-11-10\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "92a737a8-ce71-426f-b8ca-f85867f07877",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Create a task to call Liam Clark about his quarterly review next Tuesday.",
+      "ttfurMs": 4458,
+      "ttftTextMs": 4458,
+      "firstActionMs": 5448,
+      "e2eMs": 9238,
+      "llmCalls": [
+        {
+          "ms": 5445,
+          "ttftMs": 4456,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 102,
+            "cacheRead": 5235,
+            "cacheWrite": 3243
+          },
+          "costUSD": 0.020365
+        },
+        {
+          "ms": 1793,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 119,
+            "cacheRead": 8478,
+            "cacheWrite": 287
+          },
+          "costUSD": 0.0072142000000000005
+        },
+        {
+          "ms": 1991,
+          "ttftMs": 1985,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 106,
+            "cacheRead": 8765,
+            "cacheWrite": 211
+          },
+          "costUSD": 0.006689
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Liam Clark"
+          },
+          "ok": true,
+          "ms": 0.42,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Call Liam Clark about quarterly review",
+            "contactId": "con_016",
+            "dueDate": "2026-11-10"
+          },
+          "ok": true,
+          "ms": 5.57,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 327,
+        "cache_creation_input_tokens": 3741,
+        "cache_read_input_tokens": 22478
+      },
+      "costUSD": 0.034268,
+      "retries": 0,
+      "retrieved": [
+        "tasks.create_task",
+        "tasks.search_tasks",
+        "reviews.create_review_request",
+        "reviews.list_review_requests",
+        "appointments.create_appointment",
+        "reviews.search_reviews",
+        "subscriptions.preview_next_invoice",
+        "calendars.create_calendar",
+        "appointments.cancel_appointment",
+        "notes.create_note",
+        "reports.create_report",
+        "reviews.draft_review_response",
+        "reviews.get_review",
+        "appointments.search_appointments",
+        "reviews.record_review",
+        "tasks.reopen_task",
+        "tasks.cancel_task",
+        "tasks.get_task",
+        "tasks.complete_task",
+        "tickets.create_ticket",
+        "reports.compare_report_periods",
+        "quotes.convert_quote_to_invoice",
+        "contacts.set_communication_preferences",
+        "events.cancel_registration"
+      ],
+      "status": "completed",
+      "finalText": "I created the task and linked it to Liam Clark (con_016).\n\n- **Task:** Call Liam Clark about quarterly review (tsk_031)\n- **Due:** Tue, 10 Nov 2026\n- **Priority:** Medium (the default setting)\n- **Status:** Open\n- **Owner:** None set",
+      "progress": [],
+      "retrievalMs": 1.84,
+      "calls": 3
+    },
+    {
+      "sessionId": "92a737a8-ce71-426f-b8ca-f85867f07877",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Actually give that one to Priya, and make it high priority.",
+      "ttfurMs": 1631,
+      "ttftTextMs": 1631,
+      "firstActionMs": 2955,
+      "e2eMs": 6659,
+      "llmCalls": [
+        {
+          "ms": 2949,
+          "ttftMs": 1625,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 191,
+            "cacheRead": 8976,
+            "cacheWrite": 3249
+          },
+          "costUSD": 0.023671400000000002
+        },
+        {
+          "ms": 1690,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 102,
+            "cacheRead": 12225,
+            "cacheWrite": 454
+          },
+          "costUSD": 0.009208
+        },
+        {
+          "ms": 2007,
+          "ttftMs": 2006,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 115,
+            "cacheRead": 12679,
+            "cacheWrite": 204
+          },
+          "costUSD": 0.0083996
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Priya"
+          },
+          "ok": true,
+          "ms": 0.07,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.set_task_priority",
+          "input": {
+            "id": "tsk_031",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.88,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.assign_task_owner",
+          "input": {
+            "id": "tsk_031",
+            "ownerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 5.04,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 408,
+        "cache_creation_input_tokens": 3907,
+        "cache_read_input_tokens": 33880
+      },
+      "costUSD": 0.041279,
+      "retries": 0,
+      "retrieved": [
+        "tasks.set_task_priority",
+        "tasks.search_tasks",
+        "enrollments.enroll_learner",
+        "tasks.create_task",
+        "reviews.list_review_requests",
+        "memberships.grant_membership",
+        "tickets.create_ticket",
+        "reviews.create_review_request",
+        "reviews.search_reviews",
+        "leads.assign_lead_owner",
+        "tickets.set_ticket_priority",
+        "appointments.create_appointment",
+        "calendars.create_calendar",
+        "subscriptions.preview_next_invoice",
+        "reviews.get_review",
+        "reports.create_report",
+        "forms.publish_form",
+        "appointments.cancel_appointment",
+        "notes.create_note",
+        "courses.publish_course",
+        "reviews.draft_review_response",
+        "appointments.search_appointments",
+        "reviews.record_review",
+        "booking_pages.publish_booking_page"
+      ],
+      "status": "completed",
+      "finalText": "I assigned the task to Priya Shah (usr_003) and set it to high priority.\n\n- **Task:** Call Liam Clark about quarterly review (tsk_031)\n- **Owner:** Priya Shah, Account Executive\n- **Priority:** High\n- **Due:** Tue, 10 Nov 2026\n- **Status:** Open",
+      "progress": [],
+      "retrievalMs": 5.43,
+      "calls": 3
+    }
+  ]
+}

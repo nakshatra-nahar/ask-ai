@@ -1,0 +1,192 @@
+{
+  "scenario": {
+    "id": "cmm-indirect-drowning-inbox",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "I'm drowning in unanswered messages. Marcus is out this week and his threads are just sitting there — can you sort that out?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action conversations.assign_conversation_owner",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "25073872-23c1-4ac4-8aa1-0755fbfd30be",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "I'm drowning in unanswered messages. Marcus is out this week and his threads are just sitting there — can you sort that out?",
+      "ttfurMs": 1458,
+      "ttftTextMs": 1458,
+      "firstActionMs": 2095,
+      "e2eMs": 14145,
+      "llmCalls": [
+        {
+          "ms": 2091,
+          "ttftMs": 1454,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 98,
+            "cacheRead": 5235,
+            "cacheWrite": 2676
+          },
+          "costUSD": 0.01745
+        },
+        {
+          "ms": 2097,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 99,
+            "cacheRead": 7911,
+            "cacheWrite": 1279
+          },
+          "costUSD": 0.0115474
+        },
+        {
+          "ms": 4488,
+          "ttftMs": 2719,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 383,
+            "cacheRead": 9190,
+            "cacheWrite": 786
+          },
+          "costUSD": 0.015274
+        },
+        {
+          "ms": 5448,
+          "ttftMs": 5441,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 474,
+            "cacheRead": 9976,
+            "cacheWrite": 973
+          },
+          "costUSD": 0.018343400000000003
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 0.24,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.list_unanswered_conversations",
+          "input": {
+            "ownerId": "usr_004",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.19,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_024",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 6.85,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_004",
+            "ownerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 4.31,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.assign_conversation_owner",
+          "input": {
+            "id": "cnv_027",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 3.85,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 1054,
+        "cache_creation_input_tokens": 5714,
+        "cache_read_input_tokens": 32312
+      },
+      "costUSD": 0.062615,
+      "retries": 0,
+      "retrieved": [
+        "websites.unpublish_website",
+        "conversations.list_unanswered_conversations",
+        "reports.schedule_report",
+        "websites.get_website",
+        "reviews.search_reviews",
+        "reports.set_report_grouping",
+        "websites.add_website_page",
+        "communities.remove_reported_post",
+        "sms.search_sms_messages",
+        "lessons.unpublish_lesson",
+        "websites.publish_website",
+        "conversations.search_conversations",
+        "email.search_email_messages",
+        "websites.update_site_navigation",
+        "websites.create_website",
+        "conversations.get_conversation",
+        "blogs.unpublish_post",
+        "conversations.reopen_conversation",
+        "conversations.close_conversation",
+        "booking_pages.unpublish_booking_page",
+        "landing_pages.unpublish_landing_page",
+        "landing_pages.create_landing_page",
+        "communities.reply_to_post",
+        "conversations.assign_conversation_owner"
+      ],
+      "status": "completed",
+      "finalText": "I moved all 3 of Marcus Reed's unanswered conversations to other Account Executives (Marcus is marked out of office). I split them between Jordan and Priya, the two other active AEs, without checking how busy each of them is.\n\n| Contact | Conversation | Waiting | Last message | New owner |\n|---|---|---|---|---|\n| Ethan Lee | cnv_024 (email) | ~305 h (since 22 Oct) | \"Thanks! Tomorrow afternoon works for a call.\" | Jordan Lee (usr_002) |\n| Priya Okafor | cnv_004 (email) | ~97 h | \"Sounds good, what does pricing look like?\" | Priya Shah (usr_003) |\n| Michael Smith | cnv_027 (email) | 9 h | \"Is there any availability this Friday afternoon?\" | Jordan Lee (usr_002) |\n\n**Worth knowing:**\n- Ethan Lee wrote almost two weeks ago. The \"tomorrow afternoon\" call he agreed to has already passed, so he needs a quick apology and a new time.\n- Michael Smith wants to meet this Friday, 6 Nov, so he needs a reply soon.\n- I only changed who owns these conversations. Nobody has replied to the contacts yet, and the contact owners are still the same.\n\nI can move any of these to someone else, or set up an automation that reassigns conversations whenever someone is out of office.",
+      "progress": [],
+      "retrievalMs": 4.25,
+      "calls": 4
+    }
+  ]
+}

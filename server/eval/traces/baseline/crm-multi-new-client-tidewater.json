@@ -1,0 +1,198 @@
+{
+  "scenario": {
+    "id": "crm-multi-new-client-tidewater",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "We just signed Tidewater Brewing Co. Please set up the company and add their GM, Harper Vance (harper.vance@tidewaterbrewing.com), as a contact linked to it. Tag her as a customer, and Dana should be both the account manager and Harper’s owner."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action companies.create_company",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action contacts.create_contact",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params companies.create_company",
+        "pass": true,
+        "detail": "{\"name\":\"/tidewater brewing/i\"}"
+      },
+      {
+        "name": "params contacts.create_contact",
+        "pass": true,
+        "detail": "{\"email\":\"harper.vance@tidewaterbrewing.com\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "4ab8c76d-1c09-4239-b91e-97e68935bc4b",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "We just signed Tidewater Brewing Co. Please set up the company and add their GM, Harper Vance (harper.vance@tidewaterbrewing.com), as a contact linked to it. Tag her as a customer, and Dana should be both the account manager and Harper’s owner.",
+      "ttfurMs": 1031,
+      "ttftTextMs": 1031,
+      "firstActionMs": 2759,
+      "e2eMs": 11266,
+      "llmCalls": [
+        {
+          "ms": 2759,
+          "ttftMs": 1031,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 281,
+            "cacheRead": 112993,
+            "cacheWrite": 163
+          },
+          "costUSD": 0.051648200000000005
+        },
+        {
+          "ms": 2070,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 122,
+            "cacheRead": 113156,
+            "cacheWrite": 661
+          },
+          "costUSD": 0.0510154
+        },
+        {
+          "ms": 2339,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 224,
+            "cacheRead": 113817,
+            "cacheWrite": 251
+          },
+          "costUSD": 0.051269800000000004
+        },
+        {
+          "ms": 4092,
+          "ttftMs": 4087,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 255,
+            "cacheRead": 114068,
+            "cacheWrite": 416
+          },
+          "costUSD": 0.05281520000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Dana"
+          },
+          "ok": true,
+          "ms": 0.15,
+          "confirmed": false
+        },
+        {
+          "action": "companies.search_companies",
+          "input": {
+            "query": "Tidewater"
+          },
+          "ok": true,
+          "ms": 0.05,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "harper.vance@tidewaterbrewing.com"
+          },
+          "ok": true,
+          "ms": 0.13,
+          "confirmed": false
+        },
+        {
+          "action": "tags.list_tags",
+          "input": {
+            "query": "customer"
+          },
+          "ok": true,
+          "ms": 0.34,
+          "confirmed": false
+        },
+        {
+          "action": "companies.create_company",
+          "input": {
+            "name": "Tidewater Brewing Co.",
+            "domain": "tidewaterbrewing.com",
+            "accountManagerId": "usr_005"
+          },
+          "ok": true,
+          "ms": 2.34,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.create_contact",
+          "input": {
+            "firstName": "Harper",
+            "lastName": "Vance",
+            "email": "harper.vance@tidewaterbrewing.com",
+            "companyId": "co_022",
+            "ownerId": "usr_005",
+            "tags": [
+              "customer"
+            ],
+            "lifecycleStage": "customer"
+          },
+          "ok": true,
+          "ms": 2.68,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 882,
+        "cache_creation_input_tokens": 1491,
+        "cache_read_input_tokens": 454034
+      },
+      "costUSD": 0.206749,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I set up Tidewater Brewing Co. and added Harper Vance as a contact linked to it.\n\n- **Company:** Tidewater Brewing Co. (`co_022`)\n  - Website: tidewaterbrewing.com (taken from Harper's email address)\n  - Account manager: Dana Cruz (`usr_005`)\n- **Contact:** Harper Vance (`con_081`)\n  - Email: harper.vance@tidewaterbrewing.com\n  - Linked to Tidewater Brewing Co. (`co_022`)\n  - Owner: Dana Cruz\n  - Tagged `customer`, and her stage is set to customer\n\nThe CRM has no field for job title, so \"GM\" isn't stored on her record. I can add it as a note if you'd like.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

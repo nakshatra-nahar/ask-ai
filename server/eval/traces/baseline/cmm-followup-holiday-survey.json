@@ -1,0 +1,275 @@
+{
+  "scenario": {
+    "id": "cmm-followup-holiday-survey",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Create a survey called 'Holiday Event Feedback' with an NPS question: How likely are you to recommend our holiday event to a friend?"
+      },
+      {
+        "user": "Also add an optional text question asking what we could do better next year, then publish it."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action surveys.create_survey",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action surveys.add_survey_question",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action surveys.publish_survey",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params surveys.add_survey_question",
+        "pass": true,
+        "detail": "{\"type\":\"nps\"}"
+      },
+      {
+        "name": "params surveys.add_survey_question",
+        "pass": true,
+        "detail": "{\"type\":\"text\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "a59a502c-3e38-4dd7-83d5-df695306ef49",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Create a survey called 'Holiday Event Feedback' with an NPS question: How likely are you to recommend our holiday event to a friend?",
+      "ttfurMs": 1382,
+      "ttftTextMs": 1382,
+      "firstActionMs": 2208,
+      "e2eMs": 7249,
+      "llmCalls": [
+        {
+          "ms": 2202,
+          "ttftMs": 1382,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 78,
+            "cacheRead": 112993,
+            "cacheWrite": 117
+          },
+          "costUSD": 0.0473582
+        },
+        {
+          "ms": 2157,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 118,
+            "cacheRead": 113110,
+            "cacheWrite": 199
+          },
+          "costUSD": 0.048607
+        },
+        {
+          "ms": 2879,
+          "ttftMs": 2878,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 145,
+            "cacheRead": 113309,
+            "cacheWrite": 339
+          },
+          "costUSD": 0.04992660000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "surveys.create_survey",
+          "input": {
+            "name": "Holiday Event Feedback"
+          },
+          "ok": true,
+          "ms": 5.67,
+          "confirmed": false
+        },
+        {
+          "action": "surveys.add_survey_question",
+          "input": {
+            "id": "srv_006",
+            "text": "How likely are you to recommend our holiday event to a friend?",
+            "type": "nps"
+          },
+          "ok": true,
+          "ms": 5.69,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 341,
+        "cache_creation_input_tokens": 655,
+        "cache_read_input_tokens": 339412
+      },
+      "costUSD": 0.145892,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I created the survey **Holiday Event Feedback** (`srv_006`). It's saved as a draft, so nobody can respond yet.\n\n**Question:**\n- `srq_011`: *How likely are you to recommend our holiday event to a friend?* It's an NPS question with a 0–10 scale, and an answer is required.\n\nWhen you want to start collecting responses, I can publish it to get a shareable link. I can also add more questions or skip logic first.",
+      "progress": [],
+      "calls": 3
+    },
+    {
+      "sessionId": "a59a502c-3e38-4dd7-83d5-df695306ef49",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Also add an optional text question asking what we could do better next year, then publish it.",
+      "ttfurMs": 2550,
+      "ttftTextMs": null,
+      "firstActionMs": 2550,
+      "e2eMs": 4439,
+      "llmCalls": [
+        {
+          "ms": 2544,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 127,
+            "cacheRead": 113648,
+            "cacheWrite": 170
+          },
+          "costUSD": 0.048865200000000004
+        },
+        {
+          "ms": 1889,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 56,
+            "cacheRead": 113818,
+            "cacheWrite": 376
+          },
+          "costUSD": 0.04853520000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "surveys.add_survey_question",
+          "input": {
+            "id": "srv_006",
+            "text": "What could we do better next year?",
+            "type": "text",
+            "required": false
+          },
+          "ok": true,
+          "ms": 5.54,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 183,
+        "cache_creation_input_tokens": 546,
+        "cache_read_input_tokens": 227466
+      },
+      "costUSD": 0.0974,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_0167uf2qwxUW38hrXx2ZSt3a",
+          "action": "surveys.publish_survey",
+          "name": "Publish survey",
+          "risk": "external",
+          "input": {
+            "id": "srv_006"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "a59a502c-3e38-4dd7-83d5-df695306ef49",
+      "turn": 2,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 5,
+      "ttftTextMs": 3332,
+      "firstActionMs": 5,
+      "e2eMs": 3333,
+      "llmCalls": [
+        {
+          "ms": 3327,
+          "ttftMs": 3326,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 179,
+            "cacheRead": 114194,
+            "cacheWrite": 296
+          },
+          "costUSD": 0.05074560000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "surveys.publish_survey",
+          "input": {
+            "id": "srv_006"
+          },
+          "ok": true,
+          "ms": 5.4,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 179,
+        "cache_creation_input_tokens": 296,
+        "cache_read_input_tokens": 114194
+      },
+      "costUSD": 0.050746,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I added the optional question and published **Holiday Event Feedback** (`srv_006`), so it's now taking responses.\n\n**Link:** https://surveys.acme.test/srv_006\n\n**Questions:**\n1. `srq_011`: *How likely are you to recommend our holiday event to a friend?* (0–10 rating, required)\n2. `srq_012`: *What could we do better next year?* (written answer, optional)\n\nNo responses have come in yet. I can email or text the link to the people who attended.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

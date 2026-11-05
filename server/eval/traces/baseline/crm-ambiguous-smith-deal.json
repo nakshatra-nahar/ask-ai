@@ -1,0 +1,108 @@
+{
+  "scenario": {
+    "id": "crm-ambiguous-smith-deal",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Hand the Smith deal over to Jordan."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "c7fecc7a-4ba8-44f5-930b-ef29a1f4f1e1",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Hand the Smith deal over to Jordan.",
+      "ttfurMs": 2442,
+      "ttftTextMs": 2442,
+      "firstActionMs": 3316,
+      "e2eMs": 6695,
+      "llmCalls": [
+        {
+          "ms": 3316,
+          "ttftMs": 2442,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 126,
+            "cacheRead": 112993,
+            "cacheWrite": 88
+          },
+          "costUSD": 0.048173200000000006
+        },
+        {
+          "ms": 3379,
+          "ttftMs": 3377,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 274,
+            "cacheRead": 113081,
+            "cacheWrite": 908
+          },
+          "costUSD": 0.0552604
+        }
+      ],
+      "actions": [
+        {
+          "action": "opportunities.search_opportunities",
+          "input": {
+            "query": "Smith"
+          },
+          "ok": true,
+          "ms": 0.2,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Jordan"
+          },
+          "ok": true,
+          "ms": 0.06,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 400,
+        "cache_creation_input_tokens": 996,
+        "cache_read_input_tokens": 226074
+      },
+      "costUSD": 0.103434,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I haven't reassigned anything yet because \"Smith\" matches more than one open deal. Jordan is **Jordan Lee** (usr_002, Account Executive, active).\n\n| Deal | ID | Value | Current owner |\n|---|---|---|---|\n| Michael Smith - Marketing Automation Setup | opp_002 | $15,000 | usr_005 |\n| Tom Smith - SEO Retainer | opp_014 | $22,000 | usr_003 |\n| Jack Smith - SEO Retainer | opp_021 | $20,000 | Jordan already owns this one |\n\nShould I hand over Michael Smith's deal, Tom Smith's, or both?",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

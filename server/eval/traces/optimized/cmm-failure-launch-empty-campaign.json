@@ -1,0 +1,196 @@
+{
+  "scenario": {
+    "id": "cmm-failure-launch-empty-campaign",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Launch the Black Friday SMS campaign now."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid campaigns.launch_campaign",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(audience|message|step|content)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "53f92ff7-3d20-463e-a9fa-0498e911a5b8",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Launch the Black Friday SMS campaign now.",
+      "ttfurMs": 1144,
+      "ttftTextMs": 1144,
+      "firstActionMs": 2225,
+      "e2eMs": 4493,
+      "llmCalls": [
+        {
+          "ms": 2224,
+          "ttftMs": 1144,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 121,
+            "cacheRead": 5235,
+            "cacheWrite": 2805
+          },
+          "costUSD": 0.018555
+        },
+        {
+          "ms": 2268,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 144,
+            "cacheRead": 8040,
+            "cacheWrite": 208
+          },
+          "costUSD": 0.007144
+        }
+      ],
+      "actions": [
+        {
+          "action": "campaigns.list_campaigns",
+          "input": {
+            "query": "Black Friday",
+            "channel": "sms"
+          },
+          "ok": true,
+          "ms": 0.16,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 265,
+        "cache_creation_input_tokens": 3013,
+        "cache_read_input_tokens": 13275
+      },
+      "costUSD": 0.025699,
+      "retries": 0,
+      "retrieved": [
+        "campaigns.launch_campaign",
+        "sms.search_sms_messages",
+        "campaigns.create_campaign",
+        "campaigns.list_campaigns",
+        "campaigns.resume_campaign",
+        "campaigns.set_campaign_schedule",
+        "campaigns.pause_campaign",
+        "sms.send_sms",
+        "availability.remove_time_block",
+        "availability.block_time",
+        "enrollments.suspend_enrollment",
+        "email.send_email",
+        "sms.record_sms_opt_out",
+        "landing_pages.add_page_section",
+        "surveys.publish_survey",
+        "sms.cancel_scheduled_sms",
+        "sms.get_sms_details",
+        "sms.get_sms_delivery_status",
+        "courses.publish_course",
+        "websites.publish_website",
+        "funnels.publish_funnel",
+        "leads.set_lead_source",
+        "landing_pages.publish_landing_page",
+        "leads.search_leads"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 0.6,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_017XuE2GALPg2cU64Wcghhg9",
+          "action": "campaigns.launch_campaign",
+          "name": "Launch campaign",
+          "risk": "external",
+          "input": {
+            "id": "cam_005"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "53f92ff7-3d20-463e-a9fa-0498e911a5b8",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 3038,
+      "ttftTextMs": 3038,
+      "firstActionMs": null,
+      "e2eMs": 3043,
+      "llmCalls": [
+        {
+          "ms": 3036,
+          "ttftMs": 3031,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 176,
+            "cacheRead": 8248,
+            "cacheWrite": 231
+          },
+          "costUSD": 0.0079822
+        }
+      ],
+      "actions": [
+        {
+          "action": "campaigns.launch_campaign",
+          "input": {
+            "id": "cam_005"
+          },
+          "ok": false,
+          "error": {
+            "code": "INVALID_STATE",
+            "message": "campaign 'Black Friday SMS' cannot launch: needs an audience (set_campaign_audience) and at least one message step (add_campaign_message_step)"
+          },
+          "ms": 6.23,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 176,
+        "cache_creation_input_tokens": 231,
+        "cache_read_input_tokens": 8248
+      },
+      "costUSD": 0.007982,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I couldn't launch **Black Friday SMS** (`cam_005`). It's still a draft and nothing has been sent.\n\n**Why it was blocked:** The campaign has no audience (it currently has 0 recipients) and no message step yet. It needs both before it can go out.\n\n**To get it ready, I need:**\n1. **Who should get it:** for example, a smart list, a tag or certain contacts.\n2. **The text message:** either the wording itself or an existing template to use.\n\nOnce you send me those, I'll add the audience and message and launch it.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

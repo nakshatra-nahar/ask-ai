@@ -1,0 +1,146 @@
+{
+  "scenario": {
+    "id": "com-direct-draft-blog-post",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Draft a blog post for the dental site called '3 Ways to Prevent Gum Disease' — a short piece on brushing, flossing and regular cleanings. Put it under Oral Health. Don't publish it yet."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action blogs.create_blog_post",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid blogs.publish_post",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid blogs.schedule_post",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params blogs.create_blog_post",
+        "pass": true,
+        "detail": "{\"title\":\"/3 Ways to Prevent Gum Disease/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "abdd66ed-2aaa-4a1e-9871-4d13b9c662c6",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Draft a blog post for the dental site called '3 Ways to Prevent Gum Disease' — a short piece on brushing, flossing and regular cleanings. Put it under Oral Health. Don't publish it yet.",
+      "ttfurMs": 1557,
+      "ttftTextMs": 1557,
+      "firstActionMs": 2360,
+      "e2eMs": 16216,
+      "llmCalls": [
+        {
+          "ms": 2359,
+          "ttftMs": 1557,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 69,
+            "cacheRead": 112993,
+            "cacheWrite": 143
+          },
+          "costUSD": 0.0473082
+        },
+        {
+          "ms": 10010,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 873,
+            "cacheRead": 113136,
+            "cacheWrite": 609
+          },
+          "costUSD": 0.06576739999999999
+        },
+        {
+          "ms": 3839,
+          "ttftMs": 3834,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 267,
+            "cacheRead": 113745,
+            "cacheWrite": 1795
+          },
+          "costUSD": 0.059821
+        }
+      ],
+      "actions": [
+        {
+          "action": "websites.list_websites",
+          "input": {
+            "query": "dental"
+          },
+          "ok": true,
+          "ms": 0.64,
+          "confirmed": false
+        },
+        {
+          "action": "blogs.create_blog_post",
+          "input": {
+            "title": "3 Ways to Prevent Gum Disease",
+            "websiteId": "web_001",
+            "categories": [
+              "Oral Health"
+            ],
+            "excerpt": "Gum disease is common, but it's largely preventable. Here are three simple habits that keep your gums healthy: brushing, flossing and regular professional cleanings.",
+            "body": "Gum disease (periodontal disease) starts quietly. Early signs like red, swollen or bleeding gums are easy to ignore, but left untreated it can lead to receding gums, bone loss and even tooth loss. The good news: most gum disease is preventable with a few consistent habits.\n\n## 1. Brush twice a day, the right way\n\nPlaque, the sticky film of bacteria on your teeth, is the main cause of gum disease. Brush for two minutes, twice a day, with a soft-bristled toothbrush and fluoride toothpaste. Angle the bristles at 45 degrees toward the gumline and use gentle, circular strokes. Scrubbing hard won't clean better and can irritate your gums. Replace your toothbrush (or brush head) every three to four months, or sooner if the bristles fray.\n\n## 2. Floss every day\n\nYour toothbrush can't reach the tight spaces between your teeth and just under the gumline, which is exactly where gum disease often begins. Floss once a day: curve the floss into a \"C\" shape around each tooth and slide it gently beneath the gumline. If regular floss is tricky, interdental brushes or a water flosser are great alternatives. A little bleeding when you start is common and usually settles within a week or two of daily flossing. If it doesn't, let us know.\n\n## 3. Keep up with regular cleanings\n\nEven with great home care, plaque can harden into tartar, which only a dental professional can remove. Professional cleanings and checkups every six months let us remove tartar buildup, measure your gum health and catch early warning signs before they become bigger problems. Some patients with a history of gum disease benefit from more frequent visits.\n\n## The bottom line\n\nBrushing, flossing and regular cleanings work best together. Stick with all three and you'll give your gums the best chance of staying healthy for life.\n\nNoticed bleeding, tenderness or bad breath that won't go away? Book a visit with Bright Smile Dental and we'll help you get your gum health back on track."
+          },
+          "ok": true,
+          "ms": 6.69,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 1209,
+        "cache_creation_input_tokens": 2547,
+        "cache_read_input_tokens": 339874
+      },
+      "costUSD": 0.172897,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I've saved the blog post as a draft on the **Bright Smile Dental** site (brightsmiledental.com). It hasn't been published.\n\n- **Post:** 3 Ways to Prevent Gum Disease (`blog_011`)\n- **Category:** Oral Health\n- **Slug:** `3-ways-to-prevent-gum-disease`\n- **Author:** `usr_001`, set by default\n- **Content:**\n  - A short intro on gum disease.\n  - Three sections: brushing twice a day the right way, flossing every day, and keeping up with regular cleanings.\n  - A wrap-up that asks readers to book a visit.\n  - A one-line summary for blog listings.\n\nThe post has no featured image or SEO title/description yet. I can add those, schedule it, or publish it whenever you're ready.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

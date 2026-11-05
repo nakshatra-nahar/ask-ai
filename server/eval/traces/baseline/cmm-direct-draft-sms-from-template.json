@@ -1,0 +1,147 @@
+{
+  "scenario": {
+    "id": "cmm-direct-draft-sms-from-template",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Draft a text to Elena Smith using our missed-call text-back template. Don't send it yet, I want to look it over."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action sms.draft_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid sms.send_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid sms.schedule_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "f9958e57-cd0c-4044-a6aa-d53500c3a675",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Draft a text to Elena Smith using our missed-call text-back template. Don't send it yet, I want to look it over.",
+      "ttfurMs": 969,
+      "ttftTextMs": 969,
+      "firstActionMs": 1998,
+      "e2eMs": 5943,
+      "llmCalls": [
+        {
+          "ms": 1998,
+          "ttftMs": 969,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 154,
+            "cacheRead": 112993,
+            "cacheWrite": 110
+          },
+          "costUSD": 0.0488432
+        },
+        {
+          "ms": 1563,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 109,
+            "cacheRead": 113103,
+            "cacheWrite": 622
+          },
+          "costUSD": 0.050539200000000006
+        },
+        {
+          "ms": 2373,
+          "ttftMs": 2370,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 201,
+            "cacheRead": 113725,
+            "cacheWrite": 363
+          },
+          "costUSD": 0.051333
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Elena Smith"
+          },
+          "ok": true,
+          "ms": 0.47,
+          "confirmed": false
+        },
+        {
+          "action": "templates.search_templates",
+          "input": {
+            "query": "missed call",
+            "channel": "sms"
+          },
+          "ok": true,
+          "ms": 0.99,
+          "confirmed": false
+        },
+        {
+          "action": "sms.draft_sms",
+          "input": {
+            "contactId": "con_009",
+            "templateId": "tpl_009",
+            "purpose": "follow_up"
+          },
+          "ok": true,
+          "ms": 7.05,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 464,
+        "cache_creation_input_tokens": 1095,
+        "cache_read_input_tokens": 339821
+      },
+      "costUSD": 0.150715,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I've drafted the text to Elena Smith. It hasn't been sent.\n\n**Draft `msg_130`**, to Elena Smith (`con_009`) at +1-555-1296:\n> Hi Elena, sorry we missed your call! How can we help? - Acme\n\n- **Template:** Missed Call Text-Back (`tpl_009`)\n- **Length:** 1 SMS segment (standard characters)\n- **Opt-in:** Elena hasn't opted out of texts, so it can be sent.\n\nOnce you've looked it over, tell me to send it or schedule it, or tell me what to change in the wording.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

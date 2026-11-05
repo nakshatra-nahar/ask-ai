@@ -1,0 +1,242 @@
+{
+  "scenario": {
+    "id": "cmm-cond-apple-listing-categories",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "Summit Fitness isn't showing on Apple Maps. Check what's going on with the Apple sync — if it was rejected over categories, set them to Gym and Personal Trainer and resubmit to Apple."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action listings.get_listing_sync_status|listings.get_listing|listings.search_listings",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action listings.set_listing_categories",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action listings.publish_listing",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params listings.set_listing_categories",
+        "pass": true,
+        "detail": "{\"id\":\"lst_003\",\"categories\":[\"Gym\",\"Personal Trainer\"]}"
+      },
+      {
+        "name": "params listings.publish_listing",
+        "pass": true,
+        "detail": "{\"id\":\"lst_003\",\"directories\":[\"apple\"]}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "c3b94db6-9972-4d89-825d-9ca13ca0d8a4",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Summit Fitness isn't showing on Apple Maps. Check what's going on with the Apple sync — if it was rejected over categories, set them to Gym and Personal Trainer and resubmit to Apple.",
+      "ttfurMs": 743,
+      "ttftTextMs": 743,
+      "firstActionMs": 1657,
+      "e2eMs": 4512,
+      "llmCalls": [
+        {
+          "ms": 1649,
+          "ttftMs": 736,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 114,
+            "cacheRead": 5235,
+            "cacheWrite": 2246
+          },
+          "costUSD": 0.01562
+        },
+        {
+          "ms": 1565,
+          "ttftMs": 969,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 132,
+            "cacheRead": 7481,
+            "cacheWrite": 955
+          },
+          "costUSD": 0.0104154
+        },
+        {
+          "ms": 1284,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 96,
+            "cacheRead": 8436,
+            "cacheWrite": 977
+          },
+          "costUSD": 0.0101874
+        }
+      ],
+      "actions": [
+        {
+          "action": "listings.search_listings",
+          "input": {
+            "query": "Summit Fitness"
+          },
+          "ok": true,
+          "ms": 1.54,
+          "confirmed": false
+        },
+        {
+          "action": "listings.set_listing_categories",
+          "input": {
+            "id": "lst_003",
+            "categories": [
+              "Gym",
+              "Personal Trainer"
+            ]
+          },
+          "ok": true,
+          "ms": 6.28,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 342,
+        "cache_creation_input_tokens": 4178,
+        "cache_read_input_tokens": 21152
+      },
+      "costUSD": 0.036223,
+      "retries": 0,
+      "retrieved": [
+        "listings.publish_listing",
+        "appointments.mark_no_show",
+        "tasks.set_task_priority",
+        "calendars.set_calendar_timezone",
+        "listings.search_listings",
+        "booking_pages.set_booking_confirmation_message",
+        "availability.block_time",
+        "orders.submit_order",
+        "listings.get_listing_sync_status",
+        "tags.set_tag_color",
+        "surveys.submit_survey_response",
+        "blogs.set_post_categories",
+        "tasks.set_task_due_date",
+        "forms.submit_form_response",
+        "refunds.set_refund_reason",
+        "custom_fields.add_dropdown_option",
+        "media.list_media_references",
+        "listings.set_listing_categories",
+        "tax_rules.set_product_tax_category",
+        "opportunities.reopen_opportunity",
+        "booking_pages.set_booking_redirect_url",
+        "courses.set_course_prerequisites",
+        "refunds.reject_refund_request",
+        "media.set_media_alt_text"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 6.69,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01U5yryRHhknGGQELsxUoBGt",
+          "action": "listings.publish_listing",
+          "name": "Publish listing to simulated directory",
+          "risk": "external",
+          "input": {
+            "id": "lst_003",
+            "directories": [
+              "apple"
+            ]
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "c3b94db6-9972-4d89-825d-9ca13ca0d8a4",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 2489,
+      "firstActionMs": 6,
+      "e2eMs": 2490,
+      "llmCalls": [
+        {
+          "ms": 2484,
+          "ttftMs": 2482,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 191,
+            "cacheRead": 9413,
+            "cacheWrite": 1179
+          },
+          "costUSD": 0.0134882
+        }
+      ],
+      "actions": [
+        {
+          "action": "listings.publish_listing",
+          "input": {
+            "id": "lst_003",
+            "directories": [
+              "apple"
+            ]
+          },
+          "ok": true,
+          "ms": 6.13,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 191,
+        "cache_creation_input_tokens": 1179,
+        "cache_read_input_tokens": 9413
+      },
+      "costUSD": 0.013488,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Summit Fitness (`lst_003`) is now synced to Apple Maps.\n\n- **What went wrong:** Apple rejected the listing on 2026-09-30 because it had no categories (\"Apple Business Connect requires at least one category\").\n- **Fix:** I set the categories to **Gym** and **Personal Trainer**.\n- **Resubmitted:** I sent the listing to Apple again, and it now shows as **synced** (2026-11-04).\n\nGoogle and Bing were already synced, but they don't have the new categories yet. Republish to them if you want the categories to show there too.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "scenario": {
+    "id": "cmm-multi-black-friday-setup",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Get the Black Friday SMS campaign ready to go: target everyone tagged customer, use the Black Friday Teaser template as the message, and schedule it for Nov 27 at 9am Eastern."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action campaigns.set_campaign_audience",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action campaigns.add_campaign_message_step",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action campaigns.set_campaign_schedule",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid campaigns.launch_campaign",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params campaigns.set_campaign_audience",
+        "pass": true,
+        "detail": "{\"id\":\"cam_005\",\"tags\":[\"customer\"]}"
+      },
+      {
+        "name": "params campaigns.add_campaign_message_step",
+        "pass": true,
+        "detail": "{\"id\":\"cam_005\",\"templateId\":\"tpl_008\"}"
+      },
+      {
+        "name": "params campaigns.set_campaign_schedule",
+        "pass": true,
+        "detail": "{\"id\":\"cam_005\",\"startAt\":\"2026-11-27\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 3,
+      "hit": 3
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "334631c2-b16d-483f-b339-7b99cfb01145",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Get the Black Friday SMS campaign ready to go: target everyone tagged customer, use the Black Friday Teaser template as the message, and schedule it for Nov 27 at 9am Eastern.",
+      "ttfurMs": 3149,
+      "ttftTextMs": 3149,
+      "firstActionMs": 4144,
+      "e2eMs": 18896,
+      "llmCalls": [
+        {
+          "ms": 4143,
+          "ttftMs": 3149,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 134,
+            "cacheRead": 112993,
+            "cacheWrite": 138
+          },
+          "costUSD": 0.04858320000000001
+        },
+        {
+          "ms": 3262,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 218,
+            "cacheRead": 113131,
+            "cacheWrite": 523
+          },
+          "costUSD": 0.0522354
+        },
+        {
+          "ms": 3205,
+          "ttftMs": 2612,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 157,
+            "cacheRead": 113654,
+            "cacheWrite": 737
+          },
+          "costUSD": 0.052294600000000004
+        },
+        {
+          "ms": 8262,
+          "ttftMs": 8257,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 317,
+            "cacheRead": 114391,
+            "cacheWrite": 425
+          },
+          "costUSD": 0.054229400000000004
+        }
+      ],
+      "actions": [
+        {
+          "action": "campaigns.list_campaigns",
+          "input": {
+            "query": "Black Friday"
+          },
+          "ok": true,
+          "ms": 0.61,
+          "confirmed": false
+        },
+        {
+          "action": "templates.search_templates",
+          "input": {
+            "query": "Black Friday Teaser"
+          },
+          "ok": true,
+          "ms": 0.47,
+          "confirmed": false
+        },
+        {
+          "action": "campaigns.set_campaign_audience",
+          "input": {
+            "id": "cam_005",
+            "tags": [
+              "customer"
+            ]
+          },
+          "ok": true,
+          "ms": 5.76,
+          "confirmed": false
+        },
+        {
+          "action": "campaigns.add_campaign_message_step",
+          "input": {
+            "id": "cam_005",
+            "templateId": "tpl_008",
+            "channel": "sms",
+            "delayDays": 0
+          },
+          "ok": true,
+          "ms": 5.09,
+          "confirmed": false
+        },
+        {
+          "action": "campaigns.set_campaign_schedule",
+          "input": {
+            "id": "cam_005",
+            "startAt": "2026-11-27T14:00:00Z",
+            "timezone": "America/New_York"
+          },
+          "ok": true,
+          "ms": 12.05,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 826,
+        "cache_creation_input_tokens": 1823,
+        "cache_read_input_tokens": 454169
+      },
+      "costUSD": 0.207343,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "The **Black Friday SMS** campaign (cam_005) is now **scheduled**. It will send automatically.\n\n- **Audience:** contacts tagged `customer`. That's only **2 reachable contacts**. No one was dropped for opting out.\n- **Message:** one SMS using the **Black Friday Teaser** template (tpl_008): \"{{business.name}} BLACK FRIDAY: 30% off everything this Friday only! Reply STOP to opt out.\"\n- **Send time:** Fri, Nov 27, 2026 at 9:00 AM Eastern (14:00 UTC), set to the America/New_York timezone.\n\n**Worth checking:**\n- 2 recipients seems low for \"everyone tagged customer.\" Some customers may not have the tag, or may have no phone number. I can widen the audience, for example to contacts whose lifecycle stage is customer.\n- The template says \"this Friday only.\" That fits, since Nov 27 is a Friday.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

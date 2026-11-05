@@ -1,0 +1,188 @@
+{
+  "scenario": {
+    "id": "com-cond-texas-tax",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "If we've got an active Texas sales tax rule, make sure it's at 6.25%. If we don't, set one up at 6.25%."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tax_rules.list_tax_rules",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action tax_rules.create_tax_rule",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params tax_rules.create_tax_rule",
+        "pass": true,
+        "detail": "{\"country\":\"US\",\"state\":\"TX\",\"rate\":6.25}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "f8cd2292-fb56-46c4-a2ba-1a8196cc10d6",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "If we've got an active Texas sales tax rule, make sure it's at 6.25%. If we don't, set one up at 6.25%.",
+      "ttfurMs": 2771,
+      "ttftTextMs": 2771,
+      "firstActionMs": 3763,
+      "e2eMs": 9696,
+      "llmCalls": [
+        {
+          "ms": 3758,
+          "ttftMs": 2767,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 114,
+            "cacheRead": 5235,
+            "cacheWrite": 2468
+          },
+          "costUSD": 0.01673
+        },
+        {
+          "ms": 1710,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 110,
+            "cacheRead": 7703,
+            "cacheWrite": 129
+          },
+          "costUSD": 0.005934200000000001
+        },
+        {
+          "ms": 1855,
+          "ttftMs": 1168,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 145,
+            "cacheRead": 7832,
+            "cacheWrite": 209
+          },
+          "costUSD": 0.007085800000000001
+        },
+        {
+          "ms": 2361,
+          "ttftMs": 2358,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 176,
+            "cacheRead": 8041,
+            "cacheWrite": 227
+          },
+          "costUSD": 0.0078794
+        }
+      ],
+      "actions": [
+        {
+          "action": "tax_rules.list_tax_rules",
+          "input": {
+            "country": "US",
+            "state": "TX",
+            "status": "active"
+          },
+          "ok": true,
+          "ms": 0.88,
+          "confirmed": false
+        },
+        {
+          "action": "tax_rules.list_tax_rules",
+          "input": {
+            "query": "Texas"
+          },
+          "ok": true,
+          "ms": 0.13,
+          "confirmed": false
+        },
+        {
+          "action": "tax_rules.create_tax_rule",
+          "input": {
+            "name": "Texas sales tax",
+            "country": "US",
+            "state": "TX",
+            "rate": 6.25,
+            "inclusive": false
+          },
+          "ok": true,
+          "ms": 6.28,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 545,
+        "cache_creation_input_tokens": 3033,
+        "cache_read_input_tokens": 28811
+      },
+      "costUSD": 0.037629,
+      "retries": 0,
+      "retrieved": [
+        "tax_rules.create_tax_rule",
+        "tax_rules.list_tax_rules",
+        "forms.publish_form",
+        "appointments.mark_no_show",
+        "prices.set_billing_interval",
+        "tax_rules.set_tax_rate",
+        "tax_rules.get_tax_rule",
+        "courses.publish_course",
+        "custom_fields.add_dropdown_option",
+        "pipelines.set_stage_probability",
+        "tax_rules.deactivate_tax_rule",
+        "booking_pages.publish_booking_page",
+        "events.promote_waitlisted",
+        "prices.set_price_currency",
+        "tax_rules.set_tax_region",
+        "lessons.publish_lesson",
+        "reviews.send_review_request",
+        "products.set_product_sku",
+        "sms.send_sms",
+        "sms.draft_sms",
+        "sms.schedule_sms",
+        "sms.receive_inbound_sms",
+        "sms.search_sms_messages",
+        "sms.record_sms_opt_out"
+      ],
+      "status": "completed",
+      "finalText": "We didn't have an active Texas sales tax rule, so I created one at 6.25%.\n\n**New rule:** \"Texas sales tax\" (`tax_008`)\n- Applies to: US, Texas\n- Rate: 6.25%\n- Tax is added on top of prices, not included in them\n- Covers all product categories\n- Status: active\n\n**Note:** There's an old rule, \"Texas sales tax (old)\" (`tax_007`), also at 6.25%. It's inactive, so I didn't change it. It won't overlap with the new rule.",
+      "progress": [],
+      "retrievalMs": 3.9,
+      "calls": 4
+    }
+  ]
+}

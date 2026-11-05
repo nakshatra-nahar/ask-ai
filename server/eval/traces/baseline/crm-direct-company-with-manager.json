@@ -1,0 +1,142 @@
+{
+  "scenario": {
+    "id": "crm-direct-company-with-manager",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Add a new company, Sunrise Pediatrics (sunrisepediatrics.com), in healthcare. Priya Shah should be the account manager."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action companies.create_company",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params companies.create_company",
+        "pass": true,
+        "detail": "{\"name\":\"/sunrise pediatrics/i\",\"domain\":\"sunrisepediatrics.com\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "81a52e32-fc76-4ed5-9f5d-bc8b4f66959c",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Add a new company, Sunrise Pediatrics (sunrisepediatrics.com), in healthcare. Priya Shah should be the account manager.",
+      "ttfurMs": 1024,
+      "ttftTextMs": 1024,
+      "firstActionMs": 1999,
+      "e2eMs": 5655,
+      "llmCalls": [
+        {
+          "ms": 1998,
+          "ttftMs": 1024,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 128,
+            "cacheRead": 112993,
+            "cacheWrite": 121
+          },
+          "costUSD": 0.0483782
+        },
+        {
+          "ms": 1738,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 147,
+            "cacheRead": 113114,
+            "cacheWrite": 345
+          },
+          "costUSD": 0.04991860000000001
+        },
+        {
+          "ms": 1913,
+          "ttftMs": 1911,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 137,
+            "cacheRead": 113459,
+            "cacheWrite": 279
+          },
+          "costUSD": 0.049526600000000004
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Priya Shah"
+          },
+          "ok": true,
+          "ms": 0.83,
+          "confirmed": false
+        },
+        {
+          "action": "companies.search_companies",
+          "input": {
+            "query": "Sunrise"
+          },
+          "ok": true,
+          "ms": 0.54,
+          "confirmed": false
+        },
+        {
+          "action": "companies.create_company",
+          "input": {
+            "name": "Sunrise Pediatrics",
+            "domain": "sunrisepediatrics.com",
+            "industry": "Healthcare",
+            "accountManagerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 3.41,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 412,
+        "cache_creation_input_tokens": 745,
+        "cache_read_input_tokens": 339566
+      },
+      "costUSD": 0.147823,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I've added Sunrise Pediatrics as a new company (**co_022**) with Priya Shah as its account manager. No company with that name already existed.\n\n- **Domain:** sunrisepediatrics.com\n- **Industry:** Healthcare\n- **Account manager:** Priya Shah (usr_003, Account Executive)\n- **Status:** Active\n\nThe phone number and address are blank. I can add them if you send them.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

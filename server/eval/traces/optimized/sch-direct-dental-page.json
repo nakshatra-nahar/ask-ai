@@ -1,0 +1,158 @@
+{
+  "scenario": {
+    "id": "sch-direct-dental-page",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Add a 'Book Online' page to the Bright Smile Dental website at /book-online"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action websites.add_website_page",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params websites.add_website_page",
+        "pass": true,
+        "detail": "{\"id\":\"web_001\",\"slug\":\"/book-online/\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "7e3a16ba-d6e5-4a8d-a1ab-d9fb8607f198",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Add a 'Book Online' page to the Bright Smile Dental website at /book-online",
+      "ttfurMs": 792,
+      "ttftTextMs": 792,
+      "firstActionMs": 1599,
+      "e2eMs": 5052,
+      "llmCalls": [
+        {
+          "ms": 1595,
+          "ttftMs": 789,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 112,
+            "cacheRead": 5235,
+            "cacheWrite": 2425
+          },
+          "costUSD": 0.016475
+        },
+        {
+          "ms": 1478,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 103,
+            "cacheRead": 7660,
+            "cacheWrite": 616
+          },
+          "costUSD": 0.008212
+        },
+        {
+          "ms": 1970,
+          "ttftMs": 1967,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 143,
+            "cacheRead": 8276,
+            "cacheWrite": 651
+          },
+          "costUSD": 0.0094334
+        }
+      ],
+      "actions": [
+        {
+          "action": "websites.list_websites",
+          "input": {
+            "query": "Bright Smile Dental"
+          },
+          "ok": true,
+          "ms": 0.64,
+          "confirmed": false
+        },
+        {
+          "action": "websites.add_website_page",
+          "input": {
+            "id": "web_001",
+            "title": "Book Online",
+            "slug": "book-online"
+          },
+          "ok": true,
+          "ms": 5.82,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 358,
+        "cache_creation_input_tokens": 3692,
+        "cache_read_input_tokens": 21171
+      },
+      "costUSD": 0.03412,
+      "retries": 0,
+      "retrieved": [
+        "websites.add_website_page",
+        "booking_pages.list_booking_pages",
+        "websites.create_website",
+        "booking_pages.create_booking_page",
+        "landing_pages.create_landing_page",
+        "websites.set_website_home_page",
+        "websites.rename_website",
+        "booking_pages.unpublish_booking_page",
+        "websites.publish_website",
+        "booking_pages.get_booking_page",
+        "booking_pages.link_calendar_to_booking_page",
+        "booking_pages.update_booking_page_content",
+        "websites.unpublish_website",
+        "funnels.add_funnel_step",
+        "listings.create_listing",
+        "landing_pages.add_page_section",
+        "landing_pages.publish_landing_page",
+        "landing_pages.search_landing_pages",
+        "appointments.add_appointment_attendee",
+        "calendars.assign_calendar_host",
+        "courses.create_course",
+        "funnels.publish_funnel",
+        "media.delete_media",
+        "media.list_media_references"
+      ],
+      "status": "completed",
+      "finalText": "I added a \"Book Online\" page (id `wpg_019`) at `/book-online` to the Bright Smile Dental website (`web_001`, brightsmiledental.com). The site is already live.\n\n**Not done:** The page isn't in the site's menu yet. The menu currently shows Home, Services, Meet the Team and New Patients. I can add \"Book Online\" to it, and I can link one of your booking pages so visitors can book from this page.",
+      "progress": [],
+      "retrievalMs": 3.24,
+      "calls": 3
+    }
+  ]
+}

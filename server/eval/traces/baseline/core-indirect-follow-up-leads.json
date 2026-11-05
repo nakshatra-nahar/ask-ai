@@ -1,0 +1,677 @@
+{
+  "scenario": {
+    "id": "core-indirect-follow-up-leads",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "I keep forgetting to follow up with new leads. Help me stay on top of them."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tasks.create_task|workflows.create_workflow",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "aa7ea275-ae57-4c06-a508-86c466354d21",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "I keep forgetting to follow up with new leads. Help me stay on top of them.",
+      "ttfurMs": 1850,
+      "ttftTextMs": 1850,
+      "firstActionMs": 2537,
+      "e2eMs": 37534,
+      "llmCalls": [
+        {
+          "ms": 2533,
+          "ttftMs": 1850,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 163,
+            "cacheRead": 0,
+            "cacheWrite": 113091
+          },
+          "costUSD": 0.568731
+        },
+        {
+          "ms": 2371,
+          "ttftMs": 1461,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 249,
+            "cacheRead": 113091,
+            "cacheWrite": 2999
+          },
+          "costUSD": 0.0652194
+        },
+        {
+          "ms": 32623,
+          "ttftMs": 8045,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 4753,
+            "cacheRead": 116090,
+            "cacheWrite": 991
+          },
+          "costUSD": 0.146459
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "status": "new",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 2.97,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.search_tasks",
+          "input": {
+            "contactIds": [
+              "con_035",
+              "con_037",
+              "con_044",
+              "con_039",
+              "con_004",
+              "con_020",
+              "con_006",
+              "con_032",
+              "con_002",
+              "con_007",
+              "con_022",
+              "con_011",
+              "con_023",
+              "con_019",
+              "con_015",
+              "con_071",
+              "con_009"
+            ],
+            "status": "open",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 2.28,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 5165,
+        "cache_creation_input_tokens": 117081,
+        "cache_read_input_tokens": 229181
+      },
+      "costUSD": 0.780409,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01KJYfBjNY88AJygbwG3irCj",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: James Patel",
+            "description": "New facebook lead (score 20) created 2026-11-04. Make first contact and update lead status.",
+            "contactId": "con_035",
+            "recordType": "leads",
+            "recordId": "ld_017",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01G75nrSRXfzRjN1ebnakyTb",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Michael Chen",
+            "description": "New website lead (score 29) created 2026-11-03. Make first contact and update lead status.",
+            "contactId": "con_037",
+            "recordType": "leads",
+            "recordId": "ld_018",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_011uCv6uYMZVzKJdZbwtvSAa",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Mei Rossi",
+            "description": "New walk-in lead (score 24) created 2026-11-02. Make first contact and update lead status.",
+            "contactId": "con_044",
+            "recordType": "leads",
+            "recordId": "ld_021",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_014x7KrdThHZ2f5cTfNZvQ9V",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: David Okafor",
+            "description": "New google_ads lead (score 12) created 2026-11-02. Make first contact and update lead status.",
+            "contactId": "con_039",
+            "recordType": "leads",
+            "recordId": "ld_019",
+            "ownerId": "usr_002",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_0158poRVhdK5oBJ8mMcwLqvz",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Ravi Haddad",
+            "description": "New google_ads lead (score 28) created 2026-11-01. Make first contact and update lead status.",
+            "contactId": "con_020",
+            "recordType": "leads",
+            "recordId": "ld_009",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01Wwu2vt9HWu3T1d8iZzTEYc",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: James Williams",
+            "description": "New facebook lead (score 39) created 2026-10-31. Make first contact and update lead status.",
+            "contactId": "con_006",
+            "recordType": "leads",
+            "recordId": "ld_003",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_017VjAXhsmrCEQYpoYyDizVV",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Jack Rossi",
+            "description": "New webinar lead (score 31) created 2026-10-31. Make first contact and update lead status.",
+            "contactId": "con_032",
+            "recordType": "leads",
+            "recordId": "ld_015",
+            "ownerId": "usr_002",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01HVPMJxhJEmMW3Lcz7usdJF",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Sarah Chen",
+            "description": "New facebook lead (score 40) created 2026-10-30. Make first contact and update lead status.",
+            "contactId": "con_002",
+            "recordType": "leads",
+            "recordId": "ld_001",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01TMx8T7uC2GAGMahrniyst1",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Priya Okafor",
+            "description": "New facebook lead (score 19) created 2026-10-29. Make first contact and update lead status.",
+            "contactId": "con_007",
+            "recordType": "leads",
+            "recordId": "ld_004",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_01MYG4fHp3PHQXgnhs7gvceL",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Lucas Johnson",
+            "description": "New website lead (score 29) created 2026-10-29. Make first contact and update lead status.",
+            "contactId": "con_022",
+            "recordType": "leads",
+            "recordId": "ld_010",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          }
+        },
+        {
+          "id": "toolu_011XknaCowWy4XtVEVMKYyDY",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Aisha Kim",
+            "description": "New facebook lead (score 16) created 2026-10-27 — waiting over a week. Make first contact and update lead status.",
+            "contactId": "con_011",
+            "recordType": "leads",
+            "recordId": "ld_005",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_01Vga293KJGerDYMacLqgB6a",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Zoe Patel",
+            "description": "New referral lead (score 30) created 2026-10-26 — waiting over a week. Make first contact and update lead status.",
+            "contactId": "con_023",
+            "recordType": "leads",
+            "recordId": "ld_011",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_01E2Vmbc5b6U4mXFbPmWnY4S",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Olivia Walker",
+            "description": "New facebook lead (score 30) created 2026-10-26 — waiting over a week. Make first contact and update lead status.",
+            "contactId": "con_019",
+            "recordType": "leads",
+            "recordId": "ld_008",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_01YNiqo7Ajs4tPUohM4BV3ee",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Mei Silva",
+            "description": "New website lead (score 36) created 2026-10-22 — waiting nearly two weeks. Make first contact and update lead status.",
+            "contactId": "con_015",
+            "recordType": "leads",
+            "recordId": "ld_045",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_0187ErhS92bN6zbP69y1Bwzr",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Tom Williams",
+            "description": "New website lead (score 14) created 2026-09-30 — waiting over a month. Make contact or disqualify.",
+            "contactId": "con_071",
+            "recordType": "leads",
+            "recordId": "ld_033",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          }
+        },
+        {
+          "id": "toolu_015eh7Mc8XR7hmhRLbUStHa7",
+          "action": "tasks.create_task",
+          "name": "Create task",
+          "risk": "bulk",
+          "input": {
+            "title": "Follow up with new lead: Elena Smith",
+            "description": "New webinar lead (score 39) created 2026-09-07 — waiting about two months. Make contact or disqualify.",
+            "contactId": "con_009",
+            "recordType": "leads",
+            "recordId": "ld_043",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "aa7ea275-ae57-4c06-a508-86c466354d21",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 7,
+      "ttftTextMs": 6918,
+      "firstActionMs": 7,
+      "e2eMs": 6920,
+      "llmCalls": [
+        {
+          "ms": 6885,
+          "ttftMs": 6883,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 763,
+            "cacheRead": 117081,
+            "cacheWrite": 8175
+          },
+          "costUSD": 0.1029754
+        }
+      ],
+      "actions": [
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: James Patel",
+            "description": "New facebook lead (score 20) created 2026-11-04. Make first contact and update lead status.",
+            "contactId": "con_035",
+            "recordType": "leads",
+            "recordId": "ld_017",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 7.03,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Michael Chen",
+            "description": "New website lead (score 29) created 2026-11-03. Make first contact and update lead status.",
+            "contactId": "con_037",
+            "recordType": "leads",
+            "recordId": "ld_018",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 4.73,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Mei Rossi",
+            "description": "New walk-in lead (score 24) created 2026-11-02. Make first contact and update lead status.",
+            "contactId": "con_044",
+            "recordType": "leads",
+            "recordId": "ld_021",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 2.98,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: David Okafor",
+            "description": "New google_ads lead (score 12) created 2026-11-02. Make first contact and update lead status.",
+            "contactId": "con_039",
+            "recordType": "leads",
+            "recordId": "ld_019",
+            "ownerId": "usr_002",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.82,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Ravi Haddad",
+            "description": "New google_ads lead (score 28) created 2026-11-01. Make first contact and update lead status.",
+            "contactId": "con_020",
+            "recordType": "leads",
+            "recordId": "ld_009",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.55,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: James Williams",
+            "description": "New facebook lead (score 39) created 2026-10-31. Make first contact and update lead status.",
+            "contactId": "con_006",
+            "recordType": "leads",
+            "recordId": "ld_003",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.51,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Jack Rossi",
+            "description": "New webinar lead (score 31) created 2026-10-31. Make first contact and update lead status.",
+            "contactId": "con_032",
+            "recordType": "leads",
+            "recordId": "ld_015",
+            "ownerId": "usr_002",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.57,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Sarah Chen",
+            "description": "New facebook lead (score 40) created 2026-10-30. Make first contact and update lead status.",
+            "contactId": "con_002",
+            "recordType": "leads",
+            "recordId": "ld_001",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.51,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Priya Okafor",
+            "description": "New facebook lead (score 19) created 2026-10-29. Make first contact and update lead status.",
+            "contactId": "con_007",
+            "recordType": "leads",
+            "recordId": "ld_004",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.59,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Lucas Johnson",
+            "description": "New website lead (score 29) created 2026-10-29. Make first contact and update lead status.",
+            "contactId": "con_022",
+            "recordType": "leads",
+            "recordId": "ld_010",
+            "dueDate": "2026-11-04",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.53,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Aisha Kim",
+            "description": "New facebook lead (score 16) created 2026-10-27 — waiting over a week. Make first contact and update lead status.",
+            "contactId": "con_011",
+            "recordType": "leads",
+            "recordId": "ld_005",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.48,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Zoe Patel",
+            "description": "New referral lead (score 30) created 2026-10-26 — waiting over a week. Make first contact and update lead status.",
+            "contactId": "con_023",
+            "recordType": "leads",
+            "recordId": "ld_011",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.41,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Olivia Walker",
+            "description": "New facebook lead (score 30) created 2026-10-26 — waiting over a week. Make first contact and update lead status.",
+            "contactId": "con_019",
+            "recordType": "leads",
+            "recordId": "ld_008",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.52,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Mei Silva",
+            "description": "New website lead (score 36) created 2026-10-22 — waiting nearly two weeks. Make first contact and update lead status.",
+            "contactId": "con_015",
+            "recordType": "leads",
+            "recordId": "ld_045",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.47,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Tom Williams",
+            "description": "New website lead (score 14) created 2026-09-30 — waiting over a month. Make contact or disqualify.",
+            "contactId": "con_071",
+            "recordType": "leads",
+            "recordId": "ld_033",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.42,
+          "confirmed": true
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with new lead: Elena Smith",
+            "description": "New webinar lead (score 39) created 2026-09-07 — waiting about two months. Make contact or disqualify.",
+            "contactId": "con_009",
+            "recordType": "leads",
+            "recordId": "ld_043",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-04",
+            "priority": "high"
+          },
+          "ok": true,
+          "ms": 1.36,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 763,
+        "cache_creation_input_tokens": 8175,
+        "cache_read_input_tokens": 117081
+      },
+      "costUSD": 0.102975,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I made 16 follow-up tasks, one for each new lead that didn't already have one. Each task is linked to its lead and contact. 13 of the 17 leads have no owner, so their tasks aren't assigned to anyone yet.\n\n**High priority, due today: waiting a week or more**\n| Task | Lead | Waiting since | Owner |\n|---|---|---|---|\n| tsk_046 | Elena Smith (ld_043) | Sep 7 | usr_005 |\n| tsk_045 | Tom Williams (ld_033) | Sep 30 | — |\n| tsk_044 | Mei Silva (ld_045) | Oct 22 | — |\n| tsk_042 | Zoe Patel (ld_011), referral | Oct 26 | — |\n| tsk_043 | Olivia Walker (ld_008) | Oct 26 | usr_005 |\n| tsk_041 | Aisha Kim (ld_005) | Oct 27 | — |\n\n**Medium priority, due today**\n- tsk_040 Lucas Johnson (ld_010)\n- tsk_039 Priya Okafor (ld_004)\n- tsk_038 Sarah Chen (ld_001). Highest score of the group: 40.\n- tsk_036 James Williams (ld_003), score 39\n- tsk_037 Jack Rossi (ld_015), owner usr_002\n- tsk_035 Ravi Haddad (ld_009)\n- tsk_034 David Okafor (ld_019), owner usr_002\n- tsk_033 Mei Rossi (ld_021)\n\n**Medium priority, due tomorrow (Nov 5)**\n- tsk_032 Michael Chen (ld_018)\n- tsk_031 James Patel (ld_017)\n\n**Skipped**\n- Mike Smith (ld_002) already has a follow-up task: tsk_002 \"Call back re: pricing\", due Nov 6.\n\n**To stay on top of future leads**, I can set up either of these:\n1. **An automatic follow-up task.** A workflow plus a trigger would create a task for each new lead, due within 1 day. This would turn on live automation.\n2. **A saved list of untouched leads.** It would show leads still marked \"new\" after 2 days.\n\nShould I build either of these, or give you the 13 unowned leads?",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

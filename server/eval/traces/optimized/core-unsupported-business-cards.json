@@ -1,0 +1,103 @@
+{
+  "scenario": {
+    "id": "core-unsupported-business-cards",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Order 200 business cards from Vistaprint for Jordan Lee and charge the company card."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|unable|not able|don't have|do not have|not support|isn't supported|no (action|capability|way))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "3a66f02a-7e79-4410-b714-0146d09ef64f",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Order 200 business cards from Vistaprint for Jordan Lee and charge the company card.",
+      "ttfurMs": 3391,
+      "ttftTextMs": 3391,
+      "firstActionMs": null,
+      "e2eMs": 6183,
+      "llmCalls": [
+        {
+          "ms": 6179,
+          "ttftMs": 3387,
+          "stop": "end_turn",
+          "usage": {
+            "input": 4,
+            "output": 340,
+            "cacheRead": 5235,
+            "cacheWrite": 2509
+          },
+          "costUSD": 0.021455
+        }
+      ],
+      "actions": [],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 340,
+        "cache_creation_input_tokens": 2509,
+        "cache_read_input_tokens": 5235
+      },
+      "costUSD": 0.021455,
+      "retries": 0,
+      "retrieved": [
+        "payments.record_payment",
+        "orders.search_orders",
+        "companies.create_company",
+        "listings.search_listings",
+        "listings.create_listing",
+        "companies.archive_company",
+        "companies.search_companies",
+        "companies.list_company_contacts",
+        "companies.get_company",
+        "listings.update_listing_name",
+        "companies.unlink_contact_from_company",
+        "invoices.create_invoice",
+        "orders.cancel_order",
+        "subscriptions.preview_next_invoice",
+        "listings.get_listing",
+        "listings.set_listing_hours",
+        "listings.set_listing_categories",
+        "contacts.update_contact",
+        "orders.create_order",
+        "orders.fulfill_order",
+        "orders.submit_order",
+        "orders.get_order",
+        "contacts.search_contacts",
+        "subscriptions.set_subscription_trial_end"
+      ],
+      "status": "completed",
+      "finalText": "I can't place this order. This platform has no way to buy from outside vendors like Vistaprint and no access to your company card. Its **Orders** and **Payments** tools only work the other way round: they handle products *you* sell to your contacts and payments *you collect* from them. Using them here would create a sale to Jordan Lee instead of buying cards for them. I didn't make any changes.\n\n**What I can do here instead:**\n- **Add a task** to remind someone to order the cards, e.g. \"Order 200 business cards from Vistaprint for Jordan Lee,\" with a due date and owner.\n- **Add a note** to Jordan Lee's contact record saying the cards were requested.\n- **Draft an email** to Vistaprint or your office manager asking for the order.\n\nIf you want any of these, tell me who should own the task and when it's due.",
+      "progress": [],
+      "retrievalMs": 4.01,
+      "calls": 1
+    }
+  ]
+}

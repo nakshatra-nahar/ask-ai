@@ -1,0 +1,230 @@
+{
+  "scenario": {
+    "id": "com-followup-overdue-report-schedule",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Can you set up a saved report of overdue invoices, broken down by status?"
+      },
+      {
+        "user": "Perfect. Have it emailed to jamie.fox@acme.test every Monday."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action reports.create_report|reports.set_report_grouping",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action reports.schedule_report",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params reports.schedule_report",
+        "pass": true,
+        "detail": "{\"frequency\":\"weekly\",\"dayOfWeek\":\"mon\",\"recipients\":[\"jamie.fox@acme.test\"]}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "34520677-ddd4-4406-b319-9d18bc57c95c",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Can you set up a saved report of overdue invoices, broken down by status?",
+      "ttfurMs": 3164,
+      "ttftTextMs": 3164,
+      "firstActionMs": 4485,
+      "e2eMs": 7135,
+      "llmCalls": [
+        {
+          "ms": 4476,
+          "ttftMs": 3164,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 170,
+            "cacheRead": 112993,
+            "cacheWrite": 95
+          },
+          "costUSD": 0.049088200000000005
+        },
+        {
+          "ms": 2650,
+          "ttftMs": 2648,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 146,
+            "cacheRead": 113088,
+            "cacheWrite": 323
+          },
+          "costUSD": 0.0497782
+        }
+      ],
+      "actions": [
+        {
+          "action": "reports.create_report",
+          "input": {
+            "name": "Overdue Invoices by Status",
+            "metric": "invoices_overdue",
+            "groupBy": "status",
+            "description": "Overdue invoices broken down by invoice status."
+          },
+          "ok": true,
+          "ms": 8.71,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 316,
+        "cache_creation_input_tokens": 418,
+        "cache_read_input_tokens": 226081
+      },
+      "costUSD": 0.098866,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I set up the saved report **Overdue Invoices by Status** (`rpt_007`).\n\n- **What it counts:** overdue invoices, broken down by invoice status\n- **Date range:** last 30 days. I picked this because you didn't specify one.\n- **Filters:** none\n- **Emailed on a schedule:** no\n\nI haven't run it yet. I can run it now, change the date range, or have it emailed to people daily, weekly or monthly.",
+      "progress": [],
+      "calls": 2
+    },
+    {
+      "sessionId": "34520677-ddd4-4406-b319-9d18bc57c95c",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Perfect. Have it emailed to jamie.fox@acme.test every Monday.",
+      "ttfurMs": 9774,
+      "ttftTextMs": 9774,
+      "firstActionMs": null,
+      "e2eMs": 10691,
+      "llmCalls": [
+        {
+          "ms": 10691,
+          "ttftMs": 9774,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 173,
+            "cacheRead": 113411,
+            "cacheWrite": 176
+          },
+          "costUSD": 0.049720400000000005
+        }
+      ],
+      "actions": [],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 173,
+        "cache_creation_input_tokens": 176,
+        "cache_read_input_tokens": 113411
+      },
+      "costUSD": 0.04972,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01N9KXK547G7UgSxB8w73HhN",
+          "action": "reports.schedule_report",
+          "name": "Schedule report delivery",
+          "risk": "external",
+          "input": {
+            "id": "rpt_007",
+            "frequency": "weekly",
+            "dayOfWeek": "mon",
+            "recipients": [
+              "jamie.fox@acme.test"
+            ]
+          }
+        }
+      ],
+      "calls": 1
+    },
+    {
+      "sessionId": "34520677-ddd4-4406-b319-9d18bc57c95c",
+      "turn": 2,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 2593,
+      "firstActionMs": 6,
+      "e2eMs": 2594,
+      "llmCalls": [
+        {
+          "ms": 2587,
+          "ttftMs": 2587,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 123,
+            "cacheRead": 113587,
+            "cacheWrite": 403
+          },
+          "costUSD": 0.049917800000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "reports.schedule_report",
+          "input": {
+            "id": "rpt_007",
+            "frequency": "weekly",
+            "dayOfWeek": "mon",
+            "recipients": [
+              "jamie.fox@acme.test"
+            ]
+          },
+          "ok": true,
+          "ms": 6.43,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 123,
+        "cache_creation_input_tokens": 403,
+        "cache_read_input_tokens": 113587
+      },
+      "costUSD": 0.049918,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "**Overdue Invoices by Status** (`rpt_007`) will now be emailed to jamie.fox@acme.test every Monday at 08:00 UTC. The first email goes out Mon, 9 Nov 2026.\n\nEach email covers the last 30 days and breaks overdue invoices down by status.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

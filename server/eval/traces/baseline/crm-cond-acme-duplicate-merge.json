@@ -1,0 +1,199 @@
+{
+  "scenario": {
+    "id": "crm-cond-acme-duplicate-merge",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "Check the notes on Acme Dental LLC. If anyone flagged it as being the same business as Acme Dental, merge it into Acme Dental (Acme Dental stays the main record). If there's no such note, leave both alone."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action notes.search_notes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action companies.merge_companies",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params companies.merge_companies",
+        "pass": true,
+        "detail": "{\"primaryId\":\"co_001\",\"duplicateId\":\"co_021\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "d9e78212-7070-421b-b09e-c95a4157f1bb",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Check the notes on Acme Dental LLC. If anyone flagged it as being the same business as Acme Dental, merge it into Acme Dental (Acme Dental stays the main record). If there's no such note, leave both alone.",
+      "ttfurMs": 1449,
+      "ttftTextMs": 1449,
+      "firstActionMs": 2202,
+      "e2eMs": 6934,
+      "llmCalls": [
+        {
+          "ms": 2202,
+          "ttftMs": 1449,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 81,
+            "cacheRead": 112993,
+            "cacheWrite": 145
+          },
+          "costUSD": 0.0475582
+        },
+        {
+          "ms": 1918,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 79,
+            "cacheRead": 113138,
+            "cacheWrite": 363
+          },
+          "costUSD": 0.048658200000000006
+        },
+        {
+          "ms": 2812,
+          "ttftMs": 2497,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 170,
+            "cacheRead": 113501,
+            "cacheWrite": 228
+          },
+          "costUSD": 0.049948400000000004
+        }
+      ],
+      "actions": [
+        {
+          "action": "companies.search_companies",
+          "input": {
+            "query": "Acme Dental"
+          },
+          "ok": true,
+          "ms": 0.16,
+          "confirmed": false
+        },
+        {
+          "action": "notes.search_notes",
+          "input": {
+            "recordType": "companies",
+            "recordId": "co_021"
+          },
+          "ok": true,
+          "ms": 1.04,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 330,
+        "cache_creation_input_tokens": 736,
+        "cache_read_input_tokens": 339632
+      },
+      "costUSD": 0.146165,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01GwZwN1jnA6gij1dVt39zRf",
+          "action": "companies.merge_companies",
+          "name": "Merge duplicate companies",
+          "risk": "destructive",
+          "input": {
+            "primaryId": "co_001",
+            "duplicateId": "co_021"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "d9e78212-7070-421b-b09e-c95a4157f1bb",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 2,
+      "ttftTextMs": 4086,
+      "firstActionMs": 2,
+      "e2eMs": 4090,
+      "llmCalls": [
+        {
+          "ms": 4087,
+          "ttftMs": 4084,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 302,
+            "cacheRead": 113729,
+            "cacheWrite": 345
+          },
+          "costUSD": 0.05326460000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "companies.merge_companies",
+          "input": {
+            "primaryId": "co_001",
+            "duplicateId": "co_021"
+          },
+          "ok": true,
+          "ms": 2.17,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 302,
+        "cache_creation_input_tokens": 345,
+        "cache_read_input_tokens": 113729
+      },
+      "costUSD": 0.053265,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I merged Acme Dental LLC (co_021) into Acme Dental (co_001). A note on Acme Dental LLC flagged it as the same business.\n\n**The note** (nt_008, by usr_003, 27 Oct): *\"Looks like the same business as Acme Dental — confirm before merging.\"* The note asked for confirmation before merging. The platform's confirmation step covered that, and the merge went through.\n\n**What changed on Acme Dental (co_001):**\n- It's still the main record. It keeps its own domain (acmedental.com), phone and account manager (usr_002).\n- Its address was blank, so it took Acme Dental LLC's: 12 Oak Ave, Austin, TX.\n- Acme Dental LLC's 2 contacts, 2 opportunities and 1 note (the one quoted above) now sit under Acme Dental.\n\nAcme Dental LLC (co_021) is now marked as merged.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

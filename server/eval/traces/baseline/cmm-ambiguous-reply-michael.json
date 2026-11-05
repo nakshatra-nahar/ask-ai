@@ -1,0 +1,149 @@
+{
+  "scenario": {
+    "id": "cmm-ambiguous-reply-michael",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Reply to Michael's email and let him know someone will give him a call this afternoon."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "de3e6ee4-630f-4dab-9eed-105345595cf6",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Reply to Michael's email and let him know someone will give him a call this afternoon.",
+      "ttfurMs": 787,
+      "ttftTextMs": 787,
+      "firstActionMs": 1949,
+      "e2eMs": 8078,
+      "llmCalls": [
+        {
+          "ms": 1948,
+          "ttftMs": 787,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 169,
+            "cacheRead": 112993,
+            "cacheWrite": 98
+          },
+          "costUSD": 0.04908320000000001
+        },
+        {
+          "ms": 2986,
+          "ttftMs": 2085,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 293,
+            "cacheRead": 113091,
+            "cacheWrite": 4266
+          },
+          "costUSD": 0.0724344
+        },
+        {
+          "ms": 3141,
+          "ttftMs": 3140,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 315,
+            "cacheRead": 117357,
+            "cacheWrite": 1500
+          },
+          "costUSD": 0.0607508
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Michael"
+          },
+          "ok": true,
+          "ms": 1,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.search_conversations",
+          "input": {
+            "channel": "email",
+            "lastDirection": "inbound",
+            "status": "open"
+          },
+          "ok": true,
+          "ms": 0.96,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.summarize_conversation",
+          "input": {
+            "id": "cnv_018"
+          },
+          "ok": true,
+          "ms": 0.89,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.summarize_conversation",
+          "input": {
+            "id": "cnv_027"
+          },
+          "ok": true,
+          "ms": 0.08,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.summarize_conversation",
+          "input": {
+            "id": "cnv_029"
+          },
+          "ok": true,
+          "ms": 0.05,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 777,
+        "cache_creation_input_tokens": 5864,
+        "cache_read_input_tokens": 343441
+      },
+      "costUSD": 0.182268,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I haven't sent anything yet. Three contacts named Michael have emails waiting for a reply, so I need to know which one you mean:\n\n| Contact | Conversation | Last email from him |\n|---|---|---|\n| **Michael Chen** (con_037) | cnv_018 | \"Thanks! Tomorrow afternoon works for a call.\" (today, 04:42 UTC) |\n| **Michael Smith** (con_003) | cnv_027 | \"Is there any availability this Friday afternoon?\" (today, 01:00 UTC) |\n| **Michael Müller** (con_008) | cnv_029 | \"Can I reschedule my appointment to next week?\" (3 Nov) |\n\nNone of them asked for a call this afternoon. Michael Chen is the closest match, but he said **tomorrow** afternoon works. Which Michael should I reply to? If it's Michael Chen, should the email say \"this afternoon\" or \"tomorrow afternoon\"?",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "scenario": {
+    "id": "sch-cond-smm-certificates",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "Issue completion certificates for Social Media Marketing 101 to anyone who's finished every lesson but hasn't gotten one yet."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action enrollments.search_enrollments|enrollments.get_learner_progress",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action enrollments.issue_certificate",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid enrollments.record_lesson_completion",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params enrollments.issue_certificate",
+        "pass": true,
+        "detail": "{\"id\":\"enr_002\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "19be1a5f-989e-4860-b44f-12a037c883b2",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Issue completion certificates for Social Media Marketing 101 to anyone who's finished every lesson but hasn't gotten one yet.",
+      "ttfurMs": 1611,
+      "ttftTextMs": 1611,
+      "firstActionMs": 2243,
+      "e2eMs": 9459,
+      "llmCalls": [
+        {
+          "ms": 2236,
+          "ttftMs": 1605,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 106,
+            "cacheRead": 5235,
+            "cacheWrite": 2444
+          },
+          "costUSD": 0.01645
+        },
+        {
+          "ms": 2199,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 91,
+            "cacheRead": 7679,
+            "cacheWrite": 334
+          },
+          "costUSD": 0.0065696
+        },
+        {
+          "ms": 2662,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 142,
+            "cacheRead": 8013,
+            "cacheWrite": 2705
+          },
+          "costUSD": 0.0195782
+        },
+        {
+          "ms": 2353,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 89,
+            "cacheRead": 10718,
+            "cacheWrite": 721
+          },
+          "costUSD": 0.0096802
+        }
+      ],
+      "actions": [
+        {
+          "action": "courses.search_courses",
+          "input": {
+            "query": "Social Media Marketing 101"
+          },
+          "ok": true,
+          "ms": 0.58,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.search_enrollments",
+          "input": {
+            "courseId": "crs_001"
+          },
+          "ok": true,
+          "ms": 0.35,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.get_learner_progress",
+          "input": {
+            "id": "enr_002"
+          },
+          "ok": true,
+          "ms": 1.12,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 428,
+        "cache_creation_input_tokens": 6204,
+        "cache_read_input_tokens": 31645
+      },
+      "costUSD": 0.052278,
+      "retries": 0,
+      "retrieved": [
+        "enrollments.issue_certificate",
+        "media.search_media",
+        "appointments.mark_no_show",
+        "lessons.get_lesson",
+        "media.list_media_references",
+        "lessons.attach_lesson_media",
+        "email.cancel_scheduled_email",
+        "lessons.search_lessons",
+        "sms.cancel_scheduled_sms",
+        "lessons.publish_lesson",
+        "refunds.set_refund_reason",
+        "lessons.update_lesson",
+        "enrollments.record_lesson_completion",
+        "invoices.issue_invoice",
+        "lessons.set_lesson_completion_criteria",
+        "media.delete_media",
+        "enrollments.get_learner_progress",
+        "tickets.create_ticket",
+        "media.rename_media",
+        "tax_rules.record_tax_exemption",
+        "media.get_media",
+        "products.get_inventory_availability",
+        "events.cancel_registration",
+        "tickets.reply_to_ticket"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 6.19,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01U2Ge2D1wsnyocC11u286Ax",
+          "action": "enrollments.issue_certificate",
+          "name": "Issue course completion certificate",
+          "risk": "external",
+          "input": {
+            "id": "enr_002"
+          }
+        }
+      ],
+      "calls": 4
+    },
+    {
+      "sessionId": "19be1a5f-989e-4860-b44f-12a037c883b2",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 7,
+      "ttftTextMs": 4788,
+      "firstActionMs": 7,
+      "e2eMs": 4792,
+      "llmCalls": [
+        {
+          "ms": 4785,
+          "ttftMs": 4781,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 339,
+            "cacheRead": 11439,
+            "cacheWrite": 203
+          },
+          "costUSD": 0.0123786
+        }
+      ],
+      "actions": [
+        {
+          "action": "enrollments.issue_certificate",
+          "input": {
+            "id": "enr_002"
+          },
+          "ok": true,
+          "ms": 7.36,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 339,
+        "cache_creation_input_tokens": 203,
+        "cache_read_input_tokens": 11439
+      },
+      "costUSD": 0.012379,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I issued one certificate. Only one learner had finished every lesson without already having a certificate.\n\n**Issued**\n- **Sarah Chen** (con_002, enrollment enr_002): certificate **CERT-2026-0002** (cert_002)\n\n**How I checked**\n- Social Media Marketing 101 (crs_001) has 6 published lessons that count toward completion. The course outline also lists a 7th lesson, les_007, which isn't counted, most likely because it isn't published yet.\n- Of the 11 enrollments, two have finished all 6 lessons:\n  - Sarah Chen: no certificate yet, so I issued one.\n  - con_001 (enr_001): already has a certificate (cert_001), so I skipped it.\n- Everyone else is partway through, including con_011 (enr_010), who has 5 of 6 done. A few enrollments are also suspended, expired or revoked.\n\nIf les_007 gets published, finishing the course will take 7 lessons. That would apply to anyone who hasn't got a certificate yet.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

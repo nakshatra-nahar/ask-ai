@@ -1,0 +1,141 @@
+{
+  "scenario": {
+    "id": "com-direct-create-holiday-coupon",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Set up a coupon code HOLIDAY15 — 15% off, valid from Nov 20 through Dec 31, capped at 100 uses."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action coupons.create_coupon",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params coupons.create_coupon",
+        "pass": true,
+        "detail": "{\"code\":\"HOLIDAY15\",\"discountType\":\"percent\",\"discountValue\":15,\"validFrom\":\"2026-11-20\",\"validUntil\":\"2026-12-31\",\"maxRedemptions\":100}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "b9b974f8-1597-4ea0-ad6c-35984a2a16bb",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Set up a coupon code HOLIDAY15 — 15% off, valid from Nov 20 through Dec 31, capped at 100 uses.",
+      "ttfurMs": 1268,
+      "ttftTextMs": 1268,
+      "firstActionMs": 2512,
+      "e2eMs": 4590,
+      "llmCalls": [
+        {
+          "ms": 2501,
+          "ttftMs": 1263,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 173,
+            "cacheRead": 5235,
+            "cacheWrite": 2513
+          },
+          "costUSD": 0.018135
+        },
+        {
+          "ms": 2078,
+          "ttftMs": 2073,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 121,
+            "cacheRead": 7748,
+            "cacheWrite": 314
+          },
+          "costUSD": 0.0070972000000000006
+        }
+      ],
+      "actions": [
+        {
+          "action": "coupons.create_coupon",
+          "input": {
+            "code": "HOLIDAY15",
+            "description": "Holiday 15% off",
+            "discountType": "percent",
+            "discountValue": 15,
+            "validFrom": "2026-11-20",
+            "validUntil": "2026-12-31",
+            "maxRedemptions": 100
+          },
+          "ok": true,
+          "ms": 6.07,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 294,
+        "cache_creation_input_tokens": 2827,
+        "cache_read_input_tokens": 12983
+      },
+      "costUSD": 0.025232,
+      "retries": 0,
+      "retrieved": [
+        "coupons.validate_coupon",
+        "coupons.search_coupons",
+        "coupons.deactivate_coupon",
+        "coupons.set_coupon_validity_window",
+        "coupons.set_redemption_limit",
+        "coupons.create_coupon",
+        "quotes.set_quote_expiry",
+        "leads.update_lead_score",
+        "tax_rules.set_tax_rate",
+        "availability.add_date_override",
+        "pipelines.set_stage_probability",
+        "orders.apply_coupon_to_order",
+        "subscriptions.create_subscription",
+        "appointments.create_appointment",
+        "appointments.cancel_appointment",
+        "opportunities.create_opportunity",
+        "media.rename_media",
+        "listings.set_listing_hours",
+        "quotes.apply_quote_discount",
+        "triggers.disable_trigger",
+        "communities.update_community_guidelines",
+        "workflows.pause_workflow",
+        "opportunities.move_opportunity_to_stage",
+        "funnels.get_funnel_metrics"
+      ],
+      "status": "completed",
+      "finalText": "I've created the coupon **HOLIDAY15** (id `cpn_008`).\n\n- **Discount:** 15% off\n- **Valid:** 2026-11-20 to 2026-12-31\n- **Use limit:** 100 in total (0 used so far)\n- **Status:** active, but customers can't redeem it until Nov 20\n- **Applies to:** all products",
+      "progress": [],
+      "retrievalMs": 4.87,
+      "calls": 2
+    }
+  ]
+}

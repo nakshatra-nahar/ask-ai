@@ -1,0 +1,281 @@
+{
+  "scenario": {
+    "id": "com-followup-overdue-report-schedule",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Can you set up a saved report of overdue invoices, broken down by status?"
+      },
+      {
+        "user": "Perfect. Have it emailed to jamie.fox@acme.test every Monday."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action reports.create_report|reports.set_report_grouping",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action reports.schedule_report",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params reports.schedule_report",
+        "pass": true,
+        "detail": "{\"frequency\":\"weekly\",\"dayOfWeek\":\"mon\",\"recipients\":[\"jamie.fox@acme.test\"]}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "5f2493d1-d8e2-4ad3-bdda-add435ab8dd6",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Can you set up a saved report of overdue invoices, broken down by status?",
+      "ttfurMs": 1610,
+      "ttftTextMs": 1610,
+      "firstActionMs": 2470,
+      "e2eMs": 5444,
+      "llmCalls": [
+        {
+          "ms": 2464,
+          "ttftMs": 1606,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 134,
+            "cacheRead": 5235,
+            "cacheWrite": 3405
+          },
+          "costUSD": 0.021815
+        },
+        {
+          "ms": 2974,
+          "ttftMs": 2948,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 148,
+            "cacheRead": 8640,
+            "cacheWrite": 230
+          },
+          "costUSD": 0.007574
+        }
+      ],
+      "actions": [
+        {
+          "action": "reports.create_report",
+          "input": {
+            "name": "Overdue Invoices by Status",
+            "metric": "invoices_overdue",
+            "groupBy": "status"
+          },
+          "ok": true,
+          "ms": 2.55,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 282,
+        "cache_creation_input_tokens": 3635,
+        "cache_read_input_tokens": 13875
+      },
+      "costUSD": 0.029389,
+      "retries": 0,
+      "retrieved": [
+        "reports.create_report",
+        "reports.list_reports",
+        "communities.remove_reported_post",
+        "reports.set_report_grouping",
+        "invoices.search_invoices",
+        "reports.run_report",
+        "invoices.list_overdue_invoices",
+        "lessons.unpublish_lesson",
+        "blogs.unpublish_post",
+        "reports.update_report_filters",
+        "reports.get_report",
+        "invoices.get_invoice",
+        "appointments.create_appointment",
+        "invoices.create_invoice",
+        "tasks.search_tasks",
+        "smart_lists.create_smart_list",
+        "invoices.issue_invoice",
+        "tickets.get_ticket_sla",
+        "templates.create_template",
+        "tickets.search_tickets",
+        "tickets.create_ticket",
+        "websites.unpublish_website",
+        "triggers.test_trigger",
+        "booking_pages.unpublish_booking_page"
+      ],
+      "status": "completed",
+      "finalText": "I've saved the report **Overdue Invoices by Status** (`rpt_007`).\n\n- **What it shows:** overdue invoices\n- **Broken down by:** status\n- **Date range:** last 30 days. You didn't pick one, so the platform used this default. I can change it, for example to this month or this quarter.\n- **Filters:** none\n\nI haven't run it yet. I can run it now to show the current numbers, or schedule it to be delivered regularly.",
+      "progress": [],
+      "retrievalMs": 3.3,
+      "calls": 2
+    },
+    {
+      "sessionId": "5f2493d1-d8e2-4ad3-bdda-add435ab8dd6",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Perfect. Have it emailed to jamie.fox@acme.test every Monday.",
+      "ttfurMs": null,
+      "ttftTextMs": null,
+      "firstActionMs": null,
+      "e2eMs": 3098,
+      "llmCalls": [
+        {
+          "ms": 3097,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 130,
+            "cacheRead": 8870,
+            "cacheWrite": 3518
+          },
+          "costUSD": 0.023754
+        }
+      ],
+      "actions": [],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 130,
+        "cache_creation_input_tokens": 3518,
+        "cache_read_input_tokens": 8870
+      },
+      "costUSD": 0.023754,
+      "retries": 0,
+      "retrieved": [
+        "reports.create_report",
+        "email.search_email_messages",
+        "email.record_email_unsubscribe",
+        "triggers.test_trigger",
+        "communities.remove_reported_post",
+        "reports.set_report_grouping",
+        "reports.list_reports",
+        "email.cancel_scheduled_email",
+        "surveys.submit_survey_response",
+        "reports.run_report",
+        "email.preview_email",
+        "invoices.search_invoices",
+        "email.draft_email",
+        "triggers.get_trigger_firing_history",
+        "lessons.unpublish_lesson",
+        "invoices.list_overdue_invoices",
+        "email.receive_inbound_email",
+        "forms.submit_form_response",
+        "blogs.unpublish_post",
+        "reports.schedule_report",
+        "reports.update_report_filters",
+        "invoices.issue_invoice",
+        "smart_lists.create_smart_list",
+        "templates.render_template"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 1.7,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_019FEAnr8ejWgZq5dLgcyvaW",
+          "action": "reports.schedule_report",
+          "name": "Schedule report delivery",
+          "risk": "external",
+          "input": {
+            "id": "rpt_007",
+            "frequency": "weekly",
+            "dayOfWeek": "mon",
+            "recipients": [
+              "jamie.fox@acme.test"
+            ]
+          }
+        }
+      ],
+      "calls": 1
+    },
+    {
+      "sessionId": "5f2493d1-d8e2-4ad3-bdda-add435ab8dd6",
+      "turn": 2,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 3067,
+      "firstActionMs": 6,
+      "e2eMs": 3067,
+      "llmCalls": [
+        {
+          "ms": 3061,
+          "ttftMs": 3061,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 167,
+            "cacheRead": 12388,
+            "cacheWrite": 310
+          },
+          "costUSD": 0.009853200000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "reports.schedule_report",
+          "input": {
+            "id": "rpt_007",
+            "frequency": "weekly",
+            "dayOfWeek": "mon",
+            "recipients": [
+              "jamie.fox@acme.test"
+            ]
+          },
+          "ok": true,
+          "ms": 5.55,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 167,
+        "cache_creation_input_tokens": 310,
+        "cache_read_input_tokens": 12388
+      },
+      "costUSD": 0.009853,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "**Overdue Invoices by Status** (`rpt_007`) will now be emailed to **jamie.fox@acme.test** every Monday at 08:00 UTC.\n\n- **First email:** Mon, 9 Nov 2026\n- **Date range:** each email covers the last 30 days, so consecutive weekly emails will overlap. I can switch it to \"this month\" or another range if that suits Jamie better.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

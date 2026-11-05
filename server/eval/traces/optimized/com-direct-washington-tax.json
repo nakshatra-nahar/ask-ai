@@ -1,0 +1,172 @@
+{
+  "scenario": {
+    "id": "com-direct-washington-tax",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "We've started shipping to Washington state. Add a 6.5% sales tax for WA."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tax_rules.create_tax_rule",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params tax_rules.create_tax_rule",
+        "pass": true,
+        "detail": "{\"country\":\"US\",\"state\":\"WA\",\"rate\":6.5}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "dda23c49-8966-492d-8d63-4d23011a539f",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "We've started shipping to Washington state. Add a 6.5% sales tax for WA.",
+      "ttfurMs": 738,
+      "ttftTextMs": 738,
+      "firstActionMs": 2740,
+      "e2eMs": 7076,
+      "llmCalls": [
+        {
+          "ms": 1388,
+          "ttftMs": 737,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 101,
+            "cacheRead": 5235,
+            "cacheWrite": 2413
+          },
+          "costUSD": 0.016195
+        },
+        {
+          "ms": 1350,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 94,
+            "cacheRead": 7648,
+            "cacheWrite": 155
+          },
+          "costUSD": 0.005722200000000001
+        },
+        {
+          "ms": 1452,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 117,
+            "cacheRead": 7803,
+            "cacheWrite": 106
+          },
+          "costUSD": 0.0059992000000000005
+        },
+        {
+          "ms": 2877,
+          "ttftMs": 2876,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 194,
+            "cacheRead": 7909,
+            "cacheWrite": 201
+          },
+          "costUSD": 0.0080566
+        }
+      ],
+      "actions": [
+        {
+          "action": "tax_rules.list_tax_rules",
+          "input": {
+            "country": "US",
+            "state": "WA"
+          },
+          "ok": true,
+          "ms": 0.36,
+          "confirmed": false
+        },
+        {
+          "action": "tax_rules.create_tax_rule",
+          "input": {
+            "name": "Washington Sales Tax",
+            "country": "US",
+            "state": "WA",
+            "rate": 6.5
+          },
+          "ok": true,
+          "ms": 6.95,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 506,
+        "cache_creation_input_tokens": 2875,
+        "cache_read_input_tokens": 28595
+      },
+      "costUSD": 0.035973,
+      "retries": 0,
+      "retrieved": [
+        "tax_rules.create_tax_rule",
+        "tax_rules.list_tax_rules",
+        "orders.create_order",
+        "courses.add_course_section",
+        "tax_rules.set_tax_region",
+        "triggers.get_trigger",
+        "teams.add_team_member",
+        "tax_rules.calculate_tax",
+        "orders.set_order_shipping_address",
+        "websites.add_website_page",
+        "tax_rules.set_tax_rate",
+        "listings.update_listing_address",
+        "pipelines.add_pipeline_stage",
+        "tax_rules.deactivate_tax_rule",
+        "users.invite_user",
+        "products.create_product",
+        "orders.add_order_line_item",
+        "funnels.add_funnel_step",
+        "orders.get_order",
+        "calendars.set_appointment_duration",
+        "blogs.set_post_categories",
+        "orders.fulfill_order",
+        "orders.submit_order",
+        "events.search_events"
+      ],
+      "status": "completed",
+      "finalText": "I added a 6.5% sales tax rule for Washington state, and it's active now.\n\n- **Washington Sales Tax** (`tax_008`): US / WA, 6.5%\n- There were no WA rules before this, so nothing overlaps.\n- Tax is added on top of your prices. Your prices don't already include it.\n- It isn't limited to one type of product, so it applies to everything you sell into WA.\n\nWashington also has local sales taxes on top of the 6.5% state rate. If you want to charge those too, the rate would need to change.",
+      "progress": [],
+      "retrievalMs": 0.71,
+      "calls": 4
+    }
+  ]
+}

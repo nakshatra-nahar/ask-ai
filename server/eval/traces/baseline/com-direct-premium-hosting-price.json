@@ -1,0 +1,156 @@
+{
+  "scenario": {
+    "id": "com-direct-premium-hosting-price",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Add a premium tier to the Website Hosting & Care Plan: $79 a month with a 14-day free trial. Label it 'Hosting & Care — Premium Monthly'."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action prices.create_price",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params prices.create_price",
+        "pass": true,
+        "detail": "{\"amount\":79,\"interval\":\"month\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "68af9ef4-8ea5-4578-896e-95af537f2057",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Add a premium tier to the Website Hosting & Care Plan: $79 a month with a 14-day free trial. Label it 'Hosting & Care — Premium Monthly'.",
+      "ttfurMs": 1023,
+      "ttftTextMs": 1023,
+      "firstActionMs": 1690,
+      "e2eMs": 8704,
+      "llmCalls": [
+        {
+          "ms": 1690,
+          "ttftMs": 1023,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 86,
+            "cacheRead": 112993,
+            "cacheWrite": 131
+          },
+          "costUSD": 0.047588200000000004
+        },
+        {
+          "ms": 1503,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 57,
+            "cacheRead": 113124,
+            "cacheWrite": 276
+          },
+          "costUSD": 0.0477776
+        },
+        {
+          "ms": 3520,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 180,
+            "cacheRead": 113400,
+            "cacheWrite": 344
+          },
+          "costUSD": 0.050688
+        },
+        {
+          "ms": 1987,
+          "ttftMs": 1982,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 153,
+            "cacheRead": 113744,
+            "cacheWrite": 303
+          },
+          "costUSD": 0.0500806
+        }
+      ],
+      "actions": [
+        {
+          "action": "products.search_products",
+          "input": {
+            "query": "Website Hosting & Care Plan"
+          },
+          "ok": true,
+          "ms": 0.3,
+          "confirmed": false
+        },
+        {
+          "action": "prices.list_product_prices",
+          "input": {
+            "productId": "prd_004"
+          },
+          "ok": true,
+          "ms": 0.36,
+          "confirmed": false
+        },
+        {
+          "action": "prices.create_price",
+          "input": {
+            "productId": "prd_004",
+            "amount": 79,
+            "currency": "USD",
+            "interval": "month",
+            "trialDays": 14,
+            "label": "Hosting & Care — Premium Monthly"
+          },
+          "ok": true,
+          "ms": 2.33,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 476,
+        "cache_creation_input_tokens": 1054,
+        "cache_read_input_tokens": 453261
+      },
+      "costUSD": 0.196134,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I added the premium tier to the **Website Hosting & Care Plan** (prd_004).\n\n**New price: Hosting & Care — Premium Monthly** (pri_019)\n- $79 USD per month\n- 14-day free trial\n- Active\n\nThe plan's default price is still **Hosting & Care — Monthly** (pri_008, $49/month with a 30-day trial). The other existing price is **Hosting & Care — Yearly** (pri_009, $490/year).",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

@@ -1,0 +1,299 @@
+{
+  "scenario": {
+    "id": "sch-multi-reels-course-launch",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "The Instagram Reels for Business course is ready. Get both of its lessons live, publish the course, and enroll Mei Silva as our first student."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action lessons.publish_lesson",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action courses.publish_course",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action enrollments.enroll_learner",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params courses.publish_course",
+        "pass": true,
+        "detail": "{\"id\":\"crs_003\"}"
+      },
+      {
+        "name": "params enrollments.enroll_learner",
+        "pass": true,
+        "detail": "{\"contactId\":\"con_015\",\"courseId\":\"crs_003\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "d91d0ca0-cbab-4f1f-8257-367a804601ce",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "The Instagram Reels for Business course is ready. Get both of its lessons live, publish the course, and enroll Mei Silva as our first student.",
+      "ttfurMs": 1730,
+      "ttftTextMs": 1730,
+      "firstActionMs": 2783,
+      "e2eMs": 4935,
+      "llmCalls": [
+        {
+          "ms": 2783,
+          "ttftMs": 1730,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 131,
+            "cacheRead": 112993,
+            "cacheWrite": 118
+          },
+          "costUSD": 0.048423200000000007
+        },
+        {
+          "ms": 2152,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 109,
+            "cacheRead": 113111,
+            "cacheWrite": 605
+          },
+          "costUSD": 0.0504574
+        }
+      ],
+      "actions": [
+        {
+          "action": "courses.search_courses",
+          "input": {
+            "query": "Instagram Reels for Business"
+          },
+          "ok": true,
+          "ms": 0.1,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Mei Silva"
+          },
+          "ok": true,
+          "ms": 0.16,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 240,
+        "cache_creation_input_tokens": 723,
+        "cache_read_input_tokens": 226104
+      },
+      "costUSD": 0.098881,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01BC3yXcF9Wh8T7jjMcfsoza",
+          "action": "lessons.publish_lesson",
+          "name": "Publish lesson",
+          "risk": "external",
+          "input": {
+            "id": "les_012"
+          }
+        },
+        {
+          "id": "toolu_0194pw9tVZqCuwSDJZNSXLHE",
+          "action": "lessons.publish_lesson",
+          "name": "Publish lesson",
+          "risk": "external",
+          "input": {
+            "id": "les_013"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "d91d0ca0-cbab-4f1f-8257-367a804601ce",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 10,
+      "ttftTextMs": 1847,
+      "firstActionMs": 10,
+      "e2eMs": 2051,
+      "llmCalls": [
+        {
+          "ms": 2041,
+          "ttftMs": 1837,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 83,
+            "cacheRead": 113716,
+            "cacheWrite": 462
+          },
+          "costUSD": 0.0494644
+        }
+      ],
+      "actions": [
+        {
+          "action": "lessons.publish_lesson",
+          "input": {
+            "id": "les_012"
+          },
+          "ok": false,
+          "error": {
+            "code": "INVALID_STATE",
+            "message": "lesson les_012 is 'published'; this action requires one of: draft"
+          },
+          "ms": 4.63,
+          "confirmed": true
+        },
+        {
+          "action": "lessons.publish_lesson",
+          "input": {
+            "id": "les_013"
+          },
+          "ok": true,
+          "ms": 5,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 83,
+        "cache_creation_input_tokens": 462,
+        "cache_read_input_tokens": 113716
+      },
+      "costUSD": 0.049464,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "resumed": true,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_011iV2HsV2FqXog4aYUKoZia",
+          "action": "courses.publish_course",
+          "name": "Publish course",
+          "risk": "external",
+          "input": {
+            "id": "crs_003"
+          }
+        }
+      ],
+      "calls": 1
+    },
+    {
+      "sessionId": "d91d0ca0-cbab-4f1f-8257-367a804601ce",
+      "turn": 2,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 8,
+      "ttftTextMs": 6122,
+      "firstActionMs": 8,
+      "e2eMs": 6123,
+      "llmCalls": [
+        {
+          "ms": 2007,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 85,
+            "cacheRead": 114178,
+            "cacheWrite": 273
+          },
+          "costUSD": 0.0487442
+        },
+        {
+          "ms": 4100,
+          "ttftMs": 4098,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 162,
+            "cacheRead": 114451,
+            "cacheWrite": 231
+          },
+          "costUSD": 0.0501834
+        }
+      ],
+      "actions": [
+        {
+          "action": "courses.publish_course",
+          "input": {
+            "id": "crs_003"
+          },
+          "ok": true,
+          "ms": 7.91,
+          "confirmed": true
+        },
+        {
+          "action": "enrollments.enroll_learner",
+          "input": {
+            "contactId": "con_015",
+            "courseId": "crs_003"
+          },
+          "ok": true,
+          "ms": 8.46,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 247,
+        "cache_creation_input_tokens": 504,
+        "cache_read_input_tokens": 228629
+      },
+      "costUSD": 0.098928,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "**Instagram Reels for Business** (crs_003) is now published, and Mei Silva is enrolled as its first student.\n\n- **Lessons** (section \"Reels Basics\"):\n  - les_012 was already published, so I didn't need to change it.\n  - les_013 \"Editing Reels on Your Phone\" is now published.\n- **Course:** crs_003 is published.\n- **Enrollment:** Mei Silva (con_015) has an active enrollment (enr_013) with no expiry date.",
+      "progress": [],
+      "resumed": true,
+      "calls": 2
+    }
+  ]
+}

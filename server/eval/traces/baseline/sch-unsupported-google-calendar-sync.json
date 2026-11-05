@@ -1,0 +1,99 @@
+{
+  "scenario": {
+    "id": "sch-unsupported-google-calendar-sync",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Hook the Sales Discovery Call calendar up to my Google Calendar so new bookings show up on my phone."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|unable|not able|couldn't|could not|don't have|do not have|not support|isn't supported|no (action|capability|way|integration))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "73893f56-ac7c-4831-b6ab-02dd8f985a4a",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Hook the Sales Discovery Call calendar up to my Google Calendar so new bookings show up on my phone.",
+      "ttfurMs": 2600,
+      "ttftTextMs": 2600,
+      "firstActionMs": 2601,
+      "e2eMs": 8600,
+      "llmCalls": [
+        {
+          "ms": 2601,
+          "ttftMs": 2600,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 142,
+            "cacheRead": 112993,
+            "cacheWrite": 109
+          },
+          "costUSD": 0.0485982
+        },
+        {
+          "ms": 5999,
+          "ttftMs": 5993,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 361,
+            "cacheRead": 113102,
+            "cacheWrite": 320
+          },
+          "costUSD": 0.0540688
+        }
+      ],
+      "actions": [
+        {
+          "action": "calendars.list_calendars",
+          "input": {
+            "query": "Sales Discovery Call"
+          },
+          "ok": true,
+          "ms": 0.15,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 503,
+        "cache_creation_input_tokens": 429,
+        "cache_read_input_tokens": 226095
+      },
+      "costUSD": 0.102667,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I can't connect the **Sales Discovery Call** calendar (`cal_001`) to Google Calendar. This platform has no Google Calendar or external calendar sync, so I didn't change anything.\n\nThe calendar is active. It's set to America/New_York, uses 30-minute meetings and has 4 hosts (`usr_002`–`usr_005`).\n\n**Other ways to keep track of new bookings:**\n- **Ask me when you want an update:** I can list upcoming appointments on this calendar for any date range, including ones for you as host.\n- **Get an automatic task or tag on each booking:** I can set up an automation that runs whenever someone books, for example creating a follow-up task assigned to you. It can't send the booking to your phone's calendar, though, and its message steps go to the person who booked, not to you.\n\nIf you want the automation, tell me which host you are so I can assign the tasks to you.",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

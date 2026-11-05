@@ -1,0 +1,273 @@
+{
+  "scenario": {
+    "id": "sch-failure-summer-shred-relaunch",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "We're running the Summer Shred Challenge again — put that funnel back live."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "reply /(no landing page|not linked|isn't linked|aren't linked|missing|not ready|need(s)? (a )?(landing )?page|couldn't|could not|can't|cannot|unable|failed)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 1
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "d5c15bee-d311-4803-99a7-2d2abfd26ea0",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "We're running the Summer Shred Challenge again — put that funnel back live.",
+      "ttfurMs": 1692,
+      "ttftTextMs": 1692,
+      "firstActionMs": 2443,
+      "e2eMs": 15721,
+      "llmCalls": [
+        {
+          "ms": 2442,
+          "ttftMs": 1691,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 109,
+            "cacheRead": 5235,
+            "cacheWrite": 2594
+          },
+          "costUSD": 0.01726
+        },
+        {
+          "ms": 7580,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 226,
+            "cacheRead": 7829,
+            "cacheWrite": 535
+          },
+          "costUSD": 0.010334600000000001
+        },
+        {
+          "ms": 2400,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 124,
+            "cacheRead": 8364,
+            "cacheWrite": 872
+          },
+          "costUSD": 0.0101936
+        },
+        {
+          "ms": 3296,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 259,
+            "cacheRead": 9236,
+            "cacheWrite": 1056
+          },
+          "costUSD": 0.0141624
+        }
+      ],
+      "actions": [
+        {
+          "action": "funnels.list_funnels",
+          "input": {
+            "query": "Summer Shred"
+          },
+          "ok": true,
+          "ms": 0.13,
+          "confirmed": false
+        },
+        {
+          "action": "landing_pages.search_landing_pages",
+          "input": {
+            "query": "Summer Shred"
+          },
+          "ok": true,
+          "ms": 0.72,
+          "confirmed": false
+        },
+        {
+          "action": "landing_pages.get_landing_page",
+          "input": {
+            "id": "lp_010"
+          },
+          "ok": true,
+          "ms": 0.04,
+          "confirmed": false
+        },
+        {
+          "action": "landing_pages.search_landing_pages",
+          "input": {
+            "websiteId": "web_002"
+          },
+          "ok": true,
+          "ms": 0.26,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 718,
+        "cache_creation_input_tokens": 5057,
+        "cache_read_input_tokens": 30664
+      },
+      "costUSD": 0.051951,
+      "retries": 0,
+      "retrieved": [
+        "funnels.publish_funnel",
+        "funnels.list_funnels",
+        "funnels.remove_funnel_step",
+        "funnels.link_landing_page_to_step",
+        "websites.publish_website",
+        "blogs.publish_post",
+        "landing_pages.publish_landing_page",
+        "campaigns.list_campaigns",
+        "landing_pages.unpublish_landing_page",
+        "smart_lists.create_smart_list",
+        "funnels.create_funnel",
+        "funnels.get_funnel",
+        "events.add_to_waitlist",
+        "reports.get_report",
+        "availability.remove_time_block",
+        "availability.remove_date_override",
+        "opportunities.reopen_opportunity",
+        "refunds.execute_refund",
+        "reports.run_report",
+        "refunds.create_refund_request",
+        "tasks.create_task",
+        "courses.publish_course",
+        "workflows.publish_workflow",
+        "subscriptions.set_subscription_trial_end"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 1.11,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01Lud2ZsrRPbF7biVkYYGUhB",
+          "action": "landing_pages.publish_landing_page",
+          "name": "Publish landing page",
+          "risk": "external",
+          "input": {
+            "id": "lp_010"
+          }
+        },
+        {
+          "id": "toolu_01F2aYRqLpPkUATQRY7eMdYN",
+          "action": "funnels.publish_funnel",
+          "name": "Publish funnel",
+          "risk": "external",
+          "input": {
+            "id": "fnl_004"
+          }
+        }
+      ],
+      "calls": 4
+    },
+    {
+      "sessionId": "d5c15bee-d311-4803-99a7-2d2abfd26ea0",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 5190,
+      "firstActionMs": 6,
+      "e2eMs": 5193,
+      "llmCalls": [
+        {
+          "ms": 5183,
+          "ttftMs": 5180,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 391,
+            "cacheRead": 10292,
+            "cacheWrite": 792
+          },
+          "costUSD": 0.0159048
+        }
+      ],
+      "actions": [
+        {
+          "action": "landing_pages.publish_landing_page",
+          "input": {
+            "id": "lp_010"
+          },
+          "ok": true,
+          "ms": 5.8,
+          "confirmed": true
+        },
+        {
+          "action": "funnels.publish_funnel",
+          "input": {
+            "id": "fnl_004"
+          },
+          "ok": false,
+          "error": {
+            "code": "INVALID_STATE",
+            "message": "cannot publish funnel fnl_004: 2 of 3 steps not ready — fstp_011 'Nutrition Add-on': no landing page linked; fstp_012 'Welcome': no landing page linked. Publish or link a landing page for each.",
+            "details": {
+              "failingSteps": [
+                {
+                  "stepId": "fstp_011",
+                  "name": "Nutrition Add-on",
+                  "reason": "no landing page linked"
+                },
+                {
+                  "stepId": "fstp_012",
+                  "name": "Welcome",
+                  "reason": "no landing page linked"
+                }
+              ]
+            }
+          },
+          "ms": 3.97,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 391,
+        "cache_creation_input_tokens": 792,
+        "cache_read_input_tokens": 10292
+      },
+      "costUSD": 0.015905,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I couldn't put the **Summer Shred Challenge** funnel (fnl_004) back live yet. Two of its three steps don't have a landing page attached, so publishing the funnel failed.\n\n**Done:**\n- I republished the funnel's signup page, **Summer Shred Signup** (lp_010). It's live now at https://summitfitness.studio/summer-shred.\n\n**Blocking the funnel:**\n- The **Nutrition Add-on** step (fstp_011) has no landing page.\n- The **Welcome** step (fstp_012) has no landing page.\n\nNone of the other pages on the same website (web_002) fit these steps. They're a meal plan opt-in, a meal plan download and a free trial class signup.\n\n**Ways forward:**\n1. **Use new pages:** create or point me to pages for the add-on offer and the welcome step. I'll link them, publish them and then publish the funnel.\n2. **Drop those two steps:** remove them so the funnel runs as signup only, then publish. This deletes the steps and their visit and conversion history, and checkout would end without the welcome page.\n\nThe signup page is live on its own in the meantime. Do you want me to take it down until the full funnel is ready?",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

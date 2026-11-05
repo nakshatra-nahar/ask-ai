@@ -1,0 +1,167 @@
+{
+  "scenario": {
+    "id": "cmm-indirect-facebook-reviews",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "our facebook reviews are terrible rn, help"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action reviews.draft_review_response|reviews.publish_review_response",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "9ad56e85-3127-46b5-b789-2e8b1083ebf2",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "our facebook reviews are terrible rn, help",
+      "ttfurMs": 1464,
+      "ttftTextMs": 1464,
+      "firstActionMs": 2753,
+      "e2eMs": 19341,
+      "llmCalls": [
+        {
+          "ms": 2752,
+          "ttftMs": 1464,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 252,
+            "cacheRead": 112993,
+            "cacheWrite": 87
+          },
+          "costUSD": 0.0506882
+        },
+        {
+          "ms": 7620,
+          "ttftMs": 2373,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 747,
+            "cacheRead": 113080,
+            "cacheWrite": 1520
+          },
+          "costUSD": 0.06778
+        },
+        {
+          "ms": 8954,
+          "ttftMs": 8948,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 754,
+            "cacheRead": 114600,
+            "cacheWrite": 1984
+          },
+          "costUSD": 0.070848
+        }
+      ],
+      "actions": [
+        {
+          "action": "reviews.get_review_summary",
+          "input": {
+            "platform": "facebook"
+          },
+          "ok": true,
+          "ms": 1.3,
+          "confirmed": false
+        },
+        {
+          "action": "reviews.search_reviews",
+          "input": {
+            "platform": "facebook",
+            "ratingMax": 3,
+            "limit": 50
+          },
+          "ok": true,
+          "ms": 0.3,
+          "confirmed": false
+        },
+        {
+          "action": "reviews.draft_review_response",
+          "input": {
+            "id": "rev_005",
+            "text": "Hi Sofia, we're truly sorry you waited 45 minutes past your appointment time, and that no one acknowledged it. That's not the experience we want for anyone. We'd like to understand what happened and make it right. Please send us a message so our manager can follow up with you directly."
+          },
+          "ok": true,
+          "ms": 5.14,
+          "confirmed": false
+        },
+        {
+          "action": "reviews.draft_review_response",
+          "input": {
+            "id": "rev_023",
+            "text": "Hi Elena, we're sorry about how you were treated at our front desk. Everyone should feel welcome and respected here, and we're raising your feedback with the team. If you're open to it, please message us so our manager can hear more and make things right."
+          },
+          "ok": true,
+          "ms": 3.56,
+          "confirmed": false
+        },
+        {
+          "action": "reviews.draft_review_response",
+          "input": {
+            "id": "rev_011",
+            "text": "Hi Mei, we apologize for the late reply and for the experience you had at our front desk. That isn't the standard we hold ourselves to, and we've shared your feedback with the team. We'd welcome the chance to make it right, so please message us so our manager can reach out."
+          },
+          "ok": true,
+          "ms": 2.37,
+          "confirmed": false
+        },
+        {
+          "action": "reviews.draft_review_response",
+          "input": {
+            "id": "rev_020",
+            "text": "Hi Noah, we're sorry your visit felt rushed and that the issue came back a week later, and we apologize for the slow reply. We'd like to take another look at no cost to you. Please message us so we can set that up."
+          },
+          "ok": true,
+          "ms": 1.56,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 1753,
+        "cache_creation_input_tokens": 3591,
+        "cache_read_input_tokens": 340673
+      },
+      "costUSD": 0.189316,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I wrote draft replies for all 4 Facebook reviews that had no response. Nothing is public yet, so you can check the wording first.\n\n**Where you stand on Facebook:** you have 8 reviews averaging **2.38★**, with three 1★, two 2★ and one each at 3★, 4★ and 5★. You've replied to only 25% of them.\n\n**Draft replies saved:**\n\n| Review | Rating | Complaint | Posted |\n|---|---|---|---|\n| Sofia M. (rev_005) | 1★ | Waited 45 minutes, no apology | Oct 30 |\n| Elena M. (rev_023) | 2★ | Rude front desk | Oct 17 |\n| Mei R. (rev_011) | 1★ | Rude front desk | Aug 7 |\n| Noah W. (rev_020) | 1★ | Rushed service, problem came back | Jun 21 |\n\nEach reply apologizes, names the specific problem and asks the reviewer to message you so a manager can follow up. Before publishing, check two things:\n- **Noah's reply offers a free follow-up visit.** Make sure that's an offer you can honor, or I'll change the wording.\n- **Mei's and Noah's replies apologize for the slow response,** since their reviews are months old.\n\n**Other things I noticed:**\n- **One existing reply doesn't fit its review.** Chloe B. (rev_017) gave 3★ because of the wait, but the reply thanks her \"for the kind words.\" Facebook replies are public and I can't edit one that's already posted, so this one stays as it is.\n- **The same complaints keep coming up:** two reviews mention a rude front desk and two mention long waits. Fixing those is what will raise the rating over time.\n- **Each review averages in at full weight,** so a few new positive reviews will lift the 2.38 quickly with only 8 reviews total.\n\n**What I can do next:**\n1. Publish all 4 replies as written, or after your edits.\n2. Send Facebook review requests to recent happy customers. Tell me which group to target, for example customers whose appointments were completed in the last 30 days.\n3. Set up an automation that asks customers for a review after each completed appointment.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

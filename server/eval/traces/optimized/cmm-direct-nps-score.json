@@ -1,0 +1,156 @@
+{
+  "scenario": {
+    "id": "cmm-direct-nps-score",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "What's our NPS on the customer satisfaction survey right now, and how many people have answered it?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action surveys.get_survey_response_summary",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /^(?=[\\s\\S]*\\b36\\b)(?=[\\s\\S]*\\b14\\b)/",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "db472659-b6da-4e69-ad9d-e302ecd07493",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "What's our NPS on the customer satisfaction survey right now, and how many people have answered it?",
+      "ttfurMs": 1245,
+      "ttftTextMs": 1245,
+      "firstActionMs": 2222,
+      "e2eMs": 6972,
+      "llmCalls": [
+        {
+          "ms": 2220,
+          "ttftMs": 1243,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 106,
+            "cacheRead": 5235,
+            "cacheWrite": 2597
+          },
+          "costUSD": 0.017215
+        },
+        {
+          "ms": 2079,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 91,
+            "cacheRead": 7832,
+            "cacheWrite": 443
+          },
+          "costUSD": 0.0071758
+        },
+        {
+          "ms": 2670,
+          "ttftMs": 2665,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 197,
+            "cacheRead": 8275,
+            "cacheWrite": 411
+          },
+          "costUSD": 0.009313
+        }
+      ],
+      "actions": [
+        {
+          "action": "surveys.list_surveys",
+          "input": {
+            "query": "customer satisfaction"
+          },
+          "ok": true,
+          "ms": 0.34,
+          "confirmed": false
+        },
+        {
+          "action": "surveys.get_survey_response_summary",
+          "input": {
+            "id": "srv_001"
+          },
+          "ok": true,
+          "ms": 1.27,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 394,
+        "cache_creation_input_tokens": 3451,
+        "cache_read_input_tokens": 21342
+      },
+      "costUSD": 0.033704,
+      "retries": 0,
+      "retrieved": [
+        "surveys.submit_survey_response",
+        "surveys.list_surveys",
+        "surveys.create_survey",
+        "products.get_inventory_availability",
+        "surveys.get_survey_response_summary",
+        "surveys.update_survey_question",
+        "availability.set_max_horizon",
+        "reports.run_report",
+        "surveys.add_survey_question",
+        "smart_lists.count_smart_list",
+        "tickets.reply_to_ticket",
+        "leads.record_qualification_answers",
+        "blogs.publish_post",
+        "contacts.search_contacts",
+        "blogs.schedule_post",
+        "coupons.set_redemption_limit",
+        "tags.get_tag_usage",
+        "contacts.create_contact",
+        "companies.list_company_contacts",
+        "leads.get_lead",
+        "coupons.validate_coupon",
+        "memberships.revoke_membership",
+        "tax_rules.calculate_tax",
+        "contacts.get_contact"
+      ],
+      "status": "completed",
+      "finalText": "Your NPS on the **Customer Satisfaction (NPS)** survey (srv_001) is **36**, and **14 people** have answered it.\n\n- **Promoters (scored 9–10):** 8\n- **Passives (scored 7–8):** 3\n- **Detractors (scored 0–6):** 3\n- **Average score:** 8.1 out of 10\n\n**Other answers:**\n- 9 of the 14 said you can contact them about their feedback.\n- 6 people answered \"What could we do better?\" Sample answers include \"More reporting options\" (given more than once) and \"Faster replies to support tickets.\"",
+      "progress": [],
+      "retrievalMs": 1.99,
+      "calls": 3
+    }
+  ]
+}

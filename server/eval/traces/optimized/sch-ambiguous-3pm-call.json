@@ -1,0 +1,130 @@
+{
+  "scenario": {
+    "id": "sch-ambiguous-3pm-call",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Push tomorrow's 3pm discovery call to next week."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "59cdb6af-1f6f-48d7-9f4f-2d0937681189",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Push tomorrow's 3pm discovery call to next week.",
+      "ttfurMs": 1157,
+      "ttftTextMs": 1157,
+      "firstActionMs": 2330,
+      "e2eMs": 5889,
+      "llmCalls": [
+        {
+          "ms": 2329,
+          "ttftMs": 1156,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 154,
+            "cacheRead": 5235,
+            "cacheWrite": 2556
+          },
+          "costUSD": 0.01797
+        },
+        {
+          "ms": 3559,
+          "ttftMs": 3557,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 250,
+            "cacheRead": 7791,
+            "cacheWrite": 787
+          },
+          "costUSD": 0.0120594
+        }
+      ],
+      "actions": [
+        {
+          "action": "appointments.search_appointments",
+          "input": {
+            "startAtAfter": "2026-11-05T00:00:00Z",
+            "startAtBefore": "2026-11-06T00:00:00Z",
+            "status": [
+              "booked",
+              "confirmed"
+            ]
+          },
+          "ok": true,
+          "ms": 0.15,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 404,
+        "cache_creation_input_tokens": 3343,
+        "cache_read_input_tokens": 13026
+      },
+      "costUSD": 0.030029,
+      "retries": 0,
+      "retrieved": [
+        "appointments.cancel_appointment",
+        "calendars.create_calendar",
+        "appointments.search_appointments",
+        "tasks.create_task",
+        "listings.publish_listing",
+        "events.cancel_registration",
+        "subscriptions.preview_next_invoice",
+        "leads.record_qualification_answers",
+        "reports.schedule_report",
+        "appointments.create_appointment",
+        "listings.update_listing_name",
+        "landing_pages.update_page_content",
+        "contacts.set_communication_preferences",
+        "reports.set_report_grouping",
+        "notes.create_note",
+        "appointments.assign_appointment_host",
+        "calendars.get_calendar_settings",
+        "calendars.set_calendar_timezone",
+        "tasks.reopen_task",
+        "tasks.cancel_task",
+        "tasks.get_task",
+        "subscriptions.update_subscription_quantity",
+        "tasks.complete_task",
+        "tasks.update_task"
+      ],
+      "status": "completed",
+      "finalText": "I couldn't move anything yet. Two discovery calls are booked for tomorrow (Thu 5 Nov) at 3:00–3:30pm UTC:\n\n1. **Sales Discovery Call with Sarah Chen**: `apt_001`, host `usr_002`\n2. **Sales Discovery Call with Sofia Nguyen**: `apt_006`, host `usr_003`\n\nWhich one should I move, or both? Unless you say otherwise, I'll move it to the same time next week: **Thu 12 Nov, 3:00–3:30pm UTC**.",
+      "progress": [],
+      "retrievalMs": 0.5,
+      "calls": 2
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "scenario": {
+    "id": "sch-direct-holiday-webinar",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Schedule a webinar called 'Holiday Email Playbook' on Dec 2 from 5 to 6pm UTC. Cap it at 150 people, Morgan Blake is hosting."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action events.create_event",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params events.create_event",
+        "pass": true,
+        "detail": "{\"name\":\"/holiday email playbook/i\",\"type\":\"webinar\",\"capacity\":150,\"startAt\":\"2026-12-02\",\"hostUserId\":\"usr_008\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "24ac7c4f-7487-4c74-834b-63d72f57ef66",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Schedule a webinar called 'Holiday Email Playbook' on Dec 2 from 5 to 6pm UTC. Cap it at 150 people, Morgan Blake is hosting.",
+      "ttfurMs": 973,
+      "ttftTextMs": 973,
+      "firstActionMs": 1664,
+      "e2eMs": 6316,
+      "llmCalls": [
+        {
+          "ms": 1663,
+          "ttftMs": 972,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 80,
+            "cacheRead": 112993,
+            "cacheWrite": 136
+          },
+          "costUSD": 0.047493200000000006
+        },
+        {
+          "ms": 2208,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 204,
+            "cacheRead": 113129,
+            "cacheWrite": 230
+          },
+          "costUSD": 0.0504896
+        },
+        {
+          "ms": 2437,
+          "ttftMs": 2431,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 176,
+            "cacheRead": 113359,
+            "cacheWrite": 384
+          },
+          "costUSD": 0.050791600000000006
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Morgan Blake"
+          },
+          "ok": true,
+          "ms": 0.15,
+          "confirmed": false
+        },
+        {
+          "action": "events.create_event",
+          "input": {
+            "name": "Holiday Email Playbook",
+            "type": "webinar",
+            "startAt": "2026-12-02T17:00:00Z",
+            "endAt": "2026-12-02T18:00:00Z",
+            "capacity": 150,
+            "hostUserId": "usr_008"
+          },
+          "ok": true,
+          "ms": 6.76,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 460,
+        "cache_creation_input_tokens": 750,
+        "cache_read_input_tokens": 339481
+      },
+      "costUSD": 0.148774,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "The webinar is scheduled.\n\n**Holiday Email Playbook** (`evt_008`)\n- **Type:** Webinar\n- **When:** Wed, Dec 2, 2026, 5:00–6:00 PM UTC (12:00–1:00 PM in Morgan's New York time zone)\n- **Host:** Morgan Blake (`usr_008`)\n- **Capacity:** 150 seats, with 0 registered so far\n\nIt has no location or join link and no description yet. Send me the webinar URL and I'll add it.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

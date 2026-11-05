@@ -1,0 +1,132 @@
+{
+  "scenario": {
+    "id": "sch-direct-community-channel",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Can you add a 'resources' channel to the Growth Hackers Club? It's for people sharing templates and tools."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action communities.create_channel",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params communities.create_channel",
+        "pass": true,
+        "detail": "{\"id\":\"cmty_001\",\"name\":\"/resources/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "85eba345-ab73-48a2-adcb-905d66541e5e",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Can you add a 'resources' channel to the Growth Hackers Club? It's for people sharing templates and tools.",
+      "ttfurMs": 844,
+      "ttftTextMs": 844,
+      "firstActionMs": 1641,
+      "e2eMs": 4294,
+      "llmCalls": [
+        {
+          "ms": 1640,
+          "ttftMs": 844,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 82,
+            "cacheRead": 112993,
+            "cacheWrite": 109
+          },
+          "costUSD": 0.0473982
+        },
+        {
+          "ms": 1353,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 104,
+            "cacheRead": 113102,
+            "cacheWrite": 995
+          },
+          "costUSD": 0.052303800000000004
+        },
+        {
+          "ms": 1294,
+          "ttftMs": 1289,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 67,
+            "cacheRead": 114097,
+            "cacheWrite": 891
+          },
+          "costUSD": 0.0514418
+        }
+      ],
+      "actions": [
+        {
+          "action": "communities.get_community",
+          "input": {
+            "id": "Growth Hackers Club"
+          },
+          "ok": true,
+          "ms": 0.91,
+          "confirmed": false
+        },
+        {
+          "action": "communities.create_channel",
+          "input": {
+            "id": "cmty_001",
+            "name": "resources",
+            "description": "Share templates and tools"
+          },
+          "ok": true,
+          "ms": 5.49,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 253,
+        "cache_creation_input_tokens": 1995,
+        "cache_read_input_tokens": 340192
+      },
+      "costUSD": 0.151144,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I added the **resources** channel (chan_007) to the Growth Hackers Club (cmty_001), with the description \"Share templates and tools.\"\n\nThe community now has four channels: general, wins, questions and resources.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

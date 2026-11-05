@@ -1,0 +1,212 @@
+{
+  "scenario": {
+    "id": "cmm-direct-listing-phone-republish",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Acme Dental has a new number, 512-555-2000. Update their listing and push the change out to the directories it is already live on."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action listings.update_listing_phone",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action listings.publish_listing",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params listings.update_listing_phone",
+        "pass": true,
+        "detail": "{\"id\":\"lst_001\",\"phone\":\"/512\\\\D*555\\\\D*2000/\"}"
+      },
+      {
+        "name": "params listings.publish_listing",
+        "pass": true,
+        "detail": "{\"id\":\"lst_001\",\"directories\":[\"google\",\"yelp\",\"facebook\"]}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "7d91ff03-c3c7-4f72-b3a5-b99bc2294275",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Acme Dental has a new number, 512-555-2000. Update their listing and push the change out to the directories it is already live on.",
+      "ttfurMs": 1527,
+      "ttftTextMs": 1527,
+      "firstActionMs": 2281,
+      "e2eMs": 6523,
+      "llmCalls": [
+        {
+          "ms": 2279,
+          "ttftMs": 1527,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 72,
+            "cacheRead": 112993,
+            "cacheWrite": 111
+          },
+          "costUSD": 0.047208200000000006
+        },
+        {
+          "ms": 2227,
+          "ttftMs": 1837,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 109,
+            "cacheRead": 113104,
+            "cacheWrite": 1200
+          },
+          "costUSD": 0.05342960000000001
+        },
+        {
+          "ms": 2009,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 88,
+            "cacheRead": 114304,
+            "cacheWrite": 1223
+          },
+          "costUSD": 0.05360460000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "listings.search_listings",
+          "input": {
+            "query": "Acme Dental"
+          },
+          "ok": true,
+          "ms": 1.34,
+          "confirmed": false
+        },
+        {
+          "action": "listings.update_listing_phone",
+          "input": {
+            "id": "lst_001",
+            "phone": "+15125552000"
+          },
+          "ok": true,
+          "ms": 6.18,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 269,
+        "cache_creation_input_tokens": 2534,
+        "cache_read_input_tokens": 340401
+      },
+      "costUSD": 0.154242,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01RXT3UN1yH2udLpdHD4Y7Wp",
+          "action": "listings.publish_listing",
+          "name": "Publish listing to simulated directory",
+          "risk": "external",
+          "input": {
+            "id": "lst_001",
+            "directories": [
+              "google",
+              "yelp",
+              "facebook"
+            ]
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "7d91ff03-c3c7-4f72-b3a5-b99bc2294275",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 5882,
+      "firstActionMs": 6,
+      "e2eMs": 5886,
+      "llmCalls": [
+        {
+          "ms": 5880,
+          "ttftMs": 5876,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 174,
+            "cacheRead": 115527,
+            "cacheWrite": 1264
+          },
+          "costUSD": 0.0560188
+        }
+      ],
+      "actions": [
+        {
+          "action": "listings.publish_listing",
+          "input": {
+            "id": "lst_001",
+            "directories": [
+              "google",
+              "yelp",
+              "facebook"
+            ]
+          },
+          "ok": true,
+          "ms": 5.8,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 174,
+        "cache_creation_input_tokens": 1264,
+        "cache_read_input_tokens": 115527
+      },
+      "costUSD": 0.056019,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I changed Acme Dental's phone number on its listing (lst_001) and sent the update to the 3 directories it was already live on. All 3 accepted it.\n\n- **Phone:** +1 512-555-1000 → **+1 512-555-2000**\n- **Google:** updated (synced 2026-11-04)\n- **Yelp:** updated (synced 2026-11-04)\n- **Facebook:** updated (synced 2026-11-04)\n\nThe listing wasn't live on Bing or Apple, so I didn't publish it there.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

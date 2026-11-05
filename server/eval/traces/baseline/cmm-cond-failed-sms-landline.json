@@ -1,0 +1,217 @@
+{
+  "scenario": {
+    "id": "cmm-cond-failed-sms-landline",
+    "category": "conditional",
+    "turns": [
+      {
+        "user": "Some of our texts bounced. Any that failed because the number is a landline, send the same message by email instead. For the others just tell me who they were."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action sms.search_sms_messages|sms.get_sms_delivery_status",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action email.send_email",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid sms.send_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(?=[\\s\\S]*Tom)/",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "a56a77da-942e-4e92-9a7a-055b187dbfb2",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Some of our texts bounced. Any that failed because the number is a landline, send the same message by email instead. For the others just tell me who they were.",
+      "ttfurMs": 7723,
+      "ttftTextMs": 7723,
+      "firstActionMs": 8646,
+      "e2eMs": 13798,
+      "llmCalls": [
+        {
+          "ms": 8645,
+          "ttftMs": 7723,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 98,
+            "cacheRead": 112993,
+            "cacheWrite": 115
+          },
+          "costUSD": 0.047748200000000005
+        },
+        {
+          "ms": 2340,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 105,
+            "cacheRead": 113108,
+            "cacheWrite": 673
+          },
+          "costUSD": 0.0507162
+        },
+        {
+          "ms": 2811,
+          "ttftMs": 1919,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 185,
+            "cacheRead": 113781,
+            "cacheWrite": 601
+          },
+          "costUSD": 0.0522254
+        }
+      ],
+      "actions": [
+        {
+          "action": "sms.search_sms_messages",
+          "input": {
+            "status": "failed",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.29,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.get_contact",
+          "input": {
+            "id": "con_011"
+          },
+          "ok": true,
+          "ms": 0.3,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.get_contact",
+          "input": {
+            "id": "con_012"
+          },
+          "ok": true,
+          "ms": 0.04,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 388,
+        "cache_creation_input_tokens": 1389,
+        "cache_read_input_tokens": 339882
+      },
+      "costUSD": 0.15069,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_013nzSqpFaKzciXePSeuTWJ1",
+          "action": "email.send_email",
+          "name": "Send email",
+          "risk": "external",
+          "input": {
+            "contactId": "con_011",
+            "subject": "Following up on your inquiry",
+            "body": "Hi Aisha, following up on your inquiry. When is a good time to talk?",
+            "purpose": "follow_up"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "a56a77da-942e-4e92-9a7a-055b187dbfb2",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 9,
+      "ttftTextMs": 3869,
+      "firstActionMs": 9,
+      "e2eMs": 3873,
+      "llmCalls": [
+        {
+          "ms": 3864,
+          "ttftMs": 3860,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 291,
+            "cacheRead": 114382,
+            "cacheWrite": 467
+          },
+          "costUSD": 0.0539158
+        }
+      ],
+      "actions": [
+        {
+          "action": "email.send_email",
+          "input": {
+            "contactId": "con_011",
+            "subject": "Following up on your inquiry",
+            "body": "Hi Aisha, following up on your inquiry. When is a good time to talk?",
+            "purpose": "follow_up"
+          },
+          "ok": true,
+          "ms": 8.88,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 291,
+        "cache_creation_input_tokens": 467,
+        "cache_read_input_tokens": 114382
+      },
+      "costUSD": 0.053916,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Two texts failed. One was to a landline, and I've now sent that message by email instead.\n\n**Sent by email (landline)**\n- **Aisha Kim** (con_011): the text to +1-555-1370 was rejected because the number is a landline. I emailed the same follow-up (\"Hi Aisha, following up on your inquiry. When is a good time to talk?\") to aisha.kim6@example.com. The email (msg_130) was delivered.\n\n**Failed for another reason (not resent)**\n- **Tom Rossi** (con_012): his appointment reminder, sent 29 Oct to +1-555-1407, failed because the number is invalid or disconnected (error 30005). His phone number on file is probably wrong and needs updating. He does have an email address (tom.rossi7@example.com), but the reminder was for an appointment \"tomorrow\", which has already passed, so I didn't resend it.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

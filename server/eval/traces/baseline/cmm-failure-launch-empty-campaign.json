@@ -1,0 +1,104 @@
+{
+  "scenario": {
+    "id": "cmm-failure-launch-empty-campaign",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Launch the Black Friday SMS campaign now."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid campaigns.launch_campaign",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(audience|message|step|content)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "fecee6b6-b774-4517-949f-84014d54e4d0",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Launch the Black Friday SMS campaign now.",
+      "ttfurMs": 2215,
+      "ttftTextMs": 2215,
+      "firstActionMs": 3073,
+      "e2eMs": 8305,
+      "llmCalls": [
+        {
+          "ms": 3073,
+          "ttftMs": 2215,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 88,
+            "cacheRead": 112993,
+            "cacheWrite": 89
+          },
+          "costUSD": 0.04741820000000001
+        },
+        {
+          "ms": 5231,
+          "ttftMs": 5229,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 279,
+            "cacheRead": 113082,
+            "cacheWrite": 239
+          },
+          "costUSD": 0.0520158
+        }
+      ],
+      "actions": [
+        {
+          "action": "campaigns.list_campaigns",
+          "input": {
+            "query": "Black Friday"
+          },
+          "ok": true,
+          "ms": 0.16,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 367,
+        "cache_creation_input_tokens": 328,
+        "cache_read_input_tokens": 226075
+      },
+      "costUSD": 0.099434,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I can't launch **Black Friday SMS** (cam_005) yet. It's still a draft with nothing set up, and the platform needs two things before an SMS campaign can launch:\n\n- **Audience:** none is set, so it would reach 0 contacts.\n- **Message steps:** there are none, so there's no SMS text to send.\n\nTo launch it, please tell me:\n1. **Who should get it:** one or more contact tags, a smart list, or specific contacts.\n2. **What the SMS should say:** the message text, or an existing SMS template to use. If you'd like, I can write a draft for you to approve.\n\nOnce I have these, I'll set the audience, add the message and launch the campaign.",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

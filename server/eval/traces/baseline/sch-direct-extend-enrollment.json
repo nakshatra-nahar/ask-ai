@@ -1,0 +1,172 @@
+{
+  "scenario": {
+    "id": "sch-direct-extend-enrollment",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Extend David Brown's access to Social Media Marketing 101 through March 31, 2027."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action enrollments.set_enrollment_expiry",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params enrollments.set_enrollment_expiry",
+        "pass": true,
+        "detail": "{\"id\":\"enr_009\",\"expiresAt\":\"2027-03-31\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "3812871d-c64b-4bcf-adf8-911dd6d1b818",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Extend David Brown's access to Social Media Marketing 101 through March 31, 2027.",
+      "ttfurMs": 1110,
+      "ttftTextMs": 1110,
+      "firstActionMs": 2148,
+      "e2eMs": 9280,
+      "llmCalls": [
+        {
+          "ms": 2147,
+          "ttftMs": 1110,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 135,
+            "cacheRead": 112993,
+            "cacheWrite": 102
+          },
+          "costUSD": 0.048423200000000007
+        },
+        {
+          "ms": 1796,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 165,
+            "cacheRead": 113095,
+            "cacheWrite": 677
+          },
+          "costUSD": 0.051931
+        },
+        {
+          "ms": 2443,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 179,
+            "cacheRead": 113772,
+            "cacheWrite": 627
+          },
+          "costUSD": 0.0522318
+        },
+        {
+          "ms": 2884,
+          "ttftMs": 2882,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 195,
+            "cacheRead": 114399,
+            "cacheWrite": 434
+          },
+          "costUSD": 0.051837600000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "David Brown"
+          },
+          "ok": true,
+          "ms": 0.38,
+          "confirmed": false
+        },
+        {
+          "action": "courses.search_courses",
+          "input": {
+            "query": "Social Media Marketing 101"
+          },
+          "ok": true,
+          "ms": 0.95,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.search_enrollments",
+          "input": {
+            "contactId": "con_010",
+            "courseId": "crs_001"
+          },
+          "ok": true,
+          "ms": 0.95,
+          "confirmed": false
+        },
+        {
+          "action": "memberships.check_member_access",
+          "input": {
+            "contactId": "con_010",
+            "courseId": "crs_001"
+          },
+          "ok": true,
+          "ms": 0.63,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.set_enrollment_expiry",
+          "input": {
+            "id": "enr_009",
+            "expiresAt": "2027-03-31T23:59:59Z"
+          },
+          "ok": true,
+          "ms": 5.6,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 674,
+        "cache_creation_input_tokens": 1840,
+        "cache_read_input_tokens": 454259
+      },
+      "costUSD": 0.204424,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "David Brown now has access to **Social Media Marketing 101** through the end of **March 31, 2027** (UTC).\n\n- **Enrollment:** enr_009, for David Brown (con_010) in course crs_001\n- **Old end date:** 2027-01-23\n- **New end date:** 2027-03-31 23:59:59 UTC\n- **Status:** active. He has finished 2 of the course's 7 lessons.\n\nHe also gets this course through his **VIP Membership** (mem_005, plan mpl_002), which is active. I didn't change that membership, because it controls access to more than just this course.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

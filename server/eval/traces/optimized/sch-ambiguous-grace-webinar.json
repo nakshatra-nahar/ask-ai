@@ -1,0 +1,134 @@
+{
+  "scenario": {
+    "id": "sch-ambiguous-grace-webinar",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Sign Grace up for the Year-End Planning Webinar."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "3aa15df9-3acc-4950-8f80-012b472e1bfe",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Sign Grace up for the Year-End Planning Webinar.",
+      "ttfurMs": 4594,
+      "ttftTextMs": 4594,
+      "firstActionMs": 5900,
+      "e2eMs": 8841,
+      "llmCalls": [
+        {
+          "ms": 5896,
+          "ttftMs": 4591,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 188,
+            "cacheRead": 5235,
+            "cacheWrite": 2480
+          },
+          "costUSD": 0.01827
+        },
+        {
+          "ms": 2941,
+          "ttftMs": 2937,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 217,
+            "cacheRead": 7715,
+            "cacheWrite": 1082
+          },
+          "costUSD": 0.012844
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Grace"
+          },
+          "ok": true,
+          "ms": 0.46,
+          "confirmed": false
+        },
+        {
+          "action": "events.search_events",
+          "input": {
+            "query": "Year-End Planning Webinar"
+          },
+          "ok": true,
+          "ms": 0.13,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 405,
+        "cache_creation_input_tokens": 3562,
+        "cache_read_input_tokens": 12950
+      },
+      "costUSD": 0.031114,
+      "retries": 0,
+      "retrieved": [
+        "events.register_attendee",
+        "subscriptions.cancel_subscription",
+        "events.create_event",
+        "subscriptions.search_subscriptions",
+        "subscriptions.set_subscription_trial_end",
+        "subscriptions.get_subscription",
+        "memberships.create_membership_plan",
+        "subscriptions.resume_subscription",
+        "subscriptions.create_subscription",
+        "enrollments.enroll_learner",
+        "events.search_events",
+        "memberships.get_membership_plan",
+        "memberships.list_membership_plans",
+        "memberships.update_plan_description",
+        "memberships.add_plan_entitlement",
+        "memberships.remove_plan_entitlement",
+        "prices.create_price",
+        "media.create_media_access_link",
+        "events.update_event",
+        "prices.set_billing_interval",
+        "campaigns.set_campaign_schedule",
+        "quotes.record_quote_acceptance",
+        "funnels.create_funnel",
+        "prices.set_trial_period"
+      ],
+      "status": "completed",
+      "finalText": "I haven't registered anyone yet because three contacts are named Grace. Which one should I sign up?\n\n- **Grace Nguyen** (con_013): grace.nguyen8@example.com, at the opportunity stage\n- **Grace Brown** (con_042): grace.brown38@example.com, an existing customer\n- **Grace Okafor** (con_072): grace.okafor68@example.com, a lead\n\nThe **Year-End Planning Webinar** (evt_007) is on 9 Dec 2026 from 17:00 to 18:00 UTC. It has room: 3 of 100 seats are taken.",
+      "progress": [],
+      "retrievalMs": 2.62,
+      "calls": 2
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "scenario": {
+    "id": "crm-direct-disqualify-lead",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Mei Silva went with a competitor, so close out her lead as disqualified."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action leads.disqualify_lead",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params leads.disqualify_lead",
+        "pass": true,
+        "detail": "{\"id\":\"ld_045\",\"reason\":\"/competitor/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "10e026a0-3edb-430e-bdc3-146862335660",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Mei Silva went with a competitor, so close out her lead as disqualified.",
+      "ttfurMs": 1160,
+      "ttftTextMs": 1160,
+      "firstActionMs": 2136,
+      "e2eMs": 5463,
+      "llmCalls": [
+        {
+          "ms": 2131,
+          "ttftMs": 1155,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 109,
+            "cacheRead": 5235,
+            "cacheWrite": 2581
+          },
+          "costUSD": 0.017195
+        },
+        {
+          "ms": 1622,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 101,
+            "cacheRead": 7816,
+            "cacheWrite": 222
+          },
+          "costUSD": 0.0062644
+        },
+        {
+          "ms": 1699,
+          "ttftMs": 1696,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 60,
+            "cacheRead": 8038,
+            "cacheWrite": 220
+          },
+          "costUSD": 0.005523200000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "query": "Mei Silva"
+          },
+          "ok": true,
+          "ms": 0.29,
+          "confirmed": false
+        },
+        {
+          "action": "leads.disqualify_lead",
+          "input": {
+            "id": "ld_045",
+            "reason": "Went with a competitor"
+          },
+          "ok": true,
+          "ms": 5.76,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 270,
+        "cache_creation_input_tokens": 3023,
+        "cache_read_input_tokens": 21089
+      },
+      "costUSD": 0.028983,
+      "retries": 0,
+      "retrieved": [
+        "leads.disqualify_lead",
+        "leads.search_leads",
+        "invoices.issue_invoice",
+        "leads.convert_lead",
+        "opportunities.mark_opportunity_won",
+        "opportunities.search_opportunities",
+        "leads.update_lead",
+        "opportunities.set_expected_close_date",
+        "opportunities.mark_opportunity_lost",
+        "conversations.mark_conversation_unread",
+        "users.deactivate_user",
+        "conversations.close_conversation",
+        "opportunities.create_opportunity",
+        "surveys.close_survey",
+        "funnels.create_funnel",
+        "landing_pages.attach_form_to_page",
+        "listings.set_listing_hours",
+        "triggers.disable_trigger",
+        "forms.publish_form",
+        "tickets.update_ticket_status",
+        "leads.update_lead_score",
+        "leads.assign_lead_owner",
+        "custom_fields.create_custom_field",
+        "campaigns.get_campaign_performance"
+      ],
+      "status": "completed",
+      "finalText": "I closed Mei Silva's lead (ld_045) as **disqualified**, with the reason \"Went with a competitor.\" Before this it was a new lead from the website with a score of 36.",
+      "progress": [],
+      "retrievalMs": 4.76,
+      "calls": 3
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "scenario": {
+    "id": "cmm-ambiguous-texting-automation",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Can you turn off the automation that texts people? Customers are complaining."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "b4420822-d8d1-47d9-b0cc-5dbaa7ea8883",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Can you turn off the automation that texts people? Customers are complaining.",
+      "ttfurMs": 1270,
+      "ttftTextMs": 1270,
+      "firstActionMs": 2208,
+      "e2eMs": 6634,
+      "llmCalls": [
+        {
+          "ms": 2205,
+          "ttftMs": 1267,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 99,
+            "cacheRead": 5235,
+            "cacheWrite": 2982
+          },
+          "costUSD": 0.019
+        },
+        {
+          "ms": 4426,
+          "ttftMs": 4424,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 300,
+            "cacheRead": 8217,
+            "cacheWrite": 2315
+          },
+          "costUSD": 0.0208698
+        }
+      ],
+      "actions": [
+        {
+          "action": "workflows.list_workflows",
+          "input": {
+            "status": "published"
+          },
+          "ok": true,
+          "ms": 0.29,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 399,
+        "cache_creation_input_tokens": 5297,
+        "cache_read_input_tokens": 13452
+      },
+      "costUSD": 0.03987,
+      "retries": 0,
+      "retrieved": [
+        "workflows.pause_workflow",
+        "tickets.create_ticket",
+        "triggers.disable_trigger",
+        "tickets.reply_to_ticket",
+        "workflows.publish_workflow",
+        "tickets.link_ticket_contact",
+        "triggers.list_event_triggers",
+        "tickets.search_tickets",
+        "triggers.enable_trigger",
+        "workflows.create_workflow",
+        "workflows.list_workflows",
+        "triggers.create_event_trigger",
+        "contacts.search_contacts",
+        "workflows.get_workflow_execution_history",
+        "sms.send_sms",
+        "sms.receive_inbound_sms",
+        "workflows.validate_workflow",
+        "coupons.deactivate_coupon",
+        "triggers.bind_trigger_to_workflow",
+        "sms.draft_sms",
+        "contacts.create_contact",
+        "companies.list_company_contacts",
+        "sms.search_sms_messages",
+        "sms.record_sms_opt_out"
+      ],
+      "status": "completed",
+      "finalText": "I haven't paused anything yet, because two live automations send texts and I need to know which one people are complaining about:\n\n1. **New Lead Nurture** (`wf_001`) texts new leads first, then sends an email and creates a call task if they don't reply. One contact is partway through it now.\n2. **Appointment Reminders** (`wf_002`) texts a reminder 24 hours before each booked appointment. One contact is partway through it now.\n\nPausing a workflow stops new contacts from entering it and stops any further steps from running. Pausing Appointment Reminders would also stop reminders for upcoming bookings.\n\nWhich one should I pause: 1, 2 or both? The third live workflow, **Invoice Overdue Follow-up** (`wf_003`), sends only emails, so I'll leave it alone.",
+      "progress": [],
+      "retrievalMs": 2.7,
+      "calls": 2
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "scenario": {
+    "id": "com-indirect-who-owes-most",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "Who owes us the most money right now?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action invoices.search_invoices|invoices.list_overdue_invoices",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /Fatima Martin/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "866fa692-e626-4232-bb16-e513c828742c",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Who owes us the most money right now?",
+      "ttfurMs": 2750,
+      "ttftTextMs": 2750,
+      "firstActionMs": 4003,
+      "e2eMs": 16060,
+      "llmCalls": [
+        {
+          "ms": 4002,
+          "ttftMs": 2750,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 177,
+            "cacheRead": 112993,
+            "cacheWrite": 83
+          },
+          "costUSD": 0.0491682
+        },
+        {
+          "ms": 3993,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 351,
+            "cacheRead": 113076,
+            "cacheWrite": 5725
+          },
+          "costUSD": 0.0808834
+        },
+        {
+          "ms": 8063,
+          "ttftMs": 8062,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 760,
+            "cacheRead": 118801,
+            "cacheWrite": 1597
+          },
+          "costUSD": 0.0707134
+        }
+      ],
+      "actions": [
+        {
+          "action": "invoices.search_invoices",
+          "input": {
+            "status": "sent",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.43,
+          "confirmed": false
+        },
+        {
+          "action": "invoices.search_invoices",
+          "input": {
+            "status": "partially_paid",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.06,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.get_contact",
+          "input": {
+            "id": "con_046"
+          },
+          "ok": true,
+          "ms": 0.22,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.get_contact",
+          "input": {
+            "id": "con_001"
+          },
+          "ok": true,
+          "ms": 0.03,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.get_contact",
+          "input": {
+            "id": "con_013"
+          },
+          "ok": true,
+          "ms": 0.02,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.get_contact",
+          "input": {
+            "id": "con_002"
+          },
+          "ok": true,
+          "ms": 0.02,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.get_contact",
+          "input": {
+            "id": "con_053"
+          },
+          "ok": true,
+          "ms": 0.02,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 1288,
+        "cache_creation_input_tokens": 7405,
+        "cache_read_input_tokens": 344870
+      },
+      "costUSD": 0.200765,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "**Fatima Martin (con_046) owes the most: $2,295 across 2 unpaid invoices.** Sarah Johnson is a close second at $2,190.\n\n**Who owes the most**\n\n| # | Customer | Amount owed | Invoices | Overdue? |\n|---|---|---|---|---|\n| 1 | **Fatima Martin** (con_046) | **$2,295** | INV-1007 $1,420 (31 days overdue, reminder sent Nov 2) · INV-1015 $875 (due Nov 18) | Partly |\n| 2 | Sarah Johnson (con_001, VIP) | $2,190 | INV-1030 (2 days overdue, no reminder sent yet) | Yes |\n| 3 | Grace Nguyen (con_013) | $1,575 | INV-1012 (due Nov 9) | No |\n| 4 | Sarah Chen (con_002) | $1,550 | INV-1011 (due Nov 15) | No |\n| 5 | Ethan Lee (con_053) | $1,470 | INV-1008 (35 days overdue, no reminder sent yet) | Yes |\n\n**Other things to know**\n- In total, customers owe **$17,945** across 17 unpaid invoices, including ones that are only partly paid.\n- If you only count overdue money, Sarah Johnson's $2,190 is the largest single overdue balance. Ethan Lee's $1,470 and Fatima Martin's $1,420 come next.\n- The oldest overdue invoice is INV-1010: $1,310, 60 days overdue, owed by con_067. No reminder has been sent for it.\n\nI can send payment reminders for the overdue invoices that haven't had one yet: INV-1030, INV-1008 and INV-1010.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

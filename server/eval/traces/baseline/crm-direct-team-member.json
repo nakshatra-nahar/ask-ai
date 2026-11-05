@@ -1,0 +1,145 @@
+{
+  "scenario": {
+    "id": "crm-direct-team-member",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Riley Kim is going to help the sales team for a bit — add her to Sales. She should stay on Support as well."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action teams.add_team_member",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid teams.remove_team_member",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params teams.add_team_member",
+        "pass": true,
+        "detail": "{\"id\":\"tm_001\",\"userId\":\"usr_007\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "e65ea836-abe6-4a2c-9722-576a990ce23f",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Riley Kim is going to help the sales team for a bit — add her to Sales. She should stay on Support as well.",
+      "ttfurMs": 1593,
+      "ttftTextMs": 1593,
+      "firstActionMs": 2607,
+      "e2eMs": 9177,
+      "llmCalls": [
+        {
+          "ms": 2606,
+          "ttftMs": 1592,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 123,
+            "cacheRead": 112993,
+            "cacheWrite": 108
+          },
+          "costUSD": 0.048213200000000005
+        },
+        {
+          "ms": 2839,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 164,
+            "cacheRead": 113101,
+            "cacheWrite": 478
+          },
+          "costUSD": 0.0509184
+        },
+        {
+          "ms": 3728,
+          "ttftMs": 3726,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 155,
+            "cacheRead": 113579,
+            "cacheWrite": 316
+          },
+          "costUSD": 0.05011960000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Riley Kim"
+          },
+          "ok": true,
+          "ms": 0.17,
+          "confirmed": false
+        },
+        {
+          "action": "teams.list_teams",
+          "input": {
+            "query": "Sales"
+          },
+          "ok": true,
+          "ms": 0.57,
+          "confirmed": false
+        },
+        {
+          "action": "teams.add_team_member",
+          "input": {
+            "id": "tm_001",
+            "userId": "usr_007"
+          },
+          "ok": true,
+          "ms": 2.74,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 442,
+        "cache_creation_input_tokens": 902,
+        "cache_read_input_tokens": 339673
+      },
+      "costUSD": 0.149251,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I added Riley Kim (usr_007) to the **Sales** team (tm_001). Nothing was removed, so she's still on Support.\n\n- She keeps her **support** role and her Support Agent title.\n- Joining a team doesn't remove her from any other team.\n- Sales hands out new work round robin, so she'll start getting Sales assignments along with the other members.\n\nShe doesn't have the **sales_rep** role. If she needs sales permissions, I can add that role alongside support.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "scenario": {
+    "id": "crm-direct-company-with-manager",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Add a new company, Sunrise Pediatrics (sunrisepediatrics.com), in healthcare. Priya Shah should be the account manager."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action companies.create_company",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params companies.create_company",
+        "pass": true,
+        "detail": "{\"name\":\"/sunrise pediatrics/i\",\"domain\":\"sunrisepediatrics.com\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "70b24115-ef99-4138-bb87-09c9f538ca48",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Add a new company, Sunrise Pediatrics (sunrisepediatrics.com), in healthcare. Priya Shah should be the account manager.",
+      "ttfurMs": 1030,
+      "ttftTextMs": 1030,
+      "firstActionMs": 1863,
+      "e2eMs": 5042,
+      "llmCalls": [
+        {
+          "ms": 1858,
+          "ttftMs": 1026,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 96,
+            "cacheRead": 5235,
+            "cacheWrite": 2436
+          },
+          "costUSD": 0.01621
+        },
+        {
+          "ms": 1653,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 130,
+            "cacheRead": 7671,
+            "cacheWrite": 1277
+          },
+          "costUSD": 0.0120614
+        },
+        {
+          "ms": 1518,
+          "ttftMs": 1512,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 90,
+            "cacheRead": 8948,
+            "cacheWrite": 230
+          },
+          "costUSD": 0.006537200000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 1.13,
+          "confirmed": false
+        },
+        {
+          "action": "companies.create_company",
+          "input": {
+            "name": "Sunrise Pediatrics",
+            "domain": "sunrisepediatrics.com",
+            "industry": "Healthcare",
+            "accountManagerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 6.49,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 316,
+        "cache_creation_input_tokens": 3943,
+        "cache_read_input_tokens": 21854
+      },
+      "costUSD": 0.034809,
+      "retries": 0,
+      "retrieved": [
+        "companies.create_company",
+        "companies.search_companies",
+        "companies.assign_account_manager",
+        "companies.list_company_contacts",
+        "contacts.create_contact",
+        "teams.assign_team_manager",
+        "opportunities.create_opportunity",
+        "companies.get_company",
+        "custom_fields.create_custom_field",
+        "companies.link_contact_to_company",
+        "users.invite_user",
+        "users.deactivate_user",
+        "lessons.create_lesson",
+        "orders.add_order_line_item",
+        "teams.add_team_member",
+        "products.create_product",
+        "notes.create_note",
+        "websites.create_website",
+        "listings.create_listing",
+        "courses.create_course",
+        "orders.create_order",
+        "communities.create_channel",
+        "courses.add_course_section",
+        "teams.create_team"
+      ],
+      "status": "completed",
+      "finalText": "I created the company **Sunrise Pediatrics** (`co_022`):\n\n- **Domain:** sunrisepediatrics.com\n- **Industry:** Healthcare\n- **Account manager:** Priya Shah (`usr_003`)\n- **Status:** Active",
+      "progress": [],
+      "retrievalMs": 3.46,
+      "calls": 3
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "scenario": {
+    "id": "crm-indirect-marcus-ooo-tasks",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "Marcus is out until the 16th. Make sure none of his tasks that come due before he's back end up slipping through the cracks."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action tasks.assign_task_owner",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid tasks.set_task_due_date",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid tasks.cancel_task",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid tasks.complete_task",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "c4e3f334-1982-4453-a5ba-6cad3f331a9c",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Marcus is out until the 16th. Make sure none of his tasks that come due before he's back end up slipping through the cracks.",
+      "ttfurMs": 2232,
+      "ttftTextMs": 2232,
+      "firstActionMs": 2817,
+      "e2eMs": 18596,
+      "llmCalls": [
+        {
+          "ms": 2816,
+          "ttftMs": 2232,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 164,
+            "cacheRead": 112993,
+            "cacheWrite": 112
+          },
+          "costUSD": 0.049053200000000005
+        },
+        {
+          "ms": 3070,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 161,
+            "cacheRead": 113105,
+            "cacheWrite": 314
+          },
+          "costUSD": 0.05004
+        },
+        {
+          "ms": 2447,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 124,
+            "cacheRead": 113419,
+            "cacheWrite": 1058
+          },
+          "costUSD": 0.05314560000000001
+        },
+        {
+          "ms": 3697,
+          "ttftMs": 2753,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 304,
+            "cacheRead": 114477,
+            "cacheWrite": 513
+          },
+          "costUSD": 0.0544438
+        },
+        {
+          "ms": 6555,
+          "ttftMs": 6551,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 416,
+            "cacheRead": 114990,
+            "cacheWrite": 661
+          },
+          "costUSD": 0.057629
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Marcus"
+          },
+          "ok": true,
+          "ms": 1.2,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.search_tasks",
+          "input": {
+            "ownerId": "usr_004",
+            "status": "open",
+            "dueDateBefore": "2026-11-16",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.28,
+          "confirmed": false
+        },
+        {
+          "action": "teams.list_teams",
+          "input": {},
+          "ok": true,
+          "ms": 0.54,
+          "confirmed": false
+        },
+        {
+          "action": "teams.get_team_workload",
+          "input": {
+            "id": "tm_001"
+          },
+          "ok": true,
+          "ms": 0.32,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.assign_task_owner",
+          "input": {
+            "id": "tsk_013",
+            "ownerId": "usr_005"
+          },
+          "ok": true,
+          "ms": 5.52,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.assign_task_owner",
+          "input": {
+            "id": "tsk_003",
+            "ownerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 2.48,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 1169,
+        "cache_creation_input_tokens": 2658,
+        "cache_read_input_tokens": 568984
+      },
+      "costUSD": 0.264312,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I've reassigned Marcus Reed's (usr_004) two open tasks that come due before the 16th to Sales reps who are in the office.\n\n| Task | Due | Priority | New owner |\n|---|---|---|---|\n| Collect missing payment details (tsk_013), contact con_037 | Nov 1, **already overdue** | Medium | Dana Cruz (usr_005) |\n| Send onboarding docs (tsk_003), contact con_007 | Nov 14 | High | Priya Shah (usr_003) |\n\nI picked Dana and Priya because they're in the office and have the lightest Sales workload. Each has 4 open tasks; Dana has no upcoming appointments and Priya has 4. Jordan Lee has more (7 open leads, 6 appointments). Chris Park is deactivated.\n\n**Left with Marcus:**\n- **Call back re: pricing (tsk_018)**, high priority, contact con_052. It's due Nov 16, the day he's back, so I didn't move it. If you'd like someone else to cover it, I can reassign it or move the due date.\n- Marcus also has 2 open leads and 1 upcoming appointment. I didn't touch these because you only asked about tasks. I can check whether any of them need covering while he's away.",
+      "progress": [],
+      "calls": 5
+    }
+  ]
+}

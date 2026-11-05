@@ -1,0 +1,136 @@
+{
+  "scenario": {
+    "id": "sch-direct-new-calendar",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Set up a new \"Website Audit Call\" calendar — 45 min meetings, Priya Shah hosting, and anyone with the link can book it."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action calendars.create_calendar",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params calendars.create_calendar",
+        "pass": true,
+        "detail": "{\"name\":\"/website audit call/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "a26a1d52-2943-4697-8ced-00d094c0bc3b",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Set up a new \"Website Audit Call\" calendar — 45 min meetings, Priya Shah hosting, and anyone with the link can book it.",
+      "ttfurMs": 781,
+      "ttftTextMs": 781,
+      "firstActionMs": 1467,
+      "e2eMs": 7501,
+      "llmCalls": [
+        {
+          "ms": 1467,
+          "ttftMs": 781,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 78,
+            "cacheRead": 112993,
+            "cacheWrite": 119
+          },
+          "costUSD": 0.047368200000000006
+        },
+        {
+          "ms": 2460,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 165,
+            "cacheRead": 113112,
+            "cacheWrite": 226
+          },
+          "costUSD": 0.049682800000000006
+        },
+        {
+          "ms": 3568,
+          "ttftMs": 3565,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 178,
+            "cacheRead": 113338,
+            "cacheWrite": 299
+          },
+          "costUSD": 0.050398200000000004
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Priya Shah"
+          },
+          "ok": true,
+          "ms": 0.21,
+          "confirmed": false
+        },
+        {
+          "action": "calendars.create_calendar",
+          "input": {
+            "name": "Website Audit Call",
+            "durationMin": 45,
+            "hostUserIds": [
+              "usr_003"
+            ],
+            "visibility": "public",
+            "timezone": "America/New_York"
+          },
+          "ok": true,
+          "ms": 6.13,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 421,
+        "cache_creation_input_tokens": 644,
+        "cache_read_input_tokens": 339443
+      },
+      "costUSD": 0.147449,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I created the **Website Audit Call** calendar (`cal_007`), and it's active.\n\n- **Meeting length:** 45 minutes\n- **Host:** Priya Shah (`usr_003`)\n- **Who can book:** anyone with the link (public)\n- **Timezone:** America/New_York, which is Priya's own timezone. I picked it because you didn't name one.\n- **Buffer between meetings:** none\n\nPeople can't book it themselves yet, because no booking page is linked to the calendar. I can create and publish one for it if you'd like.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

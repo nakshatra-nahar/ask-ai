@@ -1,0 +1,162 @@
+{
+  "scenario": {
+    "id": "cmm-direct-disable-fb-trigger",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Turn off the trigger that drops new Facebook leads into the nurture sequence for now."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action triggers.disable_trigger",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid workflows.pause_workflow",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params triggers.disable_trigger",
+        "pass": true,
+        "detail": "{\"id\":\"trg_001\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "d0cc81b3-5232-4e6f-b705-a9f9706f09e4",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Turn off the trigger that drops new Facebook leads into the nurture sequence for now.",
+      "ttfurMs": 1303,
+      "ttftTextMs": 1303,
+      "firstActionMs": 2311,
+      "e2eMs": 7709,
+      "llmCalls": [
+        {
+          "ms": 2308,
+          "ttftMs": 1301,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 117,
+            "cacheRead": 5235,
+            "cacheWrite": 3180
+          },
+          "costUSD": 0.02035
+        },
+        {
+          "ms": 1719,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 88,
+            "cacheRead": 8415,
+            "cacheWrite": 711
+          },
+          "costUSD": 0.008689
+        },
+        {
+          "ms": 3672,
+          "ttftMs": 3668,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 238,
+            "cacheRead": 9126,
+            "cacheWrite": 667
+          },
+          "costUSD": 0.011753399999999999
+        }
+      ],
+      "actions": [
+        {
+          "action": "triggers.list_event_triggers",
+          "input": {
+            "eventType": "lead_created",
+            "status": "enabled"
+          },
+          "ok": true,
+          "ms": 0.78,
+          "confirmed": false
+        },
+        {
+          "action": "triggers.disable_trigger",
+          "input": {
+            "id": "trg_001"
+          },
+          "ok": true,
+          "ms": 6.15,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 443,
+        "cache_creation_input_tokens": 4558,
+        "cache_read_input_tokens": 22776
+      },
+      "costUSD": 0.040792,
+      "retries": 0,
+      "retrieved": [
+        "triggers.disable_trigger",
+        "triggers.list_event_triggers",
+        "triggers.enable_trigger",
+        "leads.search_leads",
+        "workflows.create_workflow",
+        "workflows.pause_workflow",
+        "funnels.get_funnel_metrics",
+        "triggers.create_event_trigger",
+        "funnels.create_funnel",
+        "triggers.set_trigger_event_type",
+        "opportunities.create_opportunity",
+        "triggers.bind_trigger_to_workflow",
+        "campaigns.add_campaign_message_step",
+        "leads.create_lead",
+        "coupons.deactivate_coupon",
+        "campaigns.create_campaign",
+        "forms.create_form",
+        "blogs.schedule_post",
+        "email.schedule_email",
+        "custom_fields.create_custom_field",
+        "surveys.create_survey",
+        "sms.schedule_sms",
+        "leads.update_lead",
+        "appointments.reschedule_appointment"
+      ],
+      "status": "completed",
+      "finalText": "I turned off the **New Facebook Lead** trigger (`trg_001`), so new Facebook leads will stop going into the nurture sequence.\n\n- **What it did:** It started workflow `wf_001` whenever a lead came in with source = facebook. It last fired on 2026-10-30.\n- **What still runs:** I didn't touch workflow `wf_001` itself. It's still published, so leads already in it (for example `ld_001`, `ld_003`) will keep getting its steps. If you want those to stop too, I can pause the workflow.\n- **Turning it back on:** Ask me to re-enable `trg_001` and it will work again with the same settings.",
+      "progress": [],
+      "retrievalMs": 2.22,
+      "calls": 3
+    }
+  ]
+}

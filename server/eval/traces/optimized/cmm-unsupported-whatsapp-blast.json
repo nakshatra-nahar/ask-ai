@@ -1,0 +1,103 @@
+{
+  "scenario": {
+    "id": "cmm-unsupported-whatsapp-blast",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Send a WhatsApp broadcast to all our VIP customers about the Black Friday sale."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|couldn't|could not|unable|not able|don't have|do not have|not support|isn't supported|no (action|capability|way|integration))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "2fa50047-04dc-40af-ae6c-89d24d48d4dd",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Send a WhatsApp broadcast to all our VIP customers about the Black Friday sale.",
+      "ttfurMs": 1917,
+      "ttftTextMs": 1917,
+      "firstActionMs": null,
+      "e2eMs": 5429,
+      "llmCalls": [
+        {
+          "ms": 5426,
+          "ttftMs": 1914,
+          "stop": "end_turn",
+          "usage": {
+            "input": 4,
+            "output": 477,
+            "cacheRead": 5235,
+            "cacheWrite": 2932
+          },
+          "costUSD": 0.02631
+        }
+      ],
+      "actions": [],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 477,
+        "cache_creation_input_tokens": 2932,
+        "cache_read_input_tokens": 5235
+      },
+      "costUSD": 0.02631,
+      "retries": 0,
+      "retrieved": [
+        "memberships.grant_membership",
+        "conversations.assign_conversation_owner",
+        "sms.send_sms",
+        "email.send_email",
+        "campaigns.create_campaign",
+        "reviews.send_review_request",
+        "quotes.send_quote",
+        "conversations.get_conversation",
+        "availability.remove_time_block",
+        "invoices.send_invoice_reminder",
+        "reviews.create_review_request",
+        "users.invite_user",
+        "tax_rules.record_tax_exemption",
+        "email.receive_inbound_email",
+        "sms.receive_inbound_sms",
+        "availability.block_time",
+        "enrollments.suspend_enrollment",
+        "payments.create_payment_request",
+        "refunds.execute_refund",
+        "tax_rules.calculate_tax",
+        "invoices.issue_invoice",
+        "tax_rules.create_tax_rule",
+        "leads.create_lead",
+        "tickets.create_ticket"
+      ],
+      "status": "completed",
+      "finalText": "I can't send this as a WhatsApp broadcast. The platform has no WhatsApp channel: campaigns only go out by email, SMS, Facebook, Google or multi-channel, and single messages only by email or SMS. Nothing has been created or sent.\n\n**I can send the same Black Friday announcement to your VIP customers by SMS or email instead:**\n1. Set up a campaign by SMS, email or both (multi-channel), with your VIP customers as the audience.\n2. Add the message, plus a schedule if you want one.\n3. Launch it. You'll be asked to confirm before anything goes out.\n\nTo set this up I need:\n- **Channel:** SMS, email or both?\n- **Message:** your Black Friday text, including any discount or code and the sale dates. I can draft it if you'd prefer.\n- **Who counts as VIP:** a tag, a smart list or a custom field? If you're not sure, I'll look for an existing VIP tag or list.\n- **Timing:** send now or at a set time?\n\nCustomers who opted out of SMS or unsubscribed from email won't get the message on that channel.",
+      "progress": [],
+      "retrievalMs": 2.15,
+      "calls": 1
+    }
+  ]
+}

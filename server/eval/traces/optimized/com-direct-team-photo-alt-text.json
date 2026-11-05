@@ -1,0 +1,157 @@
+{
+  "scenario": {
+    "id": "com-direct-team-photo-alt-text",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "The team photo on the dental website has no alt text. Set it to 'The Bright Smile Dental team outside the clinic'."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action media.set_media_alt_text",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params media.set_media_alt_text",
+        "pass": true,
+        "detail": "{\"altText\":\"/Bright Smile Dental team outside the clinic/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "72c2d3cf-b12a-4ef1-976c-f0f033c011ec",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "The team photo on the dental website has no alt text. Set it to 'The Bright Smile Dental team outside the clinic'.",
+      "ttfurMs": 1444,
+      "ttftTextMs": 1444,
+      "firstActionMs": 2275,
+      "e2eMs": 5234,
+      "llmCalls": [
+        {
+          "ms": 2270,
+          "ttftMs": 1441,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 100,
+            "cacheRead": 5235,
+            "cacheWrite": 2206
+          },
+          "costUSD": 0.01514
+        },
+        {
+          "ms": 1558,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 110,
+            "cacheRead": 7441,
+            "cacheWrite": 314
+          },
+          "costUSD": 0.0067544
+        },
+        {
+          "ms": 1394,
+          "ttftMs": 1391,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 83,
+            "cacheRead": 7755,
+            "cacheWrite": 332
+          },
+          "costUSD": 0.00643
+        }
+      ],
+      "actions": [
+        {
+          "action": "media.search_media",
+          "input": {
+            "query": "team"
+          },
+          "ok": true,
+          "ms": 1.23,
+          "confirmed": false
+        },
+        {
+          "action": "media.set_media_alt_text",
+          "input": {
+            "id": "med_007",
+            "altText": "The Bright Smile Dental team outside the clinic"
+          },
+          "ok": true,
+          "ms": 5.71,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 293,
+        "cache_creation_input_tokens": 2852,
+        "cache_read_input_tokens": 20431
+      },
+      "costUSD": 0.028324,
+      "retries": 0,
+      "retrieved": [
+        "media.set_media_alt_text",
+        "teams.list_teams",
+        "teams.set_team_assignment_strategy",
+        "media.get_media",
+        "teams.assign_team_manager",
+        "teams.archive_team",
+        "calendars.set_calendar_visibility",
+        "websites.set_website_home_page",
+        "teams.rename_team",
+        "sms.record_sms_opt_out",
+        "funnels.list_funnels",
+        "teams.get_team",
+        "booking_pages.set_booking_confirmation_message",
+        "sms.draft_sms",
+        "users.list_users",
+        "sms.send_sms",
+        "custom_fields.update_field_help_text",
+        "sms.cancel_scheduled_sms",
+        "sms.search_sms_messages",
+        "landing_pages.search_landing_pages",
+        "sms.receive_inbound_sms",
+        "websites.unpublish_website",
+        "websites.rename_website",
+        "websites.get_website"
+      ],
+      "status": "completed",
+      "finalText": "I set the alt text on the dental website's team photo.\n\n- **Image:** team-photo-2026.jpg (`med_007`), in the `/websites/dental` folder\n- **Alt text:** \"The Bright Smile Dental team outside the clinic\"",
+      "progress": [],
+      "retrievalMs": 3.4,
+      "calls": 3
+    }
+  ]
+}

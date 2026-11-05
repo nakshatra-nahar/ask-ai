@@ -1,0 +1,137 @@
+{
+  "scenario": {
+    "id": "core-direct-create-contact",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Create a contact named Sarah Lee with email sarah.lee@brightpath.io"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action contacts.create_contact",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params contacts.create_contact",
+        "pass": true,
+        "detail": "{\"firstName\":\"Sarah\",\"lastName\":\"Lee\",\"email\":\"sarah.lee@brightpath.io\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "ec66ae94-aa14-4f7d-8e9b-fb9ff00e6cc0",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Create a contact named Sarah Lee with email sarah.lee@brightpath.io",
+      "ttfurMs": 1086,
+      "ttftTextMs": 1086,
+      "firstActionMs": 2115,
+      "e2eMs": 3853,
+      "llmCalls": [
+        {
+          "ms": 2102,
+          "ttftMs": 1076,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 123,
+            "cacheRead": 8281,
+            "cacheWrite": 0
+          },
+          "costUSD": 0.0057884
+        },
+        {
+          "ms": 1738,
+          "ttftMs": 1737,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 95,
+            "cacheRead": 8532,
+            "cacheWrite": 0
+          },
+          "costUSD": 0.0053208000000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.create_contact",
+          "input": {
+            "firstName": "Sarah",
+            "lastName": "Lee",
+            "email": "sarah.lee@brightpath.io"
+          },
+          "ok": true,
+          "ms": 2.87,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 218,
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 16813
+      },
+      "costUSD": 0.011109,
+      "retries": 0,
+      "retrieved": [
+        "contacts.create_contact",
+        "contacts.search_contacts",
+        "companies.create_company",
+        "email.search_email_messages",
+        "leads.create_lead",
+        "smart_lists.create_smart_list",
+        "tags.create_tag",
+        "notes.create_note",
+        "reviews.create_review_request",
+        "templates.create_template",
+        "templates.define_template_variables",
+        "websites.create_website",
+        "campaigns.create_campaign",
+        "email.receive_inbound_email",
+        "email.draft_email",
+        "email.send_email",
+        "email.record_email_unsubscribe",
+        "email.preview_email",
+        "contacts.update_contact",
+        "invoices.create_invoice",
+        "quotes.send_quote",
+        "forms.create_form",
+        "forms.publish_form",
+        "contacts.set_communication_preferences"
+      ],
+      "status": "completed",
+      "finalText": "I created the contact **Sarah Lee** (id `con_081`).\n- **Email:** sarah.lee@brightpath.io\n- **Status:** Active, with lifecycle stage \"Lead\" (the default)\n- **Communication preferences:** Opted in to email, SMS and calls",
+      "progress": [],
+      "retrievalMs": 9.14,
+      "calls": 2
+    }
+  ]
+}

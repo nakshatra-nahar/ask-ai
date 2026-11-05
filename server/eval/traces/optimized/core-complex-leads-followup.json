@@ -1,0 +1,356 @@
+{
+  "scenario": {
+    "id": "core-complex-leads-followup",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Find leads created last week who have not replied, exclude anyone with a booked appointment, assign the remaining leads to available sales reps, and create follow-up tasks."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action leads.search_leads",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action appointments.search_appointments|contacts.get_contact_timeline",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action tasks.create_task",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params leads.search_leads",
+        "pass": true,
+        "detail": "{\"createdAtAfter\":\"2026-10-26\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "3bfc3941-57ed-47fc-b8a0-2429fd30a2cb",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Find leads created last week who have not replied, exclude anyone with a booked appointment, assign the remaining leads to available sales reps, and create follow-up tasks.",
+      "ttfurMs": 1369,
+      "ttftTextMs": 1369,
+      "firstActionMs": 2981,
+      "e2eMs": 25838,
+      "llmCalls": [
+        {
+          "ms": 2968,
+          "ttftMs": 1359,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 241,
+            "cacheRead": 5235,
+            "cacheWrite": 3111
+          },
+          "costUSD": 0.022485
+        },
+        {
+          "ms": 3374,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 356,
+            "cacheRead": 8346,
+            "cacheWrite": 2496
+          },
+          "costUSD": 0.022946400000000002
+        },
+        {
+          "ms": 11631,
+          "ttftMs": 4363,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 1533,
+            "cacheRead": 10842,
+            "cacheWrite": 2972
+          },
+          "costUSD": 0.0498648
+        },
+        {
+          "ms": 7824,
+          "ttftMs": 7821,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 711,
+            "cacheRead": 13814,
+            "cacheWrite": 2982
+          },
+          "costUSD": 0.034663599999999996
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "createdAtAfter": "2026-10-26T00:00:00Z",
+            "createdAtBefore": "2026-11-01T23:59:59Z",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 3.52,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "roles": "sales_rep",
+            "status": "active",
+            "outOfOffice": false
+          },
+          "ok": true,
+          "ms": 0.74,
+          "confirmed": false
+        },
+        {
+          "action": "conversations.search_conversations",
+          "input": {
+            "contactIds": [
+              "con_004",
+              "con_020",
+              "con_014",
+              "con_006",
+              "con_032",
+              "con_025",
+              "con_002",
+              "con_007",
+              "con_022",
+              "con_033",
+              "con_018",
+              "con_029",
+              "con_011",
+              "con_031",
+              "con_023",
+              "con_019"
+            ],
+            "hasInboundReply": true,
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.64,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.search_appointments",
+          "input": {
+            "contactIds": [
+              "con_004",
+              "con_020",
+              "con_014",
+              "con_006",
+              "con_032",
+              "con_025",
+              "con_002",
+              "con_007",
+              "con_022",
+              "con_033",
+              "con_018",
+              "con_029",
+              "con_011",
+              "con_031",
+              "con_023",
+              "con_019"
+            ],
+            "status": [
+              "booked",
+              "confirmed"
+            ],
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 1.05,
+          "confirmed": false
+        },
+        {
+          "action": "leads.assign_lead_owner",
+          "input": {
+            "id": "ld_009",
+            "ownerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 6.27,
+          "confirmed": false
+        },
+        {
+          "action": "leads.assign_lead_owner",
+          "input": {
+            "id": "ld_005",
+            "ownerId": "usr_003"
+          },
+          "ok": true,
+          "ms": 3.75,
+          "confirmed": false
+        },
+        {
+          "action": "leads.assign_lead_owner",
+          "input": {
+            "id": "ld_003",
+            "ownerId": "usr_005"
+          },
+          "ok": true,
+          "ms": 2.16,
+          "confirmed": false
+        },
+        {
+          "action": "leads.assign_lead_owner",
+          "input": {
+            "id": "ld_011",
+            "ownerId": "usr_005"
+          },
+          "ok": true,
+          "ms": 1.72,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with Ravi Haddad (no reply)",
+            "contactId": "con_020",
+            "recordType": "leads",
+            "recordId": "ld_009",
+            "ownerId": "usr_003",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 2.12,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with Aisha Kim (no reply)",
+            "contactId": "con_011",
+            "recordType": "leads",
+            "recordId": "ld_005",
+            "ownerId": "usr_003",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.75,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with James Williams (no reply)",
+            "contactId": "con_006",
+            "recordType": "leads",
+            "recordId": "ld_003",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.75,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with Zoe Patel (no reply)",
+            "contactId": "con_023",
+            "recordType": "leads",
+            "recordId": "ld_011",
+            "ownerId": "usr_005",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.62,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Follow up with Jack Rossi (no reply)",
+            "contactId": "con_032",
+            "recordType": "leads",
+            "recordId": "ld_015",
+            "ownerId": "usr_002",
+            "dueDate": "2026-11-05",
+            "priority": "medium"
+          },
+          "ok": true,
+          "ms": 1.6,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 2841,
+        "cache_creation_input_tokens": 11561,
+        "cache_read_input_tokens": 38237
+      },
+      "costUSD": 0.12996,
+      "retries": 0,
+      "retrieved": [
+        "teams.get_team_workload",
+        "leads.search_leads",
+        "conversations.search_conversations",
+        "calendars.set_calendar_visibility",
+        "tasks.create_task",
+        "booking_pages.list_booking_pages",
+        "conversations.list_unanswered_conversations",
+        "booking_pages.publish_booking_page",
+        "leads.assign_lead_owner",
+        "tasks.reopen_task",
+        "users.list_users",
+        "appointments.search_appointments",
+        "email.receive_inbound_email",
+        "appointments.create_appointment",
+        "tasks.cancel_task",
+        "tasks.search_tasks",
+        "sms.receive_inbound_sms",
+        "appointments.get_appointment",
+        "opportunities.assign_opportunity_owner",
+        "tasks.get_task",
+        "tasks.assign_task_owner",
+        "availability.find_available_slots",
+        "calendars.assign_calendar_host",
+        "calendars.set_booking_buffer"
+      ],
+      "status": "completed",
+      "finalText": "Of the 16 leads created last week (26 Oct–1 Nov), 5 haven't replied and have no booked meeting. All 5 now have an owner and a follow-up task due tomorrow (2026-11-05).\n\n| Lead | Owner | Task |\n|---|---|---|\n| Ravi Haddad (ld_009) | Priya Shah (usr_003), newly assigned | tsk_031 |\n| Aisha Kim (ld_005) | Priya Shah (usr_003), newly assigned | tsk_032 |\n| James Williams (ld_003) | Dana Cruz (usr_005), newly assigned | tsk_033 |\n| Zoe Patel (ld_011) | Dana Cruz (usr_005), newly assigned | tsk_034 |\n| Jack Rossi (ld_015) | Jordan Lee (usr_002), already his, not changed | tsk_035 |\n\n**How I chose:**\n- **Reps:** I counted a rep as available if they're an active sales rep and not out of office. That's Jordan Lee, Priya Shah and Dana Cruz. Jordan already owns Jack, so I split the 4 unowned leads between Priya and Dana to spread the work evenly. I didn't check their current open tasks or leads.\n- **Tasks:** All are medium priority.\n\n**Left out:**\n- **Replied (8):** Mike Smith, Carlos Martin, Nina Chen, Priya Okafor, Lucas Johnson, Sofia Nguyen, Amara Kim, Olivia Walker.\n- **Have a booked meeting:** Sarah Chen, Noah Singh, Isabel Smith. Priya Okafor, Lucas Johnson and Sofia Nguyen also have meetings, but they're already left out for replying.\n\nAll 8 who replied are waiting on us: their emails are unread and they wrote last. That includes Mike Smith, Olivia Walker and Amara Kim, who have no meeting booked. They may need a response even though they weren't part of this request.\n\nI could also set up a workflow to do this automatically every week.",
+      "progress": [],
+      "retrievalMs": 8.67,
+      "calls": 4
+    }
+  ]
+}

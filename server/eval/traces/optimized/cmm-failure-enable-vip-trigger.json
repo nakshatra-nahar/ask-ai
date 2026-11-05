@@ -1,0 +1,155 @@
+{
+  "scenario": {
+    "id": "cmm-failure-enable-vip-trigger",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Switch on the VIP Tag Added trigger."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid triggers.enable_trigger",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(draft|not published|unpublished|publish|deactivated|invalid|error)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "63802cc2-4369-4b7a-bccf-a555226af841",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Switch on the VIP Tag Added trigger.",
+      "ttfurMs": 2138,
+      "ttftTextMs": 2138,
+      "firstActionMs": 3077,
+      "e2eMs": 8497,
+      "llmCalls": [
+        {
+          "ms": 3075,
+          "ttftMs": 2137,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 108,
+            "cacheRead": 5235,
+            "cacheWrite": 2726
+          },
+          "costUSD": 0.0179
+        },
+        {
+          "ms": 1492,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 88,
+            "cacheRead": 7961,
+            "cacheWrite": 240
+          },
+          "costUSD": 0.0061524
+        },
+        {
+          "ms": 3923,
+          "ttftMs": 3919,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 329,
+            "cacheRead": 8201,
+            "cacheWrite": 159
+          },
+          "costUSD": 0.0106634
+        }
+      ],
+      "actions": [
+        {
+          "action": "triggers.list_event_triggers",
+          "input": {
+            "query": "VIP Tag Added"
+          },
+          "ok": true,
+          "ms": 0.92,
+          "confirmed": false
+        },
+        {
+          "action": "triggers.enable_trigger",
+          "input": {
+            "id": "trg_005"
+          },
+          "ok": false,
+          "error": {
+            "code": "INVALID_STATE",
+            "message": "bound workflow wf_004 'Webinar Follow-up' is draft; publish it before enabling the trigger"
+          },
+          "ms": 6.3,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 525,
+        "cache_creation_input_tokens": 3125,
+        "cache_read_input_tokens": 21397
+      },
+      "costUSD": 0.034716,
+      "retries": 0,
+      "retrieved": [
+        "tags.rename_tag",
+        "tags.list_tags",
+        "memberships.grant_membership",
+        "tags.list_records_with_tag",
+        "tags.merge_tags",
+        "triggers.list_event_triggers",
+        "tags.apply_tag",
+        "workflows.add_workflow_step",
+        "subscriptions.change_subscription_plan",
+        "triggers.enable_trigger",
+        "triggers.disable_trigger",
+        "triggers.bind_trigger_to_workflow",
+        "workflows.create_workflow",
+        "triggers.get_trigger_firing_history",
+        "triggers.create_event_trigger",
+        "tags.get_tag_usage",
+        "tax_rules.set_tax_inclusive",
+        "contacts.create_contact",
+        "prices.set_billing_interval",
+        "coupons.set_discount_value",
+        "media.set_media_alt_text",
+        "courses.add_course_section",
+        "contacts.search_contacts",
+        "campaigns.set_campaign_audience"
+      ],
+      "status": "completed",
+      "finalText": "I couldn't switch on the **VIP Tag Added** trigger (`trg_005`), so it's still off.\n\n**Why:** A trigger can only be turned on once its workflow is published. This one is linked to **Webinar Follow-up** (`wf_004`), which is still a draft.\n\n**Something to check:** The trigger fires when the `vip` tag is added, but it's linked to a workflow named \"Webinar Follow-up.\" That may be the wrong workflow.\n\n**Next steps:**\n- **If that's the right workflow:** I can check it for errors, publish it and then turn the trigger on. Once it's published, it will start running for every contact tagged `vip`.\n- **If it isn't:** tell me which workflow the trigger should start. I'll link the trigger to that one and turn it on.",
+      "progress": [],
+      "retrievalMs": 0.57,
+      "calls": 3
+    }
+  ]
+}

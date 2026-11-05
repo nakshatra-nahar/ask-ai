@@ -1,0 +1,301 @@
+{
+  "scenario": {
+    "id": "cmm-followup-newsletter-declined-launch",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "Launch the November Newsletter right now, no point waiting until Friday.",
+        "confirm": false
+      },
+      {
+        "user": "ok hold off on that. move it to monday 9am eastern instead"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action campaigns.set_campaign_schedule",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid campaigns.launch_campaign",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params campaigns.set_campaign_schedule",
+        "pass": true,
+        "detail": "{\"id\":\"cam_003\",\"startAt\":\"2026-11-09\"}"
+      },
+      {
+        "name": "confirmation requested",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "83307ec4-d482-41a1-a816-63629e97a4c6",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Launch the November Newsletter right now, no point waiting until Friday.",
+      "ttfurMs": 2125,
+      "ttftTextMs": 2125,
+      "firstActionMs": 4434,
+      "e2eMs": 6047,
+      "llmCalls": [
+        {
+          "ms": 2843,
+          "ttftMs": 2122,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 80,
+            "cacheRead": 5235,
+            "cacheWrite": 2436
+          },
+          "costUSD": 0.01589
+        },
+        {
+          "ms": 1586,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 91,
+            "cacheRead": 7671,
+            "cacheWrite": 132
+          },
+          "costUSD": 0.0055563999999999995
+        },
+        {
+          "ms": 1613,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 89,
+            "cacheRead": 7803,
+            "cacheWrite": 314
+          },
+          "costUSD": 0.006479200000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "campaigns.list_campaigns",
+          "input": {
+            "query": "November Newsletter"
+          },
+          "ok": true,
+          "ms": 0.71,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 260,
+        "cache_creation_input_tokens": 2882,
+        "cache_read_input_tokens": 20709
+      },
+      "costUSD": 0.027926,
+      "retries": 0,
+      "retrieved": [
+        "campaigns.launch_campaign",
+        "conversations.list_unanswered_conversations",
+        "campaigns.create_campaign",
+        "quotes.set_quote_expiry",
+        "campaigns.pause_campaign",
+        "campaigns.set_campaign_schedule",
+        "coupons.set_coupon_validity_window",
+        "campaigns.resume_campaign",
+        "companies.merge_companies",
+        "blogs.publish_post",
+        "campaigns.list_campaigns",
+        "blogs.schedule_post",
+        "coupons.validate_coupon",
+        "workflows.add_workflow_step",
+        "surveys.publish_survey",
+        "courses.publish_course",
+        "websites.publish_website",
+        "funnels.publish_funnel",
+        "contacts.merge_contacts",
+        "landing_pages.publish_landing_page",
+        "workflows.pause_workflow",
+        "prices.create_price",
+        "reviews.draft_review_response",
+        "smart_lists.preview_smart_list"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 3.41,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_016JaRK8aEWenPwwvhYEQWKe",
+          "action": "campaigns.launch_campaign",
+          "name": "Launch campaign",
+          "risk": "external",
+          "input": {
+            "id": "cam_003"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "83307ec4-d482-41a1-a816-63629e97a4c6",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[declined]",
+      "ttfurMs": 2944,
+      "ttftTextMs": 2944,
+      "firstActionMs": null,
+      "e2eMs": 2945,
+      "llmCalls": [
+        {
+          "ms": 2945,
+          "ttftMs": 2943,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 181,
+            "cacheRead": 8117,
+            "cacheWrite": 132
+          },
+          "costUSD": 0.0075348
+        }
+      ],
+      "actions": [],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 181,
+        "cache_creation_input_tokens": 132,
+        "cache_read_input_tokens": 8117
+      },
+      "costUSD": 0.007535,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "The November Newsletter (`cam_003`) has **not** been launched. You declined the confirmation, so nothing was sent.\n\nIt's still set to go out as originally planned:\n- **Send time:** Friday 6 Nov 2026, 14:00 UTC (the campaign's time zone is America/New_York)\n- **Channel:** Email to 22 contacts tagged `newsletter`\n- **Subject:** \"What's new at Acme this November\"\n\nIf you still want it sent now, ask me again and I'll redo the launch.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    },
+    {
+      "sessionId": "83307ec4-d482-41a1-a816-63629e97a4c6",
+      "turn": 2,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "ok hold off on that. move it to monday 9am eastern instead",
+      "ttfurMs": 1849,
+      "ttftTextMs": 1849,
+      "firstActionMs": 2946,
+      "e2eMs": 5072,
+      "llmCalls": [
+        {
+          "ms": 2938,
+          "ttftMs": 1845,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 258,
+            "cacheRead": 8249,
+            "cacheWrite": 2501
+          },
+          "costUSD": 0.0209806
+        },
+        {
+          "ms": 2126,
+          "ttftMs": 2123,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 122,
+            "cacheRead": 10750,
+            "cacheWrite": 471
+          },
+          "costUSD": 0.009103
+        }
+      ],
+      "actions": [
+        {
+          "action": "campaigns.set_campaign_schedule",
+          "input": {
+            "id": "cam_003",
+            "startAt": "2026-11-09T09:00:00",
+            "timezone": "America/New_York"
+          },
+          "ok": true,
+          "ms": 4.04,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 380,
+        "cache_creation_input_tokens": 2972,
+        "cache_read_input_tokens": 18999
+      },
+      "costUSD": 0.030084,
+      "retries": 0,
+      "retrieved": [
+        "subscriptions.pause_subscription",
+        "custom_fields.set_field_validation",
+        "triggers.disable_trigger",
+        "lessons.move_lesson",
+        "availability.add_date_override",
+        "media.move_media",
+        "workflows.pause_workflow",
+        "opportunities.move_opportunity_to_stage",
+        "notes.attach_note",
+        "appointments.reschedule_appointment",
+        "pipelines.remove_pipeline_stage",
+        "funnels.get_funnel_metrics",
+        "appointments.cancel_appointment",
+        "forms.set_form_validation_rules",
+        "conversations.assign_conversation_owner",
+        "availability.block_time",
+        "events.promote_waitlisted",
+        "appointments.remove_appointment_attendee",
+        "tags.remove_tag_from_record",
+        "booking_pages.set_booking_redirect_url",
+        "blogs.unpublish_post",
+        "orders.cancel_order",
+        "tickets.update_ticket_status",
+        "coupons.set_discount_value"
+      ],
+      "status": "completed",
+      "finalText": "I moved the November Newsletter (`cam_003`) to **Monday 9 Nov 2026, 9:00 AM Eastern** (14:00 UTC). It's still scheduled, and Friday's send time has been replaced.\n\n- **Channel:** Email to 22 contacts tagged `newsletter`\n- **Subject:** \"What's new at Acme this November\"",
+      "progress": [],
+      "retrievalMs": 3.21,
+      "calls": 2
+    }
+  ]
+}

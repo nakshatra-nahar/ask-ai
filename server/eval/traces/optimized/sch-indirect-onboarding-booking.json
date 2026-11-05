@@ -1,0 +1,210 @@
+{
+  "scenario": {
+    "id": "sch-indirect-onboarding-booking",
+    "category": "indirect",
+    "turns": [
+      {
+        "user": "New customers keep emailing me asking where they can book their onboarding kickoff. Can we make that self-serve?"
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action booking_pages.publish_booking_page",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "ae71e816-2e0e-4408-adaa-f30ec0727120",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "New customers keep emailing me asking where they can book their onboarding kickoff. Can we make that self-serve?",
+      "ttfurMs": 1220,
+      "ttftTextMs": 1220,
+      "firstActionMs": 2523,
+      "e2eMs": 8351,
+      "llmCalls": [
+        {
+          "ms": 2517,
+          "ttftMs": 1215,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 157,
+            "cacheRead": 5235,
+            "cacheWrite": 2966
+          },
+          "costUSD": 0.02008
+        },
+        {
+          "ms": 2574,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 94,
+            "cacheRead": 8201,
+            "cacheWrite": 904
+          },
+          "costUSD": 0.0096884
+        },
+        {
+          "ms": 3252,
+          "ttftMs": 2808,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 116,
+            "cacheRead": 9105,
+            "cacheWrite": 320
+          },
+          "costUSD": 0.00757
+        }
+      ],
+      "actions": [
+        {
+          "action": "calendars.list_calendars",
+          "input": {},
+          "ok": true,
+          "ms": 0.93,
+          "confirmed": false
+        },
+        {
+          "action": "booking_pages.list_booking_pages",
+          "input": {
+            "calendarId": "cal_004"
+          },
+          "ok": true,
+          "ms": 0.99,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 367,
+        "cache_creation_input_tokens": 4190,
+        "cache_read_input_tokens": 22541
+      },
+      "costUSD": 0.037338,
+      "retries": 0,
+      "retrieved": [
+        "booking_pages.create_booking_page",
+        "email.search_email_messages",
+        "reviews.create_review_request",
+        "booking_pages.publish_booking_page",
+        "booking_pages.list_booking_pages",
+        "contacts.create_contact",
+        "forms.publish_form",
+        "leads.create_lead",
+        "courses.publish_course",
+        "email.get_email_delivery_status",
+        "appointments.reschedule_appointment",
+        "booking_pages.set_booking_redirect_url",
+        "calendars.create_calendar",
+        "email.send_email",
+        "calendars.set_appointment_duration",
+        "invoices.create_invoice",
+        "users.deactivate_user",
+        "tickets.assign_ticket",
+        "appointments.add_appointment_attendee",
+        "email.receive_inbound_email",
+        "leads.update_lead",
+        "sms.send_sms",
+        "availability.block_time",
+        "templates.create_template"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 4.91,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01EfLg1oM6aoxciVDgHCrenC",
+          "action": "booking_pages.publish_booking_page",
+          "name": "Publish booking page",
+          "risk": "external",
+          "input": {
+            "id": "bp_004"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "ae71e816-2e0e-4408-adaa-f30ec0727120",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 7,
+      "ttftTextMs": 5201,
+      "firstActionMs": 7,
+      "e2eMs": 5242,
+      "llmCalls": [
+        {
+          "ms": 5235,
+          "ttftMs": 5194,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 407,
+            "cacheRead": 9425,
+            "cacheWrite": 375
+          },
+          "costUSD": 0.013793
+        }
+      ],
+      "actions": [
+        {
+          "action": "booking_pages.publish_booking_page",
+          "input": {
+            "id": "bp_004"
+          },
+          "ok": true,
+          "ms": 6.64,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 407,
+        "cache_creation_input_tokens": 375,
+        "cache_read_input_tokens": 9425
+      },
+      "costUSD": 0.013793,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "New customers can now book their own onboarding kickoff. You already had a draft booking page for it, so I published it rather than building a new one.\n\n**Live page:** \"Schedule your onboarding kickoff\" (bp_004): **https://book.acme.test/onboarding-kickoff**\n- **Calendar:** Customer Onboarding (cal_004). Sessions are 60 minutes with a 15-minute buffer, in New York time (America/New_York). Hosts are usr_001 and usr_006.\n- **What customers fill in:** full name and email (required), and phone (optional).\n- **After booking they see:** \"Thanks! Your booking is confirmed. A calendar invite is on its way.\"\n\n**One thing to check:** the Customer Onboarding calendar is set to *private*. Publishing the page still worked, but if bookings don't go through for customers, I can make the calendar public.\n\n**Next steps I can take:**\n- Save an email template with this link that you can send when people ask, or add the link to your welcome message for new customers.\n- Set up an automation that emails the link whenever a deal is marked won or a contact becomes a customer. Nothing like this is set up now. Just say if you want it.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

@@ -1,0 +1,266 @@
+{
+  "scenario": {
+    "id": "sch-multi-meal-plan-funnel",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Launch the Free 7-Day Meal Plan funnel today. If any of its pages aren't live yet, publish those too."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action landing_pages.publish_landing_page",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action funnels.publish_funnel",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params landing_pages.publish_landing_page",
+        "pass": true,
+        "detail": "{\"id\":\"lp_006\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "848df98b-0afd-4e33-8123-bc6aa1916adc",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Launch the Free 7-Day Meal Plan funnel today. If any of its pages aren't live yet, publish those too.",
+      "ttfurMs": 1543,
+      "ttftTextMs": 1543,
+      "firstActionMs": 2314,
+      "e2eMs": 6569,
+      "llmCalls": [
+        {
+          "ms": 2313,
+          "ttftMs": 1543,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 82,
+            "cacheRead": 112993,
+            "cacheWrite": 112
+          },
+          "costUSD": 0.0474132
+        },
+        {
+          "ms": 2134,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 115,
+            "cacheRead": 113105,
+            "cacheWrite": 362
+          },
+          "costUSD": 0.04936
+        },
+        {
+          "ms": 2120,
+          "ttftMs": 1940,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 82,
+            "cacheRead": 113467,
+            "cacheWrite": 781
+          },
+          "costUSD": 0.0509398
+        }
+      ],
+      "actions": [
+        {
+          "action": "funnels.list_funnels",
+          "input": {
+            "query": "7-Day Meal Plan"
+          },
+          "ok": true,
+          "ms": 0.67,
+          "confirmed": false
+        },
+        {
+          "action": "landing_pages.get_landing_page",
+          "input": {
+            "id": "lp_005"
+          },
+          "ok": true,
+          "ms": 0.29,
+          "confirmed": false
+        },
+        {
+          "action": "landing_pages.get_landing_page",
+          "input": {
+            "id": "lp_006"
+          },
+          "ok": true,
+          "ms": 0.03,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 279,
+        "cache_creation_input_tokens": 1255,
+        "cache_read_input_tokens": 339565
+      },
+      "costUSD": 0.147713,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01QgjKitg4NmGUmce4eKiXBJ",
+          "action": "landing_pages.publish_landing_page",
+          "name": "Publish landing page",
+          "risk": "external",
+          "input": {
+            "id": "lp_006"
+          }
+        }
+      ],
+      "calls": 3
+    },
+    {
+      "sessionId": "848df98b-0afd-4e33-8123-bc6aa1916adc",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 5,
+      "ttftTextMs": null,
+      "firstActionMs": 5,
+      "e2eMs": 1866,
+      "llmCalls": [
+        {
+          "ms": 1861,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 58,
+            "cacheRead": 114248,
+            "cacheWrite": 350
+          },
+          "costUSD": 0.048617200000000006
+        }
+      ],
+      "actions": [
+        {
+          "action": "landing_pages.publish_landing_page",
+          "input": {
+            "id": "lp_006"
+          },
+          "ok": true,
+          "ms": 4.67,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 58,
+        "cache_creation_input_tokens": 350,
+        "cache_read_input_tokens": 114248
+      },
+      "costUSD": 0.048617,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "resumed": true,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_012Q46zfbTghbe6EczXx15Bd",
+          "action": "funnels.publish_funnel",
+          "name": "Publish funnel",
+          "risk": "external",
+          "input": {
+            "id": "fnl_002"
+          }
+        }
+      ],
+      "calls": 1
+    },
+    {
+      "sessionId": "848df98b-0afd-4e33-8123-bc6aa1916adc",
+      "turn": 2,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 5,
+      "ttftTextMs": 3743,
+      "firstActionMs": 5,
+      "e2eMs": 3744,
+      "llmCalls": [
+        {
+          "ms": 3739,
+          "ttftMs": 3738,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 245,
+            "cacheRead": 114598,
+            "cacheWrite": 374
+          },
+          "costUSD": 0.0526172
+        }
+      ],
+      "actions": [
+        {
+          "action": "funnels.publish_funnel",
+          "input": {
+            "id": "fnl_002"
+          },
+          "ok": true,
+          "ms": 4.99,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 245,
+        "cache_creation_input_tokens": 374,
+        "cache_read_input_tokens": 114598
+      },
+      "costUSD": 0.052617,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "The **Free 7-Day Meal Plan** funnel (fnl_002) went live today at https://summitfitness.studio/free-7-day-meal-plan.\n\n**Pages:**\n- **Step 1: Meal Plan Opt-in** (lp_005) was already live at https://summitfitness.studio/free-meal-plan, so I left it as is.\n- **Step 2: Download Page** (lp_006, \"Meal Plan Download\") was still a draft. I published it first, and it's now live at https://summitfitness.studio/meal-plan-download.\n\n**Still to do:** The funnel has no conversion goal, so you can't measure it against a target. I can set one up for form sign-ups on the opt-in step if you give me a target conversion rate.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

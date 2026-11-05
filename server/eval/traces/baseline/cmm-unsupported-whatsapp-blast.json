@@ -1,0 +1,108 @@
+{
+  "scenario": {
+    "id": "cmm-unsupported-whatsapp-blast",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Send a WhatsApp broadcast to all our VIP customers about the Black Friday sale."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|couldn't|could not|unable|not able|don't have|do not have|not support|isn't supported|no (action|capability|way|integration))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "a04b2ab0-99d2-447a-977e-2f25ac9310db",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Send a WhatsApp broadcast to all our VIP customers about the Black Friday sale.",
+      "ttfurMs": 2240,
+      "ttftTextMs": 2240,
+      "firstActionMs": 3243,
+      "e2eMs": 9001,
+      "llmCalls": [
+        {
+          "ms": 3243,
+          "ttftMs": 2240,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 209,
+            "cacheRead": 112993,
+            "cacheWrite": 103
+          },
+          "costUSD": 0.04990820000000001
+        },
+        {
+          "ms": 5758,
+          "ttftMs": 5756,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 366,
+            "cacheRead": 113096,
+            "cacheWrite": 513
+          },
+          "costUSD": 0.055131400000000004
+        }
+      ],
+      "actions": [
+        {
+          "action": "tags.list_tags",
+          "input": {
+            "query": "vip"
+          },
+          "ok": true,
+          "ms": 0.57,
+          "confirmed": false
+        },
+        {
+          "action": "campaigns.list_campaigns",
+          "input": {
+            "query": "black friday"
+          },
+          "ok": true,
+          "ms": 0.08,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 575,
+        "cache_creation_input_tokens": 616,
+        "cache_read_input_tokens": 226089
+      },
+      "costUSD": 0.10504,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "**I didn't send anything. This platform can't send WhatsApp messages.** Broadcasts here can go out by email or SMS only.\n\n**What's already set up that you could use instead:**\n- **VIP tag:** `vip` (tag_001) exists, so I can use it to target your VIP customers.\n- **Black Friday campaign:** \"Black Friday SMS\" (cam_005) is an SMS campaign that hasn't been sent yet. It has no audience and no message.\n\n**Closest option:** I can finish cam_005 as your Black Friday broadcast:\n1. Target contacts tagged `vip`. Anyone who has opted out of SMS is left out automatically.\n2. Add your sale message.\n3. Send it now, or schedule it, for example for Black Friday, 27 Nov 2026.\n\nI can also set up an email campaign instead, or run both.\n\nTo go ahead, send me:\n- The message text, or the key details: discount, dates and link\n- SMS, email or both\n- Send now or a time to schedule it",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

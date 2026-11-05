@@ -1,0 +1,167 @@
+{
+  "scenario": {
+    "id": "com-direct-quote-discount",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Knock 10% off Sarah Chen's website launch proposal."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action quotes.apply_quote_discount",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params quotes.apply_quote_discount",
+        "pass": true,
+        "detail": "{\"type\":\"percent\",\"value\":10}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "4a4a33f8-647e-4d7f-aadc-6d531ab69929",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Knock 10% off Sarah Chen's website launch proposal.",
+      "ttfurMs": 2294,
+      "ttftTextMs": 2294,
+      "firstActionMs": 3669,
+      "e2eMs": 8961,
+      "llmCalls": [
+        {
+          "ms": 3666,
+          "ttftMs": 2292,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 199,
+            "cacheRead": 5235,
+            "cacheWrite": 2421
+          },
+          "costUSD": 0.018195
+        },
+        {
+          "ms": 2267,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 102,
+            "cacheRead": 7656,
+            "cacheWrite": 728
+          },
+          "costUSD": 0.0087504
+        },
+        {
+          "ms": 3017,
+          "ttftMs": 3011,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 211,
+            "cacheRead": 8384,
+            "cacheWrite": 382
+          },
+          "costUSD": 0.009491600000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah Chen"
+          },
+          "ok": true,
+          "ms": 0.19,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.search_quotes",
+          "input": {
+            "query": "website launch"
+          },
+          "ok": true,
+          "ms": 1.1,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.apply_quote_discount",
+          "input": {
+            "id": "quo_001",
+            "type": "percent",
+            "value": 10
+          },
+          "ok": true,
+          "ms": 6.08,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 512,
+        "cache_creation_input_tokens": 3531,
+        "cache_read_input_tokens": 21275
+      },
+      "costUSD": 0.036437,
+      "retries": 0,
+      "retrieved": [
+        "quotes.create_quote",
+        "quotes.record_quote_acceptance",
+        "quotes.send_quote",
+        "websites.publish_website",
+        "websites.set_website_home_page",
+        "funnels.publish_funnel",
+        "appointments.cancel_appointment",
+        "campaigns.set_campaign_schedule",
+        "landing_pages.publish_landing_page",
+        "quotes.search_quotes",
+        "websites.update_site_navigation",
+        "triggers.disable_trigger",
+        "websites.unpublish_website",
+        "websites.rename_website",
+        "websites.get_website",
+        "campaigns.launch_campaign",
+        "events.add_to_waitlist",
+        "availability.get_weekly_hours",
+        "availability.add_date_override",
+        "workflows.pause_workflow",
+        "funnels.get_funnel_metrics",
+        "availability.set_weekly_hours",
+        "listings.set_listing_categories",
+        "conversations.assign_conversation_owner"
+      ],
+      "status": "completed",
+      "finalText": "I took 10% off Sarah Chen's quote **Website launch proposal** (Q-1001, `quo_001`).\n\n| | Amount (USD) |\n|---|---|\n| Subtotal | 2,087.00 |\n| 10% discount | −208.70 |\n| **New total** | **1,878.30** |\n\nThe discount covers the whole quote: the Starter Website Package ($1,499) and 12 months of prepaid Hosting & Care ($588). The quote is still a **draft** that expires 2026-12-02, so Sarah hasn't been sent anything yet. I can email it to her at sarah.chen@example.com if you'd like.",
+      "progress": [],
+      "retrievalMs": 2.21,
+      "calls": 3
+    }
+  ]
+}

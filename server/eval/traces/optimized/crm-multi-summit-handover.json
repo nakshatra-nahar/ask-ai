@@ -1,0 +1,255 @@
+{
+  "scenario": {
+    "id": "crm-multi-summit-handover",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Jordan is taking over Summit Fitness from Dana. Make him the account manager, move their open deals over to him, and drop a handover note on the company record."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action companies.assign_account_manager",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action opportunities.assign_opportunity_owner",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action notes.create_note",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params companies.assign_account_manager",
+        "pass": true,
+        "detail": "{\"id\":\"co_003\",\"userId\":\"usr_002\"}"
+      },
+      {
+        "name": "params opportunities.assign_opportunity_owner",
+        "pass": true,
+        "detail": "{\"id\":\"opp_002\",\"ownerId\":\"usr_002\"}"
+      },
+      {
+        "name": "params notes.create_note",
+        "pass": true,
+        "detail": "{\"recordType\":\"companies\",\"recordId\":\"co_003\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 3,
+      "hit": 3
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "58b6269f-d3b9-45ab-8eee-d40e1fb9552c",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Jordan is taking over Summit Fitness from Dana. Make him the account manager, move their open deals over to him, and drop a handover note on the company record.",
+      "ttfurMs": 1117,
+      "ttftTextMs": 1117,
+      "firstActionMs": 2553,
+      "e2eMs": 15815,
+      "llmCalls": [
+        {
+          "ms": 2547,
+          "ttftMs": 1112,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 184,
+            "cacheRead": 5235,
+            "cacheWrite": 2590
+          },
+          "costUSD": 0.01874
+        },
+        {
+          "ms": 3167,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 190,
+            "cacheRead": 7825,
+            "cacheWrite": 1541
+          },
+          "costUSD": 0.014643
+        },
+        {
+          "ms": 5333,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 302,
+            "cacheRead": 9366,
+            "cacheWrite": 522
+          },
+          "costUSD": 0.0124044
+        },
+        {
+          "ms": 2252,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 201,
+            "cacheRead": 9888,
+            "cacheWrite": 637
+          },
+          "costUSD": 0.011168200000000001
+        },
+        {
+          "ms": 2482,
+          "ttftMs": 2482,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 192,
+            "cacheRead": 10525,
+            "cacheWrite": 380
+          },
+          "costUSD": 0.009958
+        }
+      ],
+      "actions": [
+        {
+          "action": "companies.search_companies",
+          "input": {
+            "query": "Summit Fitness"
+          },
+          "ok": true,
+          "ms": 1.14,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 0.09,
+          "confirmed": false
+        },
+        {
+          "action": "companies.assign_account_manager",
+          "input": {
+            "id": "co_003",
+            "userId": "usr_002"
+          },
+          "ok": true,
+          "ms": 6.69,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.search_opportunities",
+          "input": {
+            "companyId": "co_003",
+            "status": "open"
+          },
+          "ok": true,
+          "ms": 1.17,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.assign_opportunity_owner",
+          "input": {
+            "id": "opp_002",
+            "ownerId": "usr_002"
+          },
+          "ok": true,
+          "ms": 5.85,
+          "confirmed": false
+        },
+        {
+          "action": "notes.create_note",
+          "input": {
+            "recordType": "company",
+            "recordId": "co_003",
+            "body": "Account handover (2026-11-04): Summit Fitness has moved from Dana Cruz to Jordan Lee. Jordan is now the account manager and owns the open deal \"Michael Smith - Marketing Automation Setup\" (opp_002, $15,000 USD, expected close 2026-11-09)."
+          },
+          "ok": false,
+          "error": {
+            "code": "VALIDATION",
+            "message": "unknown recordType 'company'",
+            "signature": "notes.create_note(recordType: string, recordId: string, body: string, pinned?: boolean) [write] — Notes: Create note. Write an internal (never sent) note on any record — contact, lead, opportunity, company, ticket… To message a customer use SMS/email instead."
+          },
+          "ms": 4.97,
+          "confirmed": false
+        },
+        {
+          "action": "notes.create_note",
+          "input": {
+            "recordType": "companies",
+            "recordId": "co_003",
+            "body": "Account handover (2026-11-04): Summit Fitness has moved from Dana Cruz to Jordan Lee. Jordan is now the account manager and owns the open deal \"Michael Smith - Marketing Automation Setup\" (opp_002, $15,000 USD, expected close 2026-11-09)."
+          },
+          "ok": true,
+          "ms": 6.58,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 1069,
+        "cache_creation_input_tokens": 5670,
+        "cache_read_input_tokens": 42839
+      },
+      "costUSD": 0.066914,
+      "retries": 0,
+      "retrieved": [
+        "companies.assign_account_manager",
+        "companies.search_companies",
+        "forms.submit_form_response",
+        "opportunities.move_opportunity_to_stage",
+        "notes.create_note",
+        "companies.get_company",
+        "companies.list_company_contacts",
+        "orders.submit_order",
+        "companies.create_company",
+        "opportunities.update_opportunity_value",
+        "opportunities.create_opportunity",
+        "reports.compare_report_periods",
+        "opportunities.mark_opportunity_won",
+        "notes.attach_note",
+        "surveys.submit_survey_response",
+        "notes.detach_note",
+        "opportunities.search_opportunities",
+        "companies.link_contact_to_company",
+        "opportunities.assign_opportunity_owner",
+        "custom_fields.create_custom_field",
+        "leads.convert_lead",
+        "teams.assign_team_manager",
+        "pipelines.remove_pipeline_stage",
+        "notes.pin_note"
+      ],
+      "status": "completed",
+      "finalText": "Jordan Lee (usr_002) has taken over Summit Fitness (co_003) from Dana Cruz.\n\n- **Account manager:** Changed from Dana Cruz to Jordan Lee.\n- **Open deals:** Summit Fitness had one open deal, and Jordan now owns it: **Michael Smith - Marketing Automation Setup** (opp_002). It's worth $15,000 USD and is expected to close 2026-11-09.\n- **Handover note:** Added to the company record (nt_028). It says who handed the account to whom and lists the deal that moved.",
+      "progress": [],
+      "retrievalMs": 4.9,
+      "calls": 5
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "scenario": {
+    "id": "crm-direct-disqualify-lead",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Mei Silva went with a competitor, so close out her lead as disqualified."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action leads.disqualify_lead",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params leads.disqualify_lead",
+        "pass": true,
+        "detail": "{\"id\":\"ld_045\",\"reason\":\"/competitor/i\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "8393db9e-3fd7-4b53-833d-a18ae691ccca",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Mei Silva went with a competitor, so close out her lead as disqualified.",
+      "ttfurMs": 1311,
+      "ttftTextMs": 1311,
+      "firstActionMs": 1957,
+      "e2eMs": 4857,
+      "llmCalls": [
+        {
+          "ms": 1957,
+          "ttftMs": 1311,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 77,
+            "cacheRead": 112993,
+            "cacheWrite": 97
+          },
+          "costUSD": 0.0472382
+        },
+        {
+          "ms": 1405,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 85,
+            "cacheRead": 113090,
+            "cacheWrite": 257
+          },
+          "costUSD": 0.048229
+        },
+        {
+          "ms": 1489,
+          "ttftMs": 1485,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 65,
+            "cacheRead": 113347,
+            "cacheWrite": 260
+          },
+          "costUSD": 0.047946800000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "query": "Mei Silva"
+          },
+          "ok": true,
+          "ms": 0.24,
+          "confirmed": false
+        },
+        {
+          "action": "leads.disqualify_lead",
+          "input": {
+            "id": "ld_045",
+            "reason": "Went with a competitor"
+          },
+          "ok": true,
+          "ms": 5.63,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 227,
+        "cache_creation_input_tokens": 614,
+        "cache_read_input_tokens": 339430
+      },
+      "costUSD": 0.143414,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I closed Mei Silva's lead (**ld_045**) as disqualified, with the reason \"Went with a competitor.\" It's no longer an open lead. Her contact record (con_015) is still there.",
+      "progress": [],
+      "calls": 3
+    }
+  ]
+}

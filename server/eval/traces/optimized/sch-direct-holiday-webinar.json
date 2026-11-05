@@ -1,0 +1,159 @@
+{
+  "scenario": {
+    "id": "sch-direct-holiday-webinar",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Schedule a webinar called 'Holiday Email Playbook' on Dec 2 from 5 to 6pm UTC. Cap it at 150 people, Morgan Blake is hosting."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action events.create_event",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params events.create_event",
+        "pass": true,
+        "detail": "{\"name\":\"/holiday email playbook/i\",\"type\":\"webinar\",\"capacity\":150,\"startAt\":\"2026-12-02\",\"hostUserId\":\"usr_008\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "27a1fd5a-32dc-4152-b6d4-bb60b2e0119c",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Schedule a webinar called 'Holiday Email Playbook' on Dec 2 from 5 to 6pm UTC. Cap it at 150 people, Morgan Blake is hosting.",
+      "ttfurMs": 1166,
+      "ttftTextMs": 1166,
+      "firstActionMs": 2141,
+      "e2eMs": 6707,
+      "llmCalls": [
+        {
+          "ms": 2136,
+          "ttftMs": 1161,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 88,
+            "cacheRead": 5235,
+            "cacheWrite": 3224
+          },
+          "costUSD": 0.01999
+        },
+        {
+          "ms": 2097,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 155,
+            "cacheRead": 8459,
+            "cacheWrite": 1269
+          },
+          "costUSD": 0.0128366
+        },
+        {
+          "ms": 2462,
+          "ttftMs": 2462,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 104,
+            "cacheRead": 9728,
+            "cacheWrite": 291
+          },
+          "costUSD": 0.007434200000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 0.21,
+          "confirmed": false
+        },
+        {
+          "action": "events.create_event",
+          "input": {
+            "name": "Holiday Email Playbook",
+            "type": "webinar",
+            "startAt": "2026-12-02T17:00:00Z",
+            "endAt": "2026-12-02T18:00:00Z",
+            "capacity": 150,
+            "hostUserId": "usr_008"
+          },
+          "ok": true,
+          "ms": 6.49,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 347,
+        "cache_creation_input_tokens": 4784,
+        "cache_read_input_tokens": 23422
+      },
+      "costUSD": 0.040261,
+      "retries": 0,
+      "retrieved": [
+        "events.create_event",
+        "email.search_email_messages",
+        "reports.schedule_report",
+        "companies.list_company_contacts",
+        "appointments.assign_appointment_host",
+        "appointments.create_appointment",
+        "contacts.search_contacts",
+        "calendars.assign_calendar_host",
+        "events.search_events",
+        "events.register_attendee",
+        "contacts.get_contact",
+        "contacts.set_communication_preferences",
+        "contacts.archive_contact",
+        "appointments.cancel_appointment",
+        "appointments.search_appointments",
+        "email.record_email_unsubscribe",
+        "email.schedule_email",
+        "tasks.create_task",
+        "calendars.create_calendar",
+        "sms.preview_sms_segmentation",
+        "availability.add_date_override",
+        "contacts.get_contact_timeline",
+        "sms.record_sms_opt_out",
+        "availability.set_weekly_hours"
+      ],
+      "status": "completed",
+      "finalText": "I've scheduled the **Holiday Email Playbook** webinar (evt_008).\n\n- **When:** Wed, 2 Dec 2026, 17:00–18:00 UTC\n- **Capacity:** 150 people\n- **Host:** Morgan Blake (usr_008)\n\nNo one is registered yet.",
+      "progress": [],
+      "retrievalMs": 4.8,
+      "calls": 3
+    }
+  ]
+}

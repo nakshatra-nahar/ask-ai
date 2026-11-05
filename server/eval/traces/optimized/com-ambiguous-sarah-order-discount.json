@@ -1,0 +1,210 @@
+{
+  "scenario": {
+    "id": "com-ambiguous-sarah-order-discount",
+    "category": "ambiguous",
+    "turns": [
+      {
+        "user": "Put the discount on Sarah's order."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "asks clarification",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "bce2daf0-7c85-40b6-bf88-9a90ca5b2a9a",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Put the discount on Sarah's order.",
+      "ttfurMs": 1113,
+      "ttftTextMs": 1113,
+      "firstActionMs": 3682,
+      "e2eMs": 13640,
+      "llmCalls": [
+        {
+          "ms": 2076,
+          "ttftMs": 1112,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 89,
+            "cacheRead": 5235,
+            "cacheWrite": 2302
+          },
+          "costUSD": 0.0154
+        },
+        {
+          "ms": 1605,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 92,
+            "cacheRead": 7537,
+            "cacheWrite": 137
+          },
+          "costUSD": 0.0055478
+        },
+        {
+          "ms": 1525,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 87,
+            "cacheRead": 7674,
+            "cacheWrite": 103
+          },
+          "costUSD": 0.005332600000000001
+        },
+        {
+          "ms": 3337,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 354,
+            "cacheRead": 7777,
+            "cacheWrite": 677
+          },
+          "costUSD": 0.0135838
+        },
+        {
+          "ms": 5094,
+          "ttftMs": 5093,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 481,
+            "cacheRead": 8454,
+            "cacheWrite": 1611
+          },
+          "costUSD": 0.0210646
+        }
+      ],
+      "actions": [
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "query": "Sarah",
+            "status": "draft"
+          },
+          "ok": true,
+          "ms": 0.92,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Sarah"
+          },
+          "ok": true,
+          "ms": 0.09,
+          "confirmed": false
+        },
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "contactId": "con_001",
+            "status": "draft"
+          },
+          "ok": true,
+          "ms": 0.19,
+          "confirmed": false
+        },
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "contactId": "con_002",
+            "status": "draft"
+          },
+          "ok": true,
+          "ms": 0.1,
+          "confirmed": false
+        },
+        {
+          "action": "orders.search_orders",
+          "input": {
+            "contactId": "con_064",
+            "status": "draft"
+          },
+          "ok": true,
+          "ms": 0.04,
+          "confirmed": false
+        },
+        {
+          "action": "coupons.search_coupons",
+          "input": {
+            "status": "active"
+          },
+          "ok": true,
+          "ms": 0.61,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 1103,
+        "cache_creation_input_tokens": 4830,
+        "cache_read_input_tokens": 36677
+      },
+      "costUSD": 0.060929,
+      "retries": 0,
+      "retrieved": [
+        "orders.apply_coupon_to_order",
+        "orders.search_orders",
+        "coupons.validate_coupon",
+        "quotes.apply_quote_discount",
+        "coupons.deactivate_coupon",
+        "coupons.search_coupons",
+        "coupons.set_discount_value",
+        "coupons.create_coupon",
+        "coupons.restrict_coupon_to_products",
+        "events.add_to_waitlist",
+        "orders.get_order",
+        "orders.cancel_order",
+        "orders.update_order_quantity",
+        "orders.submit_order",
+        "funnels.reorder_funnel_steps",
+        "forms.reorder_form_fields",
+        "landing_pages.reorder_page_sections",
+        "websites.update_site_navigation",
+        "invoices.update_draft_invoice",
+        "subscriptions.set_subscription_trial_end",
+        "subscriptions.preview_next_invoice",
+        "prices.set_price_amount",
+        "subscriptions.create_subscription",
+        "quotes.get_quote"
+      ],
+      "status": "completed",
+      "finalText": "I couldn't apply the discount yet, because both the order and the coupon are unclear. I didn't change anything.\n\n**Two Sarahs have draft orders:**\n- **Sarah Chen**: ORD-1006 (`ord_006`). Logo T-Shirt ×2 and Ceramic Coffee Mug, $65 total.\n- **Sarah Johnson**: ORD-1012 (`ord_012`). It's empty ($0, no items), so a discount wouldn't do anything right now.\n\nSarah Walker has no draft orders.\n\n**Coupons that would work on Sarah Chen's order:**\n- **MERCH5**: $5 off branded merch. It covers both items on her order.\n- **WELCOME10**: 10% off for new customers, which is $6.50 here.\n\nI left out BLACKFRIDAY25 (starts 27 Nov), SUMMER20 (ended in August), LAUNCH50 (no uses left) and SEO15 (only for the SEO retainer).\n\nWhich order and which coupon do you want, for example Sarah Chen with MERCH5? If you meant a custom discount rather than a coupon code, tell me the amount and I can set up a code for it.",
+      "progress": [],
+      "retrievalMs": 0.61,
+      "calls": 5
+    }
+  ]
+}

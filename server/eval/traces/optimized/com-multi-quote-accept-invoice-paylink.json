@@ -1,0 +1,334 @@
+{
+  "scenario": {
+    "id": "com-multi-quote-accept-invoice-paylink",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Michael Smith said yes to the SEO growth plan quote. Mark it accepted, bill him for it with the invoice due Dec 4, send the invoice, and email him a pay link."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action quotes.record_quote_acceptance",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action quotes.convert_quote_to_invoice",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action invoices.issue_invoice",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action payments.create_payment_request",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 4,
+      "hit": 4,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "1c670f1f-ac4b-4224-95e6-a708dde0180d",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Michael Smith said yes to the SEO growth plan quote. Mark it accepted, bill him for it with the invoice due Dec 4, send the invoice, and email him a pay link.",
+      "ttfurMs": 1050,
+      "ttftTextMs": 1050,
+      "firstActionMs": 1900,
+      "e2eMs": 7717,
+      "llmCalls": [
+        {
+          "ms": 1895,
+          "ttftMs": 1045,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 113,
+            "cacheRead": 5235,
+            "cacheWrite": 2665
+          },
+          "costUSD": 0.017695
+        },
+        {
+          "ms": 1443,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 88,
+            "cacheRead": 7900,
+            "cacheWrite": 318
+          },
+          "costUSD": 0.006518
+        },
+        {
+          "ms": 1526,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 107,
+            "cacheRead": 8218,
+            "cacheWrite": 387
+          },
+          "costUSD": 0.0073702
+        },
+        {
+          "ms": 1460,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 107,
+            "cacheRead": 8605,
+            "cacheWrite": 437
+          },
+          "costUSD": 0.007775
+        },
+        {
+          "ms": 1375,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 88,
+            "cacheRead": 9042,
+            "cacheWrite": 739
+          },
+          "costUSD": 0.009079799999999999
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Michael Smith"
+          },
+          "ok": true,
+          "ms": 0.3,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.search_quotes",
+          "input": {
+            "contactId": "con_003"
+          },
+          "ok": true,
+          "ms": 1.36,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.record_quote_acceptance",
+          "input": {
+            "id": "quo_003",
+            "acceptedBy": "Michael Smith"
+          },
+          "ok": true,
+          "ms": 5.91,
+          "confirmed": false
+        },
+        {
+          "action": "quotes.convert_quote_to_invoice",
+          "input": {
+            "id": "quo_003",
+            "dueDate": "2026-12-04"
+          },
+          "ok": true,
+          "ms": 5.96,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 12,
+        "output_tokens": 503,
+        "cache_creation_input_tokens": 4546,
+        "cache_read_input_tokens": 39000
+      },
+      "costUSD": 0.048438,
+      "retries": 0,
+      "retrieved": [
+        "quotes.convert_quote_to_invoice",
+        "email.search_email_messages",
+        "memberships.create_membership_plan",
+        "quotes.record_quote_acceptance",
+        "invoices.create_invoice",
+        "invoices.send_invoice_reminder",
+        "payments.cancel_payment_request",
+        "payments.create_payment_request",
+        "subscriptions.cancel_subscription",
+        "invoices.issue_invoice",
+        "payments.get_payment_request",
+        "subscriptions.create_subscription",
+        "tasks.complete_task",
+        "invoices.set_invoice_due_date",
+        "email.send_email",
+        "memberships.get_membership_plan",
+        "conversations.mark_conversation_read",
+        "subscriptions.preview_next_invoice",
+        "tickets.reply_to_ticket",
+        "quotes.create_quote",
+        "quotes.send_quote",
+        "payments.record_payment",
+        "subscriptions.update_subscription_quantity",
+        "quotes.get_quote"
+      ],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "retrievalMs": 4.5,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_012vp47G7Lk346akTSNveFeY",
+          "action": "invoices.issue_invoice",
+          "name": "Issue invoice",
+          "risk": "external",
+          "input": {
+            "id": "inv_031"
+          }
+        }
+      ],
+      "calls": 5
+    },
+    {
+      "sessionId": "1c670f1f-ac4b-4224-95e6-a708dde0180d",
+      "turn": 1,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": null,
+      "firstActionMs": 6,
+      "e2eMs": 1455,
+      "llmCalls": [
+        {
+          "ms": 1449,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 98,
+            "cacheRead": 9781,
+            "cacheWrite": 398
+          },
+          "costUSD": 0.0078704
+        }
+      ],
+      "actions": [
+        {
+          "action": "invoices.issue_invoice",
+          "input": {
+            "id": "inv_031"
+          },
+          "ok": true,
+          "ms": 5.66,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 98,
+        "cache_creation_input_tokens": 398,
+        "cache_read_input_tokens": 9781
+      },
+      "costUSD": 0.00787,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "resumed": true,
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01UdkDqZRWmqaQjwFY1Tt5qp",
+          "action": "payments.create_payment_request",
+          "name": "Create payment request",
+          "risk": "external",
+          "input": {
+            "invoiceId": "inv_031",
+            "channel": "email"
+          }
+        }
+      ],
+      "calls": 1
+    },
+    {
+      "sessionId": "1c670f1f-ac4b-4224-95e6-a708dde0180d",
+      "turn": 2,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 3389,
+      "firstActionMs": 6,
+      "e2eMs": 3392,
+      "llmCalls": [
+        {
+          "ms": 3386,
+          "ttftMs": 3383,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 297,
+            "cacheRead": 10179,
+            "cacheWrite": 281
+          },
+          "costUSD": 0.0114246
+        }
+      ],
+      "actions": [
+        {
+          "action": "payments.create_payment_request",
+          "input": {
+            "invoiceId": "inv_031",
+            "channel": "email"
+          },
+          "ok": true,
+          "ms": 6.05,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 297,
+        "cache_creation_input_tokens": 281,
+        "cache_read_input_tokens": 10179
+      },
+      "costUSD": 0.011425,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I marked Michael Smith's SEO growth plan quote accepted, billed him for it, sent the invoice and emailed him a pay link.\n\n- **Quote:** \"SEO growth plan\" Q-1003 (quo_003) is now accepted by Michael Smith.\n- **Invoice:** INV-1031 (inv_031) was created from the quote, due **Dec 4, 2026**, and emailed to michael.smith@example.com. The total is **$4,944.00 USD**:\n  - Monthly SEO Retainer: 6 × $799 = $4,794\n  - Strategy Consultation (60 min): $150\n- **Pay link:** Request preq_004 for the full $4,944.00 was emailed to the same address. The link is https://pay.example.com/r/preq_004. It's still unpaid and **expires Nov 11, 2026**, well before the invoice's Dec 4 due date.",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

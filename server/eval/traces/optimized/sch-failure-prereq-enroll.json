@@ -1,0 +1,200 @@
+{
+  "scenario": {
+    "id": "sch-failure-prereq-enroll",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Enroll Michael Smith in Advanced Funnel Building."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "forbid enrollments.record_lesson_completion",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid courses.set_course_prerequisites",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(prerequisite|hasn't (completed|finished)|has not (completed|finished)|needs to (complete|finish)|must (complete|finish)|first complete|couldn't|could not|can't|cannot|unable)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "c660eb6e-1d28-45d7-af40-c6725cefab38",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Enroll Michael Smith in Advanced Funnel Building.",
+      "ttfurMs": 1245,
+      "ttftTextMs": 1245,
+      "firstActionMs": 2534,
+      "e2eMs": 10092,
+      "llmCalls": [
+        {
+          "ms": 2531,
+          "ttftMs": 1242,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 190,
+            "cacheRead": 5235,
+            "cacheWrite": 2330
+          },
+          "costUSD": 0.01756
+        },
+        {
+          "ms": 1663,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 101,
+            "cacheRead": 7565,
+            "cacheWrite": 672
+          },
+          "costUSD": 0.008414
+        },
+        {
+          "ms": 2089,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 131,
+            "cacheRead": 8237,
+            "cacheWrite": 230
+          },
+          "costUSD": 0.007072800000000001
+        },
+        {
+          "ms": 3799,
+          "ttftMs": 3798,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 315,
+            "cacheRead": 8467,
+            "cacheWrite": 348
+          },
+          "costUSD": 0.011434799999999998
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Michael Smith"
+          },
+          "ok": true,
+          "ms": 0.43,
+          "confirmed": false
+        },
+        {
+          "action": "courses.search_courses",
+          "input": {
+            "query": "Advanced Funnel Building"
+          },
+          "ok": true,
+          "ms": 0.12,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.enroll_learner",
+          "input": {
+            "contactId": "con_003",
+            "courseId": "crs_002"
+          },
+          "ok": false,
+          "error": {
+            "code": "INVALID_STATE",
+            "message": "Michael Smith has not completed the prerequisite course(s) for Advanced Funnel Building: crs_001 Social Media Marketing 101. Enroll them in and complete those first",
+            "details": {
+              "missing": [
+                {
+                  "id": "crs_001",
+                  "title": "Social Media Marketing 101"
+                }
+              ]
+            }
+          },
+          "ms": 4.91,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.search_enrollments",
+          "input": {
+            "contactId": "con_003",
+            "courseId": "crs_001"
+          },
+          "ok": true,
+          "ms": 0.85,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 737,
+        "cache_creation_input_tokens": 3580,
+        "cache_read_input_tokens": 29504
+      },
+      "costUSD": 0.044482,
+      "retries": 0,
+      "retrieved": [
+        "availability.set_min_notice",
+        "funnels.list_funnels",
+        "opportunities.move_opportunity_to_stage",
+        "enrollments.enroll_learner",
+        "funnels.create_funnel",
+        "funnels.get_funnel",
+        "funnels.publish_funnel",
+        "funnels.get_funnel_metrics",
+        "enrollments.search_enrollments",
+        "funnels.reorder_funnel_steps",
+        "workflows.publish_workflow",
+        "websites.create_website",
+        "landing_pages.unpublish_landing_page",
+        "courses.archive_course",
+        "landing_pages.publish_landing_page",
+        "events.register_attendee",
+        "lessons.publish_lesson",
+        "courses.publish_course",
+        "courses.set_course_prerequisites",
+        "enrollments.revoke_enrollment",
+        "workflows.create_workflow",
+        "lessons.set_lesson_release_schedule",
+        "enrollments.record_lesson_completion",
+        "blogs.publish_post"
+      ],
+      "status": "completed",
+      "finalText": "I couldn't enroll Michael Smith (con_003) in **Advanced Funnel Building** (crs_002). The platform blocked it because he hasn't finished the required earlier course, **Social Media Marketing 101** (crs_001).\n\n**Where he is in the required course:**\n- He's enrolled in it (enrollment enr_003, active since 2026-10-15).\n- He has finished 3 lessons: les_001, les_002 and les_003. The course isn't marked complete yet.\n\n**Ways forward:**\n1. **Wait:** once he finishes Social Media Marketing 101, I can enroll him then.\n2. **Mark his remaining lessons complete:** if he has actually done them, I can record that for enr_003 and then enroll him.\n3. **Remove the requirement:** I can drop Social Media Marketing 101 as a required course for Advanced Funnel Building. That would change it for every learner, not just Michael.\n\nLet me know which you'd like.",
+      "progress": [],
+      "retrievalMs": 2.62,
+      "calls": 4
+    }
+  ]
+}

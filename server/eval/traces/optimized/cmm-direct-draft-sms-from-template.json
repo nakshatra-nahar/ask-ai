@@ -1,0 +1,171 @@
+{
+  "scenario": {
+    "id": "cmm-direct-draft-sms-from-template",
+    "category": "direct",
+    "turns": [
+      {
+        "user": "Draft a text to Elena Smith using our missed-call text-back template. Don't send it yet, I want to look it over."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action sms.draft_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid sms.send_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "forbid sms.schedule_sms",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "e4bf0cf9-32d1-4d83-9924-1a7b280c2ac3",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Draft a text to Elena Smith using our missed-call text-back template. Don't send it yet, I want to look it over.",
+      "ttfurMs": 709,
+      "ttftTextMs": 709,
+      "firstActionMs": 1991,
+      "e2eMs": 5726,
+      "llmCalls": [
+        {
+          "ms": 1987,
+          "ttftMs": 705,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 196,
+            "cacheRead": 5235,
+            "cacheWrite": 3435
+          },
+          "costUSD": 0.023205
+        },
+        {
+          "ms": 1356,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 99,
+            "cacheRead": 8670,
+            "cacheWrite": 583
+          },
+          "costUSD": 0.008371
+        },
+        {
+          "ms": 2371,
+          "ttftMs": 2369,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 188,
+            "cacheRead": 9253,
+            "cacheWrite": 247
+          },
+          "costUSD": 0.0087042
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Elena Smith"
+          },
+          "ok": true,
+          "ms": 0.35,
+          "confirmed": false
+        },
+        {
+          "action": "templates.search_templates",
+          "input": {
+            "query": "missed call"
+          },
+          "ok": true,
+          "ms": 1.14,
+          "confirmed": false
+        },
+        {
+          "action": "sms.draft_sms",
+          "input": {
+            "contactId": "con_009",
+            "templateId": "tpl_009"
+          },
+          "ok": true,
+          "ms": 6.72,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 483,
+        "cache_creation_input_tokens": 4265,
+        "cache_read_input_tokens": 23158
+      },
+      "costUSD": 0.04028,
+      "retries": 0,
+      "retrieved": [
+        "appointments.mark_no_show",
+        "booking_pages.list_booking_pages",
+        "tasks.create_task",
+        "conversations.list_unanswered_conversations",
+        "sms.draft_sms",
+        "email.cancel_scheduled_email",
+        "availability.find_available_slots",
+        "sms.send_sms",
+        "sms.record_sms_opt_out",
+        "sms.cancel_scheduled_sms",
+        "reports.compare_report_periods",
+        "templates.restore_template_version",
+        "booking_pages.unpublish_booking_page",
+        "workflows.add_workflow_step",
+        "sms.schedule_sms",
+        "email.preview_email",
+        "sms.get_sms_details",
+        "templates.render_template",
+        "appointments.cancel_appointment",
+        "email.send_email",
+        "appointments.create_appointment",
+        "appointments.search_appointments",
+        "templates.archive_template",
+        "calendars.create_calendar"
+      ],
+      "status": "completed",
+      "finalText": "I saved the text to Elena Smith as a draft. Nothing has been sent.\n\n- **Draft:** msg_130\n- **To:** Elena Smith (con_009), +1-555-1296\n- **Template:** Missed Call Text-Back (tpl_009)\n- **Message:** \"Hi Elena, sorry we missed your call! How can we help? - Acme\"\n- **Length:** 1 SMS segment\n- **Text messages:** Elena hasn't opted out\n\nOnce you've looked it over, tell me to send it as is, change the wording, or schedule it for later.",
+      "progress": [],
+      "retrievalMs": 3.71,
+      "calls": 3
+    }
+  ]
+}

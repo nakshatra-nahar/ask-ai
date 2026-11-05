@@ -1,0 +1,215 @@
+{
+  "scenario": {
+    "id": "sch-followup-move-okafor-call",
+    "category": "follow_up",
+    "turns": [
+      {
+        "user": "What's on Jordan Lee's calendar this Friday?"
+      },
+      {
+        "user": "Move the David Okafor one to Monday, same time."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action appointments.reschedule_appointment",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params appointments.reschedule_appointment",
+        "pass": true,
+        "detail": "{\"id\":\"apt_007\",\"startAt\":\"2026-11-09\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 1,
+      "hit": 1,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "9345cb50-9ce1-40fe-b9e7-99ea90691fe7",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "What's on Jordan Lee's calendar this Friday?",
+      "ttfurMs": 820,
+      "ttftTextMs": 820,
+      "firstActionMs": 1958,
+      "e2eMs": 7360,
+      "llmCalls": [
+        {
+          "ms": 1958,
+          "ttftMs": 820,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 144,
+            "cacheRead": 112993,
+            "cacheWrite": 91
+          },
+          "costUSD": 0.04854820000000001
+        },
+        {
+          "ms": 1943,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 194,
+            "cacheRead": 113084,
+            "cacheWrite": 365
+          },
+          "costUSD": 0.05094660000000001
+        },
+        {
+          "ms": 3457,
+          "ttftMs": 3453,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 318,
+            "cacheRead": 113449,
+            "cacheWrite": 960
+          },
+          "costUSD": 0.0565476
+        }
+      ],
+      "actions": [
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Jordan Lee"
+          },
+          "ok": true,
+          "ms": 0.07,
+          "confirmed": false
+        },
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Jordan Lee"
+          },
+          "ok": true,
+          "ms": 0.05,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.search_appointments",
+          "input": {
+            "hostUserId": "usr_002",
+            "startAtAfter": "2026-11-06T00:00:00Z",
+            "startAtBefore": "2026-11-07T00:00:00Z"
+          },
+          "ok": true,
+          "ms": 1.51,
+          "confirmed": false
+        },
+        {
+          "action": "availability.get_weekly_hours",
+          "input": {
+            "userId": "usr_002"
+          },
+          "ok": true,
+          "ms": 0.38,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 656,
+        "cache_creation_input_tokens": 1416,
+        "cache_read_input_tokens": 339526
+      },
+      "costUSD": 0.156042,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "Jordan Lee (usr_002, Account Executive) has **2 appointments on Friday, Nov 6**:\n\n| Time (UTC) | Time (Jordan's ET) | Meeting | Status |\n|---|---|---|---|\n| 15:00–15:30 | 10:00–10:30 AM | Sales Discovery Call with Priya Okafor (apt_002, contact con_007, lead ld_004) | Booked |\n| 16:00–16:30 | 11:00–11:30 AM | Sales Discovery Call with David Okafor (apt_007, contact con_039, lead ld_019) | Booked |\n\nJordan has no time blocks or schedule changes on Friday. Their usual working hours are 09:00–17:00 UTC, and the rest of the day is open apart from these two calls.",
+      "progress": [],
+      "calls": 3
+    },
+    {
+      "sessionId": "9345cb50-9ce1-40fe-b9e7-99ea90691fe7",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Move the David Okafor one to Monday, same time.",
+      "ttfurMs": 1377,
+      "ttftTextMs": 1377,
+      "firstActionMs": 2367,
+      "e2eMs": 4531,
+      "llmCalls": [
+        {
+          "ms": 2360,
+          "ttftMs": 1376,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 205,
+            "cacheRead": 114409,
+            "cacheWrite": 337
+          },
+          "costUSD": 0.05156460000000001
+        },
+        {
+          "ms": 2163,
+          "ttftMs": 2163,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 167,
+            "cacheRead": 114746,
+            "cacheWrite": 421
+          },
+          "costUSD": 0.0513514
+        }
+      ],
+      "actions": [
+        {
+          "action": "appointments.reschedule_appointment",
+          "input": {
+            "id": "apt_007",
+            "startAt": "2026-11-09T16:00:00Z"
+          },
+          "ok": true,
+          "ms": 6.76,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 372,
+        "cache_creation_input_tokens": 758,
+        "cache_read_input_tokens": 229155
+      },
+      "costUSD": 0.102916,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I moved the Sales Discovery Call with David Okafor (apt_007) to **Monday, Nov 9, 16:00–16:30 UTC** (11:00–11:30 AM Eastern, Jordan's time zone).\n\n- **Host:** Jordan Lee (usr_002)\n- **Status:** Booked\n- **Original time:** Fri, Nov 6, 16:00 UTC\n\nRescheduling doesn't notify David, so let me know if you'd like me to email or text him the new time.",
+      "progress": [],
+      "calls": 2
+    }
+  ]
+}

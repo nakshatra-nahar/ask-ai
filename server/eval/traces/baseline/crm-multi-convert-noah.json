@@ -1,0 +1,178 @@
+{
+  "scenario": {
+    "id": "crm-multi-convert-noah",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "Noah Singh's lead is qualified now. Convert it into a deal — $14k, expected to close Dec 15 — Priya keeps it. Then give her a task to send him the proposal by Friday."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action leads.convert_lead",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action tasks.create_task",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params leads.convert_lead",
+        "pass": true,
+        "detail": "{\"id\":\"ld_007\"}"
+      },
+      {
+        "name": "params tasks.create_task",
+        "pass": true,
+        "detail": "{\"dueDate\":\"2026-11-06\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 2,
+      "hit": 2,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "7ff3fba7-046a-4adc-8008-68e5a845e3e6",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Noah Singh's lead is qualified now. Convert it into a deal — $14k, expected to close Dec 15 — Priya keeps it. Then give her a task to send him the proposal by Friday.",
+      "ttfurMs": 1883,
+      "ttftTextMs": 1883,
+      "firstActionMs": 2667,
+      "e2eMs": 14060,
+      "llmCalls": [
+        {
+          "ms": 2667,
+          "ttftMs": 1883,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 127,
+            "cacheRead": 112993,
+            "cacheWrite": 137
+          },
+          "costUSD": 0.04843820000000001
+        },
+        {
+          "ms": 3607,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 110,
+            "cacheRead": 113130,
+            "cacheWrite": 543
+          },
+          "costUSD": 0.050175
+        },
+        {
+          "ms": 3772,
+          "ttftMs": 2253,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 265,
+            "cacheRead": 113673,
+            "cacheWrite": 536
+          },
+          "costUSD": 0.0534572
+        },
+        {
+          "ms": 4001,
+          "ttftMs": 3999,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 256,
+            "cacheRead": 114209,
+            "cacheWrite": 450
+          },
+          "costUSD": 0.05306160000000001
+        }
+      ],
+      "actions": [
+        {
+          "action": "leads.search_leads",
+          "input": {
+            "query": "Noah Singh"
+          },
+          "ok": true,
+          "ms": 0.1,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {
+            "query": "Priya"
+          },
+          "ok": true,
+          "ms": 0.02,
+          "confirmed": false
+        },
+        {
+          "action": "leads.convert_lead",
+          "input": {
+            "id": "ld_007",
+            "value": 14000,
+            "expectedCloseDate": "2026-12-15"
+          },
+          "ok": true,
+          "ms": 6.15,
+          "confirmed": false
+        },
+        {
+          "action": "tasks.create_task",
+          "input": {
+            "title": "Send proposal to Noah Singh",
+            "ownerId": "usr_003",
+            "contactId": "con_018",
+            "recordType": "opportunities",
+            "recordId": "opp_026",
+            "dueDate": "2026-11-06",
+            "description": "Send Noah the proposal for the $14,000 deal (expected close Dec 15)."
+          },
+          "ok": true,
+          "ms": 5.91,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 758,
+        "cache_creation_input_tokens": 1666,
+        "cache_read_input_tokens": 454005
+      },
+      "costUSD": 0.205132,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I converted Noah Singh's lead into a deal and gave Priya the proposal task.\n\n- **Deal:** \"Noah Singh - New deal\" (opp_026) is worth $14,000 and expected to close Dec 15, 2026. It's in the first stage of the default pipeline. Priya Shah already owned the lead, so she owns the deal too.\n- **Lead:** ld_007 is now marked converted and linked to the deal.\n- **Task:** \"Send proposal to Noah Singh\" (tsk_031) is assigned to Priya and due Friday, Nov 6, at medium priority. It's linked to both Noah and the deal.\n\nThe qualification answers on the lead list a budget of $5k–10k, which is below the $14k deal value. You may want to check that with Priya.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

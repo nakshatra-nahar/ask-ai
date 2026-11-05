@@ -1,0 +1,144 @@
+{
+  "scenario": {
+    "id": "core-failure-sms-opted-out",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Text Olivia Martin to remind her about tomorrow’s appointment."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "reply /(opt(ed)?[- ]?out|unsubscribed|do not (text|contact)|doesn't accept|not accept|can't|cannot|couldn't|could not|unable|failed)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "b5889b22-3acf-414e-af18-dc719ec9ff2d",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Text Olivia Martin to remind her about tomorrow’s appointment.",
+      "ttfurMs": 1387,
+      "ttftTextMs": 1387,
+      "firstActionMs": 2273,
+      "e2eMs": 14045,
+      "llmCalls": [
+        {
+          "ms": 2272,
+          "ttftMs": 1387,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 83,
+            "cacheRead": 112993,
+            "cacheWrite": 97
+          },
+          "costUSD": 0.0473582
+        },
+        {
+          "ms": 2707,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 154,
+            "cacheRead": 113090,
+            "cacheWrite": 335
+          },
+          "costUSD": 0.049999
+        },
+        {
+          "ms": 5067,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 81,
+            "cacheRead": 113425,
+            "cacheWrite": 171
+          },
+          "costUSD": 0.047853
+        },
+        {
+          "ms": 3997,
+          "ttftMs": 3995,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 261,
+            "cacheRead": 113596,
+            "cacheWrite": 98
+          },
+          "costUSD": 0.051156400000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "contacts.search_contacts",
+          "input": {
+            "query": "Olivia Martin"
+          },
+          "ok": true,
+          "ms": 0.46,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.search_appointments",
+          "input": {
+            "contactId": "con_005",
+            "startAtAfter": "2026-11-05T00:00:00Z",
+            "startAtBefore": "2026-11-06T00:00:00Z"
+          },
+          "ok": true,
+          "ms": 0.26,
+          "confirmed": false
+        },
+        {
+          "action": "appointments.search_appointments",
+          "input": {
+            "contactId": "con_005",
+            "upcoming": true
+          },
+          "ok": true,
+          "ms": 0.08,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 579,
+        "cache_creation_input_tokens": 701,
+        "cache_read_input_tokens": 453104
+      },
+      "costUSD": 0.196367,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I didn't send the text, for two reasons:\n\n1. **Olivia has no appointment tomorrow.** Olivia Martin (con_005) has nothing booked on 5 Nov 2026, and she has no upcoming booked or confirmed appointments at all.\n2. **She has opted out of SMS.** Her texting preference is off, so the platform would block any SMS to her. Her calls are also turned off. Email is the only channel she accepts (olivia.martin@example.com).\n\n**What I can do next:**\n- Book the appointment if it hasn't been entered yet. I'd need the calendar and the time.\n- Send her an email reminder once the appointment is booked.\n- Look up the appointment under another contact, in case it was booked under someone else's name.",
+      "progress": [],
+      "calls": 4
+    }
+  ]
+}

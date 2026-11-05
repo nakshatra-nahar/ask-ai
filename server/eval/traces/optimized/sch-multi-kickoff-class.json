@@ -1,0 +1,281 @@
+{
+  "scenario": {
+    "id": "sch-multi-kickoff-class",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "We're hosting a live kickoff class for Social Media Marketing 101 on Thursday Nov 19, 4–5pm UTC. 30 seats, Morgan Blake running it. Create it and register everyone who's actively enrolled in the course."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action events.create_event",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action enrollments.search_enrollments",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action events.register_attendee",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params events.create_event",
+        "pass": true,
+        "detail": "{\"type\":\"class\",\"capacity\":30,\"startAt\":\"2026-11-19\",\"hostUserId\":\"usr_008\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 1,
+      "hit": 1
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "00edb540-f95f-4e01-b3a6-6bf29d20492f",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "We're hosting a live kickoff class for Social Media Marketing 101 on Thursday Nov 19, 4–5pm UTC. 30 seats, Morgan Blake running it. Create it and register everyone who's actively enrolled in the course.",
+      "ttfurMs": 1126,
+      "ttftTextMs": 1126,
+      "firstActionMs": 2416,
+      "e2eMs": 20318,
+      "llmCalls": [
+        {
+          "ms": 2409,
+          "ttftMs": 1120,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 188,
+            "cacheRead": 5235,
+            "cacheWrite": 2740
+          },
+          "costUSD": 0.01957
+        },
+        {
+          "ms": 3552,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 284,
+            "cacheRead": 7975,
+            "cacheWrite": 1643
+          },
+          "costUSD": 0.017093
+        },
+        {
+          "ms": 9172,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 739,
+            "cacheRead": 9618,
+            "cacheWrite": 2438
+          },
+          "costUSD": 0.0308252
+        },
+        {
+          "ms": 5146,
+          "ttftMs": 5144,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 455,
+            "cacheRead": 12056,
+            "cacheWrite": 4273
+          },
+          "costUSD": 0.035295400000000005
+        }
+      ],
+      "actions": [
+        {
+          "action": "courses.search_courses",
+          "input": {
+            "query": "Social Media Marketing 101"
+          },
+          "ok": true,
+          "ms": 0.99,
+          "confirmed": false
+        },
+        {
+          "action": "users.list_users",
+          "input": {},
+          "ok": true,
+          "ms": 0.12,
+          "confirmed": false
+        },
+        {
+          "action": "enrollments.search_enrollments",
+          "input": {
+            "courseId": "crs_001",
+            "status": "active"
+          },
+          "ok": true,
+          "ms": 1.11,
+          "confirmed": false
+        },
+        {
+          "action": "events.create_event",
+          "input": {
+            "name": "Social Media Marketing 101 – Live Kickoff",
+            "type": "class",
+            "startAt": "2026-11-19T16:00:00Z",
+            "endAt": "2026-11-19T17:00:00Z",
+            "capacity": 30,
+            "hostUserId": "usr_008",
+            "description": "Live kickoff class for Social Media Marketing 101."
+          },
+          "ok": true,
+          "ms": 6.6,
+          "confirmed": false
+        },
+        {
+          "action": "events.register_attendee",
+          "input": {
+            "id": "evt_008",
+            "contactId": "con_001"
+          },
+          "ok": true,
+          "ms": 6.63,
+          "confirmed": false
+        },
+        {
+          "action": "events.register_attendee",
+          "input": {
+            "id": "evt_008",
+            "contactId": "con_002"
+          },
+          "ok": true,
+          "ms": 4.4,
+          "confirmed": false
+        },
+        {
+          "action": "events.register_attendee",
+          "input": {
+            "id": "evt_008",
+            "contactId": "con_003"
+          },
+          "ok": true,
+          "ms": 3.54,
+          "confirmed": false
+        },
+        {
+          "action": "events.register_attendee",
+          "input": {
+            "id": "evt_008",
+            "contactId": "con_008"
+          },
+          "ok": true,
+          "ms": 2.75,
+          "confirmed": false
+        },
+        {
+          "action": "events.register_attendee",
+          "input": {
+            "id": "evt_008",
+            "contactId": "con_010"
+          },
+          "ok": true,
+          "ms": 1.74,
+          "confirmed": false
+        },
+        {
+          "action": "events.register_attendee",
+          "input": {
+            "id": "evt_008",
+            "contactId": "con_011"
+          },
+          "ok": true,
+          "ms": 1.54,
+          "confirmed": false
+        },
+        {
+          "action": "events.register_attendee",
+          "input": {
+            "id": "evt_008",
+            "contactId": "con_012"
+          },
+          "ok": true,
+          "ms": 1.38,
+          "confirmed": false
+        },
+        {
+          "action": "events.register_attendee",
+          "input": {
+            "id": "evt_008",
+            "contactId": "con_020"
+          },
+          "ok": true,
+          "ms": 1.42,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 1666,
+        "cache_creation_input_tokens": 11094,
+        "cache_read_input_tokens": 34884
+      },
+      "costUSD": 0.102784,
+      "retries": 0,
+      "retrieved": [
+        "events.create_event",
+        "courses.search_courses",
+        "availability.set_weekly_hours",
+        "subscriptions.update_subscription_quantity",
+        "campaigns.list_campaigns",
+        "teams.create_team",
+        "enrollments.enroll_learner",
+        "media.search_media",
+        "media.upload_media",
+        "availability.check_scheduling_conflicts",
+        "events.get_event",
+        "reports.get_report",
+        "pipelines.create_pipeline",
+        "courses.archive_course",
+        "events.register_attendee",
+        "media.list_media_references",
+        "courses.publish_course",
+        "availability.get_weekly_hours",
+        "events.promote_waitlisted",
+        "workflows.get_workflow_execution_history",
+        "websites.create_website",
+        "booking_pages.publish_booking_page",
+        "availability.find_available_slots",
+        "reports.set_report_date_range"
+      ],
+      "status": "completed",
+      "finalText": "I created the kickoff class and registered all 8 people actively enrolled in the course.\n\n**Event:** Social Media Marketing 101 – Live Kickoff (`evt_008`)\n- Class, Thu 19 Nov 2026, 16:00–17:00 UTC\n- Host: Morgan Blake (`usr_008`), who is also the course's instructor\n- 30 seats: 8 taken, 22 left, no waitlist\n\n**Registered** (all active enrollments in Social Media Marketing 101, `crs_001`):\n\n| Contact | Enrollment | Registration |\n|---|---|---|\n| con_001 | enr_001 | reg_072 |\n| con_002 | enr_002 | reg_073 |\n| con_003 | enr_003 | reg_074 |\n| con_008 | enr_006 | reg_075 |\n| con_010 | enr_009 | reg_076 |\n| con_011 | enr_010 | reg_077 |\n| con_012 | enr_011 | reg_078 |\n| con_020 | enr_012 | reg_079 |\n\nTwo of these learners, con_001 and con_002, have already finished the course, but they're still actively enrolled, so I registered them too.\n\nRegistering people doesn't send them anything, and I didn't check whether Morgan's calendar is free at that time.",
+      "progress": [],
+      "retrievalMs": 5.82,
+      "calls": 4
+    }
+  ]
+}

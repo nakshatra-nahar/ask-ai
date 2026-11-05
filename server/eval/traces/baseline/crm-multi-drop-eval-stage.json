@@ -1,0 +1,243 @@
+{
+  "scenario": {
+    "id": "crm-multi-drop-eval-stage",
+    "category": "multi_step",
+    "turns": [
+      {
+        "user": "We're getting rid of the Evaluation stage in the Partnerships pipeline. Move any deals sitting in it back to Intro Call, leave a short note on each one explaining the move, and then delete the stage."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "action opportunities.move_opportunity_to_stage",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action notes.create_note",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "action pipelines.remove_pipeline_stage",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "no unexpected writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "params opportunities.move_opportunity_to_stage",
+        "pass": true,
+        "detail": "{\"id\":\"opp_022\"}"
+      },
+      {
+        "name": "params pipelines.remove_pipeline_stage",
+        "pass": true,
+        "detail": "{\"id\":\"pl_002\",\"stageId\":\"stg_007\"}"
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 3,
+      "hit": 3,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 2,
+      "hit": 2
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "10ebaff9-9d19-4725-bdf1-88bc33e61d46",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "We're getting rid of the Evaluation stage in the Partnerships pipeline. Move any deals sitting in it back to Intro Call, leave a short note on each one explaining the move, and then delete the stage.",
+      "ttfurMs": 690,
+      "ttftTextMs": 690,
+      "firstActionMs": 1429,
+      "e2eMs": 7064,
+      "llmCalls": [
+        {
+          "ms": 1429,
+          "ttftMs": 690,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 80,
+            "cacheRead": 112993,
+            "cacheWrite": 139
+          },
+          "costUSD": 0.04750820000000001
+        },
+        {
+          "ms": 1377,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 110,
+            "cacheRead": 113132,
+            "cacheWrite": 300
+          },
+          "costUSD": 0.048960800000000006
+        },
+        {
+          "ms": 2908,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 269,
+            "cacheRead": 113432,
+            "cacheWrite": 314
+          },
+          "costUSD": 0.052330800000000004
+        },
+        {
+          "ms": 1338,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 88,
+            "cacheRead": 113746,
+            "cacheWrite": 737
+          },
+          "costUSD": 0.0509514
+        }
+      ],
+      "actions": [
+        {
+          "action": "pipelines.list_pipelines",
+          "input": {
+            "query": "Partnerships"
+          },
+          "ok": true,
+          "ms": 0.08,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.search_opportunities",
+          "input": {
+            "pipelineId": "pl_002",
+            "stageId": "stg_007",
+            "limit": 100
+          },
+          "ok": true,
+          "ms": 0.77,
+          "confirmed": false
+        },
+        {
+          "action": "opportunities.move_opportunity_to_stage",
+          "input": {
+            "id": "opp_022",
+            "stageId": "stg_006"
+          },
+          "ok": true,
+          "ms": 5.39,
+          "confirmed": false
+        },
+        {
+          "action": "notes.create_note",
+          "input": {
+            "recordType": "opportunities",
+            "recordId": "opp_022",
+            "body": "Moved from Evaluation back to Intro Call because the Evaluation stage is being removed from the Partnerships pipeline."
+          },
+          "ok": true,
+          "ms": 5.15,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 547,
+        "cache_creation_input_tokens": 1490,
+        "cache_read_input_tokens": 453303
+      },
+      "costUSD": 0.199751,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_01LwCZ58DmBjiqph3DMimCJQ",
+          "action": "pipelines.remove_pipeline_stage",
+          "name": "Remove empty pipeline stage",
+          "risk": "destructive",
+          "input": {
+            "id": "pl_002",
+            "stageId": "stg_007"
+          }
+        }
+      ],
+      "calls": 4
+    },
+    {
+      "sessionId": "10ebaff9-9d19-4725-bdf1-88bc33e61d46",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 6,
+      "ttftTextMs": 2275,
+      "firstActionMs": 6,
+      "e2eMs": 2279,
+      "llmCalls": [
+        {
+          "ms": 2273,
+          "ttftMs": 2270,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 201,
+            "cacheRead": 114483,
+            "cacheWrite": 297
+          },
+          "costUSD": 0.0513062
+        }
+      ],
+      "actions": [
+        {
+          "action": "pipelines.remove_pipeline_stage",
+          "input": {
+            "id": "pl_002",
+            "stageId": "stg_007"
+          },
+          "ok": true,
+          "ms": 5.58,
+          "confirmed": true
+        }
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "output_tokens": 201,
+        "cache_creation_input_tokens": 297,
+        "cache_read_input_tokens": 114483
+      },
+      "costUSD": 0.051306,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "The Evaluation stage has been deleted from the Partnerships pipeline (pl_002). One deal was in it, and I moved it back to Intro Call first.\n\n**Deal moved:**\n- **Daniel Kim - Marketing Automation Setup** (opp_022), $35,000: it's now in Intro Call, so its win probability dropped from 50% to 20%. I added a note to it (nt_028) explaining that it moved because the Evaluation stage was removed.\n\n**The Partnerships pipeline now has these stages:** Intro Call (20%) → Contract Review (80%) → On Hold (5%).",
+      "progress": [],
+      "resumed": true,
+      "calls": 1
+    }
+  ]
+}

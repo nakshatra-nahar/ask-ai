@@ -1,0 +1,103 @@
+{
+  "scenario": {
+    "id": "com-unsupported-shipping-labels",
+    "category": "unsupported",
+    "turns": [
+      {
+        "user": "Buy UPS shipping labels for ORD-1003 and book a courier pickup for tomorrow (2026-11-05) morning."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(can't|cannot|can not|unable|not able|don't have|do not have|not support|isn't supported|no (action|capability|way|integration))/i",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "373fe44d-cbfd-4a93-aaae-70cb21bd2490",
+      "turn": 0,
+      "strategy": "optimized",
+      "model": "claude-opus-5-5",
+      "userText": "Buy UPS shipping labels for ORD-1003 and book a courier pickup for tomorrow (2026-11-05) morning.",
+      "ttfurMs": 2200,
+      "ttftTextMs": 2200,
+      "firstActionMs": null,
+      "e2eMs": 4557,
+      "llmCalls": [
+        {
+          "ms": 4552,
+          "ttftMs": 2195,
+          "stop": "end_turn",
+          "usage": {
+            "input": 4,
+            "output": 338,
+            "cacheRead": 5235,
+            "cacheWrite": 1948
+          },
+          "costUSD": 0.01861
+        }
+      ],
+      "actions": [],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 338,
+        "cache_creation_input_tokens": 1948,
+        "cache_read_input_tokens": 5235
+      },
+      "costUSD": 0.01861,
+      "retries": 0,
+      "retrieved": [
+        "tags.create_tag",
+        "booking_pages.list_booking_pages",
+        "courses.search_courses",
+        "tags.apply_tag",
+        "listings.set_listing_hours",
+        "enrollments.issue_certificate",
+        "tags.set_tag_color",
+        "courses.archive_course",
+        "tags.list_tags",
+        "courses.assign_course_instructor",
+        "tags.remove_tag_from_record",
+        "tags.list_records_with_tag",
+        "orders.set_order_shipping_address",
+        "custom_fields.rename_field_label",
+        "prices.update_price_label",
+        "orders.get_order",
+        "courses.set_course_prerequisites",
+        "courses.create_course",
+        "courses.publish_course",
+        "orders.fulfill_order",
+        "booking_pages.unpublish_booking_page",
+        "booking_pages.set_booking_intake_fields",
+        "leads.update_lead_score",
+        "orders.submit_order"
+      ],
+      "status": "completed",
+      "finalText": "I can't buy UPS shipping labels or book a courier pickup here. The platform has no shipping-carrier or courier actions, so I didn't do anything to ORD-1003.\n\nHere's what I can do for this order instead:\n- **Mark it fulfilled:** once you've bought the label through UPS yourself, I can mark ORD-1003 as shipped and add the UPS tracking number. Marking it shipped also takes the reserved items out of stock.\n- **Set or check the shipping address:** I can confirm the order's shipping address is right before you buy the label. I can only change it while the order is still a draft.\n- **Add a reminder:** I can create a task to book the UPS pickup for tomorrow morning (2026-11-05).\n\nDo you want me to set up the reminder task, or send me the tracking number once you have it?",
+      "progress": [],
+      "retrievalMs": 5.2,
+      "calls": 1
+    }
+  ]
+}

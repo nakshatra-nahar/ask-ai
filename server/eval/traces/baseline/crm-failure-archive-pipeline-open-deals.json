@@ -1,0 +1,191 @@
+{
+  "scenario": {
+    "id": "crm-failure-archive-pipeline-open-deals",
+    "category": "failure",
+    "turns": [
+      {
+        "user": "Please archive the Partnerships pipeline, we're not running that program anymore."
+      }
+    ]
+  },
+  "check": {
+    "pass": true,
+    "checks": [
+      {
+        "name": "no writes",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "reply /(open (deals?|opportunit)|still (has|have|contains)|can't|cannot|couldn't|could not|unable|not allowed|blocked)/i",
+        "pass": true,
+        "detail": ""
+      },
+      {
+        "name": "final state",
+        "pass": true,
+        "detail": ""
+      }
+    ],
+    "selection": {
+      "expected": 0,
+      "hit": 0,
+      "forbiddenHit": 0,
+      "unexpectedWrites": 0
+    },
+    "params": {
+      "total": 0,
+      "hit": 0
+    }
+  },
+  "segments": [
+    {
+      "sessionId": "21d0c4c4-23c1-4436-b45e-097fad75005b",
+      "turn": 0,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "Please archive the Partnerships pipeline, we're not running that program anymore.",
+      "ttfurMs": 1411,
+      "ttftTextMs": 1411,
+      "firstActionMs": 2239,
+      "e2eMs": 4027,
+      "llmCalls": [
+        {
+          "ms": 2238,
+          "ttftMs": 1411,
+          "stop": "tool_use",
+          "usage": {
+            "input": 4,
+            "output": 76,
+            "cacheRead": 112993,
+            "cacheWrite": 97
+          },
+          "costUSD": 0.0472182
+        },
+        {
+          "ms": 1789,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 59,
+            "cacheRead": 113090,
+            "cacheWrite": 296
+          },
+          "costUSD": 0.047904
+        }
+      ],
+      "actions": [
+        {
+          "action": "pipelines.list_pipelines",
+          "input": {
+            "query": "Partnerships"
+          },
+          "ok": true,
+          "ms": 0.19,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 6,
+        "output_tokens": 135,
+        "cache_creation_input_tokens": 393,
+        "cache_read_input_tokens": 226083
+      },
+      "costUSD": 0.095122,
+      "retries": 0,
+      "retrieved": [],
+      "status": "awaiting_confirmation",
+      "finalText": "",
+      "progress": [],
+      "pendingConfirmation": [
+        {
+          "id": "toolu_018Hv6Asm19hPhbh9N94CZL1",
+          "action": "pipelines.archive_pipeline",
+          "name": "Archive pipeline",
+          "risk": "destructive",
+          "input": {
+            "id": "pl_002"
+          }
+        }
+      ],
+      "calls": 2
+    },
+    {
+      "sessionId": "21d0c4c4-23c1-4436-b45e-097fad75005b",
+      "turn": 1,
+      "strategy": "baseline",
+      "model": "claude-opus-5-5",
+      "userText": "[confirmed]",
+      "ttfurMs": 2348,
+      "ttftTextMs": 7332,
+      "firstActionMs": 2348,
+      "e2eMs": 7336,
+      "llmCalls": [
+        {
+          "ms": 2342,
+          "ttftMs": null,
+          "stop": "tool_use",
+          "usage": {
+            "input": 2,
+            "output": 116,
+            "cacheRead": 113386,
+            "cacheWrite": 127
+          },
+          "costUSD": 0.0483174
+        },
+        {
+          "ms": 4987,
+          "ttftMs": 4983,
+          "stop": "end_turn",
+          "usage": {
+            "input": 2,
+            "output": 428,
+            "cacheRead": 113513,
+            "cacheWrite": 686
+          },
+          "costUSD": 0.0574032
+        }
+      ],
+      "actions": [
+        {
+          "action": "pipelines.archive_pipeline",
+          "input": {
+            "id": "pl_002"
+          },
+          "ok": false,
+          "error": {
+            "code": "CONFLICT",
+            "message": "Partnerships has 3 open opportunities (opp_021, opp_022, opp_023); close or move them first"
+          },
+          "ms": 6.15,
+          "confirmed": true
+        },
+        {
+          "action": "opportunities.search_opportunities",
+          "input": {
+            "pipelineId": "pl_002",
+            "status": "open"
+          },
+          "ok": true,
+          "ms": 0.35,
+          "confirmed": false
+        }
+      ],
+      "usage": {
+        "input_tokens": 4,
+        "output_tokens": 544,
+        "cache_creation_input_tokens": 813,
+        "cache_read_input_tokens": 226899
+      },
+      "costUSD": 0.105721,
+      "retries": 0,
+      "retrieved": [],
+      "status": "completed",
+      "finalText": "I couldn't archive the **Partnerships** pipeline (pl_002). The platform won't archive a pipeline that still has open deals, and this one has 3:\n\n| Deal | Stage | Value | Expected close |\n|---|---|---|---|\n| Jack Smith - SEO Retainer (opp_021) | Intro Call | $20,000 | 2027-01-03 |\n| Daniel Kim - Marketing Automation Setup (opp_022) | Evaluation | $35,000 | 2026-12-19 |\n| Sarah Walker - Annual Membership (opp_023) | Contract Review | $50,000 | 2026-11-24 |\n\nThat's $105,000 in open deals. Each one needs to be closed before the archive will work. How do you want to handle them?\n\n1. **Mark them all lost** with a reason like \"Partnerships program discontinued.\" Then I'll archive the pipeline.\n2. **Keep some or all of them going.** I can't move a deal into a different pipeline; deals can only change stages within their own pipeline. For any you want to keep, I'd recreate it in another pipeline, such as the default one, then mark the original lost.\n3. **Mark some of them won**, if any have actually closed.\n\nTell me which option to use, or how to treat each deal, and I'll finish the archive.",
+      "progress": [],
+      "resumed": true,
+      "calls": 2
+    }
+  ]
+}
